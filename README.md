@@ -1,5 +1,7 @@
 # FreshDoctrineEnumBundle
 
+[![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
+
 Doctrine2 Enum type for Symfony2 applications.
 
 ## Requirements
