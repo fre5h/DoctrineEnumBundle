@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
 
-Doctrine2 Enum type for Symfony2 applications.
+Doctrine2 ENUM type for Symfony2 applications.
 
 ## Requirements
 
@@ -63,7 +63,7 @@ In this example will be shown how to create custom ENUM field for basketball pos
 * `PF` - Power forward
 * `C`  - Center
 
-Create class for new ENUM type `BasketballPositionType` and add three static methods to operate with ENUM values:
+Create class for new ENUM type `BasketballPositionType`:
 
 ```php
 <?php
@@ -99,41 +99,6 @@ class BasketballPositionType extends AbstractEnumType
         self::POWER_FORWARD  => 'Power forward',
         self::CENTER         => 'Center',
     );
-
-    /**
-     * Get readable choices for the Enum field
-     *
-     * @static
-     * @return array Readable choices for the Enum field
-     */
-    public static function getChoices()
-    {
-        return self::$choices;
-    }
-
-    /**
-     * Get values for the Enum field
-     *
-     * @static
-     * @return array Values for the Enum field
-     */
-    public static function getValues()
-    {
-        return array_keys(self::getChoices());
-    }
-
-    /**
-     * Get value in readable format
-     *
-     * @param string $value Enum value
-     *
-     * @static
-     * @return string|null Value in readable format
-     */
-    public static function getReadableValue($value)
-    {
-        return isset(self::getChoices()[$value]) ? self::getChoices()[$value] : null;
-    }
 }
 ```
 
