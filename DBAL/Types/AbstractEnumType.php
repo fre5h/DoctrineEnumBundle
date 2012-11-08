@@ -89,7 +89,7 @@ abstract class AbstractEnumType extends Type
      */
     public static function getChoices()
     {
-        return self::$choices;
+        return static::$choices;
     }
 
     /**
