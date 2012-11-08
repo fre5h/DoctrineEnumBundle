@@ -100,7 +100,7 @@ abstract class AbstractEnumType extends Type
      */
     public static function getValues()
     {
-        return array_keys(self::getChoices());
+        return array_keys(static::getChoices());
     }
 
     /**
@@ -113,6 +113,6 @@ abstract class AbstractEnumType extends Type
      */
     public static function getReadableValue($value)
     {
-        return isset(self::getChoices()[$value]) ? self::getChoices()[$value] : null;
+        return isset(static::getChoices()[$value]) ? static::getChoices()[$value] : null;
     }
 }
