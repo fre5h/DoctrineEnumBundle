@@ -41,39 +41,4 @@ class BasketballPositionType extends AbstractEnumType
         self::POWER_FORWARD  => 'Power forward',
         self::CENTER         => 'Center',
     );
-
-    /**
-     * Get readable choices for the Enum field
-     *
-     * @static
-     * @return array Readable choices for the Enum field
-     */
-    public static function getChoices()
-    {
-        return self::$choices;
-    }
-
-    /**
-     * Get values for the Enum field
-     *
-     * @static
-     * @return array Values for the Enum field
-     */
-    public static function getValues()
-    {
-        return array_keys(self::getChoices());
-    }
-
-    /**
-     * Get value in readable format
-     *
-     * @param string $value Enum value
-     *
-     * @static
-     * @return string|null Value in readable format
-     */
-    public static function getReadableValue($value)
-    {
-        return isset(self::getChoices()[$value]) ? self::getChoices()[$value] : null;
-    }
 }
