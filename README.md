@@ -200,7 +200,7 @@ $builder->add('position', 'choice', array('choices' => BasketballPositionType::g
 
 ### Hook for Doctrine migrations
 
-If you use [Doctrine migrations](https://github.com/doctrine/migrations "Doctrine migrations") in your project you should be able to create migrations for you custom ENUM types. If you create migration for the **new** ENUM type, then just use console commands `doctrine:migrations:diff` to create migration and `doctrine:migrations:migrate` to execute it.
+If you use [Doctrine migrations](https://github.com/doctrine/migrations "Doctrine migrations") in your project you should be able to create migrations for you custom ENUM types. If you want to create migration for the **new** ENUM type, then just use console commands `doctrine:migrations:diff` to create migration and `doctrine:migrations:migrate` to execute it.
 
 For the previous example of `BasketballPositionType` Doctrine will generate SQL statement, that looks like this:
 
