@@ -216,7 +216,7 @@ You see here is a comment *'(DC2Type:BasketballPositionType)'* for `position` co
 
 If you later need to add new values to ENUM or delete some existed, you also will need to create new migrations. But Doctrine won't detect any changes in your ENUM... :(
 
-Fortunately you can do simple **hook** =) Access your database *(via phpMyAdmin, console etc.)* and delete comment for column `position`. After that console command `doctrine:migrations:diff` will create correct migrations.
+Fortunately you can do simple **hook** =) Access your database and delete comment for column `position`. After that run console command `doctrine:migrations:diff` it will create correct migrations.
 
 You should repeat these steps after each update of your custom ENUM type!
 
