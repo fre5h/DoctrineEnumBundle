@@ -1,11 +1,9 @@
 {
-    "name":        "fresh/doctrine-enum-bundle",
-    "description": "Doctrine2 Enum type for Symfony2 applications",
-    "keywords":    [
-        "doctrine", "enum", "type", "DBAL"
-    ],
-
-    "type":    "symfony-bundle",
+    "name": "fresh/doctrine-enum-bundle",
+    "description": "Doctrine ENUM type for Symfony applications",
+    "keywords": ["doctrine", "enum", "type", "DBAL", "bundle", "symfony"],
+    "homepage": "http://symfony.com",
+    "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
@@ -13,14 +11,13 @@
             "email": "genvaldartem@gmail.com"
         }
     ],
-
     "require": {
         "php":             ">=5.4.0",
         "symfony/symfony": ">=2.1",
         "doctrine/orm":    ">=2.2"
     },
-
-    "autoload":   {
+    "minimum-stability": "stable",
+    "autoload": {
         "psr-0": {
             "Fresh\\Bundle\\DoctrineEnumBundle": ""
         }
