@@ -92,13 +92,13 @@ class BasketballPositionType extends AbstractEnumType
      * @var array Readable choices
      * @static
      */
-    protected static $choices = array(
+    protected static $choices = [
         self::POINT_GUARD    => 'Point guard',
         self::SHOOTING_GUARD => 'Shooting guard',
         self::SMALL_FORWARD  => 'Small forward',
         self::POWER_FORWARD  => 'Power forward',
         self::CENTER         => 'Center',
-    );
+    ];
 }
 ```
 
@@ -195,7 +195,7 @@ use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
 When build `BasketballPositionType` as form field, select `choice` type for field and fill choices via `BasketballPositionType::getChoices()` method:
 
 ```php
-$builder->add('position', 'choice', array('choices' => BasketballPositionType::getChoices()));
+$builder->add('position', 'choice', ['choices' => BasketballPositionType::getChoices()]);
 ```
 
 ### Hook for Doctrine migrations
