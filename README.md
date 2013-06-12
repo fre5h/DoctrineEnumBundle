@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
 
-Doctrine2 ENUM type for Symfony2 applications.
+Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications.
 
 ## Requirements
 
@@ -31,10 +31,10 @@ To start using the bundle, register it in `app/AppKernel.php`:
 ```php
 public function registerBundles()
 {
-    $bundles = array(
+    $bundles = [
         // Other bundles...
         new Fresh\Bundle\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
-    );
+    ];
 }
 ```
 
@@ -142,7 +142,7 @@ class Player
     /**
      * @var string $position
      *
-     * @DoctrineAssert\Enum(entity="Application\Bundle\StatsBundle\DBAL\Types\BasketballPositionType")
+     * @DoctrineAssert\Enum(entity="Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType")
      *
      * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
      */
@@ -186,13 +186,13 @@ Now you can set a position for `Player` inside some action or somewhere else:
 $player->setPosition(BasketballPositionType::POINT_GUARD);
 ```
 
-But don't forget to define `BasketballPositionType` in use section:
+But don't forget to define `BasketballPositionType` in the *use* section:
 
 ```php
 use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
 ```
 
-When build `BasketballPositionType` as form field, select `choice` type for field and fill choices via `BasketballPositionType::getChoices()` method:
+When build `BasketballPositionType` as form field, set `choice` type for the field and fill choices via `BasketballPositionType::getChoices()` method:
 
 ```php
 $builder->add('position', 'choice', ['choices' => BasketballPositionType::getChoices()]);
@@ -212,11 +212,11 @@ CREATE TABLE players (
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
 ```
 
-You see here is a comment *'(DC2Type:BasketballPositionType)'* for `position` column. Doctrine will know that this column should be processed as `BasketballPositionType`.
+You can see here the comment *'(DC2Type:BasketballPositionType)'* for `position` column. Doctrine will know that this column should be processed as `BasketballPositionType`.
 
-If you later need to add new values to ENUM or delete some existed, you also will need to create new migrations. But Doctrine won't detect any changes in your ENUM... :(
+If you later will need to add new values to ENUM or delete some existed, you also will need to create new migrations. But Doctrine won't detect any changes in your ENUM... :(
 
-Fortunately you can do simple **hook** =) Access your database and delete comment for column `position`. After that run console command `doctrine:migrations:diff` it will create correct migrations.
+Fortunately you can do simple **hook** =) Access your database and delete comment for `position` column. After that run console command `doctrine:migrations:diff` it will create correct migrations.
 
 You should repeat these steps after each update of your custom ENUM type!
 
