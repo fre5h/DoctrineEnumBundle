@@ -3,11 +3,13 @@
 [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
 
 Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications.
+
 ## Requirements
 
 * Symfony 2.1
 * PHP 5.4
 * Doctrine 2.2
+
 ## Installation
 
 ### Install via Composer
@@ -48,6 +50,7 @@ doctrine:
         mapping_types:
             enum: string
 ```
+
 ## Using
 
 ### Examples
@@ -193,6 +196,13 @@ When build `BasketballPositionType` as form field, set `choice` type for the fie
 
 ```php
 $builder->add('position', 'choice', ['choices' => BasketballPositionType::getChoices()]);
+```
+
+#### Readable ENUM values in templates
+You are of course would want to show ENUM values rendered in your templates in readable format instead of the values that would be stored in DB. In the example below if the player is a point guard of his team then his position will be rendered as `Point guard` instead of `PG`.
+
+```twig
+{{ player.position|readable_enum_value('BasketballPositionType') }}
 ```
 
 ### Hook for Doctrine migrations
