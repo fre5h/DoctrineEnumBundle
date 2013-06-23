@@ -201,9 +201,9 @@ $builder->add('position', 'choice', ['choices' => BasketballPositionType::getCho
 ```
 
 ##### Readable ENUM values in templates
-You are of course would want to show ENUM values rendered in your templates in readable format instead of the values that would be stored in DB. In the example below if the player is a point guard of his team then his position will be rendered as `Point guard` instead of `PG`.
+You are of course would want to show ENUM values rendered in your templates in *readable format* instead of the values that would be stored in DB. In the example below if the player is a point guard of his team then his position will be rendered in template as `Point guard` instead of `PG`.
 
-```twig
+```jinja
 {{ player.position|readable_enum_value('BasketballPositionType') }}
 ```
 
