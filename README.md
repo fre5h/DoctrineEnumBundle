@@ -3,13 +3,11 @@
 [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
 
 Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications.
-
 ## Requirements
 
 * Symfony 2.1
 * PHP 5.4
 * Doctrine 2.2
-
 ## Installation
 
 ### Install via Composer
@@ -50,7 +48,6 @@ doctrine:
         mapping_types:
             enum: string
 ```
-
 ## Using
 
 ### Examples
