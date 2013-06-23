@@ -1,26 +1,31 @@
 {
     "name": "fresh/doctrine-enum-bundle",
-    "description": "Doctrine ENUM type for Symfony applications",
+    "description": "Provides support of MySQL ENUM type for Doctrine in Symfony applications",
     "keywords": ["doctrine", "enum", "type", "DBAL", "bundle", "symfony"],
+
     "homepage": "http://symfony.com",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
-            "name":  "Artem Genvald",
+            "name": "Artem Genvald",
             "email": "genvaldartem@gmail.com"
         }
     ],
+
     "require": {
-        "php":             ">=5.4.0",
+        "php": ">=5.4.0",
         "symfony/symfony": ">=2.1",
-        "doctrine/orm":    ">=2.2"
+        "doctrine/orm": ">=2.2"
     },
+
     "minimum-stability": "stable",
+
     "autoload": {
         "psr-0": {
             "Fresh\\Bundle\\DoctrineEnumBundle": ""
         }
     },
+
     "target-dir": "Fresh/Bundle/DoctrineEnumBundle"
 }

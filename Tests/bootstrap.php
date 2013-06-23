@@ -9,7 +9,7 @@
  */
 
 if (!class_exists('Composer\\Autoload\\ClassLoader', false)) {
-    $loader = require __DIR__.'/../vendor/autoload.php';
+    $loader = require __DIR__ . '/../vendor/autoload.php';
 } else {
     $loader = new Composer\Autoload\ClassLoader();
     $loader->register();

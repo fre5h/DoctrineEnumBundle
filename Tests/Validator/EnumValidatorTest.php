@@ -25,12 +25,12 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var EnumValidator
      */
-    private $enumValidator;
+    protected $enumValidator;
 
     /**
      * @var \Symfony\Component\Validator\ExecutionContext
      */
-    private $context;
+    protected $context;
 
     /**
      * Set up EnumValidator
@@ -45,14 +45,13 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that creation of Enum Constraint without type class should throw ConstraintDefinitionException
+     * Test that creation of ENUM Constraint without type class throws ConstraintDefinitionException
      *
      * @expectedException \Symfony\Component\Validator\Exception\ConstraintDefinitionException
      */
     public function testExceptionEntityNotSpecified()
     {
-        $constraint = new Enum();
-        $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
+        $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new Enum());
     }
 
     /**
@@ -86,6 +85,6 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
             );
 
         $this->enumValidator->initialize($this->context);
-        $this->enumValidator->validate('Pitcher', $constraint); // It is not baseball =)
+        $this->enumValidator->validate('Pitcher', $constraint); // It's not a baseball =)
     }
 }

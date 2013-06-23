@@ -4,4 +4,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <services>
+        <service id="twig.extension.readable_enum_value" class="Fresh\Bundle\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension" public="false">
+            <tag name="twig.extension" />
+            <argument type="service" id="service_container" />
+        </service>
+    </services>
+
 </container>

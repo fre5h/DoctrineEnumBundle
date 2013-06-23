@@ -16,7 +16,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 /**
  * AbstractEnumType
  *
- * Provides Enum type for Doctrine2
+ * Provides support of MySQL ENUM type for Doctrine in Symfony applications
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
@@ -28,10 +28,10 @@ abstract class AbstractEnumType extends Type
     protected $name = 'AbstractEnumType';
 
     /**
-     * @var array Array of Enum Values, where enum values are keys and their readable versions are values
+     * @var array Array of ENUM Values, where enum values are keys and their readable versions are values
      * @static
      */
-    protected static $choices = array();
+    protected static $choices = [];
 
     /**
      * Convert a value from its PHP representation to its database representation of this type
@@ -45,7 +45,7 @@ abstract class AbstractEnumType extends Type
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (!in_array($value, $this->getValues())) {
-            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for Enum %s', $value, $this->getName()));
+            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM %s', $value, $this->getName()));
         }
 
         return $value;
@@ -82,10 +82,10 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * Get readable choices for the Enum field
+     * Get readable choices for the ENUM field
      *
      * @static
-     * @return array Values for the Enum field
+     * @return array Values for the ENUM field
      */
     public static function getChoices()
     {
@@ -93,10 +93,10 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * Get values for the Enum field
+     * Get values for the ENUM field
      *
      * @static
-     * @return array Values for the Enum field
+     * @return array Values for the ENUM field
      */
     public static function getValues()
     {
@@ -106,13 +106,19 @@ abstract class AbstractEnumType extends Type
     /**
      * Get value in readable format
      *
-     * @param string $value Enum value
+     * @param string $value ENUM value
      *
      * @static
      * @return string|null Value in readable format
+     *
+     * @throws \InvalidArgumentException
      */
     public static function getReadableValue($value)
     {
-        return isset(static::getChoices()[$value]) ? static::getChoices()[$value] : null;
+        if (!isset(static::getChoices()[$value])) {
+            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM type "%s"', $value, get_called_class()));
+        }
+
+        return static::getChoices()[$value];
     }
 }

@@ -9,14 +9,13 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="./Tests/bootstrap.php"
->
+         bootstrap="./Tests/bootstrap.php">
 
-	<testsuites>
-		<testsuite name="Project Test Suite">
-			<directory>./Tests</directory>
-		</testsuite>
-	</testsuites>
+    <testsuites>
+        <testsuite name="Bundle Test Suite">
+            <directory>./Tests</directory>
+        </testsuite>
+    </testsuites>
 
     <filter>
         <whitelist>
