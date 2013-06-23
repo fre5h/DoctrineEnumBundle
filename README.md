@@ -8,9 +8,9 @@ Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications.
 
 ## Requirements
 
-* Symfony 2.1
-* PHP 5.4
-* Doctrine 2.2
+* Symfony 2.1 *and later*
+* PHP 5.4 *and later*
+* Doctrine 2.2 *and later*
 
 ## Installation
 
