@@ -1,5 +1,7 @@
 # FreshDoctrineEnumBundle
 
+Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications.
+
 [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
 
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
@@ -11,8 +13,6 @@ Total [![Total Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/down
 Montly [![Montly Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/d/monthly.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 
 Daily [![Daily Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/d/daily.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
-
-Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications.
 
 ## Requirements
 
