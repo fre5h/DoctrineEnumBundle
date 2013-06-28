@@ -3,16 +3,10 @@
 Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications.
 
 [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
+[![Latest Stable Version](https://poser.pugx.org/fresh/doctrine-enum-bundle/v/stable.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
+[![Total Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/downloads.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
-
-Latest [![Latest Stable Version](https://poser.pugx.org/fresh/doctrine-enum-bundle/v/stable.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
-
-Total [![Total Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/downloads.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
-
-Montly [![Montly Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/d/monthly.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
-
-Daily [![Daily Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/d/daily.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 
 ## Requirements
 
