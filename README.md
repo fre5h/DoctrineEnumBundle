@@ -4,6 +4,11 @@
 
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
 
+[![Latest Stable Version](https://poser.pugx.org/https://github.com/fre5h/DoctrineEnumBundle/v/stable.png)](https://packagist.org/packages/https://github.com/fre5h/DoctrineEnumBundle)
+[![Total Downloads](https://poser.pugx.org/https://github.com/fre5h/DoctrineEnumBundle/downloads.png)](https://packagist.org/packages/https://github.com/fre5h/DoctrineEnumBundle)
+[![Montly Downloads](https://poser.pugx.org/https://github.com/fre5h/DoctrineEnumBundle/d/monthly.png)](https://packagist.org/packages/https://github.com/fre5h/DoctrineEnumBundle)
+[![Daily Downloads](https://poser.pugx.org/https://github.com/fre5h/DoctrineEnumBundle/d/daily.png)](https://packagist.org/packages/https://github.com/fre5h/DoctrineEnumBundle)
+
 Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications.
 
 ## Requirements
