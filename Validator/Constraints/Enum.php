@@ -31,7 +31,7 @@ class Enum extends Choice
      *
      * @return array
      */
-    public function getRequiredOptions()
+    public function requiredOptions()
     {
         return ['entity'];
     }

@@ -81,7 +81,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
             ->method('addViolation')
             ->with(
                 $this->equalTo('The value you selected is not a valid choice.'),
-                $this->equalTo(array('{{ value }}' => 'Pitcher'))
+                $this->equalTo(['{{ value }}' => 'Pitcher'])
             );
 
         $this->enumValidator->initialize($this->context);
