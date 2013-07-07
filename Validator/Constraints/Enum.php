@@ -21,18 +21,25 @@ use Symfony\Component\Validator\Constraints\Choice;
  */
 class Enum extends Choice
 {
+    /**
+     * @var string Entity
+     */
     public $entity;
 
     /**
-     * {@inheritDoc}
+     * Returns the name of the required options
+     *
+     * @return array
      */
-    public function requiredOptions()
+    public function getRequiredOptions()
     {
         return ['entity'];
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the name of the default option
+     *
+     * @return string
      */
     public function getDefaultOption()
     {
