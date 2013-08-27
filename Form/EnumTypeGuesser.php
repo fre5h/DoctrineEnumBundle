@@ -19,8 +19,6 @@ use Symfony\Component\Form\Guess\TypeGuess;
 /**
  * EnumTypeGuesser
  *
- * Provides support of MySQL ENUM type for Doctrine in Symfony applications
- *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser

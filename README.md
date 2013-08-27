@@ -196,19 +196,19 @@ But don't forget to define `BasketballPositionType` in the *use* section:
 use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
 ```
 
-When build `BasketballPositionType` you don't need to specify some additional parameters. Just add property to the form builder and EnumTypeGuesser will do all work for you. Like this:
+When build `BasketballPositionType` as form field, you don't need to specify some additional parameters. Just add property to the form builder and [EnumTypeGuesser](./DoctrineEnumBundle/blob/master/Form/EnumTypeGuesser.php "EnumTypeGuesser") will do all work for you. That's how:
 
 ```php
 $builder->add('position');
 ```
 
-If you need to add some extra parameters, just skip the second (`field type`) parameter:
+If you need to add some extra parameters, just skip the second (*field type*) parameter:
 
 ```php
 $builder->add('position', null, [
     'required' => true,
-    'attr' => [
-        'class' => 'position'
+    'attr'     => [
+        'class' => 'some-class'
     ]
 ]);
 ```
