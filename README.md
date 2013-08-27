@@ -196,8 +196,24 @@ But don't forget to define `BasketballPositionType` in the *use* section:
 use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
 ```
 
-When build `BasketballPositionType` as form field, set `choice` type for the field and fill choices via `BasketballPositionType::getChoices()` method:
+When build `BasketballPositionType` you don't need to specify some additional parameters. Just add property to the form builder and EnumTypeGuesser will do all work for you. Like this:
 
+```php
+$builder->add('position');
+```
+
+If you need to add some extra parameters, just skip the second (`field type`) parameter:
+
+```php
+$builder->add('position', null, [
+    'required' => true,
+    'attr' => [
+        'class' => 'position'
+    ]
+]);
+```
+
+If for some reason you need to specify full config, it could looks like this:
 ```php
 $builder->add('position', 'choice', ['choices' => BasketballPositionType::getChoices()]);
 ```
