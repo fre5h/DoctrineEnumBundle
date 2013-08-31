@@ -121,4 +121,16 @@ abstract class AbstractEnumType extends Type
 
         return static::getChoices()[$value];
     }
+
+    /**
+     * Check if some string value exists in the array of ENUM values
+     *
+     * @param string $value ENUM value
+     *
+     * @return bool
+     */
+    public static function isValueExist($value)
+    {
+        return in_array($value, static::getValues());
+    }
 }

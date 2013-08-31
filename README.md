@@ -135,7 +135,7 @@ use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 class Player
 {
     /**
-     * @var integer $id
+     * @var int $id
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
@@ -155,7 +155,7 @@ class Player
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -225,7 +225,7 @@ $builder->add('position', 'choice', [
 You are of course would want to show ENUM values rendered in your templates in *readable format* instead of the values that would be stored in DB. In the example below if the player is a point guard of his team then his position will be rendered in template as `Point guard` instead of `PG`.
 
 ```jinja
-{{ player.position|readable_enum_value('BasketballPositionType') }}
+{{ player.position|readable('BasketballPositionType') }}
 ```
 
 ### Hook for Doctrine migrations

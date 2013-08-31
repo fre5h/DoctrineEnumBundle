@@ -11,6 +11,7 @@
 namespace Fresh\Bundle\DoctrineEnumBundle\Form;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Fresh\Bundle\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Guess\Guess;
@@ -24,22 +25,24 @@ use Symfony\Component\Form\Guess\TypeGuess;
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 {
     /**
-     * @var array Array holding 'ShortType' => 'Fully\Qualified\Class\Name' mappings for the enum classes
+     * Array of registered ENUM types
+     *
+     * @var \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType[]
      */
-    protected $registeredTypes = [];
+    protected $registeredEnumTypes = [];
 
     /**
      * Constructor
      *
-     * @param ManagerRegistry $registry Registry
-     * @param array           $types    Array of registered ENUM types
+     * @param ManagerRegistry $registry        Registry
+     * @param array           $registeredTypes Array of registered ENUM types
      */
-    public function __construct(ManagerRegistry $registry, array $types)
+    public function __construct(ManagerRegistry $registry, array $registeredTypes)
     {
         parent::__construct($registry);
 
-        foreach ($types as $type => $details) {
-            $this->registeredTypes[$type] = $details['class'];
+        foreach ($registeredTypes as $type => $details) {
+            $this->registeredEnumTypes[$type] = $details['class'];
         }
     }
 
@@ -51,7 +54,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
      *
      * @return TypeGuess A guess for the field's type and options
      *
-     * @throws \LogicException
+     * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      */
     public function guessType($class, $property)
     {
@@ -62,23 +65,26 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             return null;
         }
 
+        /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo $metadata */
         list($metadata) = $classMetadata;
         $fieldType = $metadata->getTypeOfField($property);
 
         // This is not one of the registered ENUM types
-        if (!isset($this->registeredTypes[$fieldType])) {
+        if (!isset($this->registeredEnumTypes[$fieldType])) {
             return null;
         }
 
-        $className = $this->registeredTypes[$fieldType];
+        $enumTypeFullClassName = $this->registeredEnumTypes[$fieldType];
 
-        if (!class_exists($className)) {
-            throw new \LogicException("ENUM type {$fieldType} is registered as {$className}, but that class does not exist");
+        if (!class_exists($enumTypeFullClassName)) {
+            throw new EnumTypeIsRegisteredButClassDoesNotExistException(
+                sprintf('ENUM type "%s" is registered as "%s", but that class does not exist', $fieldType, $enumTypeFullClassName)
+            );
         }
 
         // Get the choices from the fully qualified classname
         $parameters = [
-            'choices'  => $className::getChoices(),
+            'choices'  => $enumTypeFullClassName::getChoices(),
             'required' => !$metadata->isNullable($property),
         ];
 

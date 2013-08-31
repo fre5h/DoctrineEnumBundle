@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\Tests;
+namespace Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types;
 
 use Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
@@ -39,6 +39,6 @@ class BasketballPositionType extends AbstractEnumType
         self::SHOOTING_GUARD => 'Shooting guard',
         self::SMALL_FORWARD  => 'Small forward',
         self::POWER_FORWARD  => 'Power forward',
-        self::CENTER         => 'Center',
+        self::CENTER         => 'Center'
     ];
 }

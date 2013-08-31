@@ -10,10 +10,9 @@
 
 namespace Fresh\Bundle\DoctrineEnumBundle\Tests\Validator;
 
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
-use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
+use Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints\Enum;
-use Fresh\Bundle\DoctrineEnumBundle\Tests\BasketballPositionType;
+use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
 
 /**
  * EnumValidatorTest
@@ -59,7 +58,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidBasketballPositionType()
     {
-        $constraint = new Enum(['entity' => 'Fresh\Bundle\DoctrineEnumBundle\Tests\BasketballPositionType']);
+        $constraint = new Enum(['entity' => 'Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType']);
 
         $this->context
             ->expects($this->never())
@@ -74,7 +73,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidBasketballPositionType()
     {
-        $constraint = new Enum(['entity' => 'Fresh\Bundle\DoctrineEnumBundle\Tests\BasketballPositionType']);
+        $constraint = new Enum(['entity' => 'Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType']);
 
         $this->context
             ->expects($this->once())

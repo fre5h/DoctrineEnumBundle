@@ -10,7 +10,10 @@
 
 namespace Fresh\Bundle\DoctrineEnumBundle\Twig\Extension;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Fresh\Bundle\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
+use Fresh\Bundle\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
+use Fresh\Bundle\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException;
+use Fresh\Bundle\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException;
 
 /**
  * ReadableEnumValueExtension returns the readable variant of ENUM value
@@ -20,31 +23,21 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ReadableEnumValueExtension extends \Twig_Extension
 {
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
-     */
-    protected $container;
-
-    /**
-     * @var array
+     * Array of registered ENUM types
+     *
+     * @var \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType[]
      */
     protected $registeredEnumTypes = [];
 
     /**
      * Constructor
      *
-     * @param ContainerInterface $container
+     * @param array $registeredTypes Array of registered ENUM types
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(array $registeredTypes)
     {
-        $this->container = $container;
-
-        // Find all registered ENUM types
-        if ($this->container->hasParameter('doctrine.dbal.connection_factory.types')) {
-            $types = $this->container->getParameter('doctrine.dbal.connection_factory.types');
-
-            foreach ($types as $type => $details) {
-                $this->registeredEnumTypes[$type] = $details['class'];
-            }
+        foreach ($registeredTypes as $type => $details) {
+            $this->registeredEnumTypes[$type] = $details['class'];
         }
     }
 
@@ -55,38 +48,63 @@ class ReadableEnumValueExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return ['readable_enum_value' => new \Twig_Filter_Method($this, 'getReadableEnumValue')];
+        return ['readable' => new \Twig_Filter_Method($this, 'getReadableEnumValue')];
     }
 
     /**
      * Get readable variant of ENUM value
      *
-     * @param string $enumValue ENUM value
-     * @param string $enumType  ENUM type
+     * @param string      $enumValue ENUM value
+     * @param string|null $enumType  ENUM type
      *
      * @return string
      *
-     * @throws \UnexpectedValueException
-     * @throws \LogicException
+     * @throws EnumTypeIsNotRegisteredException
+     * @throws NoRegisteredEnumTypesException
+     * @throws ValueIsFoundInFewRegisteredEnumTypesException
+     * @throws ValueIsNotFoundInAnyRegisteredEnumTypeException
      */
-    public function getReadableEnumValue($enumValue, $enumType)
+    public function getReadableEnumValue($enumValue, $enumType = null)
     {
-        if (!empty($this->registeredEnumTypes)) {
-            if (!isset($this->registeredEnumTypes[$enumType])) {
-                throw new \UnexpectedValueException(sprintf('ENUM type %s is not registered', $enumType));
+        if (!empty($this->registeredEnumTypes) && is_array($this->registeredEnumTypes)) {
+            // If ENUM type was set, e.g. {{ player.position|readable('BasketballPositionType') }}
+            if (!empty($enumType)) {
+                if (!isset($this->registeredEnumTypes[$enumType])) {
+                    throw new EnumTypeIsNotRegisteredException(sprintf('ENUM type "%s" is not registered', $enumType));
+                }
+
+                /** @var $enumTypeClass \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType */
+                $enumTypeClass = $this->registeredEnumTypes[$enumType];
+
+                return $enumTypeClass::getReadableValue($enumValue);
+            // If ENUM type wasn't set, e.g. {{ player.position|readable }}
+            } else {
+                $occurrences = [];
+                // Check if value exists in registered ENUM types
+                foreach ($this->registeredEnumTypes as $registeredEnumType) {
+                    if ($registeredEnumType::isValueExist($enumValue)) {
+                        $occurrences[] = $registeredEnumType;
+                    }
+                }
+
+                // If found only one occurrence, then we know exactly which ENUM type
+                if (count($occurrences) == 1) {
+                    $enumTypeClass = array_pop($occurrences);
+
+                    return $enumTypeClass::getReadableValue($enumValue);
+                } elseif (count($occurrences) > 1) {
+                    throw new ValueIsFoundInFewRegisteredEnumTypesException(sprintf('Value "%s" is found in few registered ENUM types. You should manually set the appropriate one', $enumValue));
+                } else {
+                    throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(sprintf('Value "%s" wasn\'t found in any registered ENUM type', $enumValue));
+                }
             }
-
-            /** @var $enumTypeClass \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType */
-            $enumTypeClass = $this->registeredEnumTypes[$enumType];
-
-            return $enumTypeClass::getReadableValue($enumValue);
         } else {
-            throw new \LogicException('There are no registered ENUM types');
+            throw new NoRegisteredEnumTypesException('There are no registered ENUM types');
         }
     }
 
     /**
-     * Name of this extension
+     * Get name of this extension
      *
      * @return string
      */
