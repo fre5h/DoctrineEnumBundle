@@ -222,10 +222,29 @@ $builder->add('position', 'choice', [
 ```
 
 ##### Readable ENUM values in templates
-You are of course would want to show ENUM values rendered in your templates in *readable format* instead of the values that would be stored in DB. In the example below if the player is a point guard of his team then his position will be rendered in template as `Point guard` instead of `PG`.
+You are would want to show ENUM values rendered in your templates in *readable format* instead of the values that would be stored in DB. It is easy to do by using the Twig filter `|readable` that was implemented for that task. In the example below if the player is a point guard of his team then his position will be rendered in template as `Point guard` instead of `PG`.
 
 ```jinja
-{{ player.position|readable('BasketballPositionType') }}
+{{ player.position|readable }}
+```
+
+How it works? If there is no additioanl parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension") tries to find which EnumType from the registered ENUM types consists this value. If only one EnumType will be found, then it will be possible to get the readable ENUM value from it. Otherwise it will throw an exception.
+For example, if there are few EnumTypes that have same value: `BasketballPositionType` and `MapLocationType` could have same ENUM value `C` with its readable variant `Center`. The the code below should throw exception, because without additional parameter for `readable` filter it can't determine which EnumType with value `C` to use in what case:
+
+```jinja
+{{ set player_position = 'C' }}
+{{ set position_on_the_map = 'C' }}
+{{ player_position|readable }}
+{{ location_on_the_map|readable }}
+```
+
+So, that correct usage of `readable` filter in this case should be next:
+
+```jinja
+{{ set player_position = 'C' }}
+{{ set position_on_the_map = 'C' }}
+{{ player_position|readable('BasketballPositionType') }}
+{{ location_on_the_map|readable('MapLocationType') }}
 ```
 
 ### Hook for Doctrine migrations
