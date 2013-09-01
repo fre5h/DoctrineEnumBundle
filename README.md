@@ -234,7 +234,7 @@ For example `BasketballPositionType` and `MapLocationType` could have same ENUM 
 
 ```jinja
 {{ set player_position = 'C' }}
-{{ set position_on_the_map = 'C' }}
+{{ set location_on_the_map = 'C' }}
 
 {{ player_position|readable }}
 {{ location_on_the_map|readable }}
@@ -244,7 +244,7 @@ So, that correct usage of `|readable` filter in this case should be with additio
 
 ```jinja
 {{ set player_position = 'C' }}
-{{ set position_on_the_map = 'C' }}
+{{ set location_on_the_map = 'C' }}
 
 {{ player_position|readable('BasketballPositionType') }}
 {{ location_on_the_map|readable('MapLocationType') }}
