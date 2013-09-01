@@ -228,9 +228,9 @@ You would want to show ENUM values rendered in your templates in *readable forma
 {{ player.position|readable }}
 ```
 
-How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension") tries to find which EnumType of the registered ENUM types consists this value. If only one EnumType found, then it is possible to get the readable ENUM value from it. Otherwise it will throw an exception.
+How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension") tries to find which ENUM type of the registered ENUM types consists this value. If only one ENUM type found, then it is possible to get the readable value from it. Otherwise it will throw an exception.
 
-For example, if there are few EnumTypes that have same value: `BasketballPositionType` and `MapLocationType` could have same ENUM value `C` with its readable variant `Center`. The the code below will throw an exception, because without additional parameter for `|readable` filter it can't determine which EnumType use in which case:
+For example, if there are few ENUM types that have same value: `BasketballPositionType` and `MapLocationType` could have same ENUM value `C` with its readable variant `Center`. The code below will throw an exception, because without additional parameter for `|readable` filter it can't determine which EnumType to use in which case:
 
 ```jinja
 {{ set player_position = 'C' }}
@@ -240,7 +240,7 @@ For example, if there are few EnumTypes that have same value: `BasketballPositio
 {{ location_on_the_map|readable }}
 ```
 
-So, that correct usage of `readable` filter in this case should be next:
+So, that correct usage of `|readable` filter in this case should be with additional parameter that specifies the ENUM type:
 
 ```jinja
 {{ set player_position = 'C' }}
