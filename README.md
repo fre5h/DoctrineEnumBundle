@@ -222,19 +222,20 @@ $builder->add('position', 'choice', [
 ```
 
 ##### Readable ENUM values in templates
-You would want to show ENUM values rendered in your templates in *readable format* instead of the values that would be stored in DB. It is easy to do by using the Twig filter `|readable` that was implemented for that task. In the example below if the player is a point guard of his team then his position will be rendered in template as `Point guard` instead of `PG`.
+You would want to show ENUM values rendered in your templates in *readable format* instead of the values that would be stored in DB. It is easy to do by using the Twig filter `|readable` that was implemented for that purpose. In the example below if the player is a point guard of his team then his position will be rendered in template as `Point guard` instead of `PG`.
 
 ```jinja
 {{ player.position|readable }}
 ```
 
-How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension") tries to find which EnumType from the registered ENUM types consists this value. If only one EnumType will be found, then it will be possible to get the readable ENUM value from it. Otherwise it will throw an exception.
+How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension") tries to find which EnumType of the registered ENUM types consists this value. If only one EnumType found, then it is possible to get the readable ENUM value from it. Otherwise it will throw an exception.
 
-For example, if there are few EnumTypes that have same value: `BasketballPositionType` and `MapLocationType` could have same ENUM value `C` with its readable variant `Center`. The the code below will throw an exception, because without additional parameter for `readable` filter it can't determine which EnumType with value `C` to use in which case:
+For example, if there are few EnumTypes that have same value: `BasketballPositionType` and `MapLocationType` could have same ENUM value `C` with its readable variant `Center`. The the code below will throw an exception, because without additional parameter for `|readable` filter it can't determine which EnumType use in which case:
 
 ```jinja
 {{ set player_position = 'C' }}
 {{ set position_on_the_map = 'C' }}
+
 {{ player_position|readable }}
 {{ location_on_the_map|readable }}
 ```
@@ -244,6 +245,7 @@ So, that correct usage of `readable` filter in this case should be next:
 ```jinja
 {{ set player_position = 'C' }}
 {{ set position_on_the_map = 'C' }}
+
 {{ player_position|readable('BasketballPositionType') }}
 {{ location_on_the_map|readable('MapLocationType') }}
 ```
