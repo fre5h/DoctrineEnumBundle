@@ -44,6 +44,10 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that method getReadableEnumValue returns expected readable value
      *
+     * @param string $expectedReadableValue Expected readable value
+     * @param string $enumValue             Enum value
+     * @param string $enumType              Enum type
+     *
      * @dataProvider dataProviderForTestGetReadableEnumValue
      */
     public function testGetReadableEnumValue($expectedReadableValue, $enumValue, $enumType)

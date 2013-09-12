@@ -26,6 +26,8 @@ class EnumValidator extends ChoiceValidator
      *
      * @param mixed      $value      The value that should be validated
      * @param Constraint $constraint The constraint for the validation
+     *
+     * @return void
      */
     public function validate($value, Constraint $constraint)
     {
