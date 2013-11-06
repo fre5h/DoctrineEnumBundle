@@ -1,0 +1,29 @@
+filter:
+    excluded_paths: [vendor/*]
+
+before_commands:
+  - "composer install --prefer-source"
+
+tools:
+    php_code_sniffer:
+        extensions:
+            - php
+        command: phpcs
+        enabled: true
+        filter:
+            excluded_paths: ["vendor/*"]
+        config:
+            standard: PSR2
+    php_code_coverage: true
+    php_mess_detector: true
+    php_cpd:
+        command: phpcpd
+        min_lines: 5
+        min_tokens: 70
+        names:
+            - '*.php'
+        excluded_dirs: ["vendor", "files"]
+        enabled: true
+    php_pdepend:
+        excluded_dirs: [vendor]
+    php_loc: true
