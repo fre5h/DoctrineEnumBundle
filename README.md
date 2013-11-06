@@ -277,3 +277,7 @@ You should repeat these steps after each update of your custom ENUM type!
 - - -
 
 ######It's simple. Enjoy! ;)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fre5h/doctrineenumbundle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
