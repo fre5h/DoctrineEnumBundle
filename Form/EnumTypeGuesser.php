@@ -13,7 +13,6 @@ namespace Fresh\Bundle\DoctrineEnumBundle\Form;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Fresh\Bundle\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 
