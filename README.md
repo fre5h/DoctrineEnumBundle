@@ -7,6 +7,7 @@ Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications.
 [![Code Coverage](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/badges/coverage.png?s=576d093381f1d861702bb2af3da87048792e241c)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
 [![Latest Stable Version](https://poser.pugx.org/fresh/doctrine-enum-bundle/v/stable.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Total Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/downloads.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/mini.png)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fre5h/doctrineenumbundle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
