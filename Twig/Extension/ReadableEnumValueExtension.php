@@ -77,8 +77,8 @@ class ReadableEnumValueExtension extends \Twig_Extension
                 $enumTypeClass = $this->registeredEnumTypes[$enumType];
 
                 return $enumTypeClass::getReadableValue($enumValue);
-            // If ENUM type wasn't set, e.g. {{ player.position|readable }}
             } else {
+                // If ENUM type wasn't set, e.g. {{ player.position|readable }}
                 $occurrences = [];
                 // Check if value exists in registered ENUM types
                 foreach ($this->registeredEnumTypes as $registeredEnumType) {
@@ -93,9 +93,16 @@ class ReadableEnumValueExtension extends \Twig_Extension
 
                     return $enumTypeClass::getReadableValue($enumValue);
                 } elseif (count($occurrences) > 1) {
-                    throw new ValueIsFoundInFewRegisteredEnumTypesException(sprintf('Value "%s" is found in few registered ENUM types. You should manually set the appropriate one', $enumValue));
+                    $message = sprintf(
+                        'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
+                        $enumValue
+                    );
+
+                    throw new ValueIsFoundInFewRegisteredEnumTypesException($message);
                 } else {
-                    throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(sprintf('Value "%s" wasn\'t found in any registered ENUM type', $enumValue));
+                    $message = sprintf('Value "%s" wasn\'t found in any registered ENUM type', $enumValue);
+
+                    throw new ValueIsNotFoundInAnyRegisteredEnumTypeException($message);
                 }
             }
         } else {

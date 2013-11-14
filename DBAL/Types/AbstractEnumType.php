@@ -116,7 +116,9 @@ abstract class AbstractEnumType extends Type
     public static function getReadableValue($value)
     {
         if (!isset(static::getChoices()[$value])) {
-            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM type "%s"', $value, get_called_class()));
+            $message = sprintf('Invalid value "%s" for ENUM type "%s"', $value, get_called_class());
+
+            throw new \InvalidArgumentException($message);
         }
 
         return static::getChoices()[$value];
