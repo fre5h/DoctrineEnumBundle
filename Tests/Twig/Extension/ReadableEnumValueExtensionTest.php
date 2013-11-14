@@ -53,8 +53,8 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     public function testGetReadableEnumValue($expectedReadableValue, $enumValue, $enumType)
     {
         $this->assertEquals(
-             $expectedReadableValue,
-             $this->readableEnumValueExtension->getReadableEnumValue($enumValue, $enumType)
+            $expectedReadableValue,
+            $this->readableEnumValueExtension->getReadableEnumValue($enumValue, $enumType)
         );
     }
 
