@@ -25,7 +25,7 @@ abstract class AbstractEnumType extends Type
     /**
      * @var string Name of this type
      */
-    protected $name = false;
+    protected $name = '';
 
     /**
      * @var array Array of ENUM Values, where enum values are keys and their readable versions are values
@@ -78,7 +78,7 @@ abstract class AbstractEnumType extends Type
      */
     public function getName()
     {
-        return $this->name ? $this->name : get_class($this);
+        return $this->name ?: (new \ReflectionClass(get_class($this)))->getShortName();
     }
 
     /**
