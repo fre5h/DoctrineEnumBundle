@@ -3,7 +3,7 @@
     "description": "Provides support of MySQL ENUM type for Doctrine in Symfony applications",
     "keywords": ["doctrine", "enum", "type", "DBAL", "bundle", "symfony"],
 
-    "homepage": "http://symfony.com",
+    "homepage": "http://knpbundles.com/fre5h/DoctrineEnumBundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
