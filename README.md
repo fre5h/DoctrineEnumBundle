@@ -1,4 +1,4 @@
-# FreshDoctrineEnumBundle
+# DoctrineEnumBundle
 
 Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications
 
