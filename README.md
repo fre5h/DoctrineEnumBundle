@@ -212,7 +212,7 @@ $builder->add('position', null, [
 ]);
 ```
 
-If for some reason you need to specify full config, it could looks like this:
+If for some reason you need to specify full config, it can look like this:
 ```php
 $builder->add('position', 'choice', [
     'choices' => BasketballPositionType::getChoices()
@@ -228,7 +228,7 @@ You would want to show ENUM values rendered in your templates in *readable forma
 
 How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension") tries to find which ENUM type of the registered ENUM types consists this value. If only one ENUM type found, then it is possible to get the readable value from it. Otherwise it will throw an exception.
 
-For example `BasketballPositionType` and `MapLocationType` could have same ENUM value `C` with its readable variant `Center`. The code below will throw an exception, because without additional parameter for `|readable` filter, it can't determine which ENUM type to use in which case:
+For example `BasketballPositionType` and `MapLocationType` can have same ENUM value `C` with its readable variant `Center`. The code below will throw an exception, because without additional parameter for `|readable` filter, it can't determine which ENUM type to use in which case:
 
 ```jinja
 {{ set player_position = 'C' }}
@@ -269,7 +269,3 @@ If you later will need to add new values to ENUM or delete some existed, you als
 Fortunately you can do simple **hook** =) Access your database and delete comment for `position` column. After that run console command `doctrine:migrations:diff` it will create correct migrations.
 
 You should repeat these steps after each update of your custom ENUM type!
-
-- - -
-
-######It's simple. Enjoy! ;)
