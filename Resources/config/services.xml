@@ -10,11 +10,10 @@
             <argument>%doctrine.dbal.connection_factory.types%</argument>
         </service>
 
-        <service id="fresh_doctrine_enum.enumtypeguesser" class="Fresh\Bundle\DoctrineEnumBundle\Form\EnumTypeGuesser" public="true" >
+        <service id="fresh_doctrine_enum.enum_type_guesser" class="Fresh\Bundle\DoctrineEnumBundle\Form\EnumTypeGuesser" public="true" >
             <tag name="form.type_guesser" />
             <argument type="service" id="doctrine" />
             <argument>%doctrine.dbal.connection_factory.types%</argument>
         </service>
     </services>
-
 </container>
