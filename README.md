@@ -60,7 +60,7 @@ doctrine:
 
 ## Using
 
-### Examples
+### Example
 
 In this example will be shown how to create custom ENUM field for basketball positions. This ENUM should contain five values:
 

@@ -22,8 +22,8 @@ tools:
         min_tokens: 70
         names:
             - '*.php'
-        excluded_dirs: ["vendor", "Tests"]
+        excluded_dirs: ["vendor"]
         enabled: true
     php_pdepend:
-        excluded_dirs: ["vendor", "Tests"]
+        excluded_dirs: ["vendor"]
     php_loc: true
