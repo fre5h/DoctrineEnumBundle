@@ -1,9 +1,9 @@
 {
     "name": "fresh/doctrine-enum-bundle",
     "description": "Provides support of MySQL ENUM type for Doctrine2 in Symfony2 applications.",
-    "keywords": ["doctrine", "enum", "type", "DBAL", "bundle", "symfony"],
+    "keywords": ["bundle", "symfony", "doctrine", "entity", "enum", "type", "DBAL"],
 
-    "homepage": "http://knpbundles.com/fre5h/DoctrineEnumBundle",
+    "homepage": "https://github.com/fre5h/DoctrineEnumBundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
