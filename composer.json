@@ -1,6 +1,6 @@
 {
     "name": "fresh/doctrine-enum-bundle",
-    "description": "Provides support of MySQL ENUM type for Doctrine in Symfony applications",
+    "description": "Provides support of MySQL ENUM type for Doctrine2 in Symfony2 applications.",
     "keywords": ["doctrine", "enum", "type", "DBAL", "bundle", "symfony"],
 
     "homepage": "http://knpbundles.com/fre5h/DoctrineEnumBundle",
@@ -10,7 +10,7 @@
         {
             "name": "Artem Genvald",
             "email": "genvaldartem@gmail.com",
-            "role": "Developer"
+            "role": "Creator"
         }
     ],
 
