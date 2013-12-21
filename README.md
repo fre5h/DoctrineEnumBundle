@@ -128,6 +128,7 @@ use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 /**
  * Player Entity
  *
+ * @ORM\Entity()
  * @ORM\Table(name="players")
  */
 class Player
