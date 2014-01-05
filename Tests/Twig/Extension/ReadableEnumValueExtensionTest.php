@@ -67,7 +67,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    public static function dataProviderForGetReadableEnumValueTest()
+    public function dataProviderForGetReadableEnumValueTest()
     {
         return [
             ['Point guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'],
