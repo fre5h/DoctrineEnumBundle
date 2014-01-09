@@ -135,4 +135,12 @@ abstract class AbstractEnumType extends Type
     {
         return in_array($value, static::getValues());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    {
+        return true;
+    }
 }
