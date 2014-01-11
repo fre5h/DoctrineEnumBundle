@@ -231,7 +231,7 @@ $builder->add('position', 'choice', [
 ]);
 ```
 
-[EnumTypeGuesser](./Form/EnumTypeGuesser.php "EnumTypeGuesser") process only DBAL types that are children of [AbstractEnumType](./DBAL/Types/AbstractEnumType.php "AbstractEnumType").
+[EnumTypeGuesser](./Form/EnumTypeGuesser.php "EnumTypeGuesser") process **only** DBAL types that are children of [AbstractEnumType](./DBAL/Types/AbstractEnumType.php "AbstractEnumType").
 All other custom DBAL types, which are defined, will be skipped from guessing.
 
 ##### Readable ENUM values in templates
