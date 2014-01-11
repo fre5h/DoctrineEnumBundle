@@ -196,7 +196,7 @@ use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
 ```
 
 `NULL` values are also supported by ENUM field.
-You can set *nullable* parameter of column to `true` or `false` depends on if you want or not to allow `NULL` values.
+You can set *nullable* parameter of column to `true` or `false` depends on if you want or not to allow `NULL` values:
 
 ```php
 /** @ORM\Column(name="position", type="BasketballPositionType", nullable=true) */
@@ -230,6 +230,9 @@ $builder->add('position', 'choice', [
     'choices' => BasketballPositionType::getChoices()
 ]);
 ```
+
+[EnumTypeGuesser](./Form/EnumTypeGuesser.php "EnumTypeGuesser") process only DBAL types that are children of [AbstractEnumType](./DBAL/Types/AbstractEnumType.php "AbstractEnumType").
+All other custom DBAL types, which are defined, will be skipped from guessing.
 
 ##### Readable ENUM values in templates
 You would want to show ENUM values rendered in your templates in *readable format* instead of the values that would be stored in DB. It is easy to do by using the Twig filter `|readable` that was implemented for that purpose. In the example below if the player is a point guard of his team then his position will be rendered in template as `Point guard` instead of `PG`.
