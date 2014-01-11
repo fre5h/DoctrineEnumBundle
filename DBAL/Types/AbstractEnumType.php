@@ -34,16 +34,14 @@ abstract class AbstractEnumType extends Type
     protected static $choices = [];
 
     /**
-     * Convert a value from its PHP representation to its database representation of this type
-     *
-     * @param mixed            $value    The value to convert
-     * @param AbstractPlatform $platform The currently used database platform
-     *
-     * @throws \InvalidArgumentException
-     * @return mixed The database representation of the value
+     * {@inheritdoc}
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
+        if (is_null($value)) {
+            return null;
+        }
+
         if (!in_array($value, $this->getValues())) {
             throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM %s', $value, $this->getName()));
         }
@@ -52,12 +50,7 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * Get the SQL declaration snippet for a field of this type
-     *
-     * @param array            $fieldDeclaration The field declaration
-     * @param AbstractPlatform $platform         The currently used database platform
-     *
-     * @return string The SQL declaration snippet
+     * {@inheritdoc}
      */
     public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
@@ -72,9 +65,15 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * Get the name of this type
-     *
-     * @return string Name of this type
+     * {@inheritdoc}
+     */
+    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -85,6 +84,7 @@ abstract class AbstractEnumType extends Type
      * Get readable choices for the ENUM field
      *
      * @static
+     *
      * @return array Values for the ENUM field
      */
     public static function getChoices()
@@ -96,6 +96,7 @@ abstract class AbstractEnumType extends Type
      * Get values for the ENUM field
      *
      * @static
+     *
      * @return array Values for the ENUM field
      */
     public static function getValues()
@@ -109,6 +110,7 @@ abstract class AbstractEnumType extends Type
      * @param string $value ENUM value
      *
      * @static
+     *
      * @return string|null Value in readable format
      *
      * @throws \InvalidArgumentException
@@ -134,13 +136,5 @@ abstract class AbstractEnumType extends Type
     public static function isValueExist($value)
     {
         return in_array($value, static::getValues());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
-    {
-        return true;
     }
 }
