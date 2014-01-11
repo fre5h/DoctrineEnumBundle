@@ -11,6 +11,7 @@
 namespace Fresh\Bundle\DoctrineEnumBundle\Form;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\Bundle\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Component\Form\Guess\Guess;
@@ -26,7 +27,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     /**
      * Array of registered ENUM types
      *
-     * @var \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType[]
+     * @var AbstractEnumType[]
      */
     protected $registeredEnumTypes = [];
 
@@ -74,6 +75,12 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
         }
 
         $enumTypeFullClassName = $this->registeredEnumTypes[$fieldType];
+
+        $abstractEnumTypeFullClassName = 'Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
+
+        if (get_parent_class($enumTypeFullClassName) !== $abstractEnumTypeFullClassName) {
+            return null;
+        }
 
         if (!class_exists($enumTypeFullClassName)) {
             $message = sprintf(
