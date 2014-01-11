@@ -195,18 +195,21 @@ But don't forget to define `BasketballPositionType` in the *use* section:
 use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
 ```
 
-You can set `nullable` parameter of column to **true** or **false** depends on if you want or not to allow *NULL* values.
-*NULL* values are also support for ENUM field.
+*NULL* values are also supported by ENUM field.
+You can set `nullable` parameter of column to `true` or `false` depends on if you want or not to allow NULL values.
 
 ```php
-    /**
-     * @var string $position
-     *
-     * @DoctrineAssert\Enum(entity="Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType")
-     *
-     * @ORM\Column(name="position", type="BasketballPositionType", nullable=true)
-     */
-    protected $position;
+/**
+ * @ORM\Column(name="position", type="BasketballPositionType", nullable=true)
+ */
+protected $position;
+
+// or
+
+/**
+ * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
+ */
+protected $position;
 ```
 
 ##### Building the form
