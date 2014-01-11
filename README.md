@@ -26,7 +26,7 @@ Add the following lines to your `composer.json` file and then run `php composer.
 ```json
 {
     "require": {
-        "fresh/doctrine-enum-bundle": "dev-master"
+        "fresh/doctrine-enum-bundle": "v2.3"
     }
 }
 ```
@@ -193,6 +193,20 @@ But don't forget to define `BasketballPositionType` in the *use* section:
 
 ```php
 use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
+```
+
+You can set `nullable` parameter of column to **true** or **false** depends on if you want or not to allow *NULL* values.
+*NULL* values are also support for ENUM field.
+
+```php
+    /**
+     * @var string $position
+     *
+     * @DoctrineAssert\Enum(entity="Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType")
+     *
+     * @ORM\Column(name="position", type="BasketballPositionType", nullable=true)
+     */
+    protected $position;
 ```
 
 ##### Building the form
