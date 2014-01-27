@@ -26,7 +26,7 @@ Add the following lines to your `composer.json` file and then run `php composer.
 ```json
 {
     "require": {
-        "fresh/doctrine-enum-bundle": "v2.3"
+        "fresh/doctrine-enum-bundle": "v2.4"
     }
 }
 ```
