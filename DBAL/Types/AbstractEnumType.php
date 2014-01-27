@@ -11,6 +11,7 @@
 namespace Fresh\Bundle\DoctrineEnumBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Types\Type;
 
 /**
@@ -19,6 +20,7 @@ use Doctrine\DBAL\Types\Type;
  * Provides support of MySQL ENUM type for Doctrine in Symfony applications
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Ben Davies <ben.davies@gmail.com>
  */
 abstract class AbstractEnumType extends Type
 {
@@ -54,14 +56,18 @@ abstract class AbstractEnumType extends Type
      */
     public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        $values = array_map(
+        $values = implode(', ', array_map(
             function ($value) {
                 return "'{$value}'";
             },
             $this->getValues()
-        );
+        ));
 
-        return 'ENUM(' . implode(', ', $values) . ')';
+        if ($platform instanceof SqlitePlatform) {
+            return sprintf('TEXT CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
+        }
+
+        return sprintf('ENUM(%s)', $values);
     }
 
     /**
