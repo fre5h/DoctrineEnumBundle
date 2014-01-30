@@ -2,6 +2,7 @@
 
 Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications
 
+[![License](https://poser.pugx.org/fresh/doctrine-enum-bundle/license.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/badges/quality-score.png?s=be81f9b30a3996e7786cff5b4e0c0d972a64a37b)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
 [![Latest Stable Version](https://poser.pugx.org/fresh/doctrine-enum-bundle/v/stable.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
