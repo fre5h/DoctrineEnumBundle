@@ -28,7 +28,7 @@ Add the following lines to your `composer.json` file and then run `php composer.
 ```json
 {
     "require": {
-        "fresh/doctrine-enum-bundle": "v2.4"
+        "fresh/doctrine-enum-bundle": "v2.5"
     }
 }
 ```
@@ -123,8 +123,8 @@ Create `Player` entity that has `position` field:
 <?php
 namespace Application\Bundle\DefaultBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
+use Doctrine\ORM\Mapping as ORM;
 use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
@@ -148,7 +148,6 @@ class Player
      * @var string $position
      *
      * @DoctrineAssert\Enum(entity="Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType")
-     *
      * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
      */
     protected $position;
@@ -156,7 +155,7 @@ class Player
     /**
      * Get id
      *
-     * @return int
+     * @return int ID
      */
     public function getId()
     {
@@ -166,7 +165,7 @@ class Player
     /**
      * Set position
      *
-     * @param string $position
+     * @param string $position Position
      */
     public function setPosition($position)
     {
@@ -176,7 +175,7 @@ class Player
     /**
      * Get position
      *
-     * @return string
+     * @return string Position
      */
     public function getPosition()
     {

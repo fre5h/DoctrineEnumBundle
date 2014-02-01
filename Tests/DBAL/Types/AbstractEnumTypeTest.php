@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Fresh\Bundle\DoctrineEnumBundle\Tests\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
@@ -33,21 +34,21 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->type = $this->getMockBuilder('Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType')
-            ->disableOriginalConstructor()
-            ->setMethods(array('getValues'))
-            ->getMockForAbstractClass();
+                           ->disableOriginalConstructor()
+                           ->setMethods(['getValues'])
+                           ->getMockForAbstractClass();
 
         $this->type->staticExpects($this->any())
-            ->method('getValues')
-            ->will($this->returnValue(array('M', 'F')));
+                   ->method('getValues')
+                   ->will($this->returnValue(['M', 'F']));
     }
 
     /**
      * Test that the SQL declaration is the correct for the platform
      *
-     * @param array            $fieldDeclaration The Field Declaration
-     * @param AbstractPlatform $platform         The DBAL Platform
-     * @param string           $expected         Expected Sql Declaration
+     * @param array            $fieldDeclaration The field declaration
+     * @param AbstractPlatform $platform         The DBAL platform
+     * @param string           $expected         Expected SQL declaration
      *
      * @test
      * @covers ::getSqlDeclaration
@@ -59,13 +60,23 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Data provider for method getSqlDeclaration
+     *
      * @return array
      */
     public function platformProvider()
     {
-        return array(
-            array(array('name' => 'sex'), new MySqlPlatform(), "ENUM('M', 'F')"),
-            array(array('name' => 'sex'), new SqlitePlatform(), "TEXT CHECK(sex IN ('M', 'F'))")
-        );
+        return [
+            [
+                ['name' => 'sex'],
+                new MySqlPlatform(),
+                "ENUM('M', 'F')"
+            ],
+            [
+                ['name' => 'sex'],
+                new SqlitePlatform(),
+                "TEXT CHECK(sex IN ('M', 'F'))"
+            ]
+        ];
     }
 }
