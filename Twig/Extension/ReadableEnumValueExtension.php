@@ -37,7 +37,9 @@ class ReadableEnumValueExtension extends \Twig_Extension
     public function __construct(array $registeredTypes)
     {
         foreach ($registeredTypes as $type => $details) {
-            $this->registeredEnumTypes[$type] = $details['class'];
+            if (is_subclass_of($details['class'], '\Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType')) {
+                $this->registeredEnumTypes[$type] = $details['class'];
+            }
         }
     }
 
