@@ -33,7 +33,7 @@ abstract class AbstractEnumType extends Type
      * @var array Array of ENUM Values, where enum values are keys and their readable versions are values
      * @static
      */
-    protected static $choices = [];
+    protected static $choices = array();
 
     /**
      * {@inheritdoc}
@@ -83,7 +83,9 @@ abstract class AbstractEnumType extends Type
      */
     public function getName()
     {
-        return $this->name ?: (new \ReflectionClass(get_class($this)))->getShortName();
+        $reflection = new \ReflectionClass(get_class($this));
+
+        return $this->name ?: $reflection->getShortName();
     }
 
     /**
@@ -123,13 +125,15 @@ abstract class AbstractEnumType extends Type
      */
     public static function getReadableValue($value)
     {
-        if (!isset(static::getChoices()[$value])) {
+        $choices = static::getChoices();
+
+        if (!isset($choices[$value])) {
             $message = sprintf('Invalid value "%s" for ENUM type "%s"', $value, get_called_class());
 
             throw new \InvalidArgumentException($message);
         }
 
-        return static::getChoices()[$value];
+        return $choices[$value];
     }
 
     /**
