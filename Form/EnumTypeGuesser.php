@@ -29,7 +29,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
      *
      * @var AbstractEnumType[]
      */
-    protected $registeredEnumTypes = [];
+    protected $registeredEnumTypes = array();
 
     /**
      * Constructor
@@ -93,10 +93,10 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
         }
 
         // Get the choices from the fully qualified class name
-        $parameters = [
+        $parameters = array(
             'choices'  => $enumTypeFullClassName::getChoices(),
             'required' => !$metadata->isNullable($property),
-        ];
+        );
 
         return new TypeGuess('choice', $parameters, Guess::VERY_HIGH_CONFIDENCE);
     }

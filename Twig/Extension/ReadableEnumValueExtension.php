@@ -27,7 +27,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
      *
      * @var \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType[]
      */
-    protected $registeredEnumTypes = [];
+    protected $registeredEnumTypes = array();
 
     /**
      * Constructor
@@ -37,9 +37,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
     public function __construct(array $registeredTypes)
     {
         foreach ($registeredTypes as $type => $details) {
-            if (is_subclass_of($details['class'], '\Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType')) {
-                $this->registeredEnumTypes[$type] = $details['class'];
-            }
+            $this->registeredEnumTypes[$type] = $details['class'];
         }
     }
 
@@ -50,7 +48,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return ['readable' => new \Twig_Filter_Method($this, 'getReadableEnumValue')];
+        return array('readable' => new \Twig_Filter_Method($this, 'getReadableEnumValue'));
     }
 
     /**
@@ -81,7 +79,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
                 return $enumTypeClass::getReadableValue($enumValue);
             } else {
                 // If ENUM type wasn't set, e.g. {{ player.position|readable }}
-                $occurrences = [];
+                $occurrences = array();
                 // Check if value exists in registered ENUM types
                 foreach ($this->registeredEnumTypes as $registeredEnumType) {
                     if ($registeredEnumType::isValueExist($enumValue)) {
