@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints;
+namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Constraint;
@@ -27,9 +27,9 @@ class EnumValidator extends ChoiceValidator
      * @param mixed      $value      The value that should be validated
      * @param Constraint $constraint The constraint for the validation
      *
-     * @return void
-     *
      * @throws ConstraintDefinitionException
+     *
+     * @return void
      */
     public function validate($value, Constraint $constraint)
     {

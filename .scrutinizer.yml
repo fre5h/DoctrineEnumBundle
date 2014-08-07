@@ -27,3 +27,5 @@ tools:
     php_pdepend:
         excluded_dirs: ["vendor"]
     php_loc: true
+    php_analyzer: true
+    sensiolabs_security_checker: true

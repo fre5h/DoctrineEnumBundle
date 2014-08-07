@@ -1,43 +1,36 @@
 # DoctrineEnumBundle
 
-Provides support of **ENUM type** for Doctrine in Symfony applications
+Provides support of **ENUM type** for Doctrine in Symfony applications.
 
-## Supported platforms:
-
-* MySQL
-* SQLite
-
-[![License](https://poser.pugx.org/fresh/doctrine-enum-bundle/license.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
-[![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/badges/quality-score.png?s=be81f9b30a3996e7786cff5b4e0c0d972a64a37b)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
+* Scrutinizer [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/badges/quality-score.png?s=be81f9b30a3996e7786cff5b4e0c0d972a64a37b)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
+[![Build Status](https://scrutinizer-ci.com/g/fre5h/delivery-auto-api-php-client/badges/build.png?b=master)](https://scrutinizer-ci.com/g/fre5h/delivery-auto-api-php-client/build-status/master)
+* Travis CI [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
+* Packagist.org [![License](https://poser.pugx.org/fresh/doctrine-enum-bundle/license.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Latest Stable Version](https://poser.pugx.org/fresh/doctrine-enum-bundle/v/stable.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Total Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/downloads.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
-[![Dependency Status](https://www.versioneye.com/php/fresh:doctrine-enum-bundle/badge.svg)](https://www.versioneye.com/php/fresh:doctrine-enum-bundle/5.3.x-dev)
+* VersionEye [![Dependency Status](https://www.versioneye.com/user/projects/52ea10b1ec13755c2f000045/badge.svg)](https://www.versioneye.com/user/projects/52ea10b1ec13755c2f000045)
 [![Reference Status](https://www.versioneye.com/php/fresh:doctrine-enum-bundle/reference_badge.svg)](https://www.versioneye.com/php/fresh:doctrine-enum-bundle/references)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/big.png)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
 
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
 
+## Supported platforms
+
+* MySQL
+* SQLite
+
 ## Requirements
 
-* Symfony 2.1 *and later*
 * PHP 5.4 *and later*
+* Symfony 2.5 *and later*
 * Doctrine 2.2 *and later*
 
 ## Installation
 
 ### Install via Composer
 
-Add the following lines to your `composer.json` file and then run `php composer.phar install` or `php composer.phar update`:
-
-```json
-{
-    "require": {
-        "fresh/doctrine-enum-bundle": "v2.5"
-    }
-}
-```
+```php composer.phar require fresh/doctrine-enum-bundle='v3.0'```
 
 ### Register the bundle
 
@@ -48,7 +41,7 @@ public function registerBundles()
 {
     $bundles = [
         // Other bundles...
-        new Fresh\Bundle\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
+        new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
     ];
 }
 ```
@@ -61,7 +54,6 @@ Add the following lines for doctrine configuration in `config.yml` file:
 # Doctrine Configuration
 doctrine:
     dbal:
-        # Other options...
         mapping_types:
             enum: string
 ```
@@ -82,10 +74,10 @@ Create class for new ENUM type `BasketballPositionType`:
 
 ```php
 <?php
-namespace Application\Bundle\DefaultBundle\DBAL\Types;
+namespace Acme\AppBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
+use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
  * Basketball position type
@@ -118,20 +110,19 @@ Register `BasketballPositionType` for Doctrine in config.yml:
 # Doctrine Configuration
 doctrine:
     dbal:
-        # Other options...
         types:
-            BasketballPositionType: Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType
+            BasketballPositionType: Acme\AppBundle\DBAL\Types\BasketballPositionType
 ```
 
 Create `Player` entity that has `position` field:
 
 ```php
 <?php
-namespace Application\Bundle\DefaultBundle\Entity;
+namespace Acme\AppBundle\Entity;
 
-use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
+use Acme\AppBundle\DBAL\Types\BasketballPositionType;
 use Doctrine\ORM\Mapping as ORM;
-use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
  * Player Entity
@@ -142,7 +133,7 @@ use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 class Player
 {
     /**
-     * @var int $id
+     * @var int $id ID
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
@@ -151,15 +142,15 @@ class Player
     protected $id;
 
     /**
-     * @var string $position
+     * @var string $position Position
      *
-     * @DoctrineAssert\Enum(entity="Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType")
+     * @DoctrineAssert\Enum(entity="Acme\AppBundle\DBAL\Types\BasketballPositionType")
      * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
      */
     protected $position;
 
     /**
-     * Get id
+     * Get ID
      *
      * @return int ID
      */
@@ -199,7 +190,7 @@ $player->setPosition(BasketballPositionType::POINT_GUARD);
 But don't forget to define `BasketballPositionType` in the *use* section:
 
 ```php
-use Application\Bundle\DefaultBundle\DBAL\Types\BasketballPositionType;
+use Acme\AppBundle\DBAL\Types\BasketballPositionType;
 ```
 
 `NULL` values are also supported by ENUM field.

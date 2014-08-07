@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\Exception;
+namespace Fresh\DoctrineEnumBundle\Exception;
 
 /**
  * ValueIsNotFoundInAnyRegisteredEnumTypeException

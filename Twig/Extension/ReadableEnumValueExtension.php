@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\Twig\Extension;
+namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
-use Fresh\Bundle\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
-use Fresh\Bundle\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
-use Fresh\Bundle\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException;
-use Fresh\Bundle\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException;
+use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
+use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException;
 
 /**
  * ReadableEnumValueExtension returns the readable variant of ENUM value
@@ -25,7 +25,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
     /**
      * Array of registered ENUM types
      *
-     * @var \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType[]
+     * @var \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType[] $registeredEnumTypes Registered ENUM types
      */
     protected $registeredEnumTypes = [];
 
@@ -37,7 +37,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
     public function __construct(array $registeredTypes)
     {
         foreach ($registeredTypes as $type => $details) {
-            if (is_subclass_of($details['class'], '\Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType')) {
+            if (is_subclass_of($details['class'], '\Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType')) {
                 $this->registeredEnumTypes[$type] = $details['class'];
             }
         }
@@ -59,12 +59,12 @@ class ReadableEnumValueExtension extends \Twig_Extension
      * @param string      $enumValue ENUM value
      * @param string|null $enumType  ENUM type
      *
-     * @return string
-     *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
      * @throws ValueIsFoundInFewRegisteredEnumTypesException
      * @throws ValueIsNotFoundInAnyRegisteredEnumTypeException
+     *
+     * @return string
      */
     public function getReadableEnumValue($enumValue, $enumType = null)
     {
@@ -75,7 +75,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
                     throw new EnumTypeIsNotRegisteredException(sprintf('ENUM type "%s" is not registered', $enumType));
                 }
 
-                /** @var $enumTypeClass \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType */
+                /** @var $enumTypeClass \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType */
                 $enumTypeClass = $this->registeredEnumTypes[$enumType];
 
                 return $enumTypeClass::getReadableValue($enumValue);
@@ -115,7 +115,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
     /**
      * Get name of this extension
      *
-     * @return string
+     * @return string Name of extension
      */
     public function getName()
     {

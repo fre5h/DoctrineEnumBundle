@@ -8,38 +8,39 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\Tests\Validator;
+namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
-use Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType;
-use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints\Enum;
-use Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
-use Symfony\Component\Validator\ExecutionContext;
+use Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
+use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * EnumValidatorTest
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  *
- * @coversDefaultClass \Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints\EnumValidator
+ * @coversDefaultClass \Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator
  */
 class EnumValidatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var EnumValidator
+     * @var EnumValidator $enumValidator ENUM validator
      */
     private $enumValidator;
 
     /**
-     * @var ExecutionContext|\PHPUnit_Framework_MockObject_MockObject
+     * @var ExecutionContext|\PHPUnit_Framework_MockObject_MockObject $context Context
      */
     private $context;
 
     /**
-     * Set up EnumValidator
+     * Set up ENUM validator
      */
     public function setUp()
     {
         $this->enumValidator = new EnumValidator();
+
         $this->context = $this->getMockBuilder('Symfony\Component\Validator\ExecutionContext')
                               ->disableOriginalConstructor()
                               ->getMock();
@@ -66,7 +67,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     public function validBasketballPositionType()
     {
         $constraint = new Enum([
-            'entity' => 'Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
+            'entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
         ]);
 
         $this->context
@@ -86,7 +87,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     public function invalidBasketballPositionType()
     {
         $constraint = new Enum([
-            'entity' => 'Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
+            'entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
         ]);
 
         $this->context
@@ -94,7 +95,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
              ->method('addViolation')
              ->with(
                  $this->equalTo('The value you selected is not a valid choice.'),
-                 $this->equalTo(['{{ value }}' => 'Pitcher'])
+                 $this->equalTo(['{{ value }}' => '"Pitcher"'])
              );
 
         $this->enumValidator->initialize($this->context);

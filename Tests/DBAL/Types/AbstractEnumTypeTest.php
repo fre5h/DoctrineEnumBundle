@@ -8,39 +8,43 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\Tests\DBAL\Types;
+namespace Fresh\DoctrineEnumBundle\Tests\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\DBAL\Types\Type;
+use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
  * AbstractEnumTypeTest
  *
+ * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Ben Davies <ben.davies@gmail.com>
  *
- * @coversDefaultClass \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType
+ * @coversDefaultClass \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType
  */
 class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType
+     * @var AbstractEnumType
      */
     private $type;
 
     /**
-     * Set up EnumType
+     * Set up before test suite
+     */
+    public static function setUpBeforeClass()
+    {
+        Type::addType('BasketballPositionType', '\Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType');
+    }
+
+    /**
+     * Set up environment
      */
     public function setUp()
     {
-        $this->type = $this->getMockBuilder('Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType')
-                           ->disableOriginalConstructor()
-                           ->setMethods(['getValues'])
-                           ->getMockForAbstractClass();
-
-        $this->type->staticExpects($this->any())
-                   ->method('getValues')
-                   ->will($this->returnValue(['M', 'F']));
+        $this->type = Type::getType('BasketballPositionType');
     }
 
     /**
@@ -70,12 +74,12 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
             [
                 ['name' => 'sex'],
                 new MySqlPlatform(),
-                "ENUM('M', 'F')"
+                "ENUM('PG', 'SG', 'SF', 'PF', 'C')"
             ],
             [
                 ['name' => 'sex'],
                 new SqlitePlatform(),
-                "TEXT CHECK(sex IN ('M', 'F'))"
+                "TEXT CHECK(sex IN ('PG', 'SG', 'SF', 'PF', 'C'))"
             ]
         ];
     }

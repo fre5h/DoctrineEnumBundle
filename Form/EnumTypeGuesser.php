@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\Form;
+namespace Fresh\DoctrineEnumBundle\Form;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
-use Fresh\Bundle\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
+use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
+use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
@@ -76,7 +76,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         $enumTypeFullClassName = $this->registeredEnumTypes[$fieldType];
 
-        $abstractEnumTypeFullClassName = 'Fresh\Bundle\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
+        $abstractEnumTypeFullClassName = 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
 
         if (get_parent_class($enumTypeFullClassName) !== $abstractEnumTypeFullClassName) {
             return null;

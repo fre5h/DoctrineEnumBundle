@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\DBAL\Types;
+namespace Fresh\DoctrineEnumBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
@@ -30,7 +30,7 @@ abstract class AbstractEnumType extends Type
     protected $name = '';
 
     /**
-     * @var array Array of ENUM Values, where enum values are keys and their readable versions are values
+     * @var array Array of ENUM Values, where ENUM values are keys and their readable versions are values
      * @static
      */
     protected static $choices = [];
@@ -56,12 +56,15 @@ abstract class AbstractEnumType extends Type
      */
     public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        $values = implode(', ', array_map(
-            function ($value) {
-                return "'{$value}'";
-            },
-            $this->getValues()
-        ));
+        $values = implode(
+            ', ',
+            array_map(
+                function ($value) {
+                    return "'{$value}'";
+                },
+                $this->getValues()
+            )
+        );
 
         if ($platform instanceof SqlitePlatform) {
             return sprintf('TEXT CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
