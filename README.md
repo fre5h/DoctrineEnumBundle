@@ -1,6 +1,11 @@
 # DoctrineEnumBundle
 
-Provides support of *MySQL* **ENUM type** for Doctrine in Symfony applications
+Provides support of **ENUM type** for Doctrine in Symfony applications
+
+## Supported platforms:
+
+* MySQL
+* SQLite
 
 [![License](https://poser.pugx.org/fresh/doctrine-enum-bundle/license.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
