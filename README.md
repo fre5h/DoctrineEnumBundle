@@ -2,11 +2,6 @@
 
 Provides support of **ENUM type** for Doctrine in Symfony applications
 
-## Supported platforms:
-
-* MySQL
-* SQLite
-
 [![License](https://poser.pugx.org/fresh/doctrine-enum-bundle/license.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/badges/quality-score.png?s=be81f9b30a3996e7786cff5b4e0c0d972a64a37b)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
@@ -18,6 +13,11 @@ Provides support of **ENUM type** for Doctrine in Symfony applications
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/big.png)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
 
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
+
+## Supported platforms:
+
+* MySQL
+* SQLite
 
 ## Requirements
 
