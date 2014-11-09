@@ -29,7 +29,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications
 
 ### Install via Composer
 
-Add the following lines to your `composer.json` file and then run `php composer.phar install` or `php composer.phar update`:
+Add the following lines into your `composer.json` file:
 
 ```json
 {
@@ -38,6 +38,7 @@ Add the following lines to your `composer.json` file and then run `php composer.
     }
 }
 ```
+And then run `php composer.phar update`
 
 ### Register the bundle
 
