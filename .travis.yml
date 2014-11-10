@@ -6,13 +6,13 @@ php:
   - 5.6
 
 before_script:
-  - composer install
+  - composer install --dev
   - pear install --alldeps PHP_CodeSniffer
   - phpenv rehash
-  - git clone git://github.com/opensky/Symfony2-coding-standard.git $(pear config-get php_dir)/PHP/CodeSniffer/Standards/Symfony2
-  - phpcs --standard=Symfony2 --ignore=/vendor ./
 
-script: phpunit
+script:
+  - phpunit
+  - phpcs --standard=PSR2 --ignore=/vendor ./
 
 notifications:
   email:
