@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\Validator\Constraints;
+namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraints\Choice;
 
@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 class Enum extends Choice
 {
     /**
-     * @var string Entity
+     * @var string $entity Entity
      */
     public $entity;
 

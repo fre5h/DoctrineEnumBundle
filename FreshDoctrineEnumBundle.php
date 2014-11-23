@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle;
+namespace Fresh\DoctrineEnumBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

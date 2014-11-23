@@ -2,31 +2,35 @@
     "name": "fresh/doctrine-enum-bundle",
     "description": "Provides support of ENUM type for Doctrine2 in Symfony2 applications.",
     "keywords": ["bundle", "symfony", "doctrine", "entity", "enum", "type", "DBAL", "MySQL", "SQLite"],
-
     "homepage": "https://github.com/fre5h/DoctrineEnumBundle",
     "type": "symfony-bundle",
     "license": "MIT",
+    "time": "2014-11-23",
     "authors": [
         {
             "name": "Artem Genvald",
             "email": "genvaldartem@gmail.com",
             "role": "Creator"
+        },
+        {
+            "name": "Community",
+            "homepage": "https://github.com/fre5h/DoctrineEnumBundle/graphs/contributors",
+            "role": "Developers"
         }
     ],
-
+    "support": {
+        "email": "genvaldartem@gmail.com",
+        "issues": "https://github.com/fre5h/DoctrineEnumBundle/issues"
+    },
     "require": {
         "php": ">=5.4.0",
-        "symfony/symfony": ">=2.1",
-        "doctrine/orm": ">=2.2"
+        "symfony/symfony": "~2.5",
+        "doctrine/orm": "~2.2"
     },
-
     "minimum-stability": "stable",
-
     "autoload": {
-        "psr-0": {
-            "Fresh\\Bundle\\DoctrineEnumBundle": ""
+        "psr-4": {
+            "Fresh\\DoctrineEnumBundle\\": ""
         }
-    },
-
-    "target-dir": "Fresh/Bundle/DoctrineEnumBundle"
+    }
 }

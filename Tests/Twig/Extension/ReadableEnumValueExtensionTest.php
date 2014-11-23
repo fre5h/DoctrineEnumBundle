@@ -8,18 +8,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Bundle\DoctrineEnumBundle\Tests\Twig\Extension;
+namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
-use Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType;
-use Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\MapLocationType;
-use Fresh\Bundle\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension;
+use Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\MapLocationType;
+use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension;
 
 /**
  * ReadableEnumValueExtensionTest
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  *
- * @coversDefaultClass \Fresh\Bundle\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension
+ * @coversDefaultClass \Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension
  */
 class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,10 +35,10 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $this->readableEnumValueExtension = new ReadableEnumValueExtension([
             'BasketballPositionType' => [
-                'class' => 'Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
+                'class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
             ],
             'MapLocationType'        => [
-                'class' => 'Fresh\Bundle\DoctrineEnumBundle\Fixtures\DBAL\Types\MapLocationType'
+                'class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\MapLocationType'
             ]
         ]);
     }
@@ -82,7 +82,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @covers ::getReadableEnumValue
-     * @expectedException \Fresh\Bundle\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException
      */
     public function enumTypeIsNotRegisteredException()
     {
@@ -95,7 +95,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @covers ::getReadableEnumValue
-     * @expectedException \Fresh\Bundle\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException
      */
     public function valueIsFoundInFewRegisteredEnumTypesException()
     {
@@ -108,7 +108,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @covers ::getReadableEnumValue
-     * @expectedException \Fresh\Bundle\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException
      */
     public function valueIsNotFoundInAnyRegisteredEnumTypeException()
     {
@@ -121,7 +121,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @covers ::getReadableEnumValue
-     * @expectedException \Fresh\Bundle\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException
      */
     public function noRegisteredEnumTypesException()
     {
