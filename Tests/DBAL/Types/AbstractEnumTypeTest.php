@@ -27,12 +27,12 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AbstractEnumType
+     * @var AbstractEnumType $type AbstractEnumType
      */
     private $type;
 
     /**
-     * Set up before test suite
+     * {@inheritdoc}
      */
     public static function setUpBeforeClass()
     {
@@ -40,7 +40,7 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Set up environment
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -54,11 +54,9 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
      * @param AbstractPlatform $platform         The DBAL platform
      * @param string           $expected         Expected SQL declaration
      *
-     * @test
-     * @covers ::getSqlDeclaration
      * @dataProvider platformProvider
      */
-    public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, $expected)
+    public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, $expected)
     {
         $this->assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
@@ -72,14 +70,14 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                ['name' => 'sex'],
+                ['name' => 'position'],
                 new MySqlPlatform(),
                 "ENUM('PG', 'SG', 'SF', 'PF', 'C')"
             ],
             [
-                ['name' => 'sex'],
+                ['name' => 'position'],
                 new SqlitePlatform(),
-                "TEXT CHECK(sex IN ('PG', 'SG', 'SF', 'PF', 'C'))"
+                "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))"
             ]
         ];
     }
