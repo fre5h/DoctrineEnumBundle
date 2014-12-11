@@ -30,7 +30,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ### Install via Composer
 
-```php composer.phar require fresh/doctrine-enum-bundle='v3.0'```
+```php composer.phar require fresh/doctrine-enum-bundle='v3.1'```
 
 ### Register the bundle
 
