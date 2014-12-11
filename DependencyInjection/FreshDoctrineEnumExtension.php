@@ -23,10 +23,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class FreshDoctrineEnumExtension extends Extension
 {
     /**
-     * Loads a specific configuration
-     *
-     * @param array            $configs   An array of configuration values
-     * @param ContainerBuilder $container A ContainerBuilder instance
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {

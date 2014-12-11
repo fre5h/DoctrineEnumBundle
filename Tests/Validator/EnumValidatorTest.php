@@ -19,8 +19,6 @@ use Symfony\Component\Validator\Context\ExecutionContext;
  * EnumValidatorTest
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
- *
- * @coversDefaultClass \Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator
  */
 class EnumValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,7 +33,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     private $context;
 
     /**
-     * Set up ENUM validator
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -49,22 +47,17 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that creation of ENUM Constraint without type class throws ConstraintDefinitionException
      *
-     * @test
-     * @covers ::validate
-     * @expectedException \Symfony\Component\Validator\Exception\ConstraintDefinitionException
+     * @expectedException \Symfony\Component\Validator\Exception\MissingOptionsException
      */
-    public function exceptionEntityNotSpecified()
+    public function testExceptionEntityNotSpecified()
     {
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new Enum());
     }
 
     /**
      * Test valid basketball position
-     *
-     * @test
-     * @covers ::validate
      */
-    public function validBasketballPositionType()
+    public function testValidBasketballPositionType()
     {
         $constraint = new Enum([
             'entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
@@ -80,11 +73,8 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test invalid basketball position
-     *
-     * @test
-     * @covers ::validate
      */
-    public function invalidBasketballPositionType()
+    public function testInvalidBasketballPositionType()
     {
         $constraint = new Enum([
             'entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'

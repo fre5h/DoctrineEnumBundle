@@ -25,12 +25,12 @@ use Doctrine\DBAL\Types\Type;
 abstract class AbstractEnumType extends Type
 {
     /**
-     * @var string Name of this type
+     * @var string $name Name of this type
      */
     protected $name = '';
 
     /**
-     * @var array Array of ENUM Values, where ENUM values are keys and their readable versions are values
+     * @var array $choices Array of ENUM Values, where ENUM values are keys and their readable versions are values
      * @static
      */
     protected static $choices = [];
@@ -120,7 +120,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return string|null Value in readable format
+     * @return string|null $value Value in readable format
      *
      * @throws \InvalidArgumentException
      */

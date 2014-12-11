@@ -25,9 +25,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 {
     /**
-     * Array of registered ENUM types
-     *
-     * @var AbstractEnumType[]
+     * @var AbstractEnumType[] $registeredEnumTypes Array of registered ENUM types
      */
     protected $registeredEnumTypes = [];
 

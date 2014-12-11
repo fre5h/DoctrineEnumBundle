@@ -30,13 +30,12 @@ class MapLocationType extends AbstractEnumType
     const SOUTH_EAST = 'SE';
 
     /**
-     * @var string Name of this type
+     * {@inheritdoc}
      */
     protected $name = 'MapLocationType';
 
     /**
-     * @var array Readable choices
-     * @static
+     * {@inheritdoc}
      */
     protected static $choices = [
         self::NORTH      => 'North',

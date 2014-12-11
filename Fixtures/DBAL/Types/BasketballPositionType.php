@@ -26,13 +26,12 @@ class BasketballPositionType extends AbstractEnumType
     const CENTER         = 'C';
 
     /**
-     * @var string Name of this type
+     * {@inheritdoc}
      */
     protected $name = 'BasketballPositionType';
 
     /**
-     * @var array Readable choices
-     * @static
+     * {@inheritdoc}
      */
     protected static $choices = [
         self::POINT_GUARD    => 'Point guard',

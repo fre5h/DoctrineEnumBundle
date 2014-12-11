@@ -10,6 +10,7 @@
 
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
+use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException;
@@ -23,9 +24,7 @@ use Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeExc
 class ReadableEnumValueExtension extends \Twig_Extension
 {
     /**
-     * Array of registered ENUM types
-     *
-     * @var \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType[] $registeredEnumTypes Registered ENUM types
+     * @var AbstractEnumType[] $registeredEnumTypes Array of registered ENUM types
      */
     protected $registeredEnumTypes = [];
 
@@ -44,9 +43,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
     }
 
     /**
-     * Returns a list of filters
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getFilters()
     {
@@ -113,9 +110,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
     }
 
     /**
-     * Get name of this extension
-     *
-     * @return string Name of extension
+     * {@inheritdoc}
      */
     public function getName()
     {

@@ -27,19 +27,15 @@ class Enum extends Choice
     public $entity;
 
     /**
-     * Returns the name of the required options
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function requiredOptions()
+    public function getRequiredOptions()
     {
         return ['entity'];
     }
 
     /**
-     * Returns the name of the default option
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getDefaultOption()
     {
