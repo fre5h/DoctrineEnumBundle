@@ -40,7 +40,7 @@ abstract class AbstractEnumType extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (is_null($value)) {
+        if (null === $value) {
             return null;
         }
 
