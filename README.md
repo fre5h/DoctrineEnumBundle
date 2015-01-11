@@ -2,16 +2,14 @@
 
 Provides support of **ENUM type** for Doctrine in Symfony applications.
 
-* Scrutinizer [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/badges/quality-score.png?s=be81f9b30a3996e7786cff5b4e0c0d972a64a37b)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
-[![Build Status](https://scrutinizer-ci.com/g/fre5h/delivery-auto-api-php-client/badges/build.png?b=master)](https://scrutinizer-ci.com/g/fre5h/delivery-auto-api-php-client/build-status/master)
-* Travis CI [![Build Status](https://secure.travis-ci.org/fre5h/DoctrineEnumBundle.png?branch=master)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
-* Packagist.org [![License](https://poser.pugx.org/fresh/doctrine-enum-bundle/license.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
-[![Latest Stable Version](https://poser.pugx.org/fresh/doctrine-enum-bundle/v/stable.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
-[![Total Downloads](https://poser.pugx.org/fresh/doctrine-enum-bundle/downloads.png)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
-* VersionEye [![Dependency Status](https://www.versioneye.com/user/projects/52ea10b1ec13755c2f000045/badge.svg)](https://www.versioneye.com/user/projects/52ea10b1ec13755c2f000045)
-[![Reference Status](https://www.versioneye.com/php/fresh:doctrine-enum-bundle/reference_badge.svg)](https://www.versioneye.com/php/fresh:doctrine-enum-bundle/references)
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/big.png)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
+[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/fre5h/DoctrineEnumBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
+[![Build Status](https://img.shields.io/travis/fre5h/DoctrineEnumBundle.svg?style=flat-square)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
+[![License](https://img.shields.io/packagist/l/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
+[![Latest Stable Version](https://img.shields.io/packagist/v/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
+[![Total Downloads](https://img.shields.io/packagist/dt/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
+[![Dependency Status](https://www.versioneye.com/user/projects/52ea10b1ec13755c2f000045/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/52ea10b1ec13755c2f000045)
+[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/0cff4816-374a-474e-a1d5-9d5db34562e3.svg?style=flat-square)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
+[![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/fre5h/DoctrineEnumBundle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
 
@@ -79,9 +77,6 @@ namespace Acme\AppBundle\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
-/**
- * Basketball position type
- */
 class BasketballPositionType extends AbstractEnumType
 {
     const POINT_GUARD    = 'PG';
@@ -90,10 +85,6 @@ class BasketballPositionType extends AbstractEnumType
     const POWER_FORWARD  = 'PF';
     const CENTER         = 'C';
 
-    /**
-     * @var array Readable choices
-     * @static
-     */
     protected static $choices = [
         self::POINT_GUARD    => 'Point guard',
         self::SHOOTING_GUARD => 'Shooting guard',
@@ -125,16 +116,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
- * Player Entity
- *
  * @ORM\Entity()
  * @ORM\Table(name="players")
  */
 class Player
 {
     /**
-     * @var int $id ID
-     *
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -142,38 +129,21 @@ class Player
     protected $id;
 
     /**
-     * @var string $position Position
-     *
      * @DoctrineAssert\Enum(entity="Acme\AppBundle\DBAL\Types\BasketballPositionType")
      * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
      */
     protected $position;
 
-    /**
-     * Get ID
-     *
-     * @return int ID
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set position
-     *
-     * @param string $position Position
-     */
     public function setPosition($position)
     {
         $this->position = $position;
     }
 
-    /**
-     * Get position
-     *
-     * @return string Position
-     */
     public function getPosition()
     {
         return $this->position;

@@ -5,7 +5,6 @@
     "homepage": "https://github.com/fre5h/DoctrineEnumBundle",
     "type": "symfony-bundle",
     "license": "MIT",
-    "time": "2014-12-11",
     "authors": [
         {
             "name": "Artem Genvald",
