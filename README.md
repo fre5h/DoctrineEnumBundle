@@ -203,6 +203,23 @@ $builder->add('position', 'choice', [
 [EnumTypeGuesser](./Form/EnumTypeGuesser.php "EnumTypeGuesser") process **only** DBAL types that are children of [AbstractEnumType](./DBAL/Types/AbstractEnumType.php "AbstractEnumType").
 All other custom DBAL types, which are defined, will be skipped from guessing.
 
+##### Additional methods
+
+[AbstractEnumType](./DBAL/Types/AbstractEnumType.php "AbstractEnumType") provides few additional methods, which might be useful.
+
+If you need to check if some string value exists in the array of ENUM values:
+
+```php
+BasketballPositionType::isValueExist('Pitcher'); // false
+```
+
+If you need to get value in readable format:
+
+```php
+BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD);
+// Will output: Shooting guard
+```
+
 ##### Readable ENUM values in templates
 You would want to show ENUM values rendered in your templates in *readable format* instead of the values that would be stored in DB. It is easy to do by using the Twig filter `|readable` that was implemented for that purpose. In the example below if the player is a point guard of his team then his position will be rendered in template as `Point guard` instead of `PG`.
 
