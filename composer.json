@@ -22,7 +22,7 @@
         "issues": "https://github.com/fre5h/DoctrineEnumBundle/issues"
     },
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.3.3",
         "symfony/symfony": "~2.5",
         "doctrine/orm": "~2.2"
     },

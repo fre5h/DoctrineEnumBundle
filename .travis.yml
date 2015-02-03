@@ -1,12 +1,10 @@
 language: php
 
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  
+  - 5.3
+
 before_install:
-  - sudo pip install codecov  
+  - sudo pip install codecov
 
 before_script:
   - composer install --dev
@@ -15,10 +13,10 @@ before_script:
 
 script:
   - phpcs --standard=PSR2 --ignore=/vendor ./
-  - phpunit --coverage-clover=coverage.xml  
-  
+  - phpunit --coverage-clover=coverage.xml
+
 after_success:
-  - codecov   
+  - codecov
 
 notifications:
   email:

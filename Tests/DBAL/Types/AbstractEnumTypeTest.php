@@ -68,17 +68,17 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function platformProvider()
     {
-        return [
-            [
-                ['name' => 'position'],
+        return array(
+            array(
+                array('name' => 'position'),
                 new MySqlPlatform(),
                 "ENUM('PG', 'SG', 'SF', 'PF', 'C')"
-            ],
-            [
-                ['name' => 'position'],
+            ),
+            array(
+                array('name' => 'position'),
                 new SqlitePlatform(),
                 "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))"
-            ]
-        ];
+            )
+        );
     }
 }

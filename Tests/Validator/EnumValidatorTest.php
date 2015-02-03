@@ -59,9 +59,9 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidBasketballPositionType()
     {
-        $constraint = new Enum([
+        $constraint = new Enum(array(
             'entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
-        ]);
+        ));
 
         $this->context
              ->expects($this->never())
@@ -76,16 +76,16 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidBasketballPositionType()
     {
-        $constraint = new Enum([
+        $constraint = new Enum(array(
             'entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
-        ]);
+        ));
 
         $this->context
              ->expects($this->once())
              ->method('addViolation')
              ->with(
                  $this->equalTo('The value you selected is not a valid choice.'),
-                 $this->equalTo(['{{ value }}' => '"Pitcher"'])
+                 $this->equalTo(array('{{ value }}' => '"Pitcher"'))
              );
 
         $this->enumValidator->initialize($this->context);

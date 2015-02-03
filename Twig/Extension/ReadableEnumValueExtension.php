@@ -26,7 +26,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
     /**
      * @var AbstractEnumType[] $registeredEnumTypes Array of registered ENUM types
      */
-    protected $registeredEnumTypes = [];
+    protected $registeredEnumTypes = array();
 
     /**
      * Constructor
@@ -47,7 +47,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return ['readable' => new \Twig_Filter_Method($this, 'getReadableEnumValue')];
+        return array('readable' => new \Twig_Filter_Method($this, 'getReadableEnumValue'));
     }
 
     /**
@@ -78,7 +78,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
                 return $enumTypeClass::getReadableValue($enumValue);
             } else {
                 // If ENUM type wasn't set, e.g. {{ player.position|readable }}
-                $occurrences = [];
+                $occurrences = array();
                 // Check if value exists in registered ENUM types
                 foreach ($this->registeredEnumTypes as $registeredEnumType) {
                     if ($registeredEnumType::isValueExist($enumValue)) {

@@ -21,7 +21,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ## Requirements
 
-* PHP 5.4 *and later*
+* PHP 5.3 *and later*
 * Symfony 2.5 *and later*
 * Doctrine 2.2 *and later*
 
@@ -86,13 +86,13 @@ class BasketballPositionType extends AbstractEnumType
     const POWER_FORWARD  = 'PF';
     const CENTER         = 'C';
 
-    protected static $choices = [
+    protected static $choices = array(
         self::POINT_GUARD    => 'Point guard',
         self::SHOOTING_GUARD => 'Shooting guard',
         self::SMALL_FORWARD  => 'Small forward',
         self::POWER_FORWARD  => 'Power forward',
         self::CENTER         => 'Center'
-    ];
+    );
 }
 ```
 
@@ -185,19 +185,19 @@ $builder->add('position');
 If you need to add some extra parameters, just skip the second (`field type`) parameter:
 
 ```php
-$builder->add('position', null, [
+$builder->add('position', null, array(
     'required' => true,
-    'attr'     => [
+    'attr'     => array(
         'class' => 'some-class'
-    ]
-]);
+    )
+));
 ```
 
 If for some reason you need to specify full config, it can look like this:
 ```php
-$builder->add('position', 'choice', [
+$builder->add('position', 'choice', array(
     'choices' => BasketballPositionType::getChoices()
-]);
+));
 ```
 
 [EnumTypeGuesser](./Form/EnumTypeGuesser.php "EnumTypeGuesser") process **only** DBAL types that are children of [AbstractEnumType](./DBAL/Types/AbstractEnumType.php "AbstractEnumType").

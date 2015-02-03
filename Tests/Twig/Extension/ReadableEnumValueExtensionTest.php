@@ -31,14 +31,14 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->readableEnumValueExtension = new ReadableEnumValueExtension([
-            'BasketballPositionType' => [
+        $this->readableEnumValueExtension = new ReadableEnumValueExtension(array(
+            'BasketballPositionType' => array(
                 'class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
-            ],
-            'MapLocationType'        => [
+            ),
+            'MapLocationType'        => array(
                 'class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\MapLocationType'
-            ]
-        ]);
+            )
+        ));
     }
 
     /**
@@ -65,11 +65,11 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function dataProviderForGetReadableEnumValueTest()
     {
-        return [
-            ['Point guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'],
-            ['Center', BasketballPositionType::CENTER, 'BasketballPositionType'],
-            ['Center', MapLocationType::CENTER, 'MapLocationType']
-        ];
+        return array(
+            array('Point guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'),
+            array('Center', BasketballPositionType::CENTER, 'BasketballPositionType'),
+            array('Center', MapLocationType::CENTER, 'MapLocationType')
+        );
     }
 
     /**
@@ -114,7 +114,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     public function testNoRegisteredEnumTypesException()
     {
         // Create ReadableEnumValueExtension without any registered ENUM type
-        $extension = new ReadableEnumValueExtension([]);
+        $extension = new ReadableEnumValueExtension(array());
         $extension->getReadableEnumValue(BasketballPositionType::POINT_GUARD, 'BasketballPositionType');
     }
 }

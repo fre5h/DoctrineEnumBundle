@@ -37,7 +37,7 @@ class MapLocationType extends AbstractEnumType
     /**
      * {@inheritdoc}
      */
-    protected static $choices = [
+    protected static $choices = array(
         self::NORTH      => 'North',
         self::EAST       => 'East',
         self::SOUTH      => 'South',
@@ -47,5 +47,5 @@ class MapLocationType extends AbstractEnumType
         self::NORTH_EAST => 'Northeast',
         self::SOUTH_WEST => 'Southwest',
         self::SOUTH_EAST => 'Southeast'
-    ];
+    );
 }
