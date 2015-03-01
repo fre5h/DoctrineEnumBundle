@@ -12,6 +12,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
@@ -20,14 +21,14 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  * AbstractEnumTypeTest
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
- * @author Ben Davies <ben.davies@gmail.com>
+ * @author Ben Davies    <ben.davies@gmail.com>
  *
  * @coversDefaultClass \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType
  */
 class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AbstractEnumType $type AbstractEnumType
+     * @var AbstractEnumType $type Abstract EnumType
      */
     private $type;
 
@@ -78,6 +79,11 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
                 ['name' => 'position'],
                 new SqlitePlatform(),
                 "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))"
+            ],
+            [
+                ['name' => 'position'],
+                new PostgreSqlPlatform(),
+                "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))"
             ]
         ];
     }

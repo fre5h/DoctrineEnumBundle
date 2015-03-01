@@ -18,6 +18,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 * MySQL
 * SQLite
+* PostgreSQL
 
 ## Requirements
 
@@ -253,7 +254,7 @@ So, that correct usage of `|readable` filter in this case should be with additio
 
 If you use [Doctrine migrations](https://github.com/doctrine/migrations "Doctrine migrations") in your project you should be able to create migrations for you custom ENUM types. If you want to create migration for the **new** ENUM type, then just use console commands `doctrine:migrations:diff` to create migration and `doctrine:migrations:migrate` to execute it.
 
-For the previous example of `BasketballPositionType` Doctrine will generate SQL statement, that looks like this:
+For the previous example of `BasketballPositionType` for MySQL DB (e.g.) Doctrine will generate SQL statement, that looks like this:
 
 ```sql
 CREATE TABLE players (
