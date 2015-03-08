@@ -86,6 +86,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ['Point guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'],
+            ['Point guard', BasketballPositionType::POINT_GUARD, null],
             ['Center', BasketballPositionType::CENTER, 'BasketballPositionType'],
             ['Center', MapLocationType::CENTER, 'MapLocationType']
         ];

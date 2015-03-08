@@ -16,6 +16,7 @@ use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
+use Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType;
 
 /**
  * AbstractEnumTypeTest
@@ -130,7 +131,7 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetReadableValue()
     {
-        $this->assertEquals('Small forward', $this->type->getReadableValue('SF'));
+        $this->assertEquals('Small forward', $this->type->getReadableValue(BasketballPositionType::SMALL_FORWARD));
     }
 
     /**
