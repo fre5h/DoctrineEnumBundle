@@ -1,3 +1,8 @@
+checks:
+    php:
+        code_rating: true
+        duplication: true
+
 filter:
     excluded_paths: [vendor/*]
 
@@ -22,10 +27,12 @@ tools:
         min_tokens: 70
         names:
             - '*.php'
-        excluded_dirs: ["vendor"]
+        excluded_dirs: ["vendor/*"]
         enabled: true
     php_pdepend:
-        excluded_dirs: ["vendor"]
+        excluded_dirs: ["vendor/*"]
     php_loc: true
     php_analyzer: true
+    external_code_coverage:
+        timeout: 600
     sensiolabs_security_checker: true
