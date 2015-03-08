@@ -38,6 +38,7 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         Type::addType('BasketballPositionType', '\Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType');
+        Type::addType('StubType', '\Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\StubType');
     }
 
     /**
@@ -86,5 +87,59 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
                 "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))"
             ]
         ];
+    }
+
+    /**
+     * Test method getName
+     */
+    public function testGetName()
+    {
+        $this->assertEquals('BasketballPositionType', $this->type->getName());
+        $this->assertEquals('StubType', Type::getType('StubType')->getName());
+    }
+
+    /**
+     * Test method requiresSQLCommentHint
+     */
+    public function testRequiresSQLCommentHint()
+    {
+        $this->assertTrue($this->type->requiresSQLCommentHint(new MySqlPlatform()));
+    }
+
+    /**
+     * Test method convertToDatabaseValue
+     */
+    public function testConvertToDatabaseValue()
+    {
+        $this->assertNull($this->type->convertToDatabaseValue(null, new MySqlPlatform()));
+        $this->assertEquals('SF', $this->type->convertToDatabaseValue('SF', new MySqlPlatform()));
+    }
+
+    /**
+     * Test that converting unknown value of ENUM type throws InvalidArgumentException
+     *
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidArgumentExceptionInConvertToDatabaseValue()
+    {
+        $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
+    }
+
+    /**
+     * Test method getReadableValue
+     */
+    public function testGetReadableValue()
+    {
+        $this->assertEquals('Small forward', $this->type->getReadableValue('SF'));
+    }
+
+    /**
+     * Test that getting readable value for unknown value of ENUM type throws InvalidArgumentException
+     *
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidArgumentExceptionInGetReadableValue()
+    {
+        $this->type->getReadableValue('YO');
     }
 }

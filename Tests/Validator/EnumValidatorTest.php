@@ -47,11 +47,15 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that creation of ENUM Constraint without type class throws ConstraintDefinitionException
      *
-     * @expectedException \Symfony\Component\Validator\Exception\MissingOptionsException
+     * @expectedException \Symfony\Component\Validator\Exception\ConstraintDefinitionException
      */
     public function testExceptionEntityNotSpecified()
     {
-        $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new Enum());
+        $constraint = new Enum([
+            'entity' => null
+        ]);
+
+        $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
     }
 
     /**

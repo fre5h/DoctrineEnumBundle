@@ -42,6 +42,25 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test method getName
+     */
+    public function testGetName()
+    {
+        $this->assertEquals('Readable ENUM Value', $this->readableEnumValueExtension->getName());
+    }
+
+    /**
+     * Test method getFilters
+     */
+    public function testGetFilters()
+    {
+        $this->assertEquals(
+            ['readable' => new \Twig_Filter_Method($this->readableEnumValueExtension, 'getReadableEnumValue')],
+            $this->readableEnumValueExtension->getFilters()
+        );
+    }
+
+    /**
      * Test that method getReadableEnumValue returns expected readable value
      *
      * @param string $expectedReadableValue Expected readable value
