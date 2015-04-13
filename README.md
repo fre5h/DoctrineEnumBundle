@@ -74,9 +74,8 @@ Create class for new ENUM type `BasketballPositionType`:
 
 ```php
 <?php
-namespace Acme\AppBundle\DBAL\Types;
+namespace AppBundle\DBAL\Types;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 class BasketballPositionType extends AbstractEnumType
@@ -104,16 +103,16 @@ Register `BasketballPositionType` for Doctrine in config.yml:
 doctrine:
     dbal:
         types:
-            BasketballPositionType: Acme\AppBundle\DBAL\Types\BasketballPositionType
+            BasketballPositionType: AppBundle\DBAL\Types\BasketballPositionType
 ```
 
 Create `Player` entity that has `position` field:
 
 ```php
 <?php
-namespace Acme\AppBundle\Entity;
+namespace AppBundle\Entity;
 
-use Acme\AppBundle\DBAL\Types\BasketballPositionType;
+use AppBundle\DBAL\Types\BasketballPositionType;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
@@ -131,7 +130,7 @@ class Player
     protected $id;
 
     /**
-     * @DoctrineAssert\Enum(entity="Acme\AppBundle\DBAL\Types\BasketballPositionType")
+     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\BasketballPositionType")
      * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
      */
     protected $position;
@@ -162,7 +161,7 @@ $player->setPosition(BasketballPositionType::POINT_GUARD);
 But don't forget to define `BasketballPositionType` in the *use* section:
 
 ```php
-use Acme\AppBundle\DBAL\Types\BasketballPositionType;
+use AppBundle\DBAL\Types\BasketballPositionType;
 ```
 
 `NULL` values are also supported by ENUM field.
