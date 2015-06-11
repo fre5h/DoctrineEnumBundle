@@ -130,6 +130,8 @@ class Player
     protected $id;
 
     /**
+     * Note, that type of field should be same as you set in doctrine config in this case it is BasketballPositionType
+     *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\BasketballPositionType")
      * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
      */
