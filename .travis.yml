@@ -10,8 +10,6 @@ php:
 before_script:
     - composer self-update
     - composer install --dev --prefer-dist --no-interaction
-    - pear install --alldeps PHP_CodeSniffer
-    - phpenv rehash
 
 script:
     - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore=vendor --standard=psr2
