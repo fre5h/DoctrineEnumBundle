@@ -2,22 +2,24 @@ language: php
 sudo: false
 
 php:
-  - 5.4
-  - 5.5
-  - 5.6
+    - 5.4
+    - 5.5
+    - 5.6
+    - 7.0
 
 before_script:
-  - composer install --dev
-  - pear install --alldeps PHP_CodeSniffer
-  - phpenv rehash
+    - composer self-update
+    - composer install --dev --prefer-dist --no-interaction
+    - pear install --alldeps PHP_CodeSniffer
+    - phpenv rehash
 
 script:
-  - phpcs --standard=PSR2 --ignore=/vendor ./
-  - phpunit --coverage-clover=coverage.xml  
-  
+    - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore=vendor --standard=psr2
+    - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
+
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+    - bash <(curl -s https://codecov.io/bash)
 
 notifications:
-  email:
-    - genvaldartem@gmail.com
+    email:
+        - genvaldartem@gmail.com
