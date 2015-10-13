@@ -26,6 +26,9 @@
         "symfony/symfony": "~2.5",
         "doctrine/orm": "~2.2"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
