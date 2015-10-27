@@ -78,7 +78,7 @@ namespace AppBundle\DBAL\Types;
 
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
-class BasketballPositionType extends AbstractEnumType
+final class BasketballPositionType extends AbstractEnumType
 {
     const POINT_GUARD    = 'PG';
     const SHOOTING_GUARD = 'SG';
