@@ -16,7 +16,7 @@ use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
-use Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 
 /**
  * AbstractEnumTypeTest
@@ -38,8 +38,8 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-        Type::addType('BasketballPositionType', '\Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType');
-        Type::addType('StubType', '\Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\StubType');
+        Type::addType('BasketballPositionType', '\Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType');
+        Type::addType('StubType', '\Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType');
     }
 
     /**

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types;
+namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
@@ -17,7 +17,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class MapLocationType extends AbstractEnumType
+final class MapLocationType extends AbstractEnumType
 {
     const NORTH      = 'N';
     const EAST       = 'E';

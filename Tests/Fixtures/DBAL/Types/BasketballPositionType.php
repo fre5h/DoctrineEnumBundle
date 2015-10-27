@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types;
+namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
@@ -17,7 +17,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class BasketballPositionType extends AbstractEnumType
+final class BasketballPositionType extends AbstractEnumType
 {
     const POINT_GUARD    = 'PG';
     const SHOOTING_GUARD = 'SG';

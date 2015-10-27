@@ -10,8 +10,8 @@
 
 namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
-use Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType;
-use Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\MapLocationType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension;
 
 /**
@@ -33,10 +33,10 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $this->readableEnumValueExtension = new ReadableEnumValueExtension([
             'BasketballPositionType' => [
-                'class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
+                'class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType'
             ],
             'MapLocationType'        => [
-                'class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\MapLocationType'
+                'class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType'
             ]
         ]);
     }

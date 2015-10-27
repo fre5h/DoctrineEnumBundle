@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types;
+namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
@@ -17,6 +17,6 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class StubType extends AbstractEnumType
+final class StubType extends AbstractEnumType
 {
 }
