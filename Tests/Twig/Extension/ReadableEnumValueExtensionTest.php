@@ -55,7 +55,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     public function testGetFilters()
     {
         $this->assertEquals(
-            ['readable' => new \Twig_Filter_Method($this->readableEnumValueExtension, 'getReadableEnumValue')],
+            [new \Twig_SimpleFilter('readable', [$this->readableEnumValueExtension, 'getReadableEnumValue'])],
             $this->readableEnumValueExtension->getFilters()
         );
     }

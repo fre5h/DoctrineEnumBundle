@@ -47,7 +47,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return ['readable' => new \Twig_Filter_Method($this, 'getReadableEnumValue')];
+        return [new \Twig_SimpleFilter('readable', [$this, 'getReadableEnumValue'])];
     }
 
     /**
