@@ -23,7 +23,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 ## Requirements
 
 * PHP 5.4 *and later*
-* Symfony 2.5 *and later*
+* Symfony 2.5 *and later, but < Symfony 3.0*
 * Doctrine 2.2 *and later*
 
 ## Installation
