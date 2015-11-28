@@ -7,6 +7,5 @@ filter:
   excluded_paths:
     - vendor/*
 
-
 before_commands:
-  - "composer install --prefer-source"
+  - "composer install --prefer-dist"
