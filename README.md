@@ -20,17 +20,27 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 * SQLite
 * PostgreSQL
 
-## Requirements
-
-* PHP 5.4 *and later*
-* Symfony 2.5 *and later, but < Symfony 3.0*
-* Doctrine 2.2 *and later*
-
 ## Installation
 
 ### Install via Composer
 
+#### Requirements
+
+##### Latest stable version
+
+* PHP >= 5.4
+* Symfony >= 2.5 and < 3.0
+* Doctrine >= 2.2
+
 ```php composer.phar require fresh/doctrine-enum-bundle='v3.2'```
+
+##### Obsolete version for PHP 5.3, no longer being supported
+
+* PHP >= 5.3
+* Symfony >= 2.5 and < 3.0
+* Doctrine >= 2.2
+
+```php composer.phar require fresh/doctrine-enum-bundle='5.3.x-dev'```
 
 ### Register the bundle
 
@@ -53,9 +63,9 @@ Add the following lines for doctrine configuration in `config.yml` file:
 ```yml
 # Doctrine Configuration
 doctrine:
-    dbal:
-        mapping_types:
-            enum: string
+  dbal:
+    mapping_types:
+      enum: string
 ```
 
 ## Using
@@ -101,9 +111,9 @@ Register `BasketballPositionType` for Doctrine in config.yml:
 ```yml
 # Doctrine Configuration
 doctrine:
-    dbal:
-        types:
-            BasketballPositionType: AppBundle\DBAL\Types\BasketballPositionType
+  dbal:
+    types:
+      BasketballPositionType: AppBundle\DBAL\Types\BasketballPositionType
 ```
 
 Create `Player` entity that has `position` field:
@@ -130,7 +140,8 @@ class Player
     protected $id;
 
     /**
-     * Note, that type of field should be same as you set in doctrine config in this case it is BasketballPositionType
+     * Note, that type of the field should be same as you set in doctrine config
+     * (in this case it is BasketballPositionType)
      *
      * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\BasketballPositionType")
      * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
@@ -166,7 +177,7 @@ But don't forget to define `BasketballPositionType` in the *use* section:
 use AppBundle\DBAL\Types\BasketballPositionType;
 ```
 
-`NULL` values are also supported by ENUM field.
+`NULL` values are also supported by ENUM field.  
 You can set *nullable* parameter of column to `true` or `false` depends on if you want or not to allow `NULL` values:
 
 ```php
@@ -184,7 +195,7 @@ When build `BasketballPositionType` as form field, you don't need to specify som
 $builder->add('position');
 ```
 
-If you need to add some extra parameters, just skip the second (`field type`) parameter:
+If you need to add some extra parameters, just skip the second *field type* parameter:
 
 ```php
 $builder->add('position', null, [
