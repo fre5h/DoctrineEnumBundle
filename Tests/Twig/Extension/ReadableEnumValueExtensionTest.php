@@ -32,12 +32,8 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->readableEnumValueExtension = new ReadableEnumValueExtension([
-            'BasketballPositionType' => [
-                'class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
-            ],
-            'MapLocationType'        => [
-                'class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType',
-            ],
+            'BasketballPositionType' => ['class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType'],
+            'MapLocationType'        => ['class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType'],
         ]);
     }
 

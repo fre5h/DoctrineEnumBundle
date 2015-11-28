@@ -31,12 +31,8 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->enumConstantExtension = new EnumConstantExtension([
-            'BasketballPositionType' => [
-                'class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
-            ],
-            'MapLocationType'        => [
-                'class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType',
-            ],
+            'BasketballPositionType' => ['class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType'],
+            'MapLocationType'        => ['class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType'],
         ]);
     }
 
