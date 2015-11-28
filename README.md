@@ -28,7 +28,15 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 * Symfony >= 2.3 and <= 2.8
 * Doctrine >= 2.2
 
-```php composer.phar require fresh/doctrine-enum-bundle='v3.2'```
+```php composer.phar require fresh/doctrine-enum-bundle='v3.3'```
+
+#### Frozen version for PHP 5.3, no longer being supported
+
+* PHP >= 5.3
+* Symfony >= 2.3 and <= 2.7
+* Doctrine >= 2.2
+
+```php composer.phar require fresh/doctrine-enum-bundle='v2.6'```
 
 ### Register the bundle
 
