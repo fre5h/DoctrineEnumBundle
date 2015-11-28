@@ -46,7 +46,7 @@ public function registerBundles()
 
 ### Update config.yml
 
-Add the following lines for doctrine configuration in `config.yml` file:
+Add following lines for doctrine configuration in `config.yml` file:
 
 ```yml
 # Doctrine Configuration
@@ -68,7 +68,7 @@ In this example will be shown how to create custom ENUM field for basketball pos
 * `PF` - Power Forward
 * `C`  - Center
 
-Create class for new ENUM type `BasketballPositionType`:
+Create a class for new ENUM type `BasketballPositionType`:
 
 ```php
 <?php
@@ -104,7 +104,7 @@ doctrine:
       BasketballPositionType: AppBundle\DBAL\Types\BasketballPositionType
 ```
 
-Create `Player` entity that has `position` field:
+Create a `Player` entity that has a `position` field:
 
 ```php
 <?php
@@ -128,11 +128,11 @@ class Player
     protected $id;
 
     /**
-     * Note, that type of the field should be same as you set in doctrine config
+     * Note, that type of a field should be same as you set in Doctrine config
      * (in this case it is BasketballPositionType)
      *
-     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\BasketballPositionType")
      * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
+     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Types\BasketballPositionType")     
      */
     protected $position;
 
@@ -165,13 +165,14 @@ But don't forget to define `BasketballPositionType` in the *use* section:
 use AppBundle\DBAL\Types\BasketballPositionType;
 ```
 
-`NULL` values are also supported by ENUM field.  
-You can set *nullable* parameter of column to `true` or `false` depends on if you want or not to allow `NULL` values:
+`NULL` values are also supported by ENUM field. You can set *nullable* parameter of column to `true` or `false` depends on if you want or not to allow `NULL` values:
 
 ```php
 /** @ORM\Column(name="position", type="BasketballPositionType", nullable=true) */
 protected $position;
+
 // or
+
 /** @ORM\Column(name="position", type="BasketballPositionType", nullable=false) */
 protected $position;
 ```
@@ -222,10 +223,17 @@ BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD)
 // Will output: Shooting Guard
 ```
 
+If you need to get value in readable format:
+
+```php
+BasketballPositionType::getValues();
+// Will output an array: ['PG', 'SG', 'SF', 'PF', 'C']
+```
+
 ##### Readable ENUM values in templates
 
 You might want to show ENUM values rendered in your templates in *readable format* instead of values that are stored in DB.
-It is easy to do by using the custom Twig filter `|readable` that was implemented for this purpose.
+It is easy to do by using the custom TWIG filter `|readable` that was implemented for this purpose.
 In the example below if Player is a Point Guard in their basketball team then position will be rendered in template as `Point Guard` instead of `PG`.
 
 ```jinja
@@ -233,7 +241,7 @@ In the example below if Player is a Point Guard in their basketball team then po
 ```
 
 How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension")
-tries to find which ENUM type from registered ENUM types consists this value.
+tries to find which ENUM type from registered ENUM types has this value.
 If only one ENUM type found, then it is possible to get the readable value from it. Otherwise it will throw an exception.
 
 For example `BasketballPositionType` and `MapLocationType` can have same ENUM value `C` with its readable variant `Center`.
@@ -247,7 +255,7 @@ The code below will throw an exception, because without additional parameter for
 {{ location_on_the_map|readable }}
 ```
 
-So, that correct usage of `|readable` filter in this case should be with additional parameter that specifies the ENUM type:
+So, the correct usage of `|readable` filter in this case should be with additional parameter, that specifies the ENUM type:
 
 ```jinja
 {{ set player_position = 'C' }}
@@ -259,7 +267,7 @@ So, that correct usage of `|readable` filter in this case should be with additio
 
 ##### ENUM constants in templates
 
-There is also another custom Twig filter `|enum_constant`. It allows to use constants from ENUM classes in templates to print their values or to compare with other values.
+There is also another custom TWIG filter `|enum_constant`. It allows to use constants from ENUM classes in templates to print their values or to compare with other values.
 
 ```jinja
 {{ 'SHOOTING_GUARD'|enum_constant }}
