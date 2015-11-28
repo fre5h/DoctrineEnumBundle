@@ -38,6 +38,6 @@ final class BasketballPositionType extends AbstractEnumType
         self::SHOOTING_GUARD => 'Shooting guard',
         self::SMALL_FORWARD  => 'Small forward',
         self::POWER_FORWARD  => 'Power forward',
-        self::CENTER         => 'Center'
+        self::CENTER         => 'Center',
     ];
 }

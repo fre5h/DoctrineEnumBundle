@@ -52,7 +52,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     public function testExceptionEntityNotSpecified()
     {
         $constraint = new Enum([
-            'entity' => null
+            'entity' => null,
         ]);
 
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
@@ -64,7 +64,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidBasketballPositionType()
     {
         $constraint = new Enum([
-            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType'
+            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
         ]);
 
         $this->context
@@ -81,7 +81,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     public function testInvalidBasketballPositionType()
     {
         $constraint = new Enum([
-            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType'
+            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
         ]);
 
         $this->context
