@@ -40,6 +40,6 @@ class EnumValidator extends ChoiceValidator
         $entity = $constraint->entity;
         $constraint->choices = $entity::getValues();
 
-        return parent::validate($value, $constraint);
+        parent::validate($value, $constraint);
     }
 }
