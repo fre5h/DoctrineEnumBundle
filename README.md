@@ -22,25 +22,13 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ## Installation
 
-### Install via Composer
-
-#### Requirements
-
-##### Latest stable version
+#### Latest stable version
 
 * PHP >= 5.4
-* Symfony >= 2.5 and < 3.0
+* Symfony >= 2.3 and <= 2.8
 * Doctrine >= 2.2
 
 ```php composer.phar require fresh/doctrine-enum-bundle='v3.2'```
-
-##### Obsolete version for PHP 5.3, no longer being supported
-
-* PHP >= 5.3
-* Symfony >= 2.5 and < 3.0
-* Doctrine >= 2.2
-
-```php composer.phar require fresh/doctrine-enum-bundle='5.3.x-dev'```
 
 ### Register the bundle
 
@@ -74,10 +62,10 @@ doctrine:
 
 In this example will be shown how to create custom ENUM field for basketball positions. This ENUM should contain five values:
 
-* `PG` - Point guard
-* `SG` - Shooting guard
-* `SF` - Small forward
-* `PF` - Power forward
+* `PG` - Point Guard
+* `SG` - Shooting Guard
+* `SF` - Small Forward
+* `PF` - Power Forward
 * `C`  - Center
 
 Create class for new ENUM type `BasketballPositionType`:
@@ -97,10 +85,10 @@ final class BasketballPositionType extends AbstractEnumType
     const CENTER         = 'C';
 
     protected static $choices = [
-        self::POINT_GUARD    => 'Point guard',
-        self::SHOOTING_GUARD => 'Shooting guard',
-        self::SMALL_FORWARD  => 'Small forward',
-        self::POWER_FORWARD  => 'Power forward',
+        self::POINT_GUARD    => 'Point Guard',
+        self::SHOOTING_GUARD => 'Shooting Guard',
+        self::SMALL_FORWARD  => 'Small Forward',
+        self::POWER_FORWARD  => 'Power Forward',
         self::CENTER         => 'Center'
     ];
 }
@@ -189,6 +177,7 @@ protected $position;
 ```
 
 ##### Building the form
+
 When build `BasketballPositionType` as form field, you don't need to specify some additional parameters. Just add property to the form builder and [EnumTypeGuesser](./Form/EnumTypeGuesser.php "EnumTypeGuesser") will do all work for you. That's how:
 
 ```php
@@ -230,19 +219,25 @@ If you need to get value in readable format:
 
 ```php
 BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD);
-// Will output: Shooting guard
+// Will output: Shooting Guard
 ```
 
 ##### Readable ENUM values in templates
-You would want to show ENUM values rendered in your templates in *readable format* instead of the values that would be stored in DB. It is easy to do by using the Twig filter `|readable` that was implemented for that purpose. In the example below if the player is a point guard of his team then his position will be rendered in template as `Point guard` instead of `PG`.
+
+You might want to show ENUM values rendered in your templates in *readable format* instead of values that are stored in DB.
+It is easy to do by using the custom Twig filter `|readable` that was implemented for this purpose.
+In the example below if Player is a Point Guard in their basketball team then position will be rendered in template as `Point Guard` instead of `PG`.
 
 ```jinja
 {{ player.position|readable }}
 ```
 
-How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension") tries to find which ENUM type of the registered ENUM types consists this value. If only one ENUM type found, then it is possible to get the readable value from it. Otherwise it will throw an exception.
+How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension")
+tries to find which ENUM type from registered ENUM types consists this value.
+If only one ENUM type found, then it is possible to get the readable value from it. Otherwise it will throw an exception.
 
-For example `BasketballPositionType` and `MapLocationType` can have same ENUM value `C` with its readable variant `Center`. The code below will throw an exception, because without additional parameter for `|readable` filter, it can't determine which ENUM type to use in which case:
+For example `BasketballPositionType` and `MapLocationType` can have same ENUM value `C` with its readable variant `Center`.
+The code below will throw an exception, because without additional parameter for `|readable` filter, it can't determine which ENUM type to use in which case:
 
 ```jinja
 {{ set player_position = 'C' }}
@@ -262,9 +257,31 @@ So, that correct usage of `|readable` filter in this case should be with additio
 {{ location_on_the_map|readable('MapLocationType') }}
 ```
 
+##### ENUM constants in templates
+
+There is also another custom Twig filter `|enum_constant`. It allows to use constants from ENUM classes in templates to print their values or to compare with other values.
+
+```jinja
+{{ 'SHOOTING_GUARD'|enum_constant }}
+{{ 'NORTH_WEST'|enum_constant }}
+
+{% if player.position == 'SHOOTING_GUARD'|enum_constant %}
+    <span class="custom-class">{{ player.position }}</span>
+{% endif %}
+```
+
+Same problem as for `|readable` filter is present here too. If some constant is defined in few ENUM classes then an exception will be thrown.
+You can specify the correct class for this constant and it solves the problem.
+
+```jinja
+{{ 'CENTER'|enum_constant('BasketballPositionType') }}
+{{ 'CENTER'|enum_constant('MapLocationType') }}
+```
+
 ### Hook for Doctrine migrations
 
-If you use [Doctrine migrations](https://github.com/doctrine/migrations "Doctrine migrations") in your project you should be able to create migrations for you custom ENUM types. If you want to create migration for the **new** ENUM type, then just use console commands `doctrine:migrations:diff` to create migration and `doctrine:migrations:migrate` to execute it.
+If you use [Doctrine migrations](https://github.com/doctrine/migrations "Doctrine migrations") in your project you should be able to create migrations for you custom ENUM types.
+If you want to create migration for the **new** ENUM type, then just use console commands `doctrine:migrations:diff` to create migration and `doctrine:migrations:migrate` to execute it.
 
 For the previous example of `BasketballPositionType` for MySQL DB (e.g.) Doctrine will generate SQL statement, that looks like this:
 

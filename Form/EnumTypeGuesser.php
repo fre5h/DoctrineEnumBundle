@@ -81,13 +81,11 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
         }
 
         if (!class_exists($enumTypeFullClassName)) {
-            $message = sprintf(
+            throw new EnumTypeIsRegisteredButClassDoesNotExistException(sprintf(
                 'ENUM type "%s" is registered as "%s", but that class does not exist',
                 $fieldType,
                 $enumTypeFullClassName
-            );
-
-            throw new EnumTypeIsRegisteredButClassDoesNotExistException($message);
+            ));
         }
 
         // Get the choices from the fully qualified class name

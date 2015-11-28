@@ -41,7 +41,7 @@ class FreshDoctrineEnumExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * {@inheritdoc}
+     * Test load extension
      */
     public function testLoadExtension()
     {
@@ -54,6 +54,7 @@ class FreshDoctrineEnumExtensionTest extends \PHPUnit_Framework_TestCase
 
         // Check that services have been loaded
         $this->assertTrue($this->container->has('twig.extension.readable_enum_value'));
+        $this->assertTrue($this->container->has('twig.extension.enum_constant'));
         $this->assertTrue($this->container->has('enum_type_guesser'));
     }
 }

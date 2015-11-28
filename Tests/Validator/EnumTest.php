@@ -45,7 +45,7 @@ class EnumTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getRequiredOptions
+     * Test method `getRequiredOptions`
      */
     public function testGetRequiredOptions()
     {
@@ -57,7 +57,7 @@ class EnumTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getDefaultOption
+     * Test method `getDefaultOption`
      */
     public function testGetDefaultOption()
     {

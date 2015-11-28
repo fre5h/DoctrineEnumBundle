@@ -68,7 +68,7 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Data provider for method getSqlDeclaration
+     * Data provider for method `getSqlDeclaration`
      *
      * @return array
      */
@@ -94,7 +94,7 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getName
+     * Test method `getName`
      */
     public function testGetName()
     {
@@ -103,7 +103,7 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method requiresSQLCommentHint
+     * Test method `requiresSQLCommentHint`
      */
     public function testRequiresSQLCommentHint()
     {
@@ -111,7 +111,7 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method convertToDatabaseValue
+     * Test method `convertToDatabaseValue`
      */
     public function testConvertToDatabaseValue()
     {
@@ -130,11 +130,11 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getReadableValue
+     * Test method `getReadableValue`
      */
     public function testGetReadableValue()
     {
-        $this->assertEquals('Small forward', $this->type->getReadableValue(BasketballPositionType::SMALL_FORWARD));
+        $this->assertEquals('Small Forward', $this->type->getReadableValue(BasketballPositionType::SMALL_FORWARD));
     }
 
     /**

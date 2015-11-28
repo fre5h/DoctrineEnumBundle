@@ -10,7 +10,6 @@
 
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
-use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException;
@@ -21,27 +20,8 @@ use Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeExc
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class ReadableEnumValueExtension extends \Twig_Extension
+class ReadableEnumValueExtension extends AbstractEnumExtension
 {
-    /**
-     * @var AbstractEnumType[] $registeredEnumTypes Array of registered ENUM types
-     */
-    protected $registeredEnumTypes = [];
-
-    /**
-     * Constructor
-     *
-     * @param array $registeredTypes Array of registered ENUM types
-     */
-    public function __construct(array $registeredTypes)
-    {
-        foreach ($registeredTypes as $type => $details) {
-            if (is_subclass_of($details['class'], '\Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType')) {
-                $this->registeredEnumTypes[$type] = $details['class'];
-            }
-        }
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -51,7 +31,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
     }
 
     /**
-     * Get readable variant of ENUM value
+     * Get readable variant of the ENUM value
      *
      * @param string      $enumValue ENUM value
      * @param string|null $enumType  ENUM type
@@ -69,7 +49,7 @@ class ReadableEnumValueExtension extends \Twig_Extension
             // If ENUM type was set, e.g. {{ player.position|readable('BasketballPositionType') }}
             if (!empty($enumType)) {
                 if (!isset($this->registeredEnumTypes[$enumType])) {
-                    throw new EnumTypeIsNotRegisteredException(sprintf('ENUM type "%s" is not registered', $enumType));
+                    throw new EnumTypeIsNotRegisteredException(sprintf('ENUM type "%s" is not registered.', $enumType));
                 }
 
                 /** @var $enumTypeClass \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType */
@@ -92,20 +72,19 @@ class ReadableEnumValueExtension extends \Twig_Extension
 
                     return $enumTypeClass::getReadableValue($enumValue);
                 } elseif (count($occurrences) > 1) {
-                    $message = sprintf(
+                    throw new ValueIsFoundInFewRegisteredEnumTypesException(sprintf(
                         'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
                         $enumValue
-                    );
-
-                    throw new ValueIsFoundInFewRegisteredEnumTypesException($message);
+                    ));
                 } else {
-                    $message = sprintf('Value "%s" wasn\'t found in any registered ENUM type', $enumValue);
-
-                    throw new ValueIsNotFoundInAnyRegisteredEnumTypeException($message);
+                    throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(sprintf(
+                        'Value "%s" wasn\'t found in any registered ENUM type.',
+                        $enumValue
+                    ));
                 }
             }
         } else {
-            throw new NoRegisteredEnumTypesException('There are no registered ENUM types');
+            throw new NoRegisteredEnumTypesException('There are no registered ENUM types.');
         }
     }
 

@@ -46,7 +46,7 @@ abstract class AbstractEnumType extends Type
         }
 
         if (!in_array($value, $this->getValues())) {
-            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM %s', $value, $this->getName()));
+            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM %s.', $value, $this->getName()));
         }
 
         return $value;
@@ -132,7 +132,7 @@ abstract class AbstractEnumType extends Type
     public static function getReadableValue($value)
     {
         if (!isset(static::getChoices()[$value])) {
-            $message = sprintf('Invalid value "%s" for ENUM type "%s"', $value, get_called_class());
+            $message = sprintf('Invalid value "%s" for ENUM type "%s".', $value, get_called_class());
 
             throw new \InvalidArgumentException($message);
         }
