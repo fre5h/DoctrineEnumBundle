@@ -72,13 +72,13 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
             array(
                 array('name' => 'position'),
                 new MySqlPlatform(),
-                "ENUM('PG', 'SG', 'SF', 'PF', 'C')"
+                "ENUM('PG', 'SG', 'SF', 'PF', 'C')",
             ),
             array(
                 array('name' => 'position'),
                 new SqlitePlatform(),
-                "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))"
-            )
+                "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
+            ),
         );
     }
 }

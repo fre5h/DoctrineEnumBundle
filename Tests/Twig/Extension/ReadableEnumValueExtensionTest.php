@@ -32,12 +32,8 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->readableEnumValueExtension = new ReadableEnumValueExtension(array(
-            'BasketballPositionType' => array(
-                'class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
-            ),
-            'MapLocationType'        => array(
-                'class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\MapLocationType'
-            )
+            'BasketballPositionType' => array('class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'),
+            'MapLocationType'        => array('class' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\MapLocationType'),
         ));
     }
 
@@ -68,7 +64,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
         return array(
             array('Point guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'),
             array('Center', BasketballPositionType::CENTER, 'BasketballPositionType'),
-            array('Center', MapLocationType::CENTER, 'MapLocationType')
+            array('Center', MapLocationType::CENTER, 'MapLocationType'),
         );
     }
 

@@ -46,6 +46,6 @@ class MapLocationType extends AbstractEnumType
         self::NORTH_WEST => 'Northwest',
         self::NORTH_EAST => 'Northeast',
         self::SOUTH_WEST => 'Southwest',
-        self::SOUTH_EAST => 'Southeast'
+        self::SOUTH_EAST => 'Southeast',
     );
 }

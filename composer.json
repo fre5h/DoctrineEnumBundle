@@ -22,12 +22,14 @@
         "issues": "https://github.com/fre5h/DoctrineEnumBundle/issues"
     },
     "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "~2.5",
+        "php": ">=5.3.9",
+        "symfony/symfony": "~2.3",
         "doctrine/orm": "~2.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "~4.8",
+        "squizlabs/php_codesniffer": "*",
+        "escapestudios/symfony2-coding-standard": "*"
     },
     "minimum-stability": "stable",
     "autoload": {

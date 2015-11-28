@@ -22,14 +22,14 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 ## Requirements
 
 * PHP 5.3 *and later*
-* Symfony 2.5 *and later*
+* Symfony 2.3 *and later*
 * Doctrine 2.2 *and later*
 
 ## Installation
 
 ### Install via Composer
 
-```php composer.phar require fresh/doctrine-enum-bundle='v3.1'```
+```php composer.phar require fresh/doctrine-enum-bundle='v2.6'```
 
 ### Register the bundle
 

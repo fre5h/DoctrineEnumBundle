@@ -59,9 +59,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidBasketballPositionType()
     {
-        $constraint = new Enum(array(
-            'entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
-        ));
+        $constraint = new Enum(array('entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'));
 
         $this->context
              ->expects($this->never())
@@ -76,9 +74,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidBasketballPositionType()
     {
-        $constraint = new Enum(array(
-            'entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'
-        ));
+        $constraint = new Enum(array('entity' => 'Fresh\DoctrineEnumBundle\Fixtures\DBAL\Types\BasketballPositionType'));
 
         $this->context
              ->expects($this->once())
