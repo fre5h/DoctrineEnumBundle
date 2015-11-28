@@ -38,10 +38,10 @@ To start using the bundle, register it in `app/AppKernel.php`:
 ```php
 public function registerBundles()
 {
-    $bundles = [
+    $bundles = array(
         // Other bundles...
         new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
-    ];
+    );
 }
 ```
 
