@@ -53,6 +53,7 @@ class FreshDoctrineEnumExtensionTest extends \PHPUnit_Framework_TestCase
         $this->container->compile();
 
         // Check that services have been loaded
+        $this->assertTrue($this->container->has('twig.extension.enum_value'));
         $this->assertTrue($this->container->has('twig.extension.readable_enum_value'));
         $this->assertTrue($this->container->has('enum_type_guesser'));
     }

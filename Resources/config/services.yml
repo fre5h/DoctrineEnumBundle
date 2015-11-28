@@ -1,19 +1,23 @@
 parameters:
+    twig.extension.enum_value.class: Fresh\DoctrineEnumBundle\Twig\Extension\EnumValueExtension
     twig.extension.readable_enum_value.class: Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension
     enum_type_guesser.class: Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser
 
 services:
+    twig.extension.enum_value:
+        class: %twig.extension.enum_value.class%
+        arguments: [%doctrine.dbal.connection_factory.types%]
+        tags:
+            - { name: twig.extension }
+
     twig.extension.readable_enum_value:
         class: %twig.extension.readable_enum_value.class%
-        arguments:
-            - %doctrine.dbal.connection_factory.types%
+        arguments: [%doctrine.dbal.connection_factory.types%]
         tags:
             - { name: twig.extension }
 
     enum_type_guesser:
         class: %enum_type_guesser.class%
-        arguments:
-            - @doctrine
-            - %doctrine.dbal.connection_factory.types%
+        arguments: ["@doctrine", %doctrine.dbal.connection_factory.types%]
         tags:
             - { name: form.type_guesser }

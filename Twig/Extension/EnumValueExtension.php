@@ -13,15 +13,15 @@ namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
-use Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException;
-use Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException;
+use Fresh\DoctrineEnumBundle\Exception\ConstantIsFoundInFewRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\ConstantIsNotFoundInAnyRegisteredEnumTypeException;
 
 /**
- * ReadableEnumValueExtension returns the readable variant of ENUM value
+ * EnumValueExtension returns the readable variant of ENUM value
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class ReadableEnumValueExtension extends \Twig_Extension
+class EnumValueExtension extends \Twig_Extension
 {
     /**
      * @var AbstractEnumType[] $registeredEnumTypes Array of registered ENUM types
@@ -47,26 +47,24 @@ class ReadableEnumValueExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return [new \Twig_SimpleFilter('readable', [$this, 'getReadableEnumValue'])];
+        return ['enum' => new \Twig_Filter_Method($this, 'getEnumValue')];
     }
 
     /**
-     * Get readable variant of ENUM value
+     * Get variant of ENUM value
      *
-     * @param string      $enumValue ENUM value
+     * @param string      $enumConst ENUM value
      * @param string|null $enumType  ENUM type
      *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
-     * @throws ValueIsFoundInFewRegisteredEnumTypesException
-     * @throws ValueIsNotFoundInAnyRegisteredEnumTypeException
+     * @throws ConstantIsFoundInFewRegisteredEnumTypesException
+     * @throws ConstantIsNotFoundInAnyRegisteredEnumTypeException
      *
      * @return string
      */
-    public function getReadableEnumValue($enumValue, $enumType = null)
+    public function getEnumValue($enumConst, $enumType=null)
     {
-        $enumValue = (string) $enumValue;
-
         if (!empty($this->registeredEnumTypes) && is_array($this->registeredEnumTypes)) {
             // If ENUM type was set, e.g. {{ player.position|readable('BasketballPositionType') }}
             if (!empty($enumType)) {
@@ -77,34 +75,31 @@ class ReadableEnumValueExtension extends \Twig_Extension
                     ));
                 }
 
-                /** @var $enumTypeClass \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType */
-                $enumTypeClass = $this->registeredEnumTypes[$enumType];
-
-                return $enumTypeClass::getReadableValue($enumValue);
+                return constant($this->registeredEnumTypes[$enumType].'::'.$enumConst);
             } else {
                 // If ENUM type wasn't set, e.g. {{ player.position|readable }}
                 $occurrences = [];
                 // Check if value exists in registered ENUM types
                 foreach ($this->registeredEnumTypes as $registeredEnumType) {
-                    if ($registeredEnumType::isValueExist($enumValue)) {
+                    $refl = new \ReflectionClass($registeredEnumType);
+                    if ($refl->hasConstant($enumConst)) {
                         $occurrences[] = $registeredEnumType;
                     }
                 }
 
                 // If found only one occurrence, then we know exactly which ENUM type
                 if (count($occurrences) == 1) {
-                    $enumTypeClass = array_pop($occurrences);
-
-                    return $enumTypeClass::getReadableValue($enumValue);
+                    $enumClassName = array_pop($occurrences);
+                    return constant($enumClassName.'::'.$enumConst);
                 } elseif (count($occurrences) > 1) {
-                    throw new ValueIsFoundInFewRegisteredEnumTypesException(sprintf(
-                        'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
-                        $enumValue
+                    throw new ConstantIsFoundInFewRegisteredEnumTypesException(sprintf(
+                        'Constant "%s" is found in few registered ENUM types. You should manually set the appropriate one',
+                        $enumConst
                     ));
                 } else {
-                    throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(sprintf(
-                        'Value "%s" wasn\'t found in any registered ENUM type',
-                        $enumValue
+                    throw new ConstantIsNotFoundInAnyRegisteredEnumTypeException(sprintf(
+                        'Constant "%s" wasn\'t found in any registered ENUM type',
+                        $enumConst
                     ));
                 }
             }
@@ -118,6 +113,6 @@ class ReadableEnumValueExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'Readable ENUM Value';
+        return 'ENUM Value';
     }
 }
