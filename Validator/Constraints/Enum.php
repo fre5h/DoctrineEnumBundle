@@ -10,6 +10,7 @@
 
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
+use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Symfony\Component\Validator\Constraints\Choice;
 
 /**
@@ -25,6 +26,23 @@ class Enum extends Choice
      * @var string $entity Entity
      */
     public $entity;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($options = null)
+    {
+        if (isset($options['entity'])) {
+            /** @var AbstractEnumType $entity */
+            $entity = $options['entity'];
+
+            if (is_a($entity, 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType', true)) {
+                $this->choices = array_keys($entity::getChoices());
+            }
+        }
+
+        parent::__construct($options);
+    }
 
     /**
      * {@inheritdoc}
