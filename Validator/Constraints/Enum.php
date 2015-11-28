@@ -33,9 +33,10 @@ class Enum extends Choice
     public function __construct($options = null)
     {
         if (isset($options['entity'])) {
+            /** @var AbstractEnumType $entity */
             $entity = $options['entity'];
 
-            if ($entity instanceof AbstractEnumType) {
+            if (is_subclass_of($entity, 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType')) {
                 $this->choices = $entity::getValues();
             }
         }

@@ -10,6 +10,7 @@
 
 namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
 
 /**
@@ -19,6 +20,30 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
  */
 class EnumTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Test constructor
+     */
+    public function testConstructor()
+    {
+        $constraint = new Enum([
+            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
+        ]);
+
+        $this->assertEquals(BasketballPositionType::getValues(), $constraint->choices);
+    }
+
+    /**
+     * Test method missed required option `entity`
+     *
+     * @expectedException \Symfony\Component\Validator\Exception\MissingOptionsException
+     */
+    public function testMissedRequiredOption()
+    {
+        $constraint = new Enum();
+
+        $this->assertEquals(['entity'], $constraint->getRequiredOptions());
+    }
+
     /**
      * Test method getRequiredOptions
      */
