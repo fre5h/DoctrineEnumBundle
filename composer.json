@@ -23,7 +23,7 @@
     },
     "require": {
         "php": ">=5.4.0",
-        "symfony/symfony": "~2.3",
+        "symfony/symfony": "~2.6|~3.0",
         "doctrine/orm": "~2.2"
     },
     "require-dev": {
