@@ -39,7 +39,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->enumValidator = new EnumValidator();
 
-        $this->context = $this->getMockBuilder('Symfony\Component\Validator\ExecutionContext')
+        $this->context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContext')
                               ->disableOriginalConstructor()
                               ->getMock();
     }
@@ -69,7 +69,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
 
         $this->context
              ->expects($this->never())
-             ->method('addViolation');
+             ->method('buildViolation');
 
         $this->enumValidator->initialize($this->context);
         $this->enumValidator->validate(BasketballPositionType::SMALL_FORWARD, $constraint);
@@ -84,13 +84,28 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
             'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
         ]);
 
+        $constraintValidationBuilder = $this->getMockBuilder('Symfony\Component\Validator\Violation\ConstraintViolationBuilder')
+                                            ->disableOriginalConstructor()
+                                            ->getMock();
+
+        $constraintValidationBuilder
+            ->expects($this->once())
+            ->method('setParameter')
+            ->with(
+                $this->equalTo('{{ value }}'),
+                $this->equalTo('"Pitcher"')
+            )->will($this->returnSelf());
+
+        $constraintValidationBuilder
+            ->expects($this->once())
+            ->method('setCode')
+            ->will($this->returnSelf());
+
         $this->context
-             ->expects($this->once())
-             ->method('addViolation')
-             ->with(
-                 $this->equalTo('The value you selected is not a valid choice.'),
-                 $this->equalTo(['{{ value }}' => '"Pitcher"'])
-             );
+            ->expects($this->once())
+            ->method('buildViolation')
+            ->with($this->equalTo('The value you selected is not a valid choice.'))
+            ->will($this->returnValue($constraintValidationBuilder));
 
         $this->enumValidator->initialize($this->context);
         $this->enumValidator->validate('Pitcher', $constraint); // It's not a baseball =)

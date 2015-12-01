@@ -21,7 +21,7 @@ services:
     enum_type_guesser:
         class: %enum_type_guesser.class%
         arguments:
-            - @doctrine
+            - "@doctrine"
             - %doctrine.dbal.connection_factory.types%
         tags:
             - { name: form.type_guesser }
