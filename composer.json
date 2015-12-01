@@ -31,7 +31,6 @@
         "squizlabs/php_codesniffer": "*",
         "escapestudios/symfony2-coding-standard": "*"
     },
-    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Fresh\\DoctrineEnumBundle\\": ""
