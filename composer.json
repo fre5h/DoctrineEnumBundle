@@ -28,12 +28,17 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8",
-        "squizlabs/php_codesniffer": "*",
-        "escapestudios/symfony2-coding-standard": "*"
+        "squizlabs/php_codesniffer": "~2.5",
+        "escapestudios/symfony2-coding-standard": "~2.8"
     },
     "autoload": {
         "psr-4": {
             "Fresh\\DoctrineEnumBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
         }
     }
 }
