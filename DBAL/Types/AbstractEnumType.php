@@ -45,8 +45,8 @@ abstract class AbstractEnumType extends Type
             return null;
         }
 
-        if (!in_array($value, $this->getValues())) {
-            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM %s.', $value, $this->getName()));
+        if (!isset(static::$choices[$value])) {
+            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM "%s".', $value, $this->getName()));
         }
 
         return $value;
@@ -63,7 +63,7 @@ abstract class AbstractEnumType extends Type
                 function ($value) {
                     return "'{$value}'";
                 },
-                $this->getValues()
+                static::getValues()
             )
         );
 
@@ -115,7 +115,7 @@ abstract class AbstractEnumType extends Type
      */
     public static function getValues()
     {
-        return array_keys(static::getChoices());
+        return array_keys(static::$choices);
     }
 
     /**
@@ -131,13 +131,11 @@ abstract class AbstractEnumType extends Type
      */
     public static function getReadableValue($value)
     {
-        if (!isset(static::getChoices()[$value])) {
-            $message = sprintf('Invalid value "%s" for ENUM type "%s".', $value, get_called_class());
-
-            throw new \InvalidArgumentException($message);
+        if (!isset(static::$choices[$value])) {
+            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM type "%s".', $value, get_called_class()));
         }
 
-        return static::getChoices()[$value];
+        return static::$choices[$value];
     }
 
     /**
@@ -149,6 +147,6 @@ abstract class AbstractEnumType extends Type
      */
     public static function isValueExist($value)
     {
-        return in_array($value, static::getValues());
+        return isset(static::$choices[$value]);
     }
 }
