@@ -22,13 +22,15 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ## Installation
 
-Choose the appropriate version
+### Choose the appropriate version
 
 | Bundle Version (X.Y) | PHP     | Symfony            | Doctrine | Comment                                   |
-|----------------------|---------|--------------------|----------|-------------------------------------------|
+|:--------------------:|:-------:|:------------------:|:--------:|:------------------------------------------|
 | 4.1                  | >= 5.4  | >= 2.6             | >= 2.2   | Actual version                            |
 | 3.3                  | >= 5.4  | >= 2.3 and <= 2.8  | >= 2.2   |                                           |
 | 2.6                  | 5.3     | >= 2.3 and <= 2.7  | >= 2.2   | Frozen version, no longer being supported |
+
+#### Add dependency via composer
 
 ```php composer.phar require fresh/doctrine-enum-bundle='X.Y'```
 
