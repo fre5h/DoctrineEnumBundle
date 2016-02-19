@@ -13,6 +13,7 @@ namespace Fresh\DoctrineEnumBundle\Form;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
+use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
@@ -21,6 +22,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
  * EnumTypeGuesser
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Jaik Dean <jaik@fluoresce.co>
  */
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 {
@@ -94,6 +96,9 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             'required' => !$metadata->isNullable($property),
         ];
 
-        return new TypeGuess('choice', $parameters, Guess::VERY_HIGH_CONFIDENCE);
+        // Compatibility with Symfony <3.0
+        $fieldType = LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\ChoiceType');
+
+        return new TypeGuess($fieldType, $parameters, Guess::VERY_HIGH_CONFIDENCE);
     }
 }
