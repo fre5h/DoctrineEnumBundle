@@ -22,29 +22,17 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ## Installation
 
-#### Latest actual stable version (includes support of Symfony3)
+### Choose the appropriate version
 
-* PHP >= 5.4
-* Symfony >= 2.6, **also works with Symfony 3.0**
-* Doctrine >= 2.2
+| Bundle Version (X.Y) | PHP     | Symfony            | Doctrine | Comment                                   |
+|:--------------------:|:-------:|:------------------:|:--------:|:------------------------------------------|
+| 4.2                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
+| 3.3                  | >= 5.4  | >= 2.3 and <= 2.8  | >= 2.2   |                                           |
+| 2.6                  | 5.3     | >= 2.3 and <= 2.7  | >= 2.2   | Frozen version, no longer being supported |
 
-```php composer.phar require fresh/doctrine-enum-bundle='v4.0'```
+#### Add dependency via composer
 
-#### Latest stable version for Symfony <=2.8
-
-* PHP >= 5.4
-* Symfony >= 2.3 and <= 2.8
-* Doctrine >= 2.2
-
-```php composer.phar require fresh/doctrine-enum-bundle='v3.3'```
-
-#### Frozen version for PHP 5.3, no longer being supported
-
-* PHP >= 5.3
-* Symfony >= 2.3 and <= 2.7
-* Doctrine >= 2.2
-
-```php composer.phar require fresh/doctrine-enum-bundle='v2.6'```
+```php composer.phar require fresh/doctrine-enum-bundle='X.Y'```
 
 ### Register the bundle
 
@@ -213,6 +201,15 @@ $builder->add('position', null, [
 ```
 
 If for some reason you need to specify full config, it can look like this:
+
+###### Symfony >= 3.0
+```php
+$builder->add('position', '\Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+    'choices' => BasketballPositionType::getChoices()
+]);
+```
+
+###### Symfony < 3.0
 ```php
 $builder->add('position', 'choice', [
     'choices' => BasketballPositionType::getChoices()
