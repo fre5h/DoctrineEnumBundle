@@ -8,17 +8,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Util
-{
-    function method_exists($class, $method)
-    {
-        global $LegacyFormHelperTest_legacySymfonyVersion;
-        return !$LegacyFormHelperTest_legacySymfonyVersion;
-    }
-}
+namespace Fresh\DoctrineEnumBundle\Tests\Util {
 
-namespace Fresh\DoctrineEnumBundle\Tests\Util
-{
     use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
     use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 
@@ -61,5 +52,14 @@ namespace Fresh\DoctrineEnumBundle\Tests\Util
             $LegacyFormHelperTest_legacySymfonyVersion = false;
             $this->assertEquals($formType, LegacyFormHelper::getType($formType));
         }
+    }
+}
+
+namespace Fresh\DoctrineEnumBundle\Util {
+
+    function method_exists($class, $method)
+    {
+        global $LegacyFormHelperTest_legacySymfonyVersion;
+        return !$LegacyFormHelperTest_legacySymfonyVersion;
     }
 }
