@@ -202,14 +202,14 @@ $builder->add('position', null, [
 
 If for some reason you need to specify full config, it can look like this:
 
-Symfony >= 3.0
+###### Symfony >= 3.0
 ```php
 $builder->add('position', '\Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
     'choices' => BasketballPositionType::getChoices()
 ]);
 ```
 
-Symfony < 3.0:
+###### Symfony < 3.0
 ```php
 $builder->add('position', 'choice', [
     'choices' => BasketballPositionType::getChoices()
