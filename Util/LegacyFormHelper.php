@@ -25,6 +25,12 @@ final class LegacyFormHelper
         'Symfony\Component\Form\Extension\Core\Type\ChoiceType' => 'choice',
     );
 
+    /**
+     * Get a form field type compatible with the current version of Symfony
+     *
+     * @param string $class
+     * @return string Class or type name
+     */
     public static function getType($class)
     {
         if (!self::isLegacy()) {
@@ -38,6 +44,11 @@ final class LegacyFormHelper
         return self::$map[$class];
     }
 
+    /**
+     * Check whether to use legacy form behaviour from Symfony <3.0
+     *
+     * @return bool
+     */
     public static function isLegacy()
     {
         return !method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix');
