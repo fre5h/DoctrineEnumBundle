@@ -8,58 +8,63 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Tests\Util {
+namespace Fresh\DoctrineEnumBundle\Tests\Util;
 
-    use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
-    use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
+use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
+
+/**
+ * LegacyFormHelperTest
+ *
+ * @author Jaik Dean <jaik@fluoresce.co>
+ * @author Artem Genvald <genvaldartem@gmail.com>
+ */
+class LegacyFormHelperTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * @dataProvider dataProviderForIsLegacyTest
+     */
+    public function testIsLegacy($majorVersion, $expectedLegacyStatus)
+    {
+        $this->assertEquals($expectedLegacyStatus, LegacyFormHelper::isLegacy($majorVersion));
+    }
+
+    public function dataProviderForIsLegacyTest()
+    {
+        return [
+            [1, true],
+            [2, true],
+            [3, false],
+        ];
+    }
 
     /**
-     * LegacyFormHelperTest
-     *
-     * @author Jaik Dean <jaik@fluoresce.co>
-     *
-     * @coversClass \Fresh\DoctrineEnumBundle\Util\LegacyFormHelper
+     * @dataProvider dataProviderForGetTypeTest
      */
-    class LegacyFormHelperTest extends \PHPUnit_Framework_TestCase
+    public function testGetType($majorVersion, $expectedFormType)
     {
-        /**
-         * Test that the helper identifies whether we’re running a legacy
-         * version of Symfony.
-         */
-        public function testIsLegacy()
-        {
-            global $LegacyFormHelperTest_legacySymfonyVersion;
-
-            $LegacyFormHelperTest_legacySymfonyVersion = true;
-            $this->assertEquals(true, LegacyFormHelper::isLegacy());
-
-            $LegacyFormHelperTest_legacySymfonyVersion = false;
-            $this->assertEquals(false, LegacyFormHelper::isLegacy());
-        }
-
-        /**
-         * Test that the correct form field type is returned for current and legacy
-         * versions of Symfony.
-         */
-        public function testGetType()
-        {
-            global $LegacyFormHelperTest_legacySymfonyVersion;
-            $formType = 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
-
-            $LegacyFormHelperTest_legacySymfonyVersion = true;
-            $this->assertEquals('choice', LegacyFormHelper::getType($formType));
-
-            $LegacyFormHelperTest_legacySymfonyVersion = false;
-            $this->assertEquals($formType, LegacyFormHelper::getType($formType));
-        }
+        $this->assertEquals(
+            $expectedFormType,
+            LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\ChoiceType', $majorVersion)
+        );
     }
-}
 
-namespace Fresh\DoctrineEnumBundle\Util {
-
-    function method_exists($class, $method)
+    /**
+     * @return array
+     */
+    public function dataProviderForGetTypeTest()
     {
-        global $LegacyFormHelperTest_legacySymfonyVersion;
-        return !$LegacyFormHelperTest_legacySymfonyVersion;
+        return [
+            [2, 'choice'],
+            [3, 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'],
+        ];
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Form type with class "Symfony\Component\Form\Extension\Core\Type\TextType" can not be found. Please check for typos or add it to the map in LegacyFormHelper
+     */
+    public function testExceptionForGetUnsupportedType()
+    {
+        LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\TextType');
     }
 }
