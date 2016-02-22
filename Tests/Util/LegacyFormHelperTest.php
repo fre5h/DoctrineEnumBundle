@@ -65,6 +65,6 @@ class LegacyFormHelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionForGetUnsupportedType()
     {
-        LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\TextType');
+        LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\TextType', 2);
     }
 }
