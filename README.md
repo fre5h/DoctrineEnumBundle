@@ -321,3 +321,7 @@ If you later will need to add new values to ENUM or delete some existed, you als
 Fortunately you can do simple **hook** =) Access your database and delete comment for `position` column. After that run console command `doctrine:migrations:diff` it will create correct migrations.
 
 You should repeat these steps after each update of your custom ENUM type!
+
+## Contributing
+
+See [CONTRIBUTING](https://github.com/fre5h/DoctrineEnumBundle/blob/master/CONTRIBUTING.md) file.
