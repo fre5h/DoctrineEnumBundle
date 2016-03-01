@@ -5,7 +5,7 @@ First of all, **thank you** for contributing, **you are awesome**!
 Here are a few rules to follow in order to ease code reviews, and discussions before
 maintainers accept and merge your work.
 
-As Symfony follow the next standards:
+As Symfony follows the next standards:
 
 * [PSR-0](http://www.php-fig.org/psr/psr-0/)
 * [PSR-1](http://www.php-fig.org/psr/psr-1/)
