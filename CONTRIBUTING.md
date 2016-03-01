@@ -5,14 +5,7 @@ First of all, **thank you** for contributing, **you are awesome**!
 Here are a few rules to follow in order to ease code reviews, and discussions before
 maintainers accept and merge your work.
 
-As Symfony follows the next standards:
-
-* [PSR-0](http://www.php-fig.org/psr/psr-0/)
-* [PSR-1](http://www.php-fig.org/psr/psr-1/)
-* [PSR-2](http://www.php-fig.org/psr/psr-2/)
-* [PSR-4](http://www.php-fig.org/psr/psr-4/)
-
-You also MUST follow them.
+As Symfony follows the next standards: [PSR-0](http://www.php-fig.org/psr/psr-0/), [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/), [PSR-4](http://www.php-fig.org/psr/psr-4/). You also MUST follow them.
 
 You MUST follow the [Symfony Coding Standards](http://symfony.com/doc/current/contributing/code/standards.html).
 If you don't know about any of them, you should really read the recommendations.  
