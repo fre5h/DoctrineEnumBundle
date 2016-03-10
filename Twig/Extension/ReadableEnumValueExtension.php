@@ -27,7 +27,17 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
      */
     public function getFilters()
     {
-        return [new \Twig_SimpleFilter('readable', [$this, 'getReadableEnumValue'])];
+        return [
+            new \Twig_SimpleFilter(
+                'readable_enum',
+                [$this, 'getReadableEnumValue']
+            ),
+            new \Twig_SimpleFilter(
+                'readable',
+                [$this, 'getReadableEnumValue'],
+                ['deprecated' => true, 'alternative' => 'readable_enum']
+            ),
+        ];
     }
 
     /**
@@ -46,7 +56,7 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
     public function getReadableEnumValue($enumValue, $enumType = null)
     {
         if (!empty($this->registeredEnumTypes) && is_array($this->registeredEnumTypes)) {
-            // If ENUM type was set, e.g. {{ player.position|readable('BasketballPositionType') }}
+            // If ENUM type was set, e.g. {{ player.position|readable_enum('BasketballPositionType') }}
             if (!empty($enumType)) {
                 if (!isset($this->registeredEnumTypes[$enumType])) {
                     throw new EnumTypeIsNotRegisteredException(sprintf('ENUM type "%s" is not registered.', $enumType));
@@ -57,7 +67,7 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
 
                 return $enumTypeClass::getReadableValue($enumValue);
             } else {
-                // If ENUM type wasn't set, e.g. {{ player.position|readable }}
+                // If ENUM type wasn't set, e.g. {{ player.position|readable_enum }}
                 $occurrences = [];
                 // Check if value exists in registered ENUM types
                 foreach ($this->registeredEnumTypes as $registeredEnumType) {

@@ -19,6 +19,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 * MySQL
 * SQLite
 * PostgreSQL
+* MSSQL
 
 ## Installation
 
@@ -26,7 +27,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 | Bundle Version (X.Y) | PHP     | Symfony            | Doctrine | Comment                                   |
 |:--------------------:|:-------:|:------------------:|:--------:|:------------------------------------------|
-| 4.2                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
+| 4.5                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
 | 3.3                  | >= 5.4  | >= 2.3 and <= 2.8  | >= 2.2   |                                           |
 | 2.6                  | 5.3     | >= 2.3 and <= 2.7  | >= 2.2   | Frozen version, no longer being supported |
 
@@ -246,11 +247,11 @@ BasketballPositionType::getValues();
 ##### Readable ENUM values in templates
 
 You might want to show ENUM values rendered in your templates in *readable format* instead of values that are stored in DB.
-It is easy to do by using the custom TWIG filter `|readable` that was implemented for this purpose.
+It is easy to do by using the custom TWIG filter `|readable_enum` that was implemented for this purpose.
 In the example below if Player is a Point Guard in their basketball team then position will be rendered in template as `Point Guard` instead of `PG`.
 
 ```jinja
-{{ player.position|readable }}
+{{ player.position|readable_enum }}
 ```
 
 How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension")
@@ -258,25 +259,27 @@ tries to find which ENUM type from registered ENUM types has this value.
 If only one ENUM type found, then it is possible to get the readable value from it. Otherwise it will throw an exception.
 
 For example `BasketballPositionType` and `MapLocationType` can have same ENUM value `C` with its readable variant `Center`.
-The code below will throw an exception, because without additional parameter for `|readable` filter, it can't determine which ENUM type to use in which case:
+The code below will throw an exception, because without additional parameter for `|readable_enum` filter, it can't determine which ENUM type to use in which case:
 
 ```jinja
 {{ set player_position = 'C' }}
 {{ set location_on_the_map = 'C' }}
 
-{{ player_position|readable }}
-{{ location_on_the_map|readable }}
+{{ player_position|readable_enum }}
+{{ location_on_the_map|readable_enum }}
 ```
 
-So, the correct usage of `|readable` filter in this case should be with additional parameter, that specifies the ENUM type:
+So, the correct usage of `|readable_enum` filter in this case should be with additional parameter, that specifies the ENUM type:
 
 ```jinja
 {{ set player_position = 'C' }}
 {{ set location_on_the_map = 'C' }}
 
-{{ player_position|readable('BasketballPositionType') }}
-{{ location_on_the_map|readable('MapLocationType') }}
+{{ player_position|readable_enum('BasketballPositionType') }}
+{{ location_on_the_map|readable_enum('MapLocationType') }}
 ```
+
+> In previous versions `|readable_enum` filter was known as `|readable`. But since version 4.5 `|readable` is deprecated and will be removed in version 5.0, so use `|readable_enum` instead.
 
 ##### ENUM constants in templates
 
@@ -291,7 +294,7 @@ There is also another custom TWIG filter `|enum_constant`. It allows to use cons
 {% endif %}
 ```
 
-Same problem as for `|readable` filter is present here too. If some constant is defined in few ENUM classes then an exception will be thrown.
+Same problem as for `|readable_enum` filter is present here too. If some constant is defined in few ENUM classes then an exception will be thrown.
 You can specify the correct class for this constant and it solves the problem.
 
 ```jinja
@@ -321,3 +324,7 @@ If you later will need to add new values to ENUM or delete some existed, you als
 Fortunately you can do simple **hook** =) Access your database and delete comment for `position` column. After that run console command `doctrine:migrations:diff` it will create correct migrations.
 
 You should repeat these steps after each update of your custom ENUM type!
+
+## Contributing
+
+See [CONTRIBUTING](https://github.com/fre5h/DoctrineEnumBundle/blob/master/CONTRIBUTING.md) file.
