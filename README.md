@@ -27,7 +27,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 | Bundle Version (X.Y) | PHP     | Symfony            | Doctrine | Comment                                   |
 |:--------------------:|:-------:|:------------------:|:--------:|:------------------------------------------|
-| 4.4                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
+| 4.5                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
 | 3.3                  | >= 5.4  | >= 2.3 and <= 2.8  | >= 2.2   |                                           |
 | 2.6                  | 5.3     | >= 2.3 and <= 2.7  | >= 2.2   | Frozen version, no longer being supported |
 
@@ -278,6 +278,8 @@ So, the correct usage of `|readable_enum` filter in this case should be with add
 {{ player_position|readable_enum('BasketballPositionType') }}
 {{ location_on_the_map|readable_enum('MapLocationType') }}
 ```
+
+> In previous versions `|readable_enum` filter was known as `|readable`. But since version 4.5 `|readable` is deprecated and will be removed in version 5.0, so use `|readable_enum` instead.
 
 ##### ENUM constants in templates
 
