@@ -1,6 +1,6 @@
 {
     "name": "fresh/doctrine-enum-bundle",
-    "description": "Provides support of ENUM type for Doctrine2 in Symfony2 applications.",
+    "description": "Provides support of ENUM type for Doctrine2 in Symfony applications.",
     "keywords": ["bundle", "symfony", "doctrine", "entity", "enum", "type", "DBAL", "MySQL", "SQLite", "PostgreSQL", "MSSQL"],
     "homepage": "https://github.com/fre5h/DoctrineEnumBundle",
     "type": "symfony-bundle",
@@ -29,7 +29,7 @@
     "require-dev": {
         "phpunit/phpunit": "~4.8",
         "squizlabs/php_codesniffer": "~2.5",
-        "escapestudios/symfony2-coding-standard": "~2.8"
+        "escapestudios/symfony2-coding-standard": "~2.9"
     },
     "autoload": {
         "psr-4": {
