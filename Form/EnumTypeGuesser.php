@@ -19,7 +19,7 @@ use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 
 /**
- * EnumTypeGuesser
+ * EnumTypeGuesser.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Jaik Dean <jaik@fluoresce.co>
@@ -32,7 +32,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     protected $registeredEnumTypes = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ManagerRegistry $registry        Registry
      * @param array           $registeredTypes Array of registered ENUM types
@@ -47,7 +47,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     }
 
     /**
-     * Returns a field guess for a property name of a class
+     * Returns a field guess for a property name of a class.
      *
      * @param string $class    The fully qualified class name
      * @param string $property The name of the property to guess for

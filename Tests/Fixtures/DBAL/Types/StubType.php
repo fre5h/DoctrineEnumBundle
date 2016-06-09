@@ -13,7 +13,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * Stub type
+ * Stub Type.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */

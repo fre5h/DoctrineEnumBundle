@@ -11,7 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\Exception;
 
 /**
- * EnumTypeIsNotRegisteredException
+ * EnumTypeIsNotRegisteredException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */

@@ -14,7 +14,7 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantExtension;
 
 /**
- * EnumConstantExtensionTest
+ * EnumConstantExtensionTest.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
@@ -36,17 +36,11 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
-    /**
-     * Test method `getName`
-     */
     public function testGetName()
     {
         $this->assertEquals('ENUM Constant', $this->enumConstantExtension->getName());
     }
 
-    /**
-     * Test method `getFilters`
-     */
     public function testGetFilters()
     {
         $this->assertEquals(
@@ -56,12 +50,6 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that method `getEnumConstant` returns expected value of ENUM constant
-     *
-     * @param string $expectedValueOfConstant Expected readable value
-     * @param string $enumConstant            ENUM constant
-     * @param string $enumType                ENUM type
-     *
      * @dataProvider dataProviderForGetReadableEnumValueTest
      */
     public function testGetEnumConstant($expectedValueOfConstant, $enumConstant, $enumType)
@@ -72,11 +60,6 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * Data provider for method `testGetEnumValue`
-     *
-     * @return array
-     */
     public function dataProviderForGetReadableEnumValueTest()
     {
         return [
@@ -88,8 +71,6 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that using ENUM constant extension for ENUM type that is not registered throws exception
-     *
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException
      */
     public function testEnumTypeIsNotRegisteredException()
@@ -98,8 +79,6 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that using ENUM constant that is found in few registered ENUM types throws exception
-     *
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\ConstantIsFoundInFewRegisteredEnumTypesException
      */
     public function testConstantIsFoundInFewRegisteredEnumTypesException()
@@ -108,8 +87,6 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that using ENUM constant that is not found in any registered ENUM type throws exception
-     *
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\ConstantIsNotFoundInAnyRegisteredEnumTypeException
      */
     public function testConstantIsNotFoundInAnyRegisteredEnumTypeException()
@@ -118,8 +95,6 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that using ENUM constant extension without any registered ENUM type throws exception
-     *
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException
      */
     public function testNoRegisteredEnumTypesException()

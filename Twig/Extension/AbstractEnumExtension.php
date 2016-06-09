@@ -13,7 +13,7 @@ namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * BaseEnumExtension
+ * BaseEnumExtension.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
@@ -25,7 +25,7 @@ abstract class AbstractEnumExtension extends \Twig_Extension
     protected $registeredEnumTypes = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $registeredTypes Array of registered ENUM types
      */

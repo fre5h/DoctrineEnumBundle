@@ -16,7 +16,7 @@ use Fresh\DoctrineEnumBundle\Exception\ConstantIsFoundInFewRegisteredEnumTypesEx
 use Fresh\DoctrineEnumBundle\Exception\ConstantIsNotFoundInAnyRegisteredEnumTypeException;
 
 /**
- * EnumConstantExtension
+ * EnumConstantExtension.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
@@ -31,7 +31,7 @@ class EnumConstantExtension extends AbstractEnumExtension
     }
 
     /**
-     * Get value of the ENUM constant
+     * Get value of the ENUM constant.
      *
      * @param string      $enumConstant ENUM constant
      * @param string|null $enumType     ENUM type

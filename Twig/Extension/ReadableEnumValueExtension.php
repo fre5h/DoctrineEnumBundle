@@ -16,7 +16,7 @@ use Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesExcep
 use Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException;
 
 /**
- * ReadableEnumValueExtension returns the readable variant of ENUM value
+ * ReadableEnumValueExtension returns the readable variant of ENUM value.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
@@ -41,17 +41,17 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
     }
 
     /**
-     * Get readable variant of the ENUM value
+     * Get readable variant of the ENUM value.
      *
      * @param string      $enumValue ENUM value
      * @param string|null $enumType  ENUM type
+     *
+     * @return string
      *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
      * @throws ValueIsFoundInFewRegisteredEnumTypesException
      * @throws ValueIsNotFoundInAnyRegisteredEnumTypeException
-     *
-     * @return string
      */
     public function getReadableEnumValue($enumValue, $enumType = null)
     {

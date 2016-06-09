@@ -14,15 +14,12 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
 
 /**
- * EnumTest
+ * EnumTest.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class EnumTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Test constructor
-     */
     public function testConstructor()
     {
         $constraint = new Enum([
@@ -33,8 +30,6 @@ class EnumTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method missed required option `entity`
-     *
      * @expectedException \Symfony\Component\Validator\Exception\MissingOptionsException
      */
     public function testMissedRequiredOption()
@@ -44,9 +39,6 @@ class EnumTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['entity'], $constraint->getRequiredOptions());
     }
 
-    /**
-     * Test method `getRequiredOptions`
-     */
     public function testGetRequiredOptions()
     {
         $constraint = new Enum([
@@ -56,9 +48,6 @@ class EnumTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['entity'], $constraint->getRequiredOptions());
     }
 
-    /**
-     * Test method `getDefaultOption`
-     */
     public function testGetDefaultOption()
     {
         $constraint = new Enum([

@@ -20,7 +20,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 
 /**
- * AbstractEnumTypeTest
+ * AbstractEnumTypeTest.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Ben Davies    <ben.davies@gmail.com>
@@ -55,12 +55,6 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that the SQL declaration is the correct for the platform
-     *
-     * @param array            $fieldDeclaration The field declaration
-     * @param AbstractPlatform $platform         The DBAL platform
-     * @param string           $expected         Expected SQL declaration
-     *
      * @dataProvider platformProvider
      */
     public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, $expected)
@@ -68,11 +62,6 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
-    /**
-     * Data provider for method `getSqlDeclaration`
-     *
-     * @return array
-     */
     public function platformProvider()
     {
         return [
@@ -99,26 +88,17 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * Test method `getName`
-     */
     public function testGetName()
     {
         $this->assertEquals('BasketballPositionType', $this->type->getName());
         $this->assertEquals('StubType', Type::getType('StubType')->getName());
     }
 
-    /**
-     * Test method `requiresSQLCommentHint`
-     */
     public function testRequiresSQLCommentHint()
     {
         $this->assertTrue($this->type->requiresSQLCommentHint(new MySqlPlatform()));
     }
 
-    /**
-     * Test method `convertToDatabaseValue`
-     */
     public function testConvertToDatabaseValue()
     {
         $this->assertNull($this->type->convertToDatabaseValue(null, new MySqlPlatform()));
@@ -126,8 +106,6 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that converting unknown value of ENUM type throws InvalidArgumentException
-     *
      * @expectedException \InvalidArgumentException
      */
     public function testInvalidArgumentExceptionInConvertToDatabaseValue()
@@ -135,17 +113,12 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
         $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
     }
 
-    /**
-     * Test method `getReadableValue`
-     */
     public function testGetReadableValue()
     {
         $this->assertEquals('Small Forward', $this->type->getReadableValue(BasketballPositionType::SMALL_FORWARD));
     }
 
     /**
-     * Test that getting readable value for unknown value of ENUM type throws InvalidArgumentException
-     *
      * @expectedException \InvalidArgumentException
      */
     public function testInvalidArgumentExceptionInGetReadableValue()

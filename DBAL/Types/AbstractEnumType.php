@@ -18,9 +18,9 @@ use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 
 /**
- * AbstractEnumType
+ * AbstractEnumType.
  *
- * Provides support of MySQL ENUM type for Doctrine in Symfony applications
+ * Provides support of MySQL ENUM type for Doctrine in Symfony applications.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Ben Davies <ben.davies@gmail.com>
@@ -98,7 +98,7 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * Get readable choices for the ENUM field
+     * Get readable choices for the ENUM field.
      *
      * @static
      *
@@ -115,7 +115,7 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * Get values for the ENUM field
+     * Get values for the ENUM field.
      *
      * @static
      *
@@ -127,7 +127,7 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * Get value in readable format
+     * Get value in readable format.
      *
      * @param string $value ENUM value
      *
@@ -147,7 +147,7 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * Check if some string value exists in the array of ENUM values
+     * Check if some string value exists in the array of ENUM values.
      *
      * @param string $value ENUM value
      *

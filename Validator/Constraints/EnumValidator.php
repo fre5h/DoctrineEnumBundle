@@ -15,14 +15,14 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
- * EnumValidator validates that the value is one of the expected values
+ * EnumValidator validates that the value is one of the expected values.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class EnumValidator extends ChoiceValidator
 {
     /**
-     * Checks if the passed value is valid
+     * Checks if the passed value is valid.
      *
      * @param mixed      $value      The value that should be validated
      * @param Constraint $constraint The constraint for the validation

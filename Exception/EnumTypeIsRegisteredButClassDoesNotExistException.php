@@ -11,7 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\Exception;
 
 /**
- * EnumTypeIsRegisteredButClassDoesNotExistException
+ * EnumTypeIsRegisteredButClassDoesNotExistException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */

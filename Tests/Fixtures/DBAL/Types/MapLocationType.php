@@ -13,7 +13,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * Map location type
+ * Map Location Type.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
