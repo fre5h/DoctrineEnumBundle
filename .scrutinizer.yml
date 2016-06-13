@@ -6,6 +6,7 @@ checks:
 filter:
   excluded_paths:
     - vendor/*
+    - Tests/*
 
 before_commands:
   - "composer install --prefer-dist"
