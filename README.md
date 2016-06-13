@@ -27,7 +27,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ```php composer.phar require fresh/doctrine-enum-bundle='~4.6'```
 
-#### Choose the appropriate version if you need
+##### Choose the appropriate version if you need
 
 | Bundle Version (X.Y) | PHP     | Symfony            | Doctrine | Comment                                   |
 |:--------------------:|:-------:|:------------------:|:--------:|:------------------------------------------|
