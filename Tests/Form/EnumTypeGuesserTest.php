@@ -106,7 +106,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
                                 ->getMock();
         $registeredTypes = [
             'NotAChildType' => [
-                'class' => NotAChildType::class,
+                'class' => '\Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NotAChildType',
             ]
         ];
 
@@ -139,7 +139,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
                                 ->getMock();
         $registeredTypes = [
             'BasketballPositionType' => [
-                'class' => BasketballPositionType::class,
+                'class' => '\Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
             ]
         ];
 
