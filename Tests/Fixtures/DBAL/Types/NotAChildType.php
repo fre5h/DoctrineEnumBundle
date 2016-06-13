@@ -10,13 +10,13 @@
 
 namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 
-use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
-
 /**
- * StubType.
+ * NotAChildType.
+ *
+ * Is not a child of AbstractEnumType.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-final class StubType extends AbstractEnumType
+final class NotAChildType
 {
 }

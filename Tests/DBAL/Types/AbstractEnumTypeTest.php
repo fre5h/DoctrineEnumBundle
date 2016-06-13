@@ -18,6 +18,7 @@ use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 
 /**
  * AbstractEnumTypeTest.
@@ -124,5 +125,28 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     public function testInvalidArgumentExceptionInGetReadableValue()
     {
         $this->type->getReadableValue('YO');
+    }
+
+    public function testGetChoices()
+    {
+        if (LegacyFormHelper::isLegacy()) {
+            $choices = [
+                'PG' => 'Point Guard',
+                'SG' => 'Shooting Guard',
+                'SF' => 'Small Forward',
+                'PF' => 'Power Forward',
+                'C'  => 'Center',
+            ];
+        } else {
+            $choices = [
+                'Point Guard'    => 'PG',
+                'Shooting Guard' => 'SG',
+                'Small Forward'  => 'SF',
+                'Power Forward'  => 'PF',
+                'Center'         => 'C',
+            ];
+        }
+
+        $this->assertEquals($choices, $this->type->getChoices());
     }
 }

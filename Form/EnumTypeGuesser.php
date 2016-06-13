@@ -76,18 +76,18 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         $enumTypeFullClassName = $this->registeredEnumTypes[$fieldType];
 
-        $abstractEnumTypeFullClassName = 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
-
-        if (get_parent_class($enumTypeFullClassName) !== $abstractEnumTypeFullClassName) {
-            return null;
-        }
-
         if (!class_exists($enumTypeFullClassName)) {
             throw new EnumTypeIsRegisteredButClassDoesNotExistException(sprintf(
                 'ENUM type "%s" is registered as "%s", but that class does not exist',
                 $fieldType,
                 $enumTypeFullClassName
             ));
+        }
+
+        $abstractEnumTypeFullClassName = 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
+
+        if (get_parent_class($enumTypeFullClassName) !== $abstractEnumTypeFullClassName) {
+            return null;
         }
 
         // Get the choices from the fully qualified class name
