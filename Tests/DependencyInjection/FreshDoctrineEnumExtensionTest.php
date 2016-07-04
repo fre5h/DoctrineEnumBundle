@@ -14,7 +14,7 @@ use Fresh\DoctrineEnumBundle\DependencyInjection\FreshDoctrineEnumExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * FreshDoctrineEnumExtensionTest
+ * FreshDoctrineEnumExtensionTest.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
@@ -40,9 +40,6 @@ class FreshDoctrineEnumExtensionTest extends \PHPUnit_Framework_TestCase
         $this->container->registerExtension($this->extension);
     }
 
-    /**
-     * Test load extension
-     */
     public function testLoadExtension()
     {
         // Add some dummy required parameter and service

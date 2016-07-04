@@ -11,7 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\Exception;
 
 /**
- * ValueIsFoundInFewRegisteredEnumTypesException
+ * ValueIsFoundInFewRegisteredEnumTypesException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */

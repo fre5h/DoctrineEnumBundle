@@ -13,7 +13,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * Basketball position type
+ * BasketballPositionType.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */

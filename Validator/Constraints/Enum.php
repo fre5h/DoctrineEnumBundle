@@ -14,7 +14,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Symfony\Component\Validator\Constraints\Choice;
 
 /**
- * ENUM Constraint
+ * ENUM Constraint.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  *

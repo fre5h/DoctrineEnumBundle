@@ -19,7 +19,7 @@ use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 
 /**
- * EnumTypeGuesser
+ * EnumTypeGuesser.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Jaik Dean <jaik@fluoresce.co>
@@ -32,7 +32,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     protected $registeredEnumTypes = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ManagerRegistry $registry        Registry
      * @param array           $registeredTypes Array of registered ENUM types
@@ -47,7 +47,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     }
 
     /**
-     * Returns a field guess for a property name of a class
+     * Returns a field guess for a property name of a class.
      *
      * @param string $class    The fully qualified class name
      * @param string $property The name of the property to guess for
@@ -76,18 +76,18 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         $enumTypeFullClassName = $this->registeredEnumTypes[$fieldType];
 
-        $abstractEnumTypeFullClassName = 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
-
-        if (get_parent_class($enumTypeFullClassName) !== $abstractEnumTypeFullClassName) {
-            return null;
-        }
-
         if (!class_exists($enumTypeFullClassName)) {
             throw new EnumTypeIsRegisteredButClassDoesNotExistException(sprintf(
                 'ENUM type "%s" is registered as "%s", but that class does not exist',
                 $fieldType,
                 $enumTypeFullClassName
             ));
+        }
+
+        $abstractEnumTypeFullClassName = 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
+
+        if (get_parent_class($enumTypeFullClassName) !== $abstractEnumTypeFullClassName) {
+            return null;
         }
 
         // Get the choices from the fully qualified class name

@@ -8,13 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Exception;
+namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 
 /**
- * EnumTypeIsRegisteredButClassDoesNotExistException.
+ * NotAChildType.
+ *
+ * Is not a child of AbstractEnumType.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class EnumTypeIsRegisteredButClassDoesNotExistException extends \UnexpectedValueException
+final class NotAChildType
 {
 }

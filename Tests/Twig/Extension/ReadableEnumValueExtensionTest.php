@@ -15,7 +15,7 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension;
 
 /**
- * ReadableEnumValueExtensionTest
+ * ReadableEnumValueExtensionTest.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
@@ -37,17 +37,11 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
-    /**
-     * Test method `getName`
-     */
     public function testGetName()
     {
         $this->assertEquals('Readable ENUM Value', $this->readableEnumValueExtension->getName());
     }
 
-    /**
-     * Test method `getFilters`
-     */
     public function testGetFilters()
     {
         $this->assertEquals(
@@ -67,12 +61,6 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that method `getReadableEnumValue` returns expected readable value
-     *
-     * @param string $expectedReadableValue Expected readable value
-     * @param string $enumValue             ENUM value
-     * @param string $enumType              ENUM type
-     *
      * @dataProvider dataProviderForGetReadableEnumValueTest
      */
     public function testGetReadableEnumValue($expectedReadableValue, $enumValue, $enumType)
@@ -83,11 +71,6 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * Data provider for method `getReadableEnumValue`
-     *
-     * @return array
-     */
     public function dataProviderForGetReadableEnumValueTest()
     {
         return [
@@ -99,8 +82,6 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that using readable ENUM value extension for ENUM type that is not registered throws exception
-     *
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException
      */
     public function testEnumTypeIsNotRegisteredException()
@@ -109,8 +90,6 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that using ENUM value that is found in few registered ENUM types throws exception
-     *
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException
      */
     public function testValueIsFoundInFewRegisteredEnumTypesException()
@@ -119,8 +98,6 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that using ENUM value that is not found in any registered ENUM type throws exception
-     *
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException
      */
     public function testValueIsNotFoundInAnyRegisteredEnumTypeException()
@@ -129,8 +106,6 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that using readable ENUM value extension without any registered ENUM type throws exception
-     *
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException
      */
     public function testNoRegisteredEnumTypesException()

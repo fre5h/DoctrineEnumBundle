@@ -13,7 +13,7 @@ namespace Fresh\DoctrineEnumBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * FreshDoctrineEnumBundle
+ * FreshDoctrineEnumBundle.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */

@@ -11,7 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\Exception;
 
 /**
- * ConstantIsFoundInFewRegisteredEnumTypesException
+ * ConstantIsFoundInFewRegisteredEnumTypesException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */

@@ -13,7 +13,7 @@ namespace Fresh\DoctrineEnumBundle\Util;
 use Symfony\Component\HttpKernel\Kernel;
 
 /**
- * LegacyFormHelper
+ * LegacyFormHelper.
  *
  * This class based on LegacyFormHelper in FOSUserBundle:
  * @see https://github.com/FriendsOfSymfony/FOSUserBundle/blob/c533a233b52c1d3843e816a35677561330ddbc74/Util/LegacyFormHelper.php
@@ -37,7 +37,7 @@ final class LegacyFormHelper
     ];
 
     /**
-     * Get a form field type compatible with the current version of Symfony
+     * Get a form field type compatible with the current version of Symfony.
      *
      * @param string $class        Class
      * @param int    $majorVersion Major version
@@ -63,7 +63,7 @@ final class LegacyFormHelper
     }
 
     /**
-     * Check whether to use legacy form behaviour from Symfony <3.0
+     * Check whether to use legacy form behaviour from Symfony <3.0.
      *
      * @param int $majorVersion Major version
      *

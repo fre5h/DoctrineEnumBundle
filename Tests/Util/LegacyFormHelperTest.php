@@ -13,7 +13,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Util;
 use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 
 /**
- * LegacyFormHelperTest
+ * LegacyFormHelperTest.
  *
  * @author Jaik Dean <jaik@fluoresce.co>
  * @author Artem Genvald <genvaldartem@gmail.com>
@@ -48,9 +48,6 @@ class LegacyFormHelperTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @return array
-     */
     public function dataProviderForGetTypeTest()
     {
         return [
