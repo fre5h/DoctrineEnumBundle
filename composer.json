@@ -14,7 +14,7 @@
         {
             "name": "Community",
             "homepage": "https://github.com/fre5h/DoctrineEnumBundle/graphs/contributors",
-            "role": "Developers"
+            "role": "Contributors"
         }
     ],
     "support": {
@@ -23,12 +23,20 @@
     },
     "require": {
         "php": ">=5.4.0",
-        "symfony/symfony": "~2.6|~3.0",
-        "doctrine/orm": "~2.2"
+        "doctrine/common": "~2.2",
+        "doctrine/dbal": "~2.2",
+        "symfony/config": "~2.6|~3.0",
+        "symfony/dependency-injection": "~2.6|~3.0",
+        "symfony/doctrine-bridge": "~2.6|~3.0",
+        "symfony/form": "~2.6|~3.0",
+        "symfony/framework-bundle": "~2.6|~3.0",
+        "symfony/http-kernel": "~2.6|~3.0",
+        "symfony/validator": "~2.6|~3.0",
+        "twig/twig": "~1.13"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8",
-        "squizlabs/php_codesniffer": "~2.5",
+        "squizlabs/php_codesniffer": "~2.6",
         "escapestudios/symfony2-coding-standard": "~2.9"
     },
     "autoload": {

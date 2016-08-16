@@ -326,4 +326,4 @@ You should repeat these steps after each update of your custom ENUM type!
 
 ## Contributing
 
-See [CONTRIBUTING](https://github.com/fre5h/DoctrineEnumBundle/blob/master/CONTRIBUTING.md) file.
+See [CONTRIBUTING](https://github.com/fre5h/DoctrineEnumBundle/blob/master/.github/CONTRIBUTING.md) file.
