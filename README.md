@@ -10,7 +10,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 [![Total Downloads](https://img.shields.io/packagist/dt/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Dependency Status](https://img.shields.io/versioneye/d/php/fresh:doctrine-enum-bundle.svg?style=flat-square)](https://www.versioneye.com/user/projects/550402de4a10647277000002)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/0cff4816-374a-474e-a1d5-9d5db34562e3.svg?style=flat-square)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
-[![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/fre5h/DoctrineEnumBundle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/fre5h/DoctrineEnumBundle)
 
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
 
