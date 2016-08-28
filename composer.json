@@ -42,7 +42,10 @@
     "autoload": {
         "psr-4": {
             "Fresh\\DoctrineEnumBundle\\": ""
-        }
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
     },
     "extra": {
         "branch-alias": {
