@@ -37,11 +37,6 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function testGetName()
-    {
-        $this->assertEquals('Readable ENUM Value', $this->readableEnumValueExtension->getName());
-    }
-
     public function testGetFilters()
     {
         $this->assertEquals(

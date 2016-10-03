@@ -85,12 +85,4 @@ class EnumConstantExtension extends AbstractEnumExtension
             throw new NoRegisteredEnumTypesException('There are no registered ENUM types.');
         }
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'ENUM Constant';
-    }
 }
