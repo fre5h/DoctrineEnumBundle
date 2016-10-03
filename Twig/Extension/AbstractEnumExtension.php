@@ -37,9 +37,4 @@ abstract class AbstractEnumExtension extends \Twig_Extension
             }
         }
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function getName();
 }
