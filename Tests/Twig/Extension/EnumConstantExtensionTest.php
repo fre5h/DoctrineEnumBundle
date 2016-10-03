@@ -36,11 +36,6 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function testGetName()
-    {
-        $this->assertEquals('ENUM Constant', $this->enumConstantExtension->getName());
-    }
-
     public function testGetFilters()
     {
         $this->assertEquals(
