@@ -26,7 +26,7 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->container = $this->getMockBuilder(Container::class)
+        $this->container = $this->getMockBuilder('Symfony\Component\DependencyInjection\Container')
                                 ->disableOriginalConstructor()
                                 ->setMethods(['get', 'getDatabasePlatform'])
                                 ->getMock();
@@ -44,7 +44,7 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
     public function testEnumMappingRegistration()
     {
         /** @var AbstractPlatform $databasePlatform */
-        $databasePlatform = $this->getMockForAbstractClass(AbstractPlatform::class);
+        $databasePlatform = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
 
         $this->container->expects($this->once())
                         ->method('getDatabasePlatform')
@@ -61,7 +61,7 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
     public function testAlreadyRegisteredEnumMapping()
     {
         /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatform */
-        $databasePlatform = $this->getMockForAbstractClass(AbstractPlatform::class);
+        $databasePlatform = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
         $databasePlatform->registerDoctrineTypeMapping('enum', 'string');
 
         $this->container->expects($this->once())
@@ -79,7 +79,7 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
     public function testEnumMappingReregistrationToString()
     {
         /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatform */
-        $databasePlatform = $this->getMockForAbstractClass(AbstractPlatform::class);
+        $databasePlatform = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
         $databasePlatform->registerDoctrineTypeMapping('enum', 'boolean');
 
         $this->container->expects($this->once())
