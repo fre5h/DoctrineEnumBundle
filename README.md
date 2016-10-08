@@ -31,7 +31,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 | Bundle Version (X.Y) | PHP     | Symfony            | Doctrine | Comment                                   |
 |:--------------------:|:-------:|:------------------:|:--------:|:------------------------------------------|
-| 4.6                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
+| 4.7                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
 | 3.3                  | >= 5.4  | >= 2.3 and <= 2.8  | >= 2.2   | Legacy version without support            |
 
 ### Register the bundle
@@ -46,18 +46,6 @@ public function registerBundles()
         new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
     ];
 }
-```
-
-### Update config.yml
-
-Add following lines for doctrine configuration in `config.yml` file:
-
-```yml
-# Doctrine Configuration
-doctrine:
-  dbal:
-    mapping_types:
-      enum: string
 ```
 
 ## Using
