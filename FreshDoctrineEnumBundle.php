@@ -24,6 +24,8 @@ class FreshDoctrineEnumBundle extends Bundle
      */
     public function boot()
     {
+        parent::boot();
+
         $databasePlatform = $this->container->get('doctrine.dbal.default_connection')->getDatabasePlatform();
 
         if (!$databasePlatform->hasDoctrineTypeMappingFor('enum') || 'string' !== $databasePlatform->getDoctrineTypeMapping('enum')) {
