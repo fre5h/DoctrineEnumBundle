@@ -19,4 +19,17 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class FreshDoctrineEnumBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function boot()
+    {
+        parent::boot();
+
+        $databasePlatform = $this->container->get('doctrine.dbal.default_connection')->getDatabasePlatform();
+
+        if (!$databasePlatform->hasDoctrineTypeMappingFor('enum') || 'string' !== $databasePlatform->getDoctrineTypeMapping('enum')) {
+            $databasePlatform->registerDoctrineTypeMapping('enum', 'string');
+        }
+    }
 }
