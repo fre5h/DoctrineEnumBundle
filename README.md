@@ -25,7 +25,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ### Add dependency via Composer
 
-```php composer.phar require fresh/doctrine-enum-bundle='~4.6'```
+```php composer.phar require fresh/doctrine-enum-bundle='~4.7'```
 
 ##### Choose the appropriate version if you need
 
