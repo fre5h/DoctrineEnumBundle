@@ -10,10 +10,10 @@
 
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
-use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
-use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\ConstantIsFoundInFewRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\ConstantIsNotFoundInAnyRegisteredEnumTypeException;
+use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
+use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
 
 /**
  * EnumConstantExtension.
