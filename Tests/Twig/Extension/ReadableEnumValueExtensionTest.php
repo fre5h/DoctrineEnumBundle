@@ -22,7 +22,7 @@ use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension;
 class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ReadableEnumValueExtension $readableEnumValueExtension ReadableEnumValueExtension
+     * @var ReadableEnumValueExtension
      */
     private $readableEnumValueExtension;
 

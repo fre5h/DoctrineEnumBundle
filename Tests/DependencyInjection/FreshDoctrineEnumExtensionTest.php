@@ -21,12 +21,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class FreshDoctrineEnumExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var FreshDoctrineEnumExtension $extension FreshDoctrineEnumExtension
+     * @var FreshDoctrineEnumExtension
      */
     private $extension;
 
     /**
-     * @var ContainerBuilder $container Container builder
+     * @var ContainerBuilder
      */
     private $container;
 

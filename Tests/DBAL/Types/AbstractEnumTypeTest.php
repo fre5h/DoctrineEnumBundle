@@ -31,7 +31,7 @@ use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AbstractEnumType $type Abstract EnumType
+     * @var AbstractEnumType
      */
     private $type;
 

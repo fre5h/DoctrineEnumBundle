@@ -21,7 +21,7 @@ use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantExtension;
 class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var EnumConstantExtension $enumConstantExtension EnumConstantExtension
+     * @var EnumConstantExtension
      */
     private $enumConstantExtension;
 

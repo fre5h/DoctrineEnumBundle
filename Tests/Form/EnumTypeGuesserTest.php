@@ -26,7 +26,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
 {
     public function testNullResultWhenClassMetadataNotFound()
     {
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject $enumTypeGuesser */
+        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
         $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
             ->disableOriginalConstructor()
             ->setMethods(['getMetadata'])
@@ -41,7 +41,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
 
     public function testNullResultWhenEnumTypeNotRegistered()
     {
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject $enumTypeGuesser */
+        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
         $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
                                 ->disableOriginalConstructor()
                                 ->setMethods(['getMetadata'])
@@ -77,7 +77,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject $enumTypeGuesser */
+        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
         $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])
@@ -110,7 +110,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject $enumTypeGuesser */
+        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
         $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])
@@ -143,7 +143,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject $enumTypeGuesser */
+        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
         $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])
