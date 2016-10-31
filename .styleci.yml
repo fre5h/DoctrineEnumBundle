@@ -1,0 +1,7 @@
+preset: symfony
+
+finder:
+    exclude:
+        - "Tests"
+    name:
+        - "*.php"
