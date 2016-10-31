@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 class Enum extends Choice
 {
     /**
-     * @var string $entity Entity
+     * @var string Entity
      */
     public $entity;
 

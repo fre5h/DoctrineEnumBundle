@@ -1,0 +1,13 @@
+preset: symfony
+
+enabled:
+  - combine_consecutive_unsets
+  - linebreak_after_opening_tag
+  - ordered_class_elements
+  - ordered_imports
+
+finder:
+    exclude:
+        - "Tests"
+    name:
+        - "*.php"

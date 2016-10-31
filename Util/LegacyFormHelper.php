@@ -15,7 +15,8 @@ use Symfony\Component\HttpKernel\Kernel;
 /**
  * LegacyFormHelper.
  *
- * This class based on LegacyFormHelper in FOSUserBundle:
+ * This class based on LegacyFormHelper in FOSUserBundle.
+ *
  * @see https://github.com/FriendsOfSymfony/FOSUserBundle/blob/c533a233b52c1d3843e816a35677561330ddbc74/Util/LegacyFormHelper.php
  *
  * @internal
@@ -29,7 +30,7 @@ final class LegacyFormHelper
     const MINIMUM_MAJOR_VERSION = 3;
 
     /**
-     * @var array $map Mapping form type classes to legacy form types
+     * @var array Mapping form type classes to legacy form types
      * @static
      */
     private static $map = [

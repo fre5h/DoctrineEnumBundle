@@ -29,12 +29,12 @@ use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 abstract class AbstractEnumType extends Type
 {
     /**
-     * @var string $name Name of this type
+     * @var string Name of this type
      */
     protected $name = '';
 
     /**
-     * @var array $choices Array of ENUM Values, where ENUM values are keys and their readable versions are values
+     * @var array Array of ENUM Values, where ENUM values are keys and their readable versions are values
      * @static
      */
     protected static $choices = [];
@@ -45,7 +45,7 @@ abstract class AbstractEnumType extends Type
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (null === $value) {
-            return null;
+            return;
         }
 
         if (!isset(static::$choices[$value])) {
