@@ -32,7 +32,7 @@
         "symfony/framework-bundle": "~2.6|~3.0",
         "symfony/http-kernel": "~2.6|~3.0",
         "symfony/validator": "~2.6|~3.0",
-        "twig/twig": "~1.13"
+        "twig/twig": "~1.26"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8",
