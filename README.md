@@ -26,13 +26,13 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ### Add dependency via Composer
 
-```php composer.phar require fresh/doctrine-enum-bundle='~4.7'```
+```php composer.phar require fresh/doctrine-enum-bundle='~4.8'```
 
 ##### Choose the appropriate version if you need
 
 | Bundle Version (X.Y) | PHP     | Symfony            | Doctrine | Comment                                   |
 |:--------------------:|:-------:|:------------------:|:--------:|:------------------------------------------|
-| 4.7                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
+| 4.8                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
 | 3.3                  | >= 5.4  | >= 2.3 and <= 2.8  | >= 2.2   | Legacy version without support            |
 
 ### Register the bundle
