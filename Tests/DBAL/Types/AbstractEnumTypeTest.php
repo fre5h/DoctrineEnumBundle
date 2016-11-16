@@ -114,6 +114,18 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
         $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
     }
 
+    public function testGetReadableValues()
+    {
+        $choices = [
+            'PG' => 'Point Guard',
+            'SG' => 'Shooting Guard',
+            'SF' => 'Small Forward',
+            'PF' => 'Power Forward',
+            'C'  => 'Center',
+        ];
+        $this->assertEquals($choices, $this->type->getReadableValues());
+    }
+
     public function testGetReadableValue()
     {
         $this->assertEquals('Small Forward', $this->type->getReadableValue(BasketballPositionType::SMALL_FORWARD));
