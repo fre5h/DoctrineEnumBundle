@@ -1,6 +1,6 @@
 <?php
-/**
- * This file is part of the InBasket API project
+/*
+ * This file is part of the FreshDoctrineEnumBundle
  *
  * (c) Artem Genvald <genvaldartem@gmail.com>
  *
@@ -60,7 +60,7 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
 
     public function testAlreadyRegisteredEnumMapping()
     {
-        /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatform */
+        /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject */
         $databasePlatform = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
         $databasePlatform->registerDoctrineTypeMapping('enum', 'string');
 
@@ -78,7 +78,7 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumMappingReregistrationToString()
     {
-        /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatform */
+        /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject */
         $databasePlatform = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
         $databasePlatform->registerDoctrineTypeMapping('enum', 'boolean');
 

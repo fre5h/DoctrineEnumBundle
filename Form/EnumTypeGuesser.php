@@ -27,7 +27,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 {
     /**
-     * @var AbstractEnumType[] $registeredEnumTypes Array of registered ENUM types
+     * @var AbstractEnumType[] Array of registered ENUM types
      */
     protected $registeredEnumTypes = [];
 
@@ -62,7 +62,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         // If no metadata for this class - can't guess anything
         if (!$classMetadata) {
-            return null;
+            return;
         }
 
         /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo $metadata */
@@ -71,7 +71,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         // This is not one of the registered ENUM types
         if (!isset($this->registeredEnumTypes[$fieldType])) {
-            return null;
+            return;
         }
 
         $registeredEnumTypeFQCN = $this->registeredEnumTypes[$fieldType];
@@ -87,12 +87,12 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
         $abstractEnumTypeFQCN = 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
 
         if (get_parent_class($registeredEnumTypeFQCN) !== $abstractEnumTypeFQCN) {
-            return null;
+            return;
         }
 
         // Get the choices from the fully qualified class name
         $parameters = [
-            'choices'  => $registeredEnumTypeFQCN::getChoices(),
+            'choices' => $registeredEnumTypeFQCN::getChoices(),
             'required' => !$metadata->isNullable($property),
         ];
 

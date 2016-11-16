@@ -23,12 +23,12 @@ use Symfony\Component\Validator\Context\ExecutionContext;
 class EnumValidatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var EnumValidator $enumValidator ENUM validator
+     * @var EnumValidator
      */
     private $enumValidator;
 
     /**
-     * @var ExecutionContext|\PHPUnit_Framework_MockObject_MockObject $context Context
+     * @var ExecutionContext|\PHPUnit_Framework_MockObject_MockObject
      */
     private $context;
 

@@ -21,12 +21,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class FreshDoctrineEnumExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var FreshDoctrineEnumExtension $extension FreshDoctrineEnumExtension
+     * @var FreshDoctrineEnumExtension
      */
     private $extension;
 
     /**
-     * @var ContainerBuilder $container Container builder
+     * @var ContainerBuilder
      */
     private $container;
 
@@ -44,7 +44,7 @@ class FreshDoctrineEnumExtensionTest extends \PHPUnit_Framework_TestCase
     {
         // Add some dummy required parameter and service
         $this->container->setParameter('doctrine.dbal.connection_factory.types', null);
-        $this->container->set('doctrine', new \StdClass());
+        $this->container->set('doctrine', new \stdClass());
 
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();

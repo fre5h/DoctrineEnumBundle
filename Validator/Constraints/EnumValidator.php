@@ -10,8 +10,8 @@
 
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
@@ -28,8 +28,6 @@ class EnumValidator extends ChoiceValidator
      * @param Constraint $constraint The constraint for the validation
      *
      * @throws ConstraintDefinitionException
-     *
-     * @return void
      */
     public function validate($value, Constraint $constraint)
     {

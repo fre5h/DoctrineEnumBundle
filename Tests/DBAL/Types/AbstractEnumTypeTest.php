@@ -31,7 +31,7 @@ use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AbstractEnumType $type Abstract EnumType
+     * @var AbstractEnumType
      */
     private $type;
 
@@ -112,6 +112,18 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     public function testInvalidArgumentExceptionInConvertToDatabaseValue()
     {
         $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
+    }
+
+    public function testGetReadableValues()
+    {
+        $choices = [
+            'PG' => 'Point Guard',
+            'SG' => 'Shooting Guard',
+            'SF' => 'Small Forward',
+            'PF' => 'Power Forward',
+            'C'  => 'Center',
+        ];
+        $this->assertEquals($choices, $this->type->getReadableValues());
     }
 
     public function testGetReadableValue()
