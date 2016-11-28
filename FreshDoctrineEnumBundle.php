@@ -26,10 +26,12 @@ class FreshDoctrineEnumBundle extends Bundle
     {
         parent::boot();
 
-        $databasePlatform = $this->container->get('doctrine.dbal.default_connection')->getDatabasePlatform();
+        if ($this->container->has('doctrine.dbal.default_connection')) {
+            $databasePlatform = $this->container->get('doctrine.dbal.default_connection')->getDatabasePlatform();
 
-        if (!$databasePlatform->hasDoctrineTypeMappingFor('enum') || 'string' !== $databasePlatform->getDoctrineTypeMapping('enum')) {
-            $databasePlatform->registerDoctrineTypeMapping('enum', 'string');
+            if (!$databasePlatform->hasDoctrineTypeMappingFor('enum') || 'string' !== $databasePlatform->getDoctrineTypeMapping('enum')) {
+                $databasePlatform->registerDoctrineTypeMapping('enum', 'string');
+            }
         }
     }
 }
