@@ -15,7 +15,6 @@ use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
-use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 
 /**
  * AbstractEnumType.
@@ -29,7 +28,7 @@ use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 abstract class AbstractEnumType extends Type
 {
     /**
-     * @var string Name of this type
+     * @var string
      */
     protected $name = '';
 
@@ -106,11 +105,6 @@ abstract class AbstractEnumType extends Type
      */
     public static function getChoices()
     {
-        // Compatibility with Symfony <3.0
-        if (LegacyFormHelper::isLegacy()) {
-            return static::$choices;
-        }
-
         return array_flip(static::$choices);
     }
 

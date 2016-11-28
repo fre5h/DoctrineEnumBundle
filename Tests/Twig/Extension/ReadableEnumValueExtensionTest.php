@@ -26,14 +26,11 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
      */
     private $readableEnumValueExtension;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp()
     {
         $this->readableEnumValueExtension = new ReadableEnumValueExtension([
-            'BasketballPositionType' => ['class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType'],
-            'MapLocationType'        => ['class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType'],
+            'BasketballPositionType' => ['class' => BasketballPositionType::class],
+            'MapLocationType' => ['class' => MapLocationType::class],
         ]);
     }
 
@@ -44,11 +41,6 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
                 new \Twig_SimpleFilter(
                     'readable_enum',
                     [$this->readableEnumValueExtension, 'getReadableEnumValue']
-                ),
-                new \Twig_SimpleFilter(
-                    'readable',
-                    [$this->readableEnumValueExtension, 'getReadableEnumValue'],
-                    ['deprecated' => true, 'alternative' => 'readable_enum']
                 ),
             ],
             $this->readableEnumValueExtension->getFilters()

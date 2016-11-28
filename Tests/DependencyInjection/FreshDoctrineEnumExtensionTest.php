@@ -20,19 +20,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class FreshDoctrineEnumExtensionTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var FreshDoctrineEnumExtension
-     */
+    /** @var FreshDoctrineEnumExtension */
     private $extension;
 
-    /**
-     * @var ContainerBuilder
-     */
+    /** @var ContainerBuilder */
     private $container;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp()
     {
         $this->extension = new FreshDoctrineEnumExtension();

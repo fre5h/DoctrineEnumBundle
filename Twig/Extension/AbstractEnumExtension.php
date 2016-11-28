@@ -13,26 +13,24 @@ namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * BaseEnumExtension.
+ * AbstractEnumExtension.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
 abstract class AbstractEnumExtension extends \Twig_Extension
 {
     /**
-     * @var AbstractEnumType[] Array of registered ENUM types
+     * @var AbstractEnumType[]
      */
     protected $registeredEnumTypes = [];
 
     /**
-     * Constructor.
-     *
-     * @param array $registeredTypes Array of registered ENUM types
+     * @param array $registeredTypes
      */
     public function __construct(array $registeredTypes)
     {
         foreach ($registeredTypes as $type => $details) {
-            if (is_subclass_of($details['class'], '\Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType')) {
+            if (is_subclass_of($details['class'], AbstractEnumType::class)) {
                 $this->registeredEnumTypes[$type] = $details['class'];
             }
         }

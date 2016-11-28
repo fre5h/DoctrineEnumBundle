@@ -14,6 +14,7 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
 use Symfony\Component\Validator\Context\ExecutionContext;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 /**
  * EnumValidatorTest.
@@ -32,14 +33,11 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
      */
     private $context;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp()
     {
         $this->enumValidator = new EnumValidator();
 
-        $this->context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContext')
+        $this->context = $this->getMockBuilder(ExecutionContext::class)
                               ->disableOriginalConstructor()
                               ->getMock();
     }
@@ -59,7 +57,7 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidBasketballPositionType()
     {
         $constraint = new Enum([
-            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
+            'entity' => BasketballPositionType::class,
         ]);
 
         $this->context->expects($this->never())
@@ -72,10 +70,10 @@ class EnumValidatorTest extends \PHPUnit_Framework_TestCase
     public function testInvalidBasketballPositionType()
     {
         $constraint = new Enum([
-            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
+            'entity' => BasketballPositionType::class,
         ]);
 
-        $constraintValidationBuilder = $this->getMockBuilder('Symfony\Component\Validator\Violation\ConstraintViolationBuilder')
+        $constraintValidationBuilder = $this->getMockBuilder(ConstraintViolationBuilder::class)
                                             ->disableOriginalConstructor()
                                             ->getMock();
 

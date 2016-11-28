@@ -18,15 +18,13 @@ use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
-use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
 
 /**
  * AbstractEnumTypeTest.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Ben Davies    <ben.davies@gmail.com>
- *
- * @coversDefaultClass \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType
  */
 class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,24 +33,20 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
      */
     private $type;
 
-    /**
-     * {@inheritdoc}
-     */
     public static function setUpBeforeClass()
     {
-        Type::addType(
-            'BasketballPositionType',
-            '\Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType'
-        );
-        Type::addType('StubType', '\Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType');
+        Type::addType('BasketballPositionType', BasketballPositionType::class);
+        Type::addType('StubType', StubType::class);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp()
     {
         $this->type = Type::getType('BasketballPositionType');
+    }
+
+    protected function tearDown()
+    {
+        unset($this->type);
     }
 
     /**
@@ -121,7 +115,7 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
             'SG' => 'Shooting Guard',
             'SF' => 'Small Forward',
             'PF' => 'Power Forward',
-            'C'  => 'Center',
+            'C' => 'Center',
         ];
         $this->assertEquals($choices, $this->type->getReadableValues());
     }
@@ -141,23 +135,13 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetChoices()
     {
-        if (LegacyFormHelper::isLegacy()) {
-            $choices = [
-                'PG' => 'Point Guard',
-                'SG' => 'Shooting Guard',
-                'SF' => 'Small Forward',
-                'PF' => 'Power Forward',
-                'C'  => 'Center',
-            ];
-        } else {
-            $choices = [
-                'Point Guard'    => 'PG',
-                'Shooting Guard' => 'SG',
-                'Small Forward'  => 'SF',
-                'Power Forward'  => 'PF',
-                'Center'         => 'C',
-            ];
-        }
+        $choices = [
+            'Point Guard' => 'PG',
+            'Shooting Guard' => 'SG',
+            'Small Forward' => 'SF',
+            'Power Forward' => 'PF',
+            'Center' => 'C',
+        ];
 
         $this->assertEquals($choices, $this->type->getChoices());
     }

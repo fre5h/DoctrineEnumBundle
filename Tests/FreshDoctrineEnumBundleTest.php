@@ -11,6 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
 use Symfony\Component\DependencyInjection\Container;
@@ -30,12 +31,12 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->container = $this->getMockBuilder('Symfony\Component\DependencyInjection\Container')
+        $this->container = $this->getMockBuilder(Container::class)
                                 ->disableOriginalConstructor()
                                 ->setMethods(['get'])
                                 ->getMock();
 
-        $this->doctrine = $this->getMockBuilder('Doctrine\Bundle\DoctrineBundle\Registry')
+        $this->doctrine = $this->getMockBuilder(Registry::class)
                                ->disableOriginalConstructor()
                                ->setMethods(['getConnections'])
                                ->getMock();
@@ -59,10 +60,10 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
          * @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformAbc
          * @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformDef
          */
-        $databasePlatformAbc = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
-        $databasePlatformDef = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
+        $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
+        $databasePlatformDef = $this->getMockForAbstractClass(AbstractPlatform::class);
 
-        $connectionAbc = $this->getMockBuilder('Doctrine\DBAL\Connection')
+        $connectionAbc = $this->getMockBuilder(Connection::class)
                               ->disableOriginalConstructor()
                               ->setMethods(['getDatabasePlatform'])
                               ->getMock();
@@ -71,7 +72,7 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
                       ->method('getDatabasePlatform')
                       ->willReturn($databasePlatformAbc);
 
-        $connectionDef = $this->getMockBuilder('Doctrine\DBAL\Connection')
+        $connectionDef = $this->getMockBuilder(Connection::class)
                               ->disableOriginalConstructor()
                               ->setMethods(['getDatabasePlatform'])
                               ->getMock();
@@ -80,7 +81,8 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
                       ->method('getDatabasePlatform')
                       ->willReturn($databasePlatformDef);
 
-        $this->doctrine->method('getConnections')
+        $this->doctrine->expects($this->once())
+                       ->method('getConnections')
                        ->willReturn([$connectionAbc, $connectionDef]);
 
         $bundle = new FreshDoctrineEnumBundle();
@@ -97,9 +99,9 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
     public function testAlreadyRegisteredEnumMapping()
     {
         /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformAbc */
-        $databasePlatformAbc = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
+        $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
-        $connectionAbc = $this->getMockBuilder('Doctrine\DBAL\Connection')
+        $connectionAbc = $this->getMockBuilder(Connection::class)
                               ->disableOriginalConstructor()
                               ->setMethods(['getDatabasePlatform'])
                               ->getMock();
@@ -108,7 +110,8 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
                       ->method('getDatabasePlatform')
                       ->willReturn($databasePlatformAbc);
 
-        $this->doctrine->method('getConnections')
+        $this->doctrine->expects($this->once())
+                       ->method('getConnections')
                        ->willReturn([$connectionAbc]);
 
         $databasePlatformAbc->registerDoctrineTypeMapping('enum', 'string');
@@ -124,9 +127,9 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
     public function testEnumMappingReregistrationToString()
     {
         /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformAbc */
-        $databasePlatformAbc = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
+        $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
-        $connectionAbc = $this->getMockBuilder('Doctrine\DBAL\Connection')
+        $connectionAbc = $this->getMockBuilder(Connection::class)
                               ->disableOriginalConstructor()
                               ->setMethods(['getDatabasePlatform'])
                               ->getMock();
@@ -135,7 +138,8 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
                       ->method('getDatabasePlatform')
                       ->willReturn($databasePlatformAbc);
 
-        $this->doctrine->method('getConnections')
+        $this->doctrine->expects($this->once())
+                       ->method('getConnections')
                        ->willReturn([$connectionAbc]);
 
         $databasePlatformAbc->registerDoctrineTypeMapping('enum', 'boolean');

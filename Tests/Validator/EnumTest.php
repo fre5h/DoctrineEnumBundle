@@ -23,7 +23,7 @@ class EnumTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $constraint = new Enum([
-            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
+            'entity' => BasketballPositionType::class,
         ]);
 
         $this->assertEquals(BasketballPositionType::getValues(), $constraint->choices);
@@ -42,7 +42,7 @@ class EnumTest extends \PHPUnit_Framework_TestCase
     public function testGetRequiredOptions()
     {
         $constraint = new Enum([
-            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
+            'entity' => BasketballPositionType::class,
         ]);
 
         $this->assertEquals(['entity'], $constraint->getRequiredOptions());
@@ -51,7 +51,7 @@ class EnumTest extends \PHPUnit_Framework_TestCase
     public function testGetDefaultOption()
     {
         $constraint = new Enum([
-            'entity' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
+            'entity' => BasketballPositionType::class,
         ]);
 
         $this->assertEquals('choices', $constraint->getDefaultOption());

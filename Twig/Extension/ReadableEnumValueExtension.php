@@ -32,19 +32,12 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
                 'readable_enum',
                 [$this, 'getReadableEnumValue']
             ),
-            new \Twig_SimpleFilter(
-                'readable',
-                [$this, 'getReadableEnumValue'],
-                ['deprecated' => true, 'alternative' => 'readable_enum']
-            ),
         ];
     }
 
     /**
-     * Get readable variant of the ENUM value.
-     *
-     * @param string      $enumValue ENUM value
-     * @param string|null $enumType  ENUM type
+     * @param string      $enumValue
+     * @param string|null $enumType
      *
      * @return string
      *
@@ -77,11 +70,11 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
                 }
 
                 // If found only one occurrence, then we know exactly which ENUM type
-                if (count($occurrences) == 1) {
+                if (1 == count($occurrences)) {
                     $enumTypeClass = array_pop($occurrences);
 
                     return $enumTypeClass::getReadableValue($enumValue);
-                } elseif (count($occurrences) > 1) {
+                } elseif (1 < count($occurrences)) {
                     throw new ValueIsFoundInFewRegisteredEnumTypesException(sprintf(
                         'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
                         $enumValue

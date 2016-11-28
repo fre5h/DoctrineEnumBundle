@@ -271,8 +271,6 @@ So, the correct usage of `|readable_enum` filter in this case should be with add
 {{ location_on_the_map|readable_enum('MapLocationType') }}
 ```
 
-> In previous versions `|readable_enum` filter was known as `|readable`. But since version 4.5 `|readable` is deprecated and will be removed in version 5.0, so use `|readable_enum` instead.
-
 ##### ENUM constants in templates
 
 There is also another custom TWIG filter `|enum_constant`. It allows to use constants from ENUM classes in templates to print their values or to compare with other values.
