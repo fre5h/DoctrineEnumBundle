@@ -10,6 +10,7 @@
 
 namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
 use Symfony\Component\DependencyInjection\Container;
@@ -24,107 +25,126 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
     /** @var Container|\PHPUnit_Framework_MockObject_MockObject */
     private $container;
 
-    /** @@var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject */
-    private $databasePlatform;
+    /** @@var Registry|\PHPUnit_Framework_MockObject_MockObject */
+    private $doctrine;
 
     protected function setUp()
     {
         $this->container = $this->getMockBuilder('Symfony\Component\DependencyInjection\Container')
                                 ->disableOriginalConstructor()
-                                ->setMethods(['has', 'get', 'getDatabasePlatform'])
+                                ->setMethods(['get'])
                                 ->getMock();
 
-        $this->container->expects($this->any())
-                        ->method('get')
-                        ->will($this->returnSelf());
+        $this->doctrine = $this->getMockBuilder('Doctrine\Bundle\DoctrineBundle\Registry')
+                               ->disableOriginalConstructor()
+                               ->setMethods(['getConnections'])
+                               ->getMock();
 
-        $this->databasePlatform = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
+        $this->container->expects($this->once())
+                        ->method('get')
+                        ->with('doctrine')
+                        ->willReturn($this->doctrine);
+
     }
 
     protected function tearDown()
     {
         unset($this->container);
-        unset($this->databasePlatform);
+        unset($this->doctrine);
     }
 
     public function testEnumMappingRegistration()
     {
-        $this->container->expects($this->once())
-                        ->method('has')
-                        ->with('doctrine.dbal.default_connection')
-                        ->willReturn(true);
+        /**
+         * @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformAbc
+         * @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformDef
+         */
+        $databasePlatformAbc = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
+        $databasePlatformDef = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
 
-        $this->container->expects($this->once())
-                        ->method('getDatabasePlatform')
-                        ->willReturn($this->databasePlatform);
+        $connectionAbc = $this->getMockBuilder('Doctrine\DBAL\Connection')
+                              ->disableOriginalConstructor()
+                              ->setMethods(['getDatabasePlatform'])
+                              ->getMock();
+
+        $connectionAbc->expects($this->once())
+                      ->method('getDatabasePlatform')
+                      ->willReturn($databasePlatformAbc);
+
+        $connectionDef = $this->getMockBuilder('Doctrine\DBAL\Connection')
+                              ->disableOriginalConstructor()
+                              ->setMethods(['getDatabasePlatform'])
+                              ->getMock();
+
+        $connectionDef->expects($this->once())
+                      ->method('getDatabasePlatform')
+                      ->willReturn($databasePlatformDef);
+
+        $this->doctrine->method('getConnections')
+                       ->willReturn([$connectionAbc, $connectionDef]);
 
         $bundle = new FreshDoctrineEnumBundle();
         $bundle->setContainer($this->container);
         $bundle->boot();
 
-        $this->assertTrue($this->databasePlatform->hasDoctrineTypeMappingFor('enum'));
-        $this->assertEquals('string', $this->databasePlatform->getDoctrineTypeMapping('enum'));
+        $this->assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
+        $this->assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
+
+        $this->assertTrue($databasePlatformDef->hasDoctrineTypeMappingFor('enum'));
+        $this->assertEquals('string', $databasePlatformDef->getDoctrineTypeMapping('enum'));
     }
 
     public function testAlreadyRegisteredEnumMapping()
     {
-        $this->databasePlatform->registerDoctrineTypeMapping('enum', 'string');
+        /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformAbc */
+        $databasePlatformAbc = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
 
-        $this->container->expects($this->once())
-                        ->method('has')
-                        ->with('doctrine.dbal.default_connection')
-                        ->willReturn(true);
+        $connectionAbc = $this->getMockBuilder('Doctrine\DBAL\Connection')
+                              ->disableOriginalConstructor()
+                              ->setMethods(['getDatabasePlatform'])
+                              ->getMock();
 
-        $this->container->expects($this->once())
-                        ->method('getDatabasePlatform')
-                        ->willReturn($this->databasePlatform);
+        $connectionAbc->expects($this->once())
+                      ->method('getDatabasePlatform')
+                      ->willReturn($databasePlatformAbc);
+
+        $this->doctrine->method('getConnections')
+                       ->willReturn([$connectionAbc]);
+
+        $databasePlatformAbc->registerDoctrineTypeMapping('enum', 'string');
 
         $bundle = new FreshDoctrineEnumBundle();
         $bundle->setContainer($this->container);
         $bundle->boot();
 
-        $this->assertTrue($this->databasePlatform->hasDoctrineTypeMappingFor('enum'));
-        $this->assertEquals('string', $this->databasePlatform->getDoctrineTypeMapping('enum'));
+        $this->assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
+        $this->assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
     }
 
     public function testEnumMappingReregistrationToString()
     {
-        $this->databasePlatform->registerDoctrineTypeMapping('enum', 'boolean');
+        /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformAbc */
+        $databasePlatformAbc = $this->getMockForAbstractClass('Doctrine\DBAL\Platforms\AbstractPlatform');
 
-        $this->container->expects($this->once())
-                        ->method('has')
-                        ->with('doctrine.dbal.default_connection')
-                        ->willReturn(true);
+        $connectionAbc = $this->getMockBuilder('Doctrine\DBAL\Connection')
+                              ->disableOriginalConstructor()
+                              ->setMethods(['getDatabasePlatform'])
+                              ->getMock();
 
-        $this->container->expects($this->once())
-                        ->method('getDatabasePlatform')
-                        ->willReturn($this->databasePlatform);
+        $connectionAbc->expects($this->once())
+                      ->method('getDatabasePlatform')
+                      ->willReturn($databasePlatformAbc);
 
-        $bundle = new FreshDoctrineEnumBundle();
-        $bundle->setContainer($this->container);
-        $bundle->boot();
+        $this->doctrine->method('getConnections')
+                       ->willReturn([$connectionAbc]);
 
-        $this->assertTrue($this->databasePlatform->hasDoctrineTypeMappingFor('enum'));
-        $this->assertEquals('string', $this->databasePlatform->getDoctrineTypeMapping('enum'));
-    }
-
-    public function testEnumMappingForRenamedDefaultConnection()
-    {
-        $this->container->expects($this->once())
-                        ->method('has')
-                        ->with('doctrine.dbal.default_connection')
-                        ->willReturn(false);
-
-        $this->container->expects($this->never())
-                        ->method('getDatabasePlatform')
-                        ->willReturn($this->databasePlatform);
+        $databasePlatformAbc->registerDoctrineTypeMapping('enum', 'boolean');
 
         $bundle = new FreshDoctrineEnumBundle();
         $bundle->setContainer($this->container);
         $bundle->boot();
 
-        $this->assertFalse($this->databasePlatform->hasDoctrineTypeMappingFor('enum'));
-        $this->expectException('Doctrine\DBAL\DBALException');
-        $this->assertEquals('string', $this->databasePlatform->getDoctrineTypeMapping('enum'));
+        $this->assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
+        $this->assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
     }
 }

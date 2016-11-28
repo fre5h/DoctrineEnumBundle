@@ -10,6 +10,8 @@
 
 namespace Fresh\DoctrineEnumBundle;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\DBAL\Connection;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -26,8 +28,12 @@ class FreshDoctrineEnumBundle extends Bundle
     {
         parent::boot();
 
-        if ($this->container->has('doctrine.dbal.default_connection')) {
-            $databasePlatform = $this->container->get('doctrine.dbal.default_connection')->getDatabasePlatform();
+        /** @var Registry $doctrine */
+        $doctrine = $this->container->get('doctrine');
+
+        foreach ($doctrine->getConnections() as $connection) {
+            /** @var Connection $connection */
+            $databasePlatform = $connection->getDatabasePlatform();
 
             if (!$databasePlatform->hasDoctrineTypeMappingFor('enum') || 'string' !== $databasePlatform->getDoctrineTypeMapping('enum')) {
                 $databasePlatform->registerDoctrineTypeMapping('enum', 'string');
