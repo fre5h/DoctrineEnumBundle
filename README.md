@@ -30,10 +30,10 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ##### Choose the appropriate version if you need
 
-| Bundle Version (X.Y.Z) | PHP     | Symfony            | Doctrine | Comment                                    |
-|:----------------------:|:-------:|:------------------:|:--------:|:-------------------------------------------|
-| 5.0.*                  | >= 5.6  | >= 3.1             | >= 2.5   | Actual version                             |
-| 4.8.*                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Legacy version, support only for bug fixes |
+| Bundle Version (X.Y.Z) | PHP     | Symfony            | Doctrine | Comment        |
+|:----------------------:|:-------:|:------------------:|:--------:|:---------------|
+| 5.0.*                  | >= 5.6  | >= 3.2             | >= 2.5   | Actual version |
+| 4.8.*                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Legacy version |
 
 ### Register the bundle
 
@@ -59,7 +59,7 @@ In this example will be shown how to create custom ENUM field for basketball pos
 * `SG` - Shooting Guard
 * `SF` - Small Forward
 * `PF` - Power Forward
-* `C`  - Center
+* `C` - Center
 
 Create a class for new ENUM type `BasketballPositionType`:
 
