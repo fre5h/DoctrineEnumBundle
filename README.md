@@ -215,13 +215,13 @@ BasketballPositionType::isValueExist('Pitcher'); // false
 If you need to get value in readable format:
 
 ```php
-BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD); // Output: Shooting Guard
+BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD); // Will return: Shooting Guard
 ```
 
 If you need to get value in readable format:
 
 ```php
-BasketballPositionType::getValues(); // Output an array: ['PG', 'SG', 'SF', 'PF', 'C']
+BasketballPositionType::getValues(); // Will return: ['PG', 'SG', 'SF', 'PF', 'C']
 ```
 
 ##### Readable ENUM values in templates
