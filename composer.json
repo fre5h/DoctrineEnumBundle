@@ -23,7 +23,7 @@
     },
     "require": {
         "php": ">=5.6.0",
-        "doctrine/common": "~2.7",
+        "doctrine/common": "~2.6",
         "doctrine/dbal": "~2.5",
         "symfony/config": "~3.2",
         "symfony/dependency-injection": "~3.2",
