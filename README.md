@@ -191,20 +191,10 @@ $builder->add('position', null, [
 
 If for some reason you need to specify full config, it can look like this:
 
-###### Symfony >= 3.0
-
 ```php
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 $builder->add('position', ChoiceType::class, [
-    'choices' => BasketballPositionType::getChoices()
-]);
-```
-
-###### Symfony < 3.0
-
-```php
-$builder->add('position', 'choice', [
     'choices' => BasketballPositionType::getChoices()
 ]);
 ```
@@ -225,15 +215,13 @@ BasketballPositionType::isValueExist('Pitcher'); // false
 If you need to get value in readable format:
 
 ```php
-BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD);
-// Will output: Shooting Guard
+BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD); // Output: Shooting Guard
 ```
 
 If you need to get value in readable format:
 
 ```php
-BasketballPositionType::getValues();
-// Will output an array: ['PG', 'SG', 'SF', 'PF', 'C']
+BasketballPositionType::getValues(); // Output an array: ['PG', 'SG', 'SF', 'PF', 'C']
 ```
 
 ##### Readable ENUM values in templates
