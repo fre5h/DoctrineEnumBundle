@@ -31,10 +31,8 @@ class EnumConstantExtension extends AbstractEnumExtension
     }
 
     /**
-     * Get value of the ENUM constant.
-     *
-     * @param string      $enumConstant ENUM constant
-     * @param string|null $enumType     ENUM type
+     * @param string      $enumConstant
+     * @param string|null $enumType
      *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
@@ -65,11 +63,11 @@ class EnumConstantExtension extends AbstractEnumExtension
                 }
 
                 // If found only one occurrence, then we know exactly which ENUM type
-                if (count($occurrences) == 1) {
+                if (1 == count($occurrences)) {
                     $enumClassName = array_pop($occurrences);
 
                     return constant($enumClassName.'::'.$enumConstant);
-                } elseif (count($occurrences) > 1) {
+                } elseif (1 < count($occurrences)) {
                     throw new ConstantIsFoundInFewRegisteredEnumTypesException(sprintf(
                         'Constant "%s" is found in few registered ENUM types. You should manually set the appropriate one.',
                         $enumConstant

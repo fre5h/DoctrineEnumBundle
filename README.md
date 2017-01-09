@@ -26,14 +26,14 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ### Add dependency via Composer
 
-```php composer.phar require fresh/doctrine-enum-bundle='~4.8'```
+```php composer.phar require fresh/doctrine-enum-bundle='~5.0'```
 
 ##### Choose the appropriate version if you need
 
-| Bundle Version (X.Y) | PHP     | Symfony            | Doctrine | Comment                                   |
-|:--------------------:|:-------:|:------------------:|:--------:|:------------------------------------------|
-| 4.8                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Actual version                            |
-| 3.3                  | >= 5.4  | >= 2.3 and <= 2.8  | >= 2.2   | Legacy version without support            |
+| Bundle Version (X.Y.Z) | PHP     | Symfony            | Doctrine | Comment        |
+|:----------------------:|:-------:|:------------------:|:--------:|:---------------|
+| 5.0.*                  | >= 5.6  | >= 3.2             | >= 2.5   | Actual version |
+| 4.8.*                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Legacy version |
 
 ### Register the bundle
 
@@ -59,7 +59,7 @@ In this example will be shown how to create custom ENUM field for basketball pos
 * `SG` - Shooting Guard
 * `SF` - Small Forward
 * `PF` - Power Forward
-* `C`  - Center
+* `C` - Center
 
 Create a class for new ENUM type `BasketballPositionType`:
 
@@ -71,18 +71,18 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 final class BasketballPositionType extends AbstractEnumType
 {
-    const POINT_GUARD    = 'PG';
+    const POINT_GUARD = 'PG';
     const SHOOTING_GUARD = 'SG';
-    const SMALL_FORWARD  = 'SF';
-    const POWER_FORWARD  = 'PF';
-    const CENTER         = 'C';
+    const SMALL_FORWARD = 'SF';
+    const POWER_FORWARD = 'PF';
+    const CENTER = 'C';
 
     protected static $choices = [
-        self::POINT_GUARD    => 'Point Guard',
+        self::POINT_GUARD => 'Point Guard',
         self::SHOOTING_GUARD => 'Shooting Guard',
-        self::SMALL_FORWARD  => 'Small Forward',
-        self::POWER_FORWARD  => 'Power Forward',
-        self::CENTER         => 'Center'
+        self::SMALL_FORWARD => 'Small Forward',
+        self::POWER_FORWARD => 'Power Forward',
+        self::CENTER => 'Center'
     ];
 }
 ```
@@ -183,7 +183,7 @@ If you need to add some extra parameters, just skip the second *field type* para
 ```php
 $builder->add('position', null, [
     'required' => true,
-    'attr'     => [
+    'attr' => [
         'class' => 'some-class'
     ]
 ]);
@@ -270,8 +270,6 @@ So, the correct usage of `|readable_enum` filter in this case should be with add
 {{ player_position|readable_enum('BasketballPositionType') }}
 {{ location_on_the_map|readable_enum('MapLocationType') }}
 ```
-
-> In previous versions `|readable_enum` filter was known as `|readable`. But since version 4.5 `|readable` is deprecated and will be removed in version 5.0, so use `|readable_enum` instead.
 
 ##### ENUM constants in templates
 

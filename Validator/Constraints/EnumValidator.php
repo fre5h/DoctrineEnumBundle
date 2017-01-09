@@ -22,10 +22,8 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 class EnumValidator extends ChoiceValidator
 {
     /**
-     * Checks if the passed value is valid.
-     *
-     * @param mixed      $value      The value that should be validated
-     * @param Constraint $constraint The constraint for the validation
+     * @param mixed      $value
+     * @param Constraint $constraint
      *
      * @throws ConstraintDefinitionException
      */

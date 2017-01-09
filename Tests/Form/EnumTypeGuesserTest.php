@@ -10,10 +10,12 @@
 
 namespace Fresh\DoctrineEnumBundle\Tests\DForm;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NotAChildType;
-use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 
@@ -27,7 +29,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
     public function testNullResultWhenClassMetadataNotFound()
     {
         /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
-        $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
+        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
             ->disableOriginalConstructor()
             ->setMethods(['getMetadata'])
             ->getMock();
@@ -36,18 +38,18 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
             ->method('getMetadata')
             ->willReturn(null);
 
-        $this->assertNull($enumTypeGuesser->guessType('\stdClass', 'position'));
+        $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     public function testNullResultWhenEnumTypeNotRegistered()
     {
         /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
-        $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
+        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
                                 ->disableOriginalConstructor()
                                 ->setMethods(['getMetadata'])
                                 ->getMock();
 
-        $metadata = $this->getMockBuilder('\Doctrine\ORM\Mapping\ClassMetadataInfo')
+        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
             ->disableOriginalConstructor()
             ->setMethods(['getTypeOfField'])
             ->getMock();
@@ -60,7 +62,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
                         ->method('getMetadata')
                         ->willReturn([$metadata]);
 
-        $this->assertNull($enumTypeGuesser->guessType('\stdClass', 'position'));
+        $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     /**
@@ -68,7 +70,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionWhenClassDoesNotExist()
     {
-        $managerRegistry = $this->getMockBuilder('\Doctrine\Common\Persistence\ManagerRegistry')
+        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
@@ -78,12 +80,12 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
         ];
 
         /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
-        $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
+        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])
                                 ->getMock();
 
-        $metadata = $this->getMockBuilder('\Doctrine\ORM\Mapping\ClassMetadataInfo')
+        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
                          ->disableOriginalConstructor()
                          ->setMethods(['getTypeOfField'])
                          ->getMock();
@@ -96,27 +98,27 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
                         ->method('getMetadata')
                         ->willReturn([$metadata]);
 
-        $this->assertNull($enumTypeGuesser->guessType('\stdClass', 'position'));
+        $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     public function testNullResultWhenIsNotChildOfAbstractEnumType()
     {
-        $managerRegistry = $this->getMockBuilder('\Doctrine\Common\Persistence\ManagerRegistry')
+        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
             'NotAChildType' => [
-                'class' => '\Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NotAChildType',
+                'class' => NotAChildType::class,
             ]
         ];
 
         /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
-        $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
+        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])
                                 ->getMock();
 
-        $metadata = $this->getMockBuilder('\Doctrine\ORM\Mapping\ClassMetadataInfo')
+        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
                          ->disableOriginalConstructor()
                          ->setMethods(['getTypeOfField'])
                          ->getMock();
@@ -129,27 +131,27 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
                         ->method('getMetadata')
                         ->willReturn([$metadata]);
 
-        $this->assertNull($enumTypeGuesser->guessType('\stdClass', 'position'));
+        $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     public function testSuccessfulTypeGuessing()
     {
-        $managerRegistry = $this->getMockBuilder('\Doctrine\Common\Persistence\ManagerRegistry')
+        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
             'BasketballPositionType' => [
-                'class' => '\Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType',
+                'class' => BasketballPositionType::class,
             ]
         ];
 
         /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
-        $enumTypeGuesser = $this->getMockBuilder('\Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser')
+        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])
                                 ->getMock();
 
-        $metadata = $this->getMockBuilder('\Doctrine\ORM\Mapping\ClassMetadataInfo')
+        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
                          ->disableOriginalConstructor()
                          ->setMethods(['getTypeOfField', 'isNullable'])
                          ->getMock();
@@ -167,14 +169,14 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
                         ->willReturn([$metadata]);
 
         $typeGuess = new TypeGuess(
-            LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\ChoiceType'),
+            ChoiceType::class,
             [
-                'choices'  => BasketballPositionType::getChoices(),
+                'choices' => BasketballPositionType::getChoices(),
                 'required' => false,
             ],
             Guess::VERY_HIGH_CONFIDENCE
         );
 
-        $this->assertEquals($typeGuess, $enumTypeGuesser->guessType('\stdClass', 'position'));
+        $this->assertEquals($typeGuess, $enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 }

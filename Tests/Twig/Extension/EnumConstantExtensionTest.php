@@ -11,6 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantExtension;
 
 /**
@@ -20,19 +21,14 @@ use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantExtension;
  */
 class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var EnumConstantExtension
-     */
+    /** @var EnumConstantExtension */
     private $enumConstantExtension;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp()
     {
         $this->enumConstantExtension = new EnumConstantExtension([
-            'BasketballPositionType' => ['class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType'],
-            'MapLocationType'        => ['class' => 'Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType'],
+            'BasketballPositionType' => ['class' => BasketballPositionType::class],
+            'MapLocationType' => ['class' => MapLocationType::class],
         ]);
     }
 

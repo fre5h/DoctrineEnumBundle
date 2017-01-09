@@ -13,8 +13,8 @@ namespace Fresh\DoctrineEnumBundle\Form;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
-use Fresh\DoctrineEnumBundle\Util\LegacyFormHelper;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 
@@ -27,15 +27,13 @@ use Symfony\Component\Form\Guess\TypeGuess;
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 {
     /**
-     * @var AbstractEnumType[] Array of registered ENUM types
+     * @var AbstractEnumType[]
      */
     protected $registeredEnumTypes = [];
 
     /**
-     * Constructor.
-     *
-     * @param ManagerRegistry $registry        Registry
-     * @param array           $registeredTypes Array of registered ENUM types
+     * @param ManagerRegistry $registry
+     * @param array           $registeredTypes
      */
     public function __construct(ManagerRegistry $registry, array $registeredTypes)
     {
@@ -47,12 +45,10 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     }
 
     /**
-     * Returns a field guess for a property name of a class.
+     * @param string $class
+     * @param string $property
      *
-     * @param string $class    The fully qualified class name
-     * @param string $property The name of the property to guess for
-     *
-     * @return TypeGuess A guess for the field's type and options
+     * @return TypeGuess
      *
      * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      */
@@ -84,9 +80,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             ));
         }
 
-        $abstractEnumTypeFQCN = 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
-
-        if (get_parent_class($registeredEnumTypeFQCN) !== $abstractEnumTypeFQCN) {
+        if (AbstractEnumType::class !== get_parent_class($registeredEnumTypeFQCN)) {
             return;
         }
 
@@ -96,9 +90,6 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             'required' => !$metadata->isNullable($property),
         ];
 
-        // Compatibility with Symfony <3.0
-        $fieldType = LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\ChoiceType');
-
-        return new TypeGuess($fieldType, $parameters, Guess::VERY_HIGH_CONFIDENCE);
+        return new TypeGuess(ChoiceType::class, $parameters, Guess::VERY_HIGH_CONFIDENCE);
     }
 }
