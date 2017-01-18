@@ -47,6 +47,11 @@
             "/Tests/"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Fresh\\DoctrineEnumBundle\\Tests\\": "Tests/"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "5.x-dev"
