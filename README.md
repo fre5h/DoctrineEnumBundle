@@ -9,10 +9,10 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 [![Latest Stable Version](https://img.shields.io/packagist/v/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Total Downloads](https://img.shields.io/packagist/dt/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Dependency Status](https://www.versioneye.com/user/projects/57b5b913090d4d004eda0044/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57b5b913090d4d004eda0044)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/0cff4816-374a-474e-a1d5-9d5db34562e3.svg?style=flat-square)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
 [![StyleCI](https://styleci.io/repos/6553368/shield?style=flat-square)](https://styleci.io/repos/6553368)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/fre5h/DoctrineEnumBundle)
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/small.png)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
 
 ## Supported platforms
