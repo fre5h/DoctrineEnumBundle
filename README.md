@@ -53,7 +53,7 @@ public function registerBundles()
 
 ### Example
 
-In this example will be shown how to create custom ENUM field for basketball positions. This ENUM should contain five values:
+In this example will be shown how to create a custom ENUM field for basketball positions. This ENUM should contain five values:
 
 * `PG` - Point Guard
 * `SG` - Shooting Guard
