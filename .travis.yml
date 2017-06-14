@@ -9,6 +9,7 @@ php:
 
 env:
   - SYMFONY_VERSION=3.2.*
+  - SYMFONY_VERSION=3.3.*  
 
 before_install:
   - composer self-update
