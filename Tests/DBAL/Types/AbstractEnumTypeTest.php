@@ -145,4 +145,24 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($choices, $this->type->getChoices());
     }
+    
+    public function testMappedDatabaseTypesContainEnumOnMySQL()
+    {
+        $actual = $this->type->getMappedDatabaseTypes(new MySqlPlatform());
+        $this->assertContains('enum', $actual);
+    }
+    
+    public function testMappedDatabaseTypesDoesNotContainEnumOnNonMySQL()
+    {
+        $testProviders = [
+            new SqlitePlatform(),
+            new PostgreSqlPlatform(),
+            new SQLServerPlatform(),
+        ];
+        
+        foreach ($testProviders as $testProvider) {
+            $actual = $this->type->getMappedDatabaseTypes($testProvider);
+            $this->assertNotContains('enum', $actual);
+        }
+    }
 }
