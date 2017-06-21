@@ -166,7 +166,7 @@ abstract class AbstractEnumType extends Type
     {
         return isset(static::$choices[$value]);
     }
-    
+
     /**
      * Gets an array of database types that map to this Doctrine type.
      *
@@ -184,7 +184,7 @@ abstract class AbstractEnumType extends Type
                 ]
             );
         }
-        
+
         return parent::getMappedDatabaseTypes($platform);
     }
 }
