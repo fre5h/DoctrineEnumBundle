@@ -11,7 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Platforms\SQLServerPlatform;
