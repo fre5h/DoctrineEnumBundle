@@ -11,6 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Platforms\SQLServerPlatform;
@@ -164,5 +165,26 @@ abstract class AbstractEnumType extends Type
     public static function isValueExist($value)
     {
         return isset(static::$choices[$value]);
+    }
+
+    /**
+     * Gets an array of database types that map to this Doctrine type.
+     *
+     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
+     *
+     * @return array
+     */
+    public function getMappedDatabaseTypes(AbstractPlatform $platform)
+    {
+        if ($platform instanceof MySqlPlatform) {
+            return array_merge(
+                parent::getMappedDatabaseTypes($platform),
+                [
+                    'enum',
+                ]
+            );
+        }
+
+        return parent::getMappedDatabaseTypes($platform);
     }
 }
