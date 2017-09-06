@@ -86,7 +86,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         $abstractEnumTypeFQCN = 'Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType';
 
-        if (get_parent_class($registeredEnumTypeFQCN) !== $abstractEnumTypeFQCN) {
+        if (!is_subclass_of($registeredEnumTypeFQCN, $abstractEnumTypeFQCN)) {
             return;
         }
 
