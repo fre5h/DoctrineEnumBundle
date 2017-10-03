@@ -32,7 +32,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 | Bundle Version (X.Y.Z) | PHP     | Symfony            | Doctrine | Comment        |
 |:----------------------:|:-------:|:------------------:|:--------:|:---------------|
-| 5.0.*                  | >= 5.6  | >= 3.2             | >= 2.5   | Actual version |
+| 5.1.*                  | >= 5.6  | >= 3.2             | >= 2.5   | Actual version |
 | 4.8.*                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2   | Legacy version |
 
 ### Register the bundle
