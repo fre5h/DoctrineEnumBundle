@@ -20,7 +20,7 @@ use Doctrine\DBAL\Types\Type;
 /**
  * AbstractEnumType.
  *
- * Provides support of MySQL ENUM type for Doctrine in Symfony applications.
+ * Provides support of ENUM type for Doctrine in Symfony applications.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Ben Davies <ben.davies@gmail.com>
@@ -134,6 +134,20 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
+     * Asserts that given choice exists in the array of ENUM values.
+     *
+     * @param string $value ENUM value
+     *
+     * @throws \InvalidArgumentException
+     */
+    public static function assertValidChoice($value)
+    {
+        if (!isset(static::$choices[$value])) {
+            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM type "%s".', $value, get_called_class()));
+        }
+    }
+
+    /**
      * Get value in readable format.
      *
      * @param string $value ENUM value
@@ -146,9 +160,7 @@ abstract class AbstractEnumType extends Type
      */
     public static function getReadableValue($value)
     {
-        if (!isset(static::$choices[$value])) {
-            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM type "%s".', $value, get_called_class()));
-        }
+        static::assertValidChoice($value);
 
         return static::$choices[$value];
     }
