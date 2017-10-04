@@ -11,6 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Platforms\SQLServerPlatform;
@@ -19,7 +20,7 @@ use Doctrine\DBAL\Types\Type;
 /**
  * AbstractEnumType.
  *
- * Provides support of MySQL ENUM type for Doctrine in Symfony applications.
+ * Provides support of ENUM type for Doctrine in Symfony applications.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Ben Davies <ben.davies@gmail.com>
@@ -133,6 +134,20 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
+     * Asserts that given choice exists in the array of ENUM values.
+     *
+     * @param string $value ENUM value
+     *
+     * @throws \InvalidArgumentException
+     */
+    public static function assertValidChoice($value)
+    {
+        if (!isset(static::$choices[$value])) {
+            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM type "%s".', $value, get_called_class()));
+        }
+    }
+
+    /**
      * Get value in readable format.
      *
      * @param string $value ENUM value
@@ -145,9 +160,7 @@ abstract class AbstractEnumType extends Type
      */
     public static function getReadableValue($value)
     {
-        if (!isset(static::$choices[$value])) {
-            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM type "%s".', $value, get_called_class()));
-        }
+        static::assertValidChoice($value);
 
         return static::$choices[$value];
     }
@@ -164,5 +177,26 @@ abstract class AbstractEnumType extends Type
     public static function isValueExist($value)
     {
         return isset(static::$choices[$value]);
+    }
+
+    /**
+     * Gets an array of database types that map to this Doctrine type.
+     *
+     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
+     *
+     * @return array
+     */
+    public function getMappedDatabaseTypes(AbstractPlatform $platform)
+    {
+        if ($platform instanceof MySqlPlatform) {
+            return array_merge(
+                parent::getMappedDatabaseTypes($platform),
+                [
+                    'enum',
+                ]
+            );
+        }
+
+        return parent::getMappedDatabaseTypes($platform);
     }
 }
