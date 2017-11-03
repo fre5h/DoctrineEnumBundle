@@ -15,8 +15,16 @@ CREATE TABLE players (
 
 You can see here the comment *'(DC2Type:BasketballPositionType)'* for `position` column. Doctrine will know that this column should be processed as `BasketballPositionType`.
 
-If you later will need to add new values to ENUM or delete some existed, you also will need to create new migrations. But Doctrine won't detect any changes in your ENUM... :(
+If you later need to add new values to ENUM or delete some existing, you also need to create new migrations. But Doctrine won't detect any changes in your ENUM... :(
 
-Fortunately you can do simple **hook** =) Access your database and delete comment for `position` column. After that run console command `doctrine:migrations:diff` it will create correct migrations.
+Fortunately you can do simple **hook** =) Access your database and delete comment for `position` column. Then run console command `doctrine:migrations:diff` it will create correct migrations.
 
 You should repeat these steps after each update of your custom ENUM type!
+
+### More features
+
+* [NULL values](./null_values.md "NULL values")
+* [Building the form](./building_the_form.md "Building the form")
+* [Additional methods](./additional_methods.md "Additional methods")
+* [Readable ENUM values in templates](./readable_enum_values_in_template.md "Readable ENUM values in templates")
+* [ENUM constants in templates](./enum_constants_in_templates.md "ENUM constants in templates")

@@ -17,6 +17,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 ## Supported platforms
 
 | MySQL | SQLite | PostgreSQL | MSSQL |
+|-------|--------|------------|-------|
 
 ## Installation
 
@@ -32,7 +33,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 | 5.1.*                  | >= 5.6  | >= 3.2             | >= 2.5        | **Actual version** |
 | 4.8.*                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2        | ~~Legacy version~~ |
 
-### Register the bundle
+### Register the bundle for Symfony2/3
 
 To start using the bundle, register it in `app/AppKernel.php`:
 
@@ -52,6 +53,7 @@ public function registerBundles()
 
 ## Features
 
+* [NULL values](./Resources/docs/null_values.md "NULL values")
 * [Building the form](./Resources/docs/building_the_form.md "Building the form")
 * [Additional methods](./Resources/docs/additional_methods.md "Additional methods")
 * [Readable ENUM values in templates](./Resources/docs/readable_enum_values_in_template.md "Readable ENUM values in templates")

@@ -18,3 +18,11 @@ You can specify the correct class for this constant and it solves the problem.
 {{ 'CENTER'|enum_constant('BasketballPositionType') }}
 {{ 'CENTER'|enum_constant('MapLocationType') }}
 ```
+
+### More features
+
+* [NULL values](./null_values.md "NULL values")
+* [Building the form](./building_the_form.md "Building the form")
+* [Additional methods](./additional_methods.md "Additional methods")
+* [Readable ENUM values in templates](./readable_enum_values_in_template.md "Readable ENUM values in templates")
+* [Hook for Doctrine migrations](./hook_for_doctrine_migrations.md "Hook for Doctrine migrations")
