@@ -5,20 +5,25 @@
 ##### If you need to check if some string value exists in the array of ENUM values:
 
 ```php
-BasketballPositionType::isValueExist('Pitcher'); // false
+BasketballPositionType::isValueExist('Pitcher');
+// Will return: false
 ```
 
 ##### If you need to get value in the readable format:
 
 ```php
-BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD); // Will return: Shooting Guard
+BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD);
+// Will return: Shooting Guard
 ```
 
 ##### If you need to get values in the readable format:
 
 ```php
-BasketballPositionType::getValues(); // Will return: ['PG', 'SG', 'SF', 'PF', 'C']
+BasketballPositionType::getValues();
+// Will return: ['PG', 'SG', 'SF', 'PF', 'C']
 ```
+
+---
 
 ### More features
 

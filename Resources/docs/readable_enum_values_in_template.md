@@ -33,6 +33,8 @@ So, the correct usage of `|readable_enum` filter in this case should be with add
 {{ location_on_the_map|readable_enum('MapLocationType') }}
 ```
 
+---
+
 ### More features
 
 * [NULL values](./null_values.md "NULL values")

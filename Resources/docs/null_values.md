@@ -12,6 +12,8 @@ protected $position;
 protected $position;
 ```
 
+---
+
 ### More features
 
 * [Building the form](./building_the_form.md "Building the form")

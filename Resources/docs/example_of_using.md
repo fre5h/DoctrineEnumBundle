@@ -104,6 +104,8 @@ But don't forget to define `BasketballPositionType` in the *use* section:
 use App\DBAL\Types\BasketballPositionType;
 ```
 
+---
+
 ### More features
 
 * [NULL values](./null_values.md "NULL values")

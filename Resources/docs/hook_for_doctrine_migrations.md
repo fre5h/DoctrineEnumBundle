@@ -21,6 +21,8 @@ Fortunately you can do simple **hook** =) Access your database and delete commen
 
 You should repeat these steps after each update of your custom ENUM type!
 
+---
+
 ### More features
 
 * [NULL values](./null_values.md "NULL values")

@@ -19,6 +19,8 @@ You can specify the correct class for this constant and it solves the problem.
 {{ 'CENTER'|enum_constant('MapLocationType') }}
 ```
 
+---
+
 ### More features
 
 * [NULL values](./null_values.md "NULL values")

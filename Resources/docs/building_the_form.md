@@ -30,6 +30,8 @@ $builder->add('position', ChoiceType::class, [
 [EnumTypeGuesser](./../../Form/EnumTypeGuesser.php "EnumTypeGuesser") process **only** DBAL types that are children of [AbstractEnumType](./../../DBAL/Types/AbstractEnumType.php "AbstractEnumType").
 All other custom DBAL types, which are defined, will be skipped from guessing.
 
+---
+
 ### More features
 
 * [NULL values](./null_values.md "NULL values")
