@@ -22,9 +22,7 @@ use Symfony\Component\Validator\Constraints\Choice;
  */
 class Enum extends Choice
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $entity;
 
     /**
@@ -32,6 +30,8 @@ class Enum extends Choice
      */
     public function __construct($options = null)
     {
+        $this->strict = true;
+
         if (isset($options['entity'])) {
             /** @var AbstractEnumType $entity */
             $entity = $options['entity'];
