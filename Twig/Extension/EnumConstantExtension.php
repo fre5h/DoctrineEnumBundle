@@ -25,23 +25,25 @@ class EnumConstantExtension extends AbstractEnumExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [new \Twig_SimpleFilter('enum_constant', [$this, 'getEnumConstant'])];
     }
 
     /**
-     * @param string      $enumConstant
+     * @param string|null $enumConstant
      * @param string|null $enumType
      *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
      * @throws ConstantIsFoundInFewRegisteredEnumTypesException
      * @throws ConstantIsNotFoundInAnyRegisteredEnumTypeException
+     * @throws \InvalidArgumentException
+     * @throws \ReflectionException
      *
      * @return string
      */
-    public function getEnumConstant(string $enumConstant, ?string $enumType = null): string
+    public function getEnumConstant(?string $enumConstant, ?string $enumType = null): string
     {
         if (!empty($this->registeredEnumTypes) && \is_array($this->registeredEnumTypes)) {
             // If ENUM type was set, e.g. {{ 'CENTER'|enum_constant('BasketballPositionType') }}

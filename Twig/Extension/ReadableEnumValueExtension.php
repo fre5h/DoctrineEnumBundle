@@ -25,13 +25,13 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [new \Twig_SimpleFilter('readable_enum', [$this, 'getReadableEnumValue'])];
     }
 
     /**
-     * @param string      $enumValue
+     * @param string|null $enumValue
      * @param string|null $enumType
      *
      * @return string
@@ -40,8 +40,9 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
      * @throws NoRegisteredEnumTypesException
      * @throws ValueIsFoundInFewRegisteredEnumTypesException
      * @throws ValueIsNotFoundInAnyRegisteredEnumTypeException
+     * @throws \InvalidArgumentException
      */
-    public function getReadableEnumValue(string $enumValue, ?string $enumType = null): string
+    public function getReadableEnumValue(?string $enumValue, ?string $enumType = null): string
     {
         if (!empty($this->registeredEnumTypes) && \is_array($this->registeredEnumTypes)) {
             if (null === $enumValue) {
