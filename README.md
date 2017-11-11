@@ -32,8 +32,8 @@ Registration in Kernel for Symfony 4.0 is done automatically.
 | Bundle Version (X.Y.Z) | PHP     | Symfony            | Doctrine DBAL | Comment                |
 |:----------------------:|:-------:|:------------------:|:-------------:|:-----------------------|
 | 6.0.*                  | >= 7.1  | >= 4.0             | >= 2.6        | **Actual version**     |
-| 5.1.*                  | >= 5.6  | >= 3.2             | >= 2.5        | *Bug fix support only* |
-| 4.8.*                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2        | ~~Legacy version~~     |
+| 5.1.*                  | >= 5.6  | >= 3.2, <= 3.4     | >= 2.5        | *Bug fix support only* |
+| 4.8.*                  | >= 5.4  | >= 2.6, <= 3.1     | >= 2.2        | ~~Legacy version~~     |
 
 ## Using
 
@@ -50,4 +50,4 @@ Registration in Kernel for Symfony 4.0 is done automatically.
 
 ## Contributing
 
-See [CONTRIBUTING](https://github.com/fre5h/DoctrineEnumBundle/blob/master/.github/CONTRIBUTING.md) file.
+Read the [CONTRIBUTING](https://github.com/fre5h/DoctrineEnumBundle/blob/master/.github/CONTRIBUTING.md) file.
