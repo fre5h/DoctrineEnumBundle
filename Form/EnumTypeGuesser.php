@@ -80,7 +80,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             ));
         }
 
-        if (AbstractEnumType::class !== \get_parent_class($registeredEnumTypeFQCN)) {
+        if (!is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
             return null;
         }
 
