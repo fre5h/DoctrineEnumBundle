@@ -51,7 +51,7 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
             // If ENUM type was set, e.g. {{ player.position|readable_enum('BasketballPositionType') }}
             if (null !== $enumType) {
                 if (!isset($this->registeredEnumTypes[$enumType])) {
-                    throw new EnumTypeIsNotRegisteredException(sprintf('ENUM type "%s" is not registered.', $enumType));
+                    throw new EnumTypeIsNotRegisteredException(\sprintf('ENUM type "%s" is not registered.', $enumType));
                 }
 
                 /** @var $enumTypeClass \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType */

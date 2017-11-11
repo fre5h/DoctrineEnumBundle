@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Exception;
+namespace Fresh\DoctrineEnumBundle\Exception\EnumType;
 
 /**
- * EnumTypeIsRegisteredButClassDoesNotExistException.
+ * NoRegisteredEnumTypesException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class EnumTypeIsRegisteredButClassDoesNotExistException extends \UnexpectedValueException
+class NoRegisteredEnumTypesException extends \LogicException
 {
 }

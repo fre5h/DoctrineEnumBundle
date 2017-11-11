@@ -23,6 +23,8 @@ class FreshDoctrineEnumBundle extends Bundle
 {
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function boot()
     {

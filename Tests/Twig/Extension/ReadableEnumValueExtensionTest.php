@@ -66,7 +66,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException
      */
     public function testEnumTypeIsNotRegisteredException()
     {
@@ -74,7 +74,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsFoundInFewRegisteredEnumTypesException
      */
     public function testValueIsFoundInFewRegisteredEnumTypesException()
     {
@@ -82,7 +82,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsNotFoundInAnyRegisteredEnumTypeException
      */
     public function testValueIsNotFoundInAnyRegisteredEnumTypeException()
     {
@@ -90,7 +90,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException
      */
     public function testNoRegisteredEnumTypesException()
     {

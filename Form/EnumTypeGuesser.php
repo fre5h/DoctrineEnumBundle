@@ -14,7 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Form;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
-use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;

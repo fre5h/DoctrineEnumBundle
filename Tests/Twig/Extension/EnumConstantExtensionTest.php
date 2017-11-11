@@ -65,7 +65,7 @@ class EnumConstantExtensionTest extends TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException
      */
     public function testEnumTypeIsNotRegisteredException()
     {
@@ -73,7 +73,7 @@ class EnumConstantExtensionTest extends TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ConstantIsFoundInFewRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsFoundInFewRegisteredEnumTypesException
      */
     public function testConstantIsFoundInFewRegisteredEnumTypesException()
     {
@@ -81,7 +81,7 @@ class EnumConstantExtensionTest extends TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ConstantIsNotFoundInAnyRegisteredEnumTypeException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegisteredEnumTypeException
      */
     public function testConstantIsNotFoundInAnyRegisteredEnumTypeException()
     {
@@ -89,7 +89,7 @@ class EnumConstantExtensionTest extends TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException
      */
     public function testNoRegisteredEnumTypesException()
     {

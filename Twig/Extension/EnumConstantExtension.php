@@ -10,8 +10,8 @@
 
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
-use Fresh\DoctrineEnumBundle\Exception\ConstantIsFoundInFewRegisteredEnumTypesException;
-use Fresh\DoctrineEnumBundle\Exception\ConstantIsNotFoundInAnyRegisteredEnumTypeException;
+use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsFoundInFewRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegisteredEnumTypeException;
 use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
 
@@ -49,7 +49,7 @@ class EnumConstantExtension extends AbstractEnumExtension
             // If ENUM type was set, e.g. {{ 'CENTER'|enum_constant('BasketballPositionType') }}
             if (null !== $enumType) {
                 if (!isset($this->registeredEnumTypes[$enumType])) {
-                    throw new EnumTypeIsNotRegisteredException(sprintf('ENUM type "%s" is not registered.', $enumType));
+                    throw new EnumTypeIsNotRegisteredException(\sprintf('ENUM type "%s" is not registered.', $enumType));
                 }
 
                 return \constant($this->registeredEnumTypes[$enumType].'::'.$enumConstant);

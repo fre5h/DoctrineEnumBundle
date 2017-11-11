@@ -67,7 +67,7 @@ class EnumTypeGuesserTest extends TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException
      */
     public function testExceptionWhenClassDoesNotExist()
     {
