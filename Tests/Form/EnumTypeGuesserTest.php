@@ -14,6 +14,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\InheritedType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NotAChildType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;
@@ -132,6 +133,52 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
                         ->willReturn([$metadata]);
 
         $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
+    }
+
+    public function testSuccessfulTypeGuessingWithAncestor()
+    {
+        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
+                                ->disableOriginalConstructor()
+                                ->getMock();
+        $registeredTypes = [
+            'InheritedType' => [
+                'class' => InheritedType::class,
+            ]
+        ];
+
+        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
+        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
+                                ->setConstructorArgs([$managerRegistry, $registeredTypes])
+                                ->setMethods(['getMetadata'])
+                                ->getMock();
+
+        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
+                         ->disableOriginalConstructor()
+                         ->setMethods(['getTypeOfField', 'isNullable'])
+                         ->getMock();
+
+        $metadata->expects($this->once())
+                 ->method('getTypeOfField')
+                 ->willReturn('InheritedType');
+
+        $metadata->expects($this->once())
+                 ->method('isNullable')
+                 ->willReturn(true);
+
+        $enumTypeGuesser->expects($this->once())
+                        ->method('getMetadata')
+                        ->willReturn([$metadata]);
+
+        $typeGuess = new TypeGuess(
+            ChoiceType::class,
+            [
+                'choices' => InheritedType::getChoices(),
+                'required' => false,
+            ],
+            Guess::VERY_HIGH_CONFIDENCE
+        );
+
+        $this->assertEquals($typeGuess, $enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     public function testSuccessfulTypeGuessing()
