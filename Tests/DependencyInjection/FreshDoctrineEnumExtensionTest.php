@@ -11,6 +11,9 @@
 namespace Fresh\DoctrineEnumBundle\Tests\DependencyInjection;
 
 use Fresh\DoctrineEnumBundle\DependencyInjection\FreshDoctrineEnumExtension;
+use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
+use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantExtension;
+use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -43,9 +46,9 @@ class FreshDoctrineEnumExtensionTest extends TestCase
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-//        // Check that services have been loaded
-//        $this->assertTrue($this->container->has('twig.extension.readable_enum_value'));
-//        $this->assertTrue($this->container->has('twig.extension.enum_constant'));
-//        $this->assertTrue($this->container->has('enum_type_guesser'));
+        // Check that private services are not reachable from container
+        $this->assertFalse($this->container->has(ReadableEnumValueExtension::class));
+        $this->assertFalse($this->container->has(EnumConstantExtension::class));
+        $this->assertFalse($this->container->has(EnumTypeGuesser::class));
     }
 }
