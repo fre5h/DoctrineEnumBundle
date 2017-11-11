@@ -46,7 +46,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     /**
      * @dataProvider dataProviderForGetReadableEnumValueTest
      */
-    public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, string $enumType)
+    public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, ?string $enumType)
     {
         $this->assertEquals(
             $expectedReadableValue,
