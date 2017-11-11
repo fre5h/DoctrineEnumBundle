@@ -1,7 +1,5 @@
 checks:
-  php:
-    code_rating: true
-    duplication: true
+  php: true
 
 filter:
   excluded_paths:

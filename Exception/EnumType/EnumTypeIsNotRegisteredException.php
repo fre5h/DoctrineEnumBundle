@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Exception;
+namespace Fresh\DoctrineEnumBundle\Exception\EnumType;
 
 /**
- * ValueIsNotFoundInAnyRegisteredEnumTypeException.
+ * EnumTypeIsNotRegisteredException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class ConstantIsNotFoundInAnyRegisteredEnumTypeException extends \LogicException
+class EnumTypeIsNotRegisteredException extends \UnexpectedValueException
 {
 }

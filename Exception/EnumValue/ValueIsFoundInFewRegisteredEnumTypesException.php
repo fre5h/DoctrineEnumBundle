@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Exception;
+namespace Fresh\DoctrineEnumBundle\Exception\EnumValue;
 
 /**
- * EnumTypeIsNotRegisteredException.
+ * ValueIsFoundInFewRegisteredEnumTypesException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class EnumTypeIsNotRegisteredException extends \UnexpectedValueException
+class ValueIsFoundInFewRegisteredEnumTypesException extends \LogicException
 {
 }

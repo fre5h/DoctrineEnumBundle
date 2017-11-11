@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -24,6 +26,8 @@ class FreshDoctrineEnumExtension extends Extension
 {
     /**
      * {@inheritdoc}
+     *
+     * @throws \Exception
      */
     public function load(array $configs, ContainerBuilder $container)
     {

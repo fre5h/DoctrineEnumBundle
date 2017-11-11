@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
@@ -19,9 +21,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  */
 abstract class AbstractEnumExtension extends \Twig_Extension
 {
-    /**
-     * @var AbstractEnumType[]
-     */
+    /** @var AbstractEnumType[] */
     protected $registeredEnumTypes = [];
 
     /**
@@ -30,7 +30,7 @@ abstract class AbstractEnumExtension extends \Twig_Extension
     public function __construct(array $registeredTypes)
     {
         foreach ($registeredTypes as $type => $details) {
-            if (is_subclass_of($details['class'], AbstractEnumType::class)) {
+            if (\is_subclass_of($details['class'], AbstractEnumType::class)) {
                 $this->registeredEnumTypes[$type] = $details['class'];
             }
         }

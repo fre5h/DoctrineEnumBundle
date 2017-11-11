@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Exception;
+namespace Fresh\DoctrineEnumBundle\Exception\Constant;
 
 /**
- * ValueIsNotFoundInAnyRegisteredEnumTypeException.
+ * ConstantIsFoundInFewRegisteredEnumTypesException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class ValueIsNotFoundInAnyRegisteredEnumTypeException extends \LogicException
+class ConstantIsFoundInFewRegisteredEnumTypesException extends \LogicException
 {
 }

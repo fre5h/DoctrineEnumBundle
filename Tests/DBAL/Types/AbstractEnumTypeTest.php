@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Tests\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
@@ -19,6 +21,7 @@ use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
+use PHPUnit\Framework\TestCase;
 
 /**
  * AbstractEnumTypeTest.
@@ -26,11 +29,9 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
  * @author Artem Genvald <genvaldartem@gmail.com>
  * @author Ben Davies    <ben.davies@gmail.com>
  */
-class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
+class AbstractEnumTypeTest extends TestCase
 {
-    /**
-     * @var AbstractEnumType
-     */
+    /** @var AbstractEnumType */
     private $type;
 
     public static function setUpBeforeClass()
@@ -52,12 +53,12 @@ class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider platformProvider
      */
-    public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, $expected)
+    public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, string $expected)
     {
         $this->assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
-    public function platformProvider()
+    public function platformProvider(): array
     {
         return [
             [

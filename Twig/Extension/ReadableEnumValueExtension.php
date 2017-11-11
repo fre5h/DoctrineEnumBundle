@@ -8,12 +8,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
-use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
-use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
-use Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException;
-use Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsFoundInFewRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsNotFoundInAnyRegisteredEnumTypeException;
 
 /**
  * ReadableEnumValueExtension returns the readable variant of ENUM value.
@@ -25,72 +27,69 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
-        return [
-            new \Twig_SimpleFilter(
-                'readable_enum',
-                [$this, 'getReadableEnumValue']
-            ),
-        ];
+        return [new \Twig_Filter('readable_enum', [$this, 'getReadableEnumValue'])];
     }
 
     /**
-     * @param string      $enumValue
+     * @param string|null $enumValue
      * @param string|null $enumType
      *
-     * @return string
+     * @return string|null
      *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
      * @throws ValueIsFoundInFewRegisteredEnumTypesException
      * @throws ValueIsNotFoundInAnyRegisteredEnumTypeException
+     * @throws \InvalidArgumentException
      */
-    public function getReadableEnumValue($enumValue, $enumType = null)
+    public function getReadableEnumValue(?string $enumValue, ?string $enumType = null): ?string
     {
-        if (!empty($this->registeredEnumTypes) && is_array($this->registeredEnumTypes)) {
-            if (is_null($enumValue)) {
+        if (!empty($this->registeredEnumTypes) && \is_array($this->registeredEnumTypes)) {
+            if (null === $enumValue) {
                 return $enumValue;
             }
             // If ENUM type was set, e.g. {{ player.position|readable_enum('BasketballPositionType') }}
-            if (!empty($enumType)) {
+            if (null !== $enumType) {
                 if (!isset($this->registeredEnumTypes[$enumType])) {
-                    throw new EnumTypeIsNotRegisteredException(sprintf('ENUM type "%s" is not registered.', $enumType));
+                    throw new EnumTypeIsNotRegisteredException(\sprintf('ENUM type "%s" is not registered.', $enumType));
                 }
 
                 /** @var $enumTypeClass \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType */
                 $enumTypeClass = $this->registeredEnumTypes[$enumType];
 
                 return $enumTypeClass::getReadableValue($enumValue);
-            } else {
-                // If ENUM type wasn't set, e.g. {{ player.position|readable_enum }}
-                $occurrences = [];
-                // Check if value exists in registered ENUM types
-                foreach ($this->registeredEnumTypes as $registeredEnumType) {
-                    if ($registeredEnumType::isValueExist($enumValue)) {
-                        $occurrences[] = $registeredEnumType;
-                    }
-                }
+            }
 
-                // If found only one occurrence, then we know exactly which ENUM type
-                if (1 == count($occurrences)) {
-                    $enumTypeClass = array_pop($occurrences);
-
-                    return $enumTypeClass::getReadableValue($enumValue);
-                } elseif (1 < count($occurrences)) {
-                    throw new ValueIsFoundInFewRegisteredEnumTypesException(sprintf(
-                        'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
-                        $enumValue
-                    ));
-                } else {
-                    throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(sprintf(
-                        'Value "%s" wasn\'t found in any registered ENUM type.',
-                        $enumValue
-                    ));
+            // If ENUM type wasn't set, e.g. {{ player.position|readable_enum }}
+            $occurrences = [];
+            // Check if value exists in registered ENUM types
+            foreach ($this->registeredEnumTypes as $registeredEnumType) {
+                if ($registeredEnumType::isValueExist($enumValue)) {
+                    $occurrences[] = $registeredEnumType;
                 }
             }
-        } else {
-            throw new NoRegisteredEnumTypesException('There are no registered ENUM types.');
+
+            // If found only one occurrence, then we know exactly which ENUM type
+            if (1 === \count($occurrences)) {
+                $enumTypeClass = \array_pop($occurrences);
+
+                return $enumTypeClass::getReadableValue($enumValue);
+            }
+            if (1 < \count($occurrences)) {
+                throw new ValueIsFoundInFewRegisteredEnumTypesException(\sprintf(
+                    'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
+                    $enumValue
+                ));
+            }
+
+            throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(\sprintf(
+                'Value "%s" wasn\'t found in any registered ENUM type.',
+                $enumValue
+            ));
         }
+
+        throw new NoRegisteredEnumTypesException('There are no registered ENUM types.');
     }
 }

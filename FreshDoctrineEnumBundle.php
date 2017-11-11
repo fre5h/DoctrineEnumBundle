@@ -23,6 +23,8 @@ class FreshDoctrineEnumBundle extends Bundle
 {
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function boot()
     {
@@ -31,6 +33,7 @@ class FreshDoctrineEnumBundle extends Bundle
         /** @var Registry $doctrine */
         $doctrine = $this->container->get('doctrine');
 
+        /** @var \Doctrine\DBAL\Connection $connection */
         foreach ($doctrine->getConnections() as $connection) {
             /** @var AbstractPlatform $databasePlatform */
             $databasePlatform = $connection->getDatabasePlatform();

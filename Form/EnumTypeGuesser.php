@@ -8,11 +8,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Form;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
-use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;
@@ -26,9 +28,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
  */
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 {
-    /**
-     * @var AbstractEnumType[]
-     */
+    /** @var AbstractEnumType[] */
     protected $registeredEnumTypes = [];
 
     /**
@@ -58,7 +58,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         // If no metadata for this class - can't guess anything
         if (!$classMetadata) {
-            return;
+            return null;
         }
 
         /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo $metadata */
@@ -67,21 +67,21 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         // This is not one of the registered ENUM types
         if (!isset($this->registeredEnumTypes[$fieldType])) {
-            return;
+            return null;
         }
 
         $registeredEnumTypeFQCN = $this->registeredEnumTypes[$fieldType];
 
-        if (!class_exists($registeredEnumTypeFQCN)) {
-            throw new EnumTypeIsRegisteredButClassDoesNotExistException(sprintf(
+        if (!\class_exists($registeredEnumTypeFQCN)) {
+            throw new EnumTypeIsRegisteredButClassDoesNotExistException(\sprintf(
                 'ENUM type "%s" is registered as "%s", but that class does not exist',
                 $fieldType,
                 $registeredEnumTypeFQCN
             ));
         }
 
-        if (AbstractEnumType::class !== get_parent_class($registeredEnumTypeFQCN)) {
-            return;
+        if (AbstractEnumType::class !== \get_parent_class($registeredEnumTypeFQCN)) {
+            return null;
         }
 
         // Get the choices from the fully qualified class name

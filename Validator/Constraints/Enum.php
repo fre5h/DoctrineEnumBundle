@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
@@ -36,7 +38,7 @@ class Enum extends Choice
             /** @var AbstractEnumType $entity */
             $entity = $options['entity'];
 
-            if (is_subclass_of($entity, AbstractEnumType::class)) {
+            if (\is_subclass_of($entity, AbstractEnumType::class)) {
                 $this->choices = $entity::getValues();
             }
         }
@@ -47,16 +49,8 @@ class Enum extends Choice
     /**
      * {@inheritdoc}
      */
-    public function getRequiredOptions()
+    public function getRequiredOptions(): array
     {
         return ['entity'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefaultOption()
-    {
-        return 'choices';
     }
 }

@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NotAChildType;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
@@ -24,7 +25,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
+class EnumTypeGuesserTest extends TestCase
 {
     public function testNullResultWhenClassMetadataNotFound()
     {
@@ -66,7 +67,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException
      */
     public function testExceptionWhenClassDoesNotExist()
     {

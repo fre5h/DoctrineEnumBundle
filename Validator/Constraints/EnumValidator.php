@@ -22,8 +22,8 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 class EnumValidator extends ChoiceValidator
 {
     /**
-     * @param mixed      $value
-     * @param Constraint $constraint
+     * @param mixed           $value
+     * @param Constraint|Enum $constraint
      *
      * @throws ConstraintDefinitionException
      */
@@ -33,8 +33,7 @@ class EnumValidator extends ChoiceValidator
             throw new ConstraintDefinitionException('Entity not specified.');
         }
 
-        $entity = $constraint->entity;
-        $constraint->choices = $entity::getValues();
+        $constraint->choices = $constraint->entity::getValues();
 
         parent::validate($value, $constraint);
     }
