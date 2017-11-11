@@ -8,12 +8,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsFoundInFewRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegisteredEnumTypeException;
-use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
-use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
 
 /**
  * EnumConstantExtension.
@@ -27,7 +29,7 @@ class EnumConstantExtension extends AbstractEnumExtension
      */
     public function getFilters(): array
     {
-        return [new \Twig_SimpleFilter('enum_constant', [$this, 'getEnumConstant'])];
+        return [new \Twig_Filter('enum_constant', [$this, 'getEnumConstant'])];
     }
 
     /**

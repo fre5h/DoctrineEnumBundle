@@ -23,29 +23,17 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ### Add dependency via Composer
 
-```composer require fresh/doctrine-enum-bundle='~5.1'```
+```composer req fresh/doctrine-enum-bundle='~6.0'```
+
+Registration in Kernel for Symfony 4.0 is done automatically.
 
 ##### Choose the appropriate version if you need
 
-| Bundle Version (X.Y.Z) | PHP     | Symfony            | Doctrine DBAL | Comment        |
-|:----------------------:|:-------:|:------------------:|:-------------:|:---------------|
-| 6.0.*                  | >= 7.1  | >= 4.0             | >= 2.6        | *Coming soon*  |
-| 5.1.*                  | >= 5.6  | >= 3.2             | >= 2.5        | **Actual version** |
-| 4.8.*                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2        | ~~Legacy version~~ |
-
-### Register the bundle for Symfony2/3
-
-To start using the bundle, register it in `app/AppKernel.php`:
-
-```php
-public function registerBundles()
-{
-    $bundles = [
-        // Other bundles...
-        new Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle(),
-    ];
-}
-```
+| Bundle Version (X.Y.Z) | PHP     | Symfony            | Doctrine DBAL | Comment                |
+|:----------------------:|:-------:|:------------------:|:-------------:|:-----------------------|
+| 6.0.*                  | >= 7.1  | >= 4.0             | >= 2.6        | **Actual version**     |
+| 5.1.*                  | >= 5.6  | >= 3.2             | >= 2.5        | *Bug fix support only* |
+| 4.8.*                  | >= 5.4  | >= 2.6, >= 3.0     | >= 2.2        | ~~Legacy version~~     |
 
 ## Using
 

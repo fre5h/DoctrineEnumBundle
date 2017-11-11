@@ -8,12 +8,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
-use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException;
-use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
-use Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException;
-use Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsFoundInFewRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsNotFoundInAnyRegisteredEnumTypeException;
 
 /**
  * ReadableEnumValueExtension returns the readable variant of ENUM value.
@@ -27,7 +29,7 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
      */
     public function getFilters(): array
     {
-        return [new \Twig_SimpleFilter('readable_enum', [$this, 'getReadableEnumValue'])];
+        return [new \Twig_Filter('readable_enum', [$this, 'getReadableEnumValue'])];
     }
 
     /**
@@ -70,19 +72,19 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
             }
 
             // If found only one occurrence, then we know exactly which ENUM type
-            if (1 === count($occurrences)) {
-                $enumTypeClass = array_pop($occurrences);
+            if (1 === \count($occurrences)) {
+                $enumTypeClass = \array_pop($occurrences);
 
                 return $enumTypeClass::getReadableValue($enumValue);
             }
-            if (1 < count($occurrences)) {
-                throw new ValueIsFoundInFewRegisteredEnumTypesException(sprintf(
+            if (1 < \count($occurrences)) {
+                throw new ValueIsFoundInFewRegisteredEnumTypesException(\sprintf(
                     'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
                     $enumValue
                 ));
             }
 
-            throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(sprintf(
+            throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(\sprintf(
                 'Value "%s" wasn\'t found in any registered ENUM type.',
                 $enumValue
             ));

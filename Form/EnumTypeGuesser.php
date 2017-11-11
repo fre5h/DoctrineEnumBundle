@@ -58,7 +58,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         // If no metadata for this class - can't guess anything
         if (!$classMetadata) {
-            return;
+            return null;
         }
 
         /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo $metadata */
@@ -67,7 +67,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         // This is not one of the registered ENUM types
         if (!isset($this->registeredEnumTypes[$fieldType])) {
-            return;
+            return null;
         }
 
         $registeredEnumTypeFQCN = $this->registeredEnumTypes[$fieldType];
@@ -81,7 +81,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
         }
 
         if (AbstractEnumType::class !== \get_parent_class($registeredEnumTypeFQCN)) {
-            return;
+            return null;
         }
 
         // Get the choices from the fully qualified class name

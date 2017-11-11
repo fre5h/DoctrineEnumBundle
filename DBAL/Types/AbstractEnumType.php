@@ -48,7 +48,7 @@ abstract class AbstractEnumType extends Type
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (null === $value) {
-            return;
+            return null;
         }
 
         if (!isset(static::$choices[$value])) {
@@ -61,7 +61,7 @@ abstract class AbstractEnumType extends Type
     /**
      * {@inheritdoc}
      */
-    public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
+    public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         $values = \implode(
             ', ',
@@ -87,7 +87,7 @@ abstract class AbstractEnumType extends Type
     /**
      * {@inheritdoc}
      */
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }
@@ -177,7 +177,7 @@ abstract class AbstractEnumType extends Type
      *
      * @return bool
      */
-    public static function isValueExist($value): bool
+    public static function isValueExist(string $value): bool
     {
         return isset(static::$choices[$value]);
     }
@@ -185,19 +185,14 @@ abstract class AbstractEnumType extends Type
     /**
      * Gets an array of database types that map to this Doctrine type.
      *
-     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
+     * @param AbstractPlatform $platform
      *
      * @return array
      */
     public function getMappedDatabaseTypes(AbstractPlatform $platform): array
     {
         if ($platform instanceof MySqlPlatform) {
-            return \array_merge(
-                parent::getMappedDatabaseTypes($platform),
-                [
-                    'enum',
-                ]
-            );
+            return \array_merge(parent::getMappedDatabaseTypes($platform), ['enum']);
         }
 
         return parent::getMappedDatabaseTypes($platform);
