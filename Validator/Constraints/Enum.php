@@ -36,7 +36,7 @@ class Enum extends Choice
             /** @var AbstractEnumType $entity */
             $entity = $options['entity'];
 
-            if (is_subclass_of($entity, AbstractEnumType::class)) {
+            if (\is_subclass_of($entity, AbstractEnumType::class)) {
                 $this->choices = $entity::getValues();
             }
         }

@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Form;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -72,15 +74,15 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         $registeredEnumTypeFQCN = $this->registeredEnumTypes[$fieldType];
 
-        if (!class_exists($registeredEnumTypeFQCN)) {
-            throw new EnumTypeIsRegisteredButClassDoesNotExistException(sprintf(
+        if (!\class_exists($registeredEnumTypeFQCN)) {
+            throw new EnumTypeIsRegisteredButClassDoesNotExistException(\sprintf(
                 'ENUM type "%s" is registered as "%s", but that class does not exist',
                 $fieldType,
                 $registeredEnumTypeFQCN
             ));
         }
 
-        if (AbstractEnumType::class !== get_parent_class($registeredEnumTypeFQCN)) {
+        if (AbstractEnumType::class !== \get_parent_class($registeredEnumTypeFQCN)) {
             return;
         }
 

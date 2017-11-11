@@ -19,15 +19,15 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  */
 final class MapLocationType extends AbstractEnumType
 {
-    const NORTH = 'N';
-    const EAST = 'E';
-    const SOUTH = 'S';
-    const WEST = 'W';
-    const CENTER = 'C';
-    const NORTH_WEST = 'NW';
-    const NORTH_EAST = 'NE';
-    const SOUTH_WEST = 'SW';
-    const SOUTH_EAST = 'SE';
+    public const NORTH = 'N';
+    public const EAST = 'E';
+    public const SOUTH = 'S';
+    public const WEST = 'W';
+    public const CENTER = 'C';
+    public const NORTH_WEST = 'NW';
+    public const NORTH_EAST = 'NE';
+    public const SOUTH_WEST = 'SW';
+    public const SOUTH_EAST = 'SE';
 
     protected $name = 'MapLocationType';
 

@@ -12,13 +12,14 @@ namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
+use PHPUnit\Framework\TestCase;
 
 /**
  * EnumTest.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class EnumTest extends \PHPUnit_Framework_TestCase
+class EnumTest extends TestCase
 {
     public function testConstructor()
     {

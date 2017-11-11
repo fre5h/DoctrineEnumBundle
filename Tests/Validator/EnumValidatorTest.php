@@ -13,6 +13,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContext;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
@@ -21,16 +22,12 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class EnumValidatorTest extends \PHPUnit_Framework_TestCase
+class EnumValidatorTest extends TestCase
 {
-    /**
-     * @var EnumValidator
-     */
+    /** @var EnumValidator */
     private $enumValidator;
 
-    /**
-     * @var ExecutionContext|\PHPUnit_Framework_MockObject_MockObject
-     */
+    /** @var ExecutionContext|\PHPUnit_Framework_MockObject_MockObject */
     private $context;
 
     public function setUp()

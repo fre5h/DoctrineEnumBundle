@@ -18,11 +18,11 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 final class BasketballPositionType extends AbstractEnumType
 {
-    const POINT_GUARD = 'PG';
-    const SHOOTING_GUARD = 'SG';
-    const SMALL_FORWARD = 'SF';
-    const POWER_FORWARD = 'PF';
-    const CENTER = 'C';
+    public const POINT_GUARD = 'PG';
+    public const SHOOTING_GUARD = 'SG';
+    public const SMALL_FORWARD = 'SF';
+    public const POWER_FORWARD = 'PF';
+    public const CENTER = 'C';
 
     protected static $choices = [
         self::POINT_GUARD => 'Point Guard',
@@ -80,12 +80,12 @@ class Player
         return $this->id;
     }
 
-    public function setPosition($position)
+    public function setPosition(string $position)
     {
         $this->position = $position;
     }
 
-    public function getPosition()
+    public function getPosition(): string
     {
         return $this->position;
     }

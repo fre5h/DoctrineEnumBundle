@@ -11,6 +11,7 @@
 namespace Fresh\DoctrineEnumBundle\Tests\DependencyInjection;
 
 use Fresh\DoctrineEnumBundle\DependencyInjection\FreshDoctrineEnumExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -18,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class FreshDoctrineEnumExtensionTest extends \PHPUnit_Framework_TestCase
+class FreshDoctrineEnumExtensionTest extends TestCase
 {
     /** @var FreshDoctrineEnumExtension */
     private $extension;

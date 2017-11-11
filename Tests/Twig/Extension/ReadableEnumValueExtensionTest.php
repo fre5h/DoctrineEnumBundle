@@ -8,22 +8,23 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension;
+use PHPUnit\Framework\TestCase;
 
 /**
  * ReadableEnumValueExtensionTest.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
+class ReadableEnumValueExtensionTest extends TestCase
 {
-    /**
-     * @var ReadableEnumValueExtension
-     */
+    /** @var ReadableEnumValueExtension */
     private $readableEnumValueExtension;
 
     public function setUp()
@@ -37,12 +38,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     public function testGetFilters()
     {
         $this->assertEquals(
-            [
-                new \Twig_SimpleFilter(
-                    'readable_enum',
-                    [$this->readableEnumValueExtension, 'getReadableEnumValue']
-                ),
-            ],
+            [new \Twig_SimpleFilter('readable_enum', [$this->readableEnumValueExtension, 'getReadableEnumValue'])],
             $this->readableEnumValueExtension->getFilters()
         );
     }
@@ -50,7 +46,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataProviderForGetReadableEnumValueTest
      */
-    public function testGetReadableEnumValue($expectedReadableValue, $enumValue, $enumType)
+    public function testGetReadableEnumValue(string $expectedReadableValue, string $enumValue, string $enumType)
     {
         $this->assertEquals(
             $expectedReadableValue,
@@ -58,7 +54,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function dataProviderForGetReadableEnumValueTest()
+    public function dataProviderForGetReadableEnumValueTest(): array
     {
         return [
             ['Point Guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'],
