@@ -28,7 +28,8 @@ class FreshDoctrineEnumBundle extends Bundle
     {
         parent::boot();
 
-        $doctrine = $this->container->get(Registry::class);
+        /** @var Registry $doctrine */
+        $doctrine = $this->container->get('doctrine');
 
         /** @var \Doctrine\DBAL\Connection $connection */
         foreach ($doctrine->getConnections() as $connection) {

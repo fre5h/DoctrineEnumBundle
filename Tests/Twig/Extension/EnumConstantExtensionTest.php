@@ -46,7 +46,7 @@ class EnumConstantExtensionTest extends TestCase
     /**
      * @dataProvider dataProviderForGetReadableEnumValueTest
      */
-    public function testGetEnumConstant(string $expectedValueOfConstant, string $enumConstant, string $enumType)
+    public function testGetEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType)
     {
         $this->assertEquals(
             $expectedValueOfConstant,
