@@ -34,7 +34,7 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
      * @param string|null $enumValue
      * @param string|null $enumType
      *
-     * @return string
+     * @return string|null
      *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
@@ -42,7 +42,7 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
      * @throws ValueIsNotFoundInAnyRegisteredEnumTypeException
      * @throws \InvalidArgumentException
      */
-    public function getReadableEnumValue(?string $enumValue, ?string $enumType = null): string
+    public function getReadableEnumValue(?string $enumValue, ?string $enumType = null): ?string
     {
         if (!empty($this->registeredEnumTypes) && \is_array($this->registeredEnumTypes)) {
             if (null === $enumValue) {
