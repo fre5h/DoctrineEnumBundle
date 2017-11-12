@@ -10,7 +10,6 @@
 
 namespace Fresh\DoctrineEnumBundle;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -32,7 +31,7 @@ class FreshDoctrineEnumBundle extends Bundle
     {
         parent::boot();
 
-        $doctrine = $this->container->get(Registry::class);
+        $doctrine = $this->container->get('doctrine');
 
         /** @var \Doctrine\DBAL\Connection $connection */
         foreach ($doctrine->getConnections() as $connection) {
