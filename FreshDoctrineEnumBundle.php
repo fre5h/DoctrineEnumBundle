@@ -25,13 +25,14 @@ class FreshDoctrineEnumBundle extends Bundle
      * {@inheritdoc}
      *
      * @throws \Doctrine\DBAL\DBALException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
      */
     public function boot()
     {
         parent::boot();
 
-        /** @var Registry $doctrine */
-        $doctrine = $this->container->get('doctrine');
+        $doctrine = $this->container->get(Registry::class);
 
         /** @var \Doctrine\DBAL\Connection $connection */
         foreach ($doctrine->getConnections() as $connection) {

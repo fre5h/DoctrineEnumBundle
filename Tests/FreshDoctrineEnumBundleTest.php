@@ -44,7 +44,7 @@ class FreshDoctrineEnumBundleTest extends TestCase
 
         $this->container->expects($this->once())
                         ->method('get')
-                        ->with('doctrine')
+                        ->with(Registry::class)
                         ->willReturn($this->doctrine);
 
     }

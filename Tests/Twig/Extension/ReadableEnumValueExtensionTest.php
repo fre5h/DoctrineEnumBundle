@@ -14,7 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
-use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension;
+use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueTwigExtension;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,12 +24,12 @@ use PHPUnit\Framework\TestCase;
  */
 class ReadableEnumValueExtensionTest extends TestCase
 {
-    /** @var ReadableEnumValueExtension */
+    /** @var ReadableEnumValueTwigExtension */
     private $readableEnumValueExtension;
 
     public function setUp()
     {
-        $this->readableEnumValueExtension = new ReadableEnumValueExtension([
+        $this->readableEnumValueExtension = new ReadableEnumValueTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
         ]);
@@ -95,7 +95,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     public function testNoRegisteredEnumTypesException()
     {
         // Create ReadableEnumValueExtension without any registered ENUM type
-        $extension = new ReadableEnumValueExtension([]);
+        $extension = new ReadableEnumValueTwigExtension([]);
         $extension->getReadableEnumValue(BasketballPositionType::POINT_GUARD, 'BasketballPositionType');
     }
 }

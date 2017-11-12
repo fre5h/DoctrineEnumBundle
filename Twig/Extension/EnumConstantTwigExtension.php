@@ -16,20 +16,21 @@ use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsFoundInFewRegisteredEn
 use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegisteredEnumTypeException;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
+use Twig\TwigFilter;
 
 /**
  * EnumConstantExtension.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class EnumConstantExtension extends AbstractEnumExtension
+class EnumConstantTwigExtension extends AbstractEnumTwigExtension
 {
     /**
      * {@inheritdoc}
      */
     public function getFilters(): array
     {
-        return [new \Twig_Filter('enum_constant', [$this, 'getEnumConstant'])];
+        return [new TwigFilter('enum_constant', [$this, 'getEnumConstant'])];
     }
 
     /**

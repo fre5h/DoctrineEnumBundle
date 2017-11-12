@@ -16,20 +16,21 @@ use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException
 use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsFoundInFewRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsNotFoundInAnyRegisteredEnumTypeException;
+use Twig\TwigFilter;
 
 /**
  * ReadableEnumValueExtension returns the readable variant of ENUM value.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class ReadableEnumValueExtension extends AbstractEnumExtension
+class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
 {
     /**
      * {@inheritdoc}
      */
     public function getFilters(): array
     {
-        return [new \Twig_Filter('readable_enum', [$this, 'getReadableEnumValue'])];
+        return [new TwigFilter('readable_enum', [$this, 'getReadableEnumValue'])];
     }
 
     /**

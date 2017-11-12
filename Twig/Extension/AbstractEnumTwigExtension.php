@@ -15,13 +15,14 @@ namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
+use Twig\Extension\AbstractExtension;
 
 /**
- * AbstractEnumExtension.
+ * AbstractEnumTwigExtension.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-abstract class AbstractEnumExtension extends \Twig_Extension
+abstract class AbstractEnumTwigExtension extends AbstractExtension
 {
     /** @var AbstractEnumType[] */
     protected $registeredEnumTypes = [];

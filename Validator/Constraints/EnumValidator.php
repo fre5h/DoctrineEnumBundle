@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
- * EnumValidator validates that the value is one of the expected values.
+ * EnumValidator validates that the value is one of the expected ENUM values.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */

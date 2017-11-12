@@ -14,7 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
-use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantExtension;
+use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,12 +24,12 @@ use PHPUnit\Framework\TestCase;
  */
 class EnumConstantExtensionTest extends TestCase
 {
-    /** @var EnumConstantExtension */
+    /** @var EnumConstantTwigExtension */
     private $enumConstantExtension;
 
     public function setUp()
     {
-        $this->enumConstantExtension = new EnumConstantExtension([
+        $this->enumConstantExtension = new EnumConstantTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
         ]);
@@ -94,7 +94,7 @@ class EnumConstantExtensionTest extends TestCase
     public function testNoRegisteredEnumTypesException()
     {
         // Create EnumConstantExtension without any registered ENUM type
-        $extension = new EnumConstantExtension([]);
+        $extension = new EnumConstantTwigExtension([]);
         $extension->getEnumConstant(BasketballPositionType::POINT_GUARD, 'BasketballPositionType');
     }
 }
