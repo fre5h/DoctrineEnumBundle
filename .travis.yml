@@ -20,7 +20,7 @@ install:
     - composer install --no-interaction --prefer-dist
 
 script:
-  - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore=vendor --ignore=Tests --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony2
+  - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony2
   - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
 
 after_success:
