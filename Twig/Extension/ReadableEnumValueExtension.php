@@ -49,6 +49,9 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
     public function getReadableEnumValue($enumValue, $enumType = null)
     {
         if (!empty($this->registeredEnumTypes) && is_array($this->registeredEnumTypes)) {
+            if (is_null($enumValue)) {
+                return $enumValue;
+            }
             // If ENUM type was set, e.g. {{ player.position|readable_enum('BasketballPositionType') }}
             if (!empty($enumType)) {
                 if (!isset($this->registeredEnumTypes[$enumType])) {
