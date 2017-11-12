@@ -46,9 +46,8 @@ class FreshDoctrineEnumExtensionTest extends TestCase
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        // Check that private services are not reachable from container
-        $this->assertFalse($this->container->has(ReadableEnumValueTwigExtension::class));
-        $this->assertFalse($this->container->has(EnumConstantTwigExtension::class));
-        $this->assertFalse($this->container->has(EnumTypeGuesser::class));
+        $this->assertFalse($this->container->findDefinition(ReadableEnumValueTwigExtension::class)->isPublic());
+        $this->assertFalse($this->container->findDefinition(EnumConstantTwigExtension::class)->isPublic());
+        $this->assertFalse($this->container->findDefinition(EnumTypeGuesser::class)->isPublic());
     }
 }
