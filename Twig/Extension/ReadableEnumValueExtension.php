@@ -46,50 +46,54 @@ class ReadableEnumValueExtension extends AbstractEnumExtension
      */
     public function getReadableEnumValue(?string $enumValue, ?string $enumType = null): ?string
     {
-        if (!empty($this->registeredEnumTypes) && \is_array($this->registeredEnumTypes)) {
+        if ($this->hasRegisteredEnumTypes()) {
             if (null === $enumValue) {
                 return $enumValue;
             }
+
             // If ENUM type was set, e.g. {{ player.position|readable_enum('BasketballPositionType') }}
             if (null !== $enumType) {
-                if (!isset($this->registeredEnumTypes[$enumType])) {
-                    throw new EnumTypeIsNotRegisteredException(\sprintf('ENUM type "%s" is not registered.', $enumType));
-                }
+                $this->throwExceptionIfEnumTypeIsNotRegistered($enumType);
 
-                /** @var $enumTypeClass \Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType */
-                $enumTypeClass = $this->registeredEnumTypes[$enumType];
-
-                return $enumTypeClass::getReadableValue($enumValue);
+                return $this->registeredEnumTypes[$enumType]::getReadableValue($enumValue);
             }
 
             // If ENUM type wasn't set, e.g. {{ player.position|readable_enum }}
-            $occurrences = [];
-            // Check if value exists in registered ENUM types
-            foreach ($this->registeredEnumTypes as $registeredEnumType) {
-                if ($registeredEnumType::isValueExist($enumValue)) {
-                    $occurrences[] = $registeredEnumType;
-                }
+            $this->findOccurrences($enumValue);
+
+            if ($this->onlyOneOccurrenceFound()) {
+                return \array_pop($this->occurrences)::getReadableValue($enumValue);
             }
 
-            // If found only one occurrence, then we know exactly which ENUM type
-            if (1 === \count($occurrences)) {
-                $enumTypeClass = \array_pop($occurrences);
-
-                return $enumTypeClass::getReadableValue($enumValue);
+            if ($this->moreThanOneOccurrenceFound()) {
+                throw new ValueIsFoundInFewRegisteredEnumTypesException(
+                    \sprintf(
+                        'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
+                        $enumValue
+                    )
+                );
             }
-            if (1 < \count($occurrences)) {
-                throw new ValueIsFoundInFewRegisteredEnumTypesException(\sprintf(
-                    'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
+
+            throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(
+                \sprintf(
+                    'Value "%s" was not found in any registered ENUM type.',
                     $enumValue
-                ));
-            }
-
-            throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(\sprintf(
-                'Value "%s" wasn\'t found in any registered ENUM type.',
-                $enumValue
-            ));
+                )
+            );
         }
 
-        throw new NoRegisteredEnumTypesException('There are no registered ENUM types.');
+        throw $this->createNoRegisteredEnumTypesException();
+    }
+
+    /**
+     * @param string $enumValue
+     */
+    private function findOccurrences(string $enumValue): void
+    {
+        foreach ($this->registeredEnumTypes as $registeredEnumType) {
+            if ($registeredEnumType::isValueExist($enumValue)) {
+                $this->occurrences[] = $registeredEnumType;
+            }
+        }
     }
 }

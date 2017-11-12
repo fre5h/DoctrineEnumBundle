@@ -1,8 +1,3 @@
-#parameters:
-#    twig.extension.readable_enum_value.class: Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension
-#    twig.extension.enum_constant.class: Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantExtension
-#    enum_type_guesser.class: Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser
-
 services:
     _defaults:
         autowire: true
@@ -15,20 +10,6 @@ services:
             $registeredTypes: "%doctrine.dbal.connection_factory.types%"
         tags:
             - 'twig.extension'
-
-#    twig.extension.readable_enum_value:
-#        class: "%twig.extension.readable_enum_value.class%"
-#        arguments:
-#            - "%doctrine.dbal.connection_factory.types%"
-#        tags:
-#            - { name: twig.extension }
-#
-#    twig.extension.enum_constant:
-#        class: "%twig.extension.enum_constant.class%"
-#        arguments:
-#            - "%doctrine.dbal.connection_factory.types%"
-#        tags:
-#            - { name: twig.extension }
 
     Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser:
         class: Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser

@@ -47,45 +47,54 @@ class EnumConstantExtension extends AbstractEnumExtension
      */
     public function getEnumConstant(?string $enumConstant, ?string $enumType = null): string
     {
-        if (!empty($this->registeredEnumTypes) && \is_array($this->registeredEnumTypes)) {
+        if ($this->hasRegisteredEnumTypes()) {
             // If ENUM type was set, e.g. {{ 'CENTER'|enum_constant('BasketballPositionType') }}
             if (null !== $enumType) {
-                if (!isset($this->registeredEnumTypes[$enumType])) {
-                    throw new EnumTypeIsNotRegisteredException(\sprintf('ENUM type "%s" is not registered.', $enumType));
-                }
+                $this->throwExceptionIfEnumTypeIsNotRegistered($enumType);
 
                 return \constant($this->registeredEnumTypes[$enumType].'::'.$enumConstant);
             }
 
             // If ENUM type wasn't set, e.g. {{ 'CENTER'|enum_constant }}
-            $occurrences = [];
-            // Check if constant exists in registered ENUM types
-            foreach ($this->registeredEnumTypes as $registeredEnumType) {
-                $reflection = new \ReflectionClass($registeredEnumType);
-                if ($reflection->hasConstant($enumConstant)) {
-                    $occurrences[] = $registeredEnumType;
-                }
+            $this->findOccurrences($enumConstant);
+
+            if ($this->onlyOneOccurrenceFound()) {
+                return \constant(\array_pop($this->occurrences).'::'.$enumConstant);
             }
 
-            // If found only one occurrence, then we know exactly which ENUM type
-            if (1 === \count($occurrences)) {
-                $enumClassName = \array_pop($occurrences);
-
-                return \constant($enumClassName.'::'.$enumConstant);
+            if ($this->moreThanOneOccurrenceFound()) {
+                throw new ConstantIsFoundInFewRegisteredEnumTypesException(
+                    \sprintf(
+                        'Constant "%s" is found in few registered ENUM types. You should manually set the appropriate one.',
+                        $enumConstant
+                    )
+                );
             }
-            if (1 < \count($occurrences)) {
-                throw new ConstantIsFoundInFewRegisteredEnumTypesException(\sprintf(
-                    'Constant "%s" is found in few registered ENUM types. You should manually set the appropriate one.',
+
+            throw new ConstantIsNotFoundInAnyRegisteredEnumTypeException(
+                \sprintf(
+                    'Constant "%s" was not found in any registered ENUM type.',
                     $enumConstant
-                ));
-            }
-
-            throw new ConstantIsNotFoundInAnyRegisteredEnumTypeException(\sprintf(
-                'Constant "%s" wasn\'t found in any registered ENUM type.',
-                $enumConstant
-            ));
+                )
+            );
         }
 
-        throw new NoRegisteredEnumTypesException('There are no registered ENUM types.');
+        throw $this->createNoRegisteredEnumTypesException();
+    }
+
+    /**
+     * @param string $enumConstant
+     *
+     * @throws \ReflectionException
+     */
+    private function findOccurrences(string $enumConstant): void
+    {
+        foreach ($this->registeredEnumTypes as $registeredEnumType) {
+            $reflection = new \ReflectionClass($registeredEnumType);
+
+            if ($reflection->hasConstant($enumConstant)) {
+                $this->occurrences[] = $registeredEnumType;
+            }
+        }
     }
 }
