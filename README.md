@@ -29,11 +29,11 @@ Registration in Kernel for Symfony 4.0 is done automatically.
 
 ##### Choose the appropriate version if you need
 
-| Bundle Version (X.Y.Z) | PHP     | Symfony            | Doctrine DBAL | Comment                |
-|:----------------------:|:-------:|:------------------:|:-------------:|:-----------------------|
-| 6.0.*                  | >= 7.1  | >= 4.0             | >= 2.6        | **Actual version**     |
-| 5.1.*                  | >= 5.6  | >= 3.2, <= 3.4     | >= 2.5        | *Bug fix support only* |
-| 4.8.*                  | >= 5.4  | >= 2.6, <= 3.1     | >= 2.2        | ~~Legacy version~~     |
+| Bundle Version (X.Y.Z) | PHP             | Symfony            | Doctrine DBAL | Comment            |
+|:----------------------:|:---------------:|:------------------:|:-------------:|:-------------------|
+| 6.0.*                  | >= 7.1          | >= 4.0             | >= 2.6        | *Coming soon*      |
+| 5.2.*                  | >= 5.6, <= 7.1  | >= 3.2, <= 3.4     | >= 2.5        | **Actual version** |
+| 4.8.*                  | >= 5.4, <= 5.5  | >= 2.6, <= 3.1     | >= 2.2        | ~~Legacy version~~ |
 
 ## Using
 
