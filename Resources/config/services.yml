@@ -3,17 +3,11 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            $registeredTypes: "%doctrine.dbal.connection_factory.types%"
 
     Fresh\DoctrineEnumBundle\Twig\Extension\:
         resource: '../../Twig/Extension/'
-        arguments:
-            $registeredTypes: "%doctrine.dbal.connection_factory.types%"
-        tags:
-            - 'twig.extension'
 
     Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser:
         class: Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser
-        arguments:
-            $registeredTypes: "%doctrine.dbal.connection_factory.types%"
-        tags:
-            - 'form.type_guesser'
