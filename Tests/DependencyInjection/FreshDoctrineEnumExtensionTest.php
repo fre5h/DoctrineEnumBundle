@@ -16,6 +16,7 @@ use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
 use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueTwigExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * FreshDoctrineEnumExtensionTest.
@@ -39,15 +40,22 @@ class FreshDoctrineEnumExtensionTest extends TestCase
 
     public function testLoadExtension()
     {
-        // Add some dummy required parameter and service
-        $this->container->setParameter('doctrine.dbal.connection_factory.types', []);
-        $this->container->set('doctrine', new \stdClass());
+        $this->container->setParameter('doctrine.dbal.connection_factory.types', []); // Just add a dummy required parameter
 
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        $this->assertFalse($this->container->findDefinition(ReadableEnumValueTwigExtension::class)->isPublic());
-        $this->assertFalse($this->container->findDefinition(EnumConstantTwigExtension::class)->isPublic());
-        $this->assertFalse($this->container->findDefinition(EnumTypeGuesser::class)->isPublic());
+        $this->assertArrayHasKey(EnumTypeGuesser::class, $this->container->getRemovedIds());
+        $this->assertArrayHasKey(ReadableEnumValueTwigExtension::class, $this->container->getRemovedIds());
+        $this->assertArrayHasKey(EnumConstantTwigExtension::class, $this->container->getRemovedIds());
+
+        $this->assertArrayNotHasKey(EnumTypeGuesser::class, $this->container->getDefinitions());
+        $this->assertArrayNotHasKey(ReadableEnumValueTwigExtension::class, $this->container->getDefinitions());
+        $this->assertArrayNotHasKey(EnumConstantTwigExtension::class, $this->container->getDefinitions());
+
+        $this->expectException(ServiceNotFoundException::class);
+        $this->container->get(EnumTypeGuesser::class);
+        $this->container->get(ReadableEnumValueTwigExtension::class);
+        $this->container->get(EnumConstantTwigExtension::class);
     }
 }
