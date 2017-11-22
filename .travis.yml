@@ -6,10 +6,11 @@ php:
   - 7.1
 
 env:
-  - SYMFONY_VERSION=4.0.x-dev
+  - SYMFONY_VERSION=^4.0
 
 before_install:
   - composer self-update
+  - if [ "$SYMFONY_VERSION" = "^4.0" ]; then composer config minimum-stability dev; composer config prefer-stable true; fi
   - composer require --no-update symfony/symfony "$SYMFONY_VERSION"
 
 install:
