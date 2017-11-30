@@ -4,17 +4,17 @@ sudo: false
 
 php:
   - 7.1
+  - 7.2
 
 env:
-  - SYMFONY_VERSION=^4.0
+  - SYMFONY_VERSION=4.0.*
 
 before_install:
   - composer self-update
-  - if [ "$SYMFONY_VERSION" = "^4.0" ]; then composer config minimum-stability dev; composer config prefer-stable true; fi
   - composer require --no-update symfony/symfony "$SYMFONY_VERSION"
 
 install:
-    - composer install --no-interaction --prefer-dist
+  - composer install --no-interaction --prefer-dist
 
 script:
   - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
