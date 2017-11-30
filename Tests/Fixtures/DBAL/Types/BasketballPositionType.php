@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,15 +15,15 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 /**
  * BasketballPositionType.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
 final class BasketballPositionType extends AbstractEnumType
 {
-    const POINT_GUARD = 'PG';
-    const SHOOTING_GUARD = 'SG';
-    const SMALL_FORWARD = 'SF';
-    const POWER_FORWARD = 'PF';
-    const CENTER = 'C';
+    public const POINT_GUARD = 'PG';
+    public const SHOOTING_GUARD = 'SG';
+    public const SMALL_FORWARD = 'SF';
+    public const POWER_FORWARD = 'PF';
+    public const CENTER = 'C';
 
     protected $name = 'BasketballPositionType';
 

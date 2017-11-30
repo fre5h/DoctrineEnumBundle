@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,19 +15,19 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 /**
  * MapLocationType.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
 final class MapLocationType extends AbstractEnumType
 {
-    const NORTH = 'N';
-    const EAST = 'E';
-    const SOUTH = 'S';
-    const WEST = 'W';
-    const CENTER = 'C';
-    const NORTH_WEST = 'NW';
-    const NORTH_EAST = 'NE';
-    const SOUTH_WEST = 'SW';
-    const SOUTH_EAST = 'SE';
+    public const NORTH = 'N';
+    public const EAST = 'E';
+    public const SOUTH = 'S';
+    public const WEST = 'W';
+    public const CENTER = 'C';
+    public const NORTH_WEST = 'NW';
+    public const NORTH_EAST = 'NE';
+    public const SOUTH_WEST = 'SW';
+    public const SOUTH_EAST = 'SE';
 
     protected $name = 'MapLocationType';
 

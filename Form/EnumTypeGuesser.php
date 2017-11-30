@@ -2,17 +2,19 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Form;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
-use Fresh\DoctrineEnumBundle\Exception\EnumTypeIsRegisteredButClassDoesNotExistException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;
@@ -21,14 +23,12 @@ use Symfony\Component\Form\Guess\TypeGuess;
 /**
  * EnumTypeGuesser.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  * @author Jaik Dean <jaik@fluoresce.co>
  */
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 {
-    /**
-     * @var AbstractEnumType[]
-     */
+    /** @var AbstractEnumType[] */
     protected $registeredEnumTypes = [];
 
     /**
@@ -58,7 +58,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         // If no metadata for this class - can't guess anything
         if (!$classMetadata) {
-            return;
+            return null;
         }
 
         /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo $metadata */
@@ -67,13 +67,13 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         // This is not one of the registered ENUM types
         if (!isset($this->registeredEnumTypes[$fieldType])) {
-            return;
+            return null;
         }
 
         $registeredEnumTypeFQCN = $this->registeredEnumTypes[$fieldType];
 
-        if (!class_exists($registeredEnumTypeFQCN)) {
-            throw new EnumTypeIsRegisteredButClassDoesNotExistException(sprintf(
+        if (!\class_exists($registeredEnumTypeFQCN)) {
+            throw new EnumTypeIsRegisteredButClassDoesNotExistException(\sprintf(
                 'ENUM type "%s" is registered as "%s", but that class does not exist',
                 $fieldType,
                 $registeredEnumTypeFQCN
@@ -81,7 +81,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
         }
 
         if (!is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
-            return;
+            return null;
         }
 
         // Get the choices from the fully qualified class name

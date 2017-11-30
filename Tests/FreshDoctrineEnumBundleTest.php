@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,14 +14,15 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
  * FreshDoctrineEnumBundleTest.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
+class FreshDoctrineEnumBundleTest extends TestCase
 {
     /** @var Container|\PHPUnit_Framework_MockObject_MockObject */
     private $container;
@@ -50,8 +51,7 @@ class FreshDoctrineEnumBundleTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        unset($this->container);
-        unset($this->doctrine);
+        unset($this->container, $this->doctrine);
     }
 
     public function testEnumMappingRegistration()

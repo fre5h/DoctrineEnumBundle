@@ -2,31 +2,34 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
-use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantExtension;
+use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
+use PHPUnit\Framework\TestCase;
 
 /**
  * EnumConstantExtensionTest.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
+class EnumConstantExtensionTest extends TestCase
 {
-    /** @var EnumConstantExtension */
+    /** @var EnumConstantTwigExtension */
     private $enumConstantExtension;
 
     public function setUp()
     {
-        $this->enumConstantExtension = new EnumConstantExtension([
+        $this->enumConstantExtension = new EnumConstantTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
         ]);
@@ -43,7 +46,7 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataProviderForGetReadableEnumValueTest
      */
-    public function testGetEnumConstant($expectedValueOfConstant, $enumConstant, $enumType)
+    public function testGetEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType)
     {
         $this->assertEquals(
             $expectedValueOfConstant,
@@ -51,7 +54,7 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function dataProviderForGetReadableEnumValueTest()
+    public function dataProviderForGetReadableEnumValueTest(): array
     {
         return [
             ['PG', 'POINT_GUARD', 'BasketballPositionType'],
@@ -62,7 +65,7 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException
      */
     public function testEnumTypeIsNotRegisteredException()
     {
@@ -70,7 +73,7 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ConstantIsFoundInFewRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsFoundInFewRegisteredEnumTypesException
      */
     public function testConstantIsFoundInFewRegisteredEnumTypesException()
     {
@@ -78,7 +81,7 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ConstantIsNotFoundInAnyRegisteredEnumTypeException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegisteredEnumTypeException
      */
     public function testConstantIsNotFoundInAnyRegisteredEnumTypeException()
     {
@@ -86,12 +89,12 @@ class EnumConstantExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException
      */
     public function testNoRegisteredEnumTypesException()
     {
         // Create EnumConstantExtension without any registered ENUM type
-        $extension = new EnumConstantExtension([]);
+        $extension = new EnumConstantTwigExtension([]);
         $extension->getEnumConstant(BasketballPositionType::POINT_GUARD, 'BasketballPositionType');
     }
 }

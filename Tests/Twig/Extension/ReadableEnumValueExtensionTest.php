@@ -2,33 +2,34 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
-use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueExtension;
+use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueTwigExtension;
+use PHPUnit\Framework\TestCase;
 
 /**
  * ReadableEnumValueExtensionTest.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
+class ReadableEnumValueExtensionTest extends TestCase
 {
-    /**
-     * @var ReadableEnumValueExtension
-     */
+    /** @var ReadableEnumValueTwigExtension */
     private $readableEnumValueExtension;
 
     public function setUp()
     {
-        $this->readableEnumValueExtension = new ReadableEnumValueExtension([
+        $this->readableEnumValueExtension = new ReadableEnumValueTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
         ]);
@@ -37,12 +38,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     public function testGetFilters()
     {
         $this->assertEquals(
-            [
-                new \Twig_SimpleFilter(
-                    'readable_enum',
-                    [$this->readableEnumValueExtension, 'getReadableEnumValue']
-                ),
-            ],
+            [new \Twig_SimpleFilter('readable_enum', [$this->readableEnumValueExtension, 'getReadableEnumValue'])],
             $this->readableEnumValueExtension->getFilters()
         );
     }
@@ -50,7 +46,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataProviderForGetReadableEnumValueTest
      */
-    public function testGetReadableEnumValue($expectedReadableValue, $enumValue, $enumType)
+    public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, ?string $enumType)
     {
         $this->assertEquals(
             $expectedReadableValue,
@@ -58,7 +54,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function dataProviderForGetReadableEnumValueTest()
+    public function dataProviderForGetReadableEnumValueTest(): array
     {
         return [
             ['Point Guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'],
@@ -70,7 +66,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumTypeIsNotRegisteredException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException
      */
     public function testEnumTypeIsNotRegisteredException()
     {
@@ -78,7 +74,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ValueIsFoundInFewRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsFoundInFewRegisteredEnumTypesException
      */
     public function testValueIsFoundInFewRegisteredEnumTypesException()
     {
@@ -86,7 +82,7 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\ValueIsNotFoundInAnyRegisteredEnumTypeException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsNotFoundInAnyRegisteredEnumTypeException
      */
     public function testValueIsNotFoundInAnyRegisteredEnumTypeException()
     {
@@ -94,12 +90,12 @@ class ReadableEnumValueExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException
+     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException
      */
     public function testNoRegisteredEnumTypesException()
     {
         // Create ReadableEnumValueExtension without any registered ENUM type
-        $extension = new ReadableEnumValueExtension([]);
+        $extension = new ReadableEnumValueTwigExtension([]);
         $extension->getReadableEnumValue(BasketballPositionType::POINT_GUARD, 'BasketballPositionType');
     }
 }

@@ -2,11 +2,13 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
@@ -16,7 +18,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 /**
  * ENUM Constraint.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  *
  * @Annotation
  */
@@ -36,7 +38,7 @@ class Enum extends Choice
             /** @var AbstractEnumType $entity */
             $entity = $options['entity'];
 
-            if (is_subclass_of($entity, AbstractEnumType::class)) {
+            if (\is_subclass_of($entity, AbstractEnumType::class)) {
                 $this->choices = $entity::getValues();
             }
         }
@@ -47,16 +49,8 @@ class Enum extends Choice
     /**
      * {@inheritdoc}
      */
-    public function getRequiredOptions()
+    public function getRequiredOptions(): array
     {
         return ['entity'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefaultOption()
-    {
-        return 'choices';
     }
 }

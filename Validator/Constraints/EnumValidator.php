@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,15 +15,15 @@ use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
- * EnumValidator validates that the value is one of the expected values.
+ * EnumValidator validates that the value is one of the expected ENUM values.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
 class EnumValidator extends ChoiceValidator
 {
     /**
-     * @param mixed      $value
-     * @param Constraint $constraint
+     * @param mixed           $value
+     * @param Constraint|Enum $constraint
      *
      * @throws ConstraintDefinitionException
      */
@@ -33,8 +33,7 @@ class EnumValidator extends ChoiceValidator
             throw new ConstraintDefinitionException('Entity not specified.');
         }
 
-        $entity = $constraint->entity;
-        $constraint->choices = $entity::getValues();
+        $constraint->choices = $constraint->entity::getValues();
 
         parent::validate($value, $constraint);
     }
