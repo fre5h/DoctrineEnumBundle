@@ -35,7 +35,7 @@
         "twig/twig": "~2.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "6.4.*",
+        "phpunit/phpunit": "6.5.*",
         "escapestudios/symfony2-coding-standard": "3.0.*"
     },
     "autoload": {
