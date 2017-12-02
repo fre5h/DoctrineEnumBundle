@@ -16,6 +16,7 @@ use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\InheritedType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NotAChildType;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;
@@ -30,7 +31,7 @@ class EnumTypeGuesserTest extends TestCase
 {
     public function testNullResultWhenClassMetadataNotFound()
     {
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var EnumTypeGuesser|MockObject */
         $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
             ->disableOriginalConstructor()
             ->setMethods(['getMetadata'])
@@ -45,7 +46,7 @@ class EnumTypeGuesserTest extends TestCase
 
     public function testNullResultWhenEnumTypeNotRegistered()
     {
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var EnumTypeGuesser|MockObject */
         $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
                                 ->disableOriginalConstructor()
                                 ->setMethods(['getMetadata'])
@@ -81,7 +82,7 @@ class EnumTypeGuesserTest extends TestCase
             ]
         ];
 
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var EnumTypeGuesser|MockObject */
         $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])
@@ -114,7 +115,7 @@ class EnumTypeGuesserTest extends TestCase
             ]
         ];
 
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var EnumTypeGuesser|MockObject */
         $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])
@@ -147,7 +148,7 @@ class EnumTypeGuesserTest extends TestCase
             ]
         ];
 
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var EnumTypeGuesser|MockObject */
         $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])
@@ -193,7 +194,7 @@ class EnumTypeGuesserTest extends TestCase
             ]
         ];
 
-        /** @var EnumTypeGuesser|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var EnumTypeGuesser|MockObject */
         $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
                                 ->setConstructorArgs([$managerRegistry, $registeredTypes])
                                 ->setMethods(['getMetadata'])

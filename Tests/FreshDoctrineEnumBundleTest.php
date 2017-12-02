@@ -14,6 +14,7 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -24,10 +25,10 @@ use Symfony\Component\DependencyInjection\Container;
  */
 class FreshDoctrineEnumBundleTest extends TestCase
 {
-    /** @var Container|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var Container|MockObject */
     private $container;
 
-    /** @@var Registry|\PHPUnit_Framework_MockObject_MockObject */
+    /** @@var Registry|MockObject */
     private $doctrine;
 
     protected function setUp()
@@ -57,8 +58,8 @@ class FreshDoctrineEnumBundleTest extends TestCase
     public function testEnumMappingRegistration()
     {
         /**
-         * @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformAbc
-         * @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformDef
+         * @var AbstractPlatform|MockObject $databasePlatformAbc
+         * @var AbstractPlatform|MockObject $databasePlatformDef
          */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
         $databasePlatformDef = $this->getMockForAbstractClass(AbstractPlatform::class);
@@ -98,7 +99,7 @@ class FreshDoctrineEnumBundleTest extends TestCase
 
     public function testAlreadyRegisteredEnumMapping()
     {
-        /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformAbc */
+        /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
         $connectionAbc = $this->getMockBuilder(Connection::class)
@@ -126,7 +127,7 @@ class FreshDoctrineEnumBundleTest extends TestCase
 
     public function testEnumMappingReregistrationToString()
     {
-        /** @var AbstractPlatform|\PHPUnit_Framework_MockObject_MockObject $databasePlatformAbc */
+        /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
         $connectionAbc = $this->getMockBuilder(Connection::class)
