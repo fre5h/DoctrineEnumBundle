@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,7 +18,7 @@ use Fresh\DoctrineEnumBundle\Exception\NoRegisteredEnumTypesException;
 /**
  * EnumConstantExtension.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
 class EnumConstantExtension extends AbstractEnumExtension
 {
@@ -43,14 +43,14 @@ class EnumConstantExtension extends AbstractEnumExtension
      */
     public function getEnumConstant($enumConstant, $enumType = null)
     {
-        if (!empty($this->registeredEnumTypes) && is_array($this->registeredEnumTypes)) {
+        if (!empty($this->registeredEnumTypes) && \is_array($this->registeredEnumTypes)) {
             // If ENUM type was set, e.g. {{ 'CENTER'|enum_constant('BasketballPositionType') }}
             if (!empty($enumType)) {
                 if (!isset($this->registeredEnumTypes[$enumType])) {
-                    throw new EnumTypeIsNotRegisteredException(sprintf('ENUM type "%s" is not registered.', $enumType));
+                    throw new EnumTypeIsNotRegisteredException(\sprintf('ENUM type "%s" is not registered.', $enumType));
                 }
 
-                return constant($this->registeredEnumTypes[$enumType].'::'.$enumConstant);
+                return \constant($this->registeredEnumTypes[$enumType].'::'.$enumConstant);
             } else {
                 // If ENUM type wasn't set, e.g. {{ 'CENTER'|enum_constant }}
                 $occurrences = [];
@@ -63,17 +63,17 @@ class EnumConstantExtension extends AbstractEnumExtension
                 }
 
                 // If found only one occurrence, then we know exactly which ENUM type
-                if (1 == count($occurrences)) {
-                    $enumClassName = array_pop($occurrences);
+                if (1 == \count($occurrences)) {
+                    $enumClassName = \array_pop($occurrences);
 
-                    return constant($enumClassName.'::'.$enumConstant);
-                } elseif (1 < count($occurrences)) {
-                    throw new ConstantIsFoundInFewRegisteredEnumTypesException(sprintf(
+                    return \constant($enumClassName.'::'.$enumConstant);
+                } elseif (1 < \count($occurrences)) {
+                    throw new ConstantIsFoundInFewRegisteredEnumTypesException(\sprintf(
                         'Constant "%s" is found in few registered ENUM types. You should manually set the appropriate one.',
                         $enumConstant
                     ));
                 } else {
-                    throw new ConstantIsNotFoundInAnyRegisteredEnumTypeException(sprintf(
+                    throw new ConstantIsNotFoundInAnyRegisteredEnumTypeException(\sprintf(
                         'Constant "%s" wasn\'t found in any registered ENUM type.',
                         $enumConstant
                     ));

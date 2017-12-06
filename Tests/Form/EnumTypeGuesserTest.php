@@ -2,15 +2,15 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Tests\DForm;
+namespace Fresh\DoctrineEnumBundle\Tests\Form;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
 /**
  * EnumTypeGuesserTest.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
 class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
 {
@@ -71,7 +71,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionWhenClassDoesNotExist()
     {
-        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
+        $managerRegistry = $this->getMockBuilder(Registry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
@@ -104,7 +104,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
 
     public function testNullResultWhenIsNotChildOfAbstractEnumType()
     {
-        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
+        $managerRegistry = $this->getMockBuilder(Registry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
@@ -137,7 +137,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
 
     public function testSuccessfulTypeGuessingWithAncestor()
     {
-        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
+        $managerRegistry = $this->getMockBuilder(Registry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
@@ -183,7 +183,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
 
     public function testSuccessfulTypeGuessing()
     {
-        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
+        $managerRegistry = $this->getMockBuilder(Registry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [

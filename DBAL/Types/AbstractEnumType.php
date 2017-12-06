@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,19 +22,18 @@ use Doctrine\DBAL\Types\Type;
  *
  * Provides support of ENUM type for Doctrine in Symfony applications.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  * @author Ben Davies <ben.davies@gmail.com>
  * @author Jaik Dean <jaik@fluoresce.co>
  */
 abstract class AbstractEnumType extends Type
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name = '';
 
     /**
      * @var array Array of ENUM Values, where ENUM values are keys and their readable versions are values
+     *
      * @static
      */
     protected static $choices = [];
@@ -49,7 +48,7 @@ abstract class AbstractEnumType extends Type
         }
 
         if (!isset(static::$choices[$value])) {
-            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM "%s".', $value, $this->getName()));
+            throw new \InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM "%s".', $value, $this->getName()));
         }
 
         return $value;
@@ -60,9 +59,9 @@ abstract class AbstractEnumType extends Type
      */
     public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        $values = implode(
+        $values = \implode(
             ', ',
-            array_map(
+            \array_map(
                 function ($value) {
                     return "'{$value}'";
                 },
@@ -71,14 +70,14 @@ abstract class AbstractEnumType extends Type
         );
 
         if ($platform instanceof SqlitePlatform) {
-            return sprintf('TEXT CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
+            return \sprintf('TEXT CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
         }
 
         if ($platform instanceof PostgreSqlPlatform || $platform instanceof SQLServerPlatform) {
-            return sprintf('VARCHAR(255) CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
+            return \sprintf('VARCHAR(255) CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
         }
 
-        return sprintf('ENUM(%s)', $values);
+        return \sprintf('ENUM(%s)', $values);
     }
 
     /**
@@ -94,7 +93,7 @@ abstract class AbstractEnumType extends Type
      */
     public function getName()
     {
-        return $this->name ?: array_search(get_class($this), self::getTypesMap(), true);
+        return $this->name ?: \array_search(\get_class($this), self::getTypesMap(), true);
     }
 
     /**
@@ -106,7 +105,7 @@ abstract class AbstractEnumType extends Type
      */
     public static function getChoices()
     {
-        return array_flip(static::$choices);
+        return \array_flip(static::$choices);
     }
 
     /**
@@ -118,7 +117,7 @@ abstract class AbstractEnumType extends Type
      */
     public static function getValues()
     {
-        return array_keys(static::$choices);
+        return \array_keys(static::$choices);
     }
 
     /**
@@ -143,7 +142,7 @@ abstract class AbstractEnumType extends Type
     public static function assertValidChoice($value)
     {
         if (!isset(static::$choices[$value])) {
-            throw new \InvalidArgumentException(sprintf('Invalid value "%s" for ENUM type "%s".', $value, get_called_class()));
+            throw new \InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM type "%s".', $value, \get_called_class()));
         }
     }
 
@@ -189,7 +188,7 @@ abstract class AbstractEnumType extends Type
     public function getMappedDatabaseTypes(AbstractPlatform $platform)
     {
         if ($platform instanceof MySqlPlatform) {
-            return array_merge(
+            return \array_merge(
                 parent::getMappedDatabaseTypes($platform),
                 [
                     'enum',
