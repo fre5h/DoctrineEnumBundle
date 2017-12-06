@@ -1,0 +1,11 @@
+parameters:
+    enum_type_guesser.class: Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser
+
+services:
+    enum_type_guesser:
+        class: "%enum_type_guesser.class%"
+        arguments:
+            - "@doctrine"
+            - "%doctrine.dbal.connection_factory.types%"
+        tags:
+            - { name: form.type_guesser }
