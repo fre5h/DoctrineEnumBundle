@@ -11,7 +11,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 [![StyleCI](https://styleci.io/repos/6553368/shield?style=flat-square)](https://styleci.io/repos/6553368)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/fre5h/DoctrineEnumBundle)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/small.png)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/small.png)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)actual
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
 
 ## Supported platforms
@@ -31,7 +31,7 @@ Registration in Kernel for Symfony 4.0 is done automatically.
 
 | Bundle Version (X.Y.Z) | PHP             | Symfony            | Doctrine DBAL | Comment            |
 |:----------------------:|:---------------:|:------------------:|:-------------:|:-------------------|
-| 6.0.*                  | >= 7.1.3        | >= 4.0             | >= 2.6        | **Actual version** |
+| 6.0.*                  | >= 7.1.3        | >= 4.0             | >= 2.6        | **Current version** |
 | 5.2.*                  | >= 5.6, <= 7.1  | >= 3.2, <= 3.4     | >= 2.5        | *Bug fix support*  |
 
 ## Using
