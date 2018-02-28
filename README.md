@@ -31,7 +31,7 @@ Registration in Kernel for Symfony 4.0 is done automatically.
 
 | Bundle Version (X.Y.Z) | PHP             | Symfony            | Doctrine DBAL | Comment            |
 |:----------------------:|:---------------:|:------------------:|:-------------:|:-------------------|
-| 6.0.*                  | >= 7.1.3        | >= 4.0             | >= 2.6        | **Actual version** |
+| 6.0.*                  | >= 7.1.3        | >= 4.0             | >= 2.6        | **Current version** |
 | 5.2.*                  | >= 5.6, <= 7.1  | >= 3.2, <= 3.4     | >= 2.5        | *Bug fix support*  |
 
 ## Using
