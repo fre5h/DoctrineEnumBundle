@@ -10,7 +10,7 @@
 
 namespace Fresh\DoctrineEnumBundle\Tests\Form;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
@@ -71,7 +71,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionWhenClassDoesNotExist()
     {
-        $managerRegistry = $this->getMockBuilder(Registry::class)
+        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
@@ -104,7 +104,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
 
     public function testNullResultWhenIsNotChildOfAbstractEnumType()
     {
-        $managerRegistry = $this->getMockBuilder(Registry::class)
+        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
@@ -137,7 +137,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
 
     public function testSuccessfulTypeGuessingWithAncestor()
     {
-        $managerRegistry = $this->getMockBuilder(Registry::class)
+        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
@@ -183,7 +183,7 @@ class EnumTypeGuesserTest extends \PHPUnit_Framework_TestCase
 
     public function testSuccessfulTypeGuessing()
     {
-        $managerRegistry = $this->getMockBuilder(Registry::class)
+        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
                                 ->getMock();
         $registeredTypes = [
