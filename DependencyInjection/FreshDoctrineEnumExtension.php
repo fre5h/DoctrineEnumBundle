@@ -13,6 +13,7 @@ namespace Fresh\DoctrineEnumBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Form\FormTypeGuesserInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -30,7 +31,7 @@ class FreshDoctrineEnumExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        if (\class_exists('Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser')) {
+        if (\interface_exists(FormTypeGuesserInterface::class)) {
             $loader->load('enum_guesser.yml');
         }
     }
