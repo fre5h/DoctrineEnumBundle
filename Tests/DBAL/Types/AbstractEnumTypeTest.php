@@ -20,6 +20,7 @@ use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
 use PHPUnit\Framework\TestCase;
 
@@ -38,6 +39,7 @@ class AbstractEnumTypeTest extends TestCase
     {
         Type::addType('BasketballPositionType', BasketballPositionType::class);
         Type::addType('StubType', StubType::class);
+        Type::addType('NumericType', NumericType::class);
     }
 
     public function setUp()
@@ -178,5 +180,15 @@ class AbstractEnumTypeTest extends TestCase
             $actual = $this->type->getMappedDatabaseTypes($testProvider);
             $this->assertNotContains('enum', $actual);
         }
+    }
+
+    public function testConvertToPHPValue()
+    {
+        $this->assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
+        $this->assertSame('SF', $this->type->convertToPHPValue('SF', new MySqlPlatform()));
+
+        $this->type = Type::getType('NumericType');
+        $this->assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
+        $this->assertEquals(1, $this->type->convertToPHPValue('1', new MySqlPlatform()));
     }
 }
