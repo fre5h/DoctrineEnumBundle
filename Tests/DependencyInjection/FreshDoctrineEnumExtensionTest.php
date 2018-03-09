@@ -31,14 +31,14 @@ class FreshDoctrineEnumExtensionTest extends TestCase
     /** @var ContainerBuilder */
     private $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->extension = new FreshDoctrineEnumExtension();
         $this->container = new ContainerBuilder();
         $this->container->registerExtension($this->extension);
     }
 
-    public function testLoadExtension()
+    public function testLoadExtension(): void
     {
         $this->container->setParameter('doctrine.dbal.connection_factory.types', []); // Just add a dummy required parameter
 

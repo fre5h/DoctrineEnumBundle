@@ -27,7 +27,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     /** @var ReadableEnumValueTwigExtension */
     private $readableEnumValueExtension;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->readableEnumValueExtension = new ReadableEnumValueTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
@@ -35,7 +35,7 @@ class ReadableEnumValueExtensionTest extends TestCase
         ]);
     }
 
-    public function testGetFilters()
+    public function testGetFilters(): void
     {
         $this->assertEquals(
             [new \Twig_SimpleFilter('readable_enum', [$this->readableEnumValueExtension, 'getReadableEnumValue'])],
@@ -46,7 +46,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     /**
      * @dataProvider dataProviderForGetReadableEnumValueTest
      */
-    public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, ?string $enumType)
+    public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, ?string $enumType): void
     {
         $this->assertEquals(
             $expectedReadableValue,
@@ -68,7 +68,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     /**
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException
      */
-    public function testEnumTypeIsNotRegisteredException()
+    public function testEnumTypeIsNotRegisteredException(): void
     {
         $this->readableEnumValueExtension->getReadableEnumValue('Pitcher', 'BaseballPositionType');
     }
@@ -76,7 +76,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     /**
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsFoundInFewRegisteredEnumTypesException
      */
-    public function testValueIsFoundInFewRegisteredEnumTypesException()
+    public function testValueIsFoundInFewRegisteredEnumTypesException(): void
     {
         $this->readableEnumValueExtension->getReadableEnumValue(BasketballPositionType::CENTER);
     }
@@ -84,7 +84,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     /**
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsNotFoundInAnyRegisteredEnumTypeException
      */
-    public function testValueIsNotFoundInAnyRegisteredEnumTypeException()
+    public function testValueIsNotFoundInAnyRegisteredEnumTypeException(): void
     {
         $this->readableEnumValueExtension->getReadableEnumValue('Pitcher');
     }
@@ -92,7 +92,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     /**
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException
      */
-    public function testNoRegisteredEnumTypesException()
+    public function testNoRegisteredEnumTypesException(): void
     {
         // Create ReadableEnumValueExtension without any registered ENUM type
         $extension = new ReadableEnumValueTwigExtension([]);

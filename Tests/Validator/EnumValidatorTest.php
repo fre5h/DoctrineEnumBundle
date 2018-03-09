@@ -31,7 +31,7 @@ class EnumValidatorTest extends TestCase
     /** @var ExecutionContext|MockObject */
     private $context;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->enumValidator = new EnumValidator();
 
@@ -43,7 +43,7 @@ class EnumValidatorTest extends TestCase
     /**
      * @expectedException \Symfony\Component\Validator\Exception\ConstraintDefinitionException
      */
-    public function testExceptionEntityNotSpecified()
+    public function testExceptionEntityNotSpecified(): void
     {
         $constraint = new Enum([
             'entity' => null,
@@ -52,7 +52,7 @@ class EnumValidatorTest extends TestCase
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
     }
 
-    public function testValidBasketballPositionType()
+    public function testValidBasketballPositionType(): void
     {
         $constraint = new Enum([
             'entity' => BasketballPositionType::class,
@@ -65,7 +65,7 @@ class EnumValidatorTest extends TestCase
         $this->enumValidator->validate(BasketballPositionType::SMALL_FORWARD, $constraint);
     }
 
-    public function testInvalidBasketballPositionType()
+    public function testInvalidBasketballPositionType(): void
     {
         $constraint = new Enum([
             'entity' => BasketballPositionType::class,
