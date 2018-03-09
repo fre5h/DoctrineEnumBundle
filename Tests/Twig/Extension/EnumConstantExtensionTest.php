@@ -27,7 +27,7 @@ class EnumConstantExtensionTest extends TestCase
     /** @var EnumConstantTwigExtension */
     private $enumConstantExtension;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->enumConstantExtension = new EnumConstantTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
@@ -35,7 +35,7 @@ class EnumConstantExtensionTest extends TestCase
         ]);
     }
 
-    public function testGetFilters()
+    public function testGetFilters(): void
     {
         $this->assertEquals(
             [new \Twig_SimpleFilter('enum_constant', [$this->enumConstantExtension, 'getEnumConstant'])],
@@ -46,7 +46,7 @@ class EnumConstantExtensionTest extends TestCase
     /**
      * @dataProvider dataProviderForGetReadableEnumValueTest
      */
-    public function testGetEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType)
+    public function testGetEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType): void
     {
         $this->assertEquals(
             $expectedValueOfConstant,
@@ -67,7 +67,7 @@ class EnumConstantExtensionTest extends TestCase
     /**
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException
      */
-    public function testEnumTypeIsNotRegisteredException()
+    public function testEnumTypeIsNotRegisteredException(): void
     {
         $this->enumConstantExtension->getEnumConstant('Pitcher', 'BaseballPositionType');
     }
@@ -75,7 +75,7 @@ class EnumConstantExtensionTest extends TestCase
     /**
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsFoundInFewRegisteredEnumTypesException
      */
-    public function testConstantIsFoundInFewRegisteredEnumTypesException()
+    public function testConstantIsFoundInFewRegisteredEnumTypesException(): void
     {
         $this->enumConstantExtension->getEnumConstant('CENTER');
     }
@@ -83,7 +83,7 @@ class EnumConstantExtensionTest extends TestCase
     /**
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegisteredEnumTypeException
      */
-    public function testConstantIsNotFoundInAnyRegisteredEnumTypeException()
+    public function testConstantIsNotFoundInAnyRegisteredEnumTypeException(): void
     {
         $this->enumConstantExtension->getEnumConstant('Pitcher');
     }
@@ -91,7 +91,7 @@ class EnumConstantExtensionTest extends TestCase
     /**
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException
      */
-    public function testNoRegisteredEnumTypesException()
+    public function testNoRegisteredEnumTypesException(): void
     {
         // Create EnumConstantExtension without any registered ENUM type
         $extension = new EnumConstantTwigExtension([]);

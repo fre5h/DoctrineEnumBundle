@@ -27,7 +27,7 @@ class EnumValidator extends ChoiceValidator
      *
      * @throws ConstraintDefinitionException
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint->entity) {
             throw new ConstraintDefinitionException('Entity not specified.');

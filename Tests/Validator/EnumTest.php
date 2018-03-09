@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
  */
 class EnumTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $constraint = new Enum([
             'entity' => BasketballPositionType::class,
@@ -33,14 +33,14 @@ class EnumTest extends TestCase
     /**
      * @expectedException \Symfony\Component\Validator\Exception\MissingOptionsException
      */
-    public function testMissedRequiredOption()
+    public function testMissedRequiredOption(): void
     {
         $constraint = new Enum();
 
         $this->assertEquals(['entity'], $constraint->getRequiredOptions());
     }
 
-    public function testGetRequiredOptions()
+    public function testGetRequiredOptions(): void
     {
         $constraint = new Enum([
             'entity' => BasketballPositionType::class,
@@ -49,7 +49,7 @@ class EnumTest extends TestCase
         $this->assertEquals(['entity'], $constraint->getRequiredOptions());
     }
 
-    public function testGetDefaultOption()
+    public function testGetDefaultOption(): void
     {
         $constraint = new Enum([
             'entity' => BasketballPositionType::class,

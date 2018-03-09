@@ -69,8 +69,8 @@ abstract class AbstractEnumType extends Type
 
         // Check whether choice list is using integers as valies
         $choice = static::$choices[$value];
-        $choices = array_flip(static::$choices);
-        if (is_int($choices[$choice])) {
+        $choices = \array_flip(static::$choices);
+        if (\is_int($choices[$choice])) {
             return (int) $value;
         }
 
@@ -162,7 +162,7 @@ abstract class AbstractEnumType extends Type
      *
      * @throws \InvalidArgumentException
      */
-    public static function assertValidChoice(string $value)
+    public static function assertValidChoice(string $value): void
     {
         if (!isset(static::$choices[$value])) {
             throw new \InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM type "%s".', $value, static::class));

@@ -31,7 +31,7 @@ class FreshDoctrineEnumBundleTest extends TestCase
     /** @@var Registry|MockObject */
     private $doctrine;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->container = $this->getMockBuilder(Container::class)
                                 ->disableOriginalConstructor()
@@ -50,12 +50,12 @@ class FreshDoctrineEnumBundleTest extends TestCase
 
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->container, $this->doctrine);
     }
 
-    public function testEnumMappingRegistration()
+    public function testEnumMappingRegistration(): void
     {
         /**
          * @var AbstractPlatform|MockObject $databasePlatformAbc
@@ -97,7 +97,7 @@ class FreshDoctrineEnumBundleTest extends TestCase
         $this->assertEquals('string', $databasePlatformDef->getDoctrineTypeMapping('enum'));
     }
 
-    public function testAlreadyRegisteredEnumMapping()
+    public function testAlreadyRegisteredEnumMapping(): void
     {
         /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
@@ -125,7 +125,7 @@ class FreshDoctrineEnumBundleTest extends TestCase
         $this->assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
     }
 
-    public function testEnumMappingReregistrationToString()
+    public function testEnumMappingReregistrationToString(): void
     {
         /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);

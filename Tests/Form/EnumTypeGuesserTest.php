@@ -29,7 +29,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
  */
 class EnumTypeGuesserTest extends TestCase
 {
-    public function testNullResultWhenClassMetadataNotFound()
+    public function testNullResultWhenClassMetadataNotFound(): void
     {
         /** @var EnumTypeGuesser|MockObject */
         $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
@@ -44,7 +44,7 @@ class EnumTypeGuesserTest extends TestCase
         $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
-    public function testNullResultWhenEnumTypeNotRegistered()
+    public function testNullResultWhenEnumTypeNotRegistered(): void
     {
         /** @var EnumTypeGuesser|MockObject */
         $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
@@ -71,7 +71,7 @@ class EnumTypeGuesserTest extends TestCase
     /**
      * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException
      */
-    public function testExceptionWhenClassDoesNotExist()
+    public function testExceptionWhenClassDoesNotExist(): void
     {
         $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
@@ -104,7 +104,7 @@ class EnumTypeGuesserTest extends TestCase
         $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
-    public function testNullResultWhenIsNotChildOfAbstractEnumType()
+    public function testNullResultWhenIsNotChildOfAbstractEnumType(): void
     {
         $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
@@ -137,7 +137,7 @@ class EnumTypeGuesserTest extends TestCase
         $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
-    public function testSuccessfulTypeGuessingWithAncestor()
+    public function testSuccessfulTypeGuessingWithAncestor(): void
     {
         $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
@@ -183,7 +183,7 @@ class EnumTypeGuesserTest extends TestCase
         $this->assertEquals($typeGuess, $enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
-    public function testSuccessfulTypeGuessing()
+    public function testSuccessfulTypeGuessing(): void
     {
         $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
                                 ->disableOriginalConstructor()
