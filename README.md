@@ -29,7 +29,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 | Bundle Version (X.Y.Z) | PHP    | Symfony | Doctrine ORM  | Comment            |
 |:----------------------:|:------:|:-------:|:-------------:|:-------------------|
-| 6.0.*                  | >= 7.1 | >= 4.0  | >= 2.6        | **Actual version** |
+| 6.0.*                  | >= 7.1 | >= 4.0  | >= 2.6        | **Current version** |
 | 5.3.*                  | >= 5.6 | 3.4.*   | >= 2.5        | **Bugfix support** |
 
 ### Register the bundle for Symfony2/3
