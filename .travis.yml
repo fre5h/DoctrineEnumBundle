@@ -6,11 +6,10 @@ php:
   - 5.6
   - 7.0
   - 7.1
+  - 7.2
 
 env:
-  - SYMFONY_VERSION=3.2.*
-  - SYMFONY_VERSION=3.3.*
-  - SYMFONY_VERSION=3.4.x-dev
+  - SYMFONY_VERSION=3.4.*
 
 before_install:
   - composer self-update
@@ -20,7 +19,7 @@ install:
     - composer install --no-interaction --prefer-dist
 
 script:
-  - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony2
+  - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
   - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
 
 after_success:

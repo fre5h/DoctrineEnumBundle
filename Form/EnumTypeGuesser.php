@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,14 +21,12 @@ use Symfony\Component\Form\Guess\TypeGuess;
 /**
  * EnumTypeGuesser.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  * @author Jaik Dean <jaik@fluoresce.co>
  */
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 {
-    /**
-     * @var AbstractEnumType[]
-     */
+    /** @var AbstractEnumType[] */
     protected $registeredEnumTypes = [];
 
     /**
@@ -72,15 +70,15 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         $registeredEnumTypeFQCN = $this->registeredEnumTypes[$fieldType];
 
-        if (!class_exists($registeredEnumTypeFQCN)) {
-            throw new EnumTypeIsRegisteredButClassDoesNotExistException(sprintf(
+        if (!\class_exists($registeredEnumTypeFQCN)) {
+            throw new EnumTypeIsRegisteredButClassDoesNotExistException(\sprintf(
                 'ENUM type "%s" is registered as "%s", but that class does not exist',
                 $fieldType,
                 $registeredEnumTypeFQCN
             ));
         }
 
-        if (!is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
+        if (!\is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
             return;
         }
 

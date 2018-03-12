@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,13 +11,12 @@
 namespace Fresh\DoctrineEnumBundle;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * FreshDoctrineEnumBundle.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
 class FreshDoctrineEnumBundle extends Bundle
 {
@@ -31,8 +30,9 @@ class FreshDoctrineEnumBundle extends Bundle
         /** @var Registry $doctrine */
         $doctrine = $this->container->get('doctrine');
 
+        /** @var \Doctrine\DBAL\Connection $connection */
         foreach ($doctrine->getConnections() as $connection) {
-            /** @var AbstractPlatform $databasePlatform */
+            /** @var \Doctrine\DBAL\Platforms\AbstractPlatform $databasePlatform */
             $databasePlatform = $connection->getDatabasePlatform();
 
             if (!$databasePlatform->hasDoctrineTypeMappingFor('enum') || 'string' !== $databasePlatform->getDoctrineTypeMapping('enum')) {

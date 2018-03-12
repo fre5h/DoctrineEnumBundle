@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,13 +15,11 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 /**
  * AbstractEnumExtension.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
 abstract class AbstractEnumExtension extends \Twig_Extension
 {
-    /**
-     * @var AbstractEnumType[]
-     */
+    /** @var AbstractEnumType[] */
     protected $registeredEnumTypes = [];
 
     /**
@@ -30,7 +28,7 @@ abstract class AbstractEnumExtension extends \Twig_Extension
     public function __construct(array $registeredTypes)
     {
         foreach ($registeredTypes as $type => $details) {
-            if (is_subclass_of($details['class'], AbstractEnumType::class)) {
+            if (\is_subclass_of($details['class'], AbstractEnumType::class)) {
                 $this->registeredEnumTypes[$type] = $details['class'];
             }
         }

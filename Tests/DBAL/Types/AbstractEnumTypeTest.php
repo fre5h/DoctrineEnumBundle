@@ -2,7 +2,7 @@
 /*
  * This file is part of the FreshDoctrineEnumBundle
  *
- * (c) Artem Genvald <genvaldartem@gmail.com>
+ * (c) Artem Henvald <genvaldartem@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,7 +23,7 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
 /**
  * AbstractEnumTypeTest.
  *
- * @author Artem Genvald <genvaldartem@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  * @author Ben Davies    <ben.davies@gmail.com>
  */
 class AbstractEnumTypeTest extends \PHPUnit_Framework_TestCase
