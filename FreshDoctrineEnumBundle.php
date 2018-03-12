@@ -10,7 +10,6 @@
 
 namespace Fresh\DoctrineEnumBundle;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -27,7 +26,7 @@ class FreshDoctrineEnumBundle extends Bundle
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 
@@ -35,7 +34,7 @@ class FreshDoctrineEnumBundle extends Bundle
 
         /** @var \Doctrine\DBAL\Connection $connection */
         foreach ($doctrine->getConnections() as $connection) {
-            /** @var AbstractPlatform $databasePlatform */
+            /** @var \Doctrine\DBAL\Platforms\AbstractPlatform $databasePlatform */
             $databasePlatform = $connection->getDatabasePlatform();
 
             if (!$databasePlatform->hasDoctrineTypeMappingFor('enum') || 'string' !== $databasePlatform->getDoctrineTypeMapping('enum')) {

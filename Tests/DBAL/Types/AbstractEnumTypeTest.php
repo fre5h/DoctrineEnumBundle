@@ -20,6 +20,7 @@ use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
 use PHPUnit\Framework\TestCase;
 
@@ -34,18 +35,19 @@ class AbstractEnumTypeTest extends TestCase
     /** @var AbstractEnumType */
     private $type;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         Type::addType('BasketballPositionType', BasketballPositionType::class);
         Type::addType('StubType', StubType::class);
+        Type::addType('NumericType', NumericType::class);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->type = Type::getType('BasketballPositionType');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->type);
     }
@@ -53,9 +55,9 @@ class AbstractEnumTypeTest extends TestCase
     /**
      * @dataProvider platformProvider
      */
-    public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, string $expected)
+    public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
     {
-        $this->assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
+        self::assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
     public function platformProvider(): array
@@ -84,32 +86,30 @@ class AbstractEnumTypeTest extends TestCase
         ];
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
-        $this->assertEquals('BasketballPositionType', $this->type->getName());
-        $this->assertEquals('StubType', Type::getType('StubType')->getName());
+        self::assertEquals('BasketballPositionType', $this->type->getName());
+        self::assertEquals('StubType', Type::getType('StubType')->getName());
     }
 
-    public function testRequiresSQLCommentHint()
+    public function testRequiresSQLCommentHint(): void
     {
-        $this->assertTrue($this->type->requiresSQLCommentHint(new MySqlPlatform()));
+        self::assertTrue($this->type->requiresSQLCommentHint(new MySqlPlatform()));
     }
 
-    public function testConvertToDatabaseValue()
+    public function testConvertToDatabaseValue(): void
     {
-        $this->assertNull($this->type->convertToDatabaseValue(null, new MySqlPlatform()));
-        $this->assertEquals('SF', $this->type->convertToDatabaseValue('SF', new MySqlPlatform()));
+        self::assertNull($this->type->convertToDatabaseValue(null, new MySqlPlatform()));
+        self::assertEquals('SF', $this->type->convertToDatabaseValue('SF', new MySqlPlatform()));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidArgumentExceptionInConvertToDatabaseValue()
+    public function testInvalidArgumentExceptionInConvertToDatabaseValue(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
     }
 
-    public function testGetReadableValues()
+    public function testGetReadableValues(): void
     {
         $choices = [
             'PG' => 'Point Guard',
@@ -118,36 +118,32 @@ class AbstractEnumTypeTest extends TestCase
             'PF' => 'Power Forward',
             'C' => 'Center',
         ];
-        $this->assertEquals($choices, $this->type->getReadableValues());
+        self::assertEquals($choices, $this->type::getReadableValues());
     }
 
-    public function testAssertValidChoice()
+    public function testAssertValidChoice(): void
     {
-        $this->assertNull($this->type->assertValidChoice(BasketballPositionType::SMALL_FORWARD));
+        self::assertNull($this->type::assertValidChoice(BasketballPositionType::SMALL_FORWARD));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidArgumentExceptionInAssertValidChoice()
+    public function testInvalidArgumentExceptionInAssertValidChoice(): void
     {
-        $this->type->assertValidChoice('YO');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->type::assertValidChoice('YO');
     }
 
-    public function testGetReadableValue()
+    public function testGetReadableValue(): void
     {
-        $this->assertEquals('Small Forward', $this->type->getReadableValue(BasketballPositionType::SMALL_FORWARD));
+        self::assertEquals('Small Forward', $this->type::getReadableValue(BasketballPositionType::SMALL_FORWARD));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidArgumentExceptionInGetReadableValue()
+    public function testInvalidArgumentExceptionInGetReadableValue(): void
     {
-        $this->type->getReadableValue('YO');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->type::getReadableValue('YO');
     }
 
-    public function testGetChoices()
+    public function testGetChoices(): void
     {
         $choices = [
             'Point Guard' => 'PG',
@@ -157,16 +153,16 @@ class AbstractEnumTypeTest extends TestCase
             'Center' => 'C',
         ];
 
-        $this->assertEquals($choices, $this->type->getChoices());
+        self::assertEquals($choices, $this->type::getChoices());
     }
 
-    public function testMappedDatabaseTypesContainEnumOnMySQL()
+    public function testMappedDatabaseTypesContainEnumOnMySQL(): void
     {
         $actual = $this->type->getMappedDatabaseTypes(new MySqlPlatform());
-        $this->assertContains('enum', $actual);
+        self::assertContains('enum', $actual);
     }
 
-    public function testMappedDatabaseTypesDoesNotContainEnumOnNonMySQL()
+    public function testMappedDatabaseTypesDoesNotContainEnumOnNonMySQL(): void
     {
         $testProviders = [
             new SqlitePlatform(),
@@ -176,7 +172,17 @@ class AbstractEnumTypeTest extends TestCase
 
         foreach ($testProviders as $testProvider) {
             $actual = $this->type->getMappedDatabaseTypes($testProvider);
-            $this->assertNotContains('enum', $actual);
+            self::assertNotContains('enum', $actual);
         }
+    }
+
+    public function testConvertToPHPValue(): void
+    {
+        self::assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
+        self::assertSame('SF', $this->type->convertToPHPValue('SF', new MySqlPlatform()));
+
+        $this->type = Type::getType('NumericType');
+        self::assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
+        self::assertEquals(1, $this->type->convertToPHPValue('1', new MySqlPlatform()));
     }
 }

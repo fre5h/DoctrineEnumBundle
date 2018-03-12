@@ -6,5 +6,5 @@ services:
         bind:
             $registeredTypes: "%doctrine.dbal.connection_factory.types%"
 
-    Fresh\DoctrineEnumBundle\Twig\Extension\:
-        resource: '../../Twig/Extension/'
+    Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser:
+        class: Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser

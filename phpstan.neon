@@ -1,0 +1,6 @@
+parameters:
+    excludes_analyse:
+        - '%rootDir%/../../../Tests/*'
+        - '%rootDir%/../../../vendor/*'
+    fileExtensions:
+        - 'php'

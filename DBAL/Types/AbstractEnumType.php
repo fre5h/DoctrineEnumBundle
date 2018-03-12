@@ -61,6 +61,25 @@ abstract class AbstractEnumType extends Type
     /**
      * {@inheritdoc}
      */
+    public function convertToPHPValue($value, AbstractPlatform $platform)
+    {
+        if (!isset(static::$choices[$value])) {
+            return $value;
+        }
+
+        // Check whether choice list is using integers as valies
+        $choice = static::$choices[$value];
+        $choices = \array_flip(static::$choices);
+        if (\is_int($choices[$choice])) {
+            return (int) $value;
+        }
+
+        return $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         $values = \implode(
@@ -95,7 +114,7 @@ abstract class AbstractEnumType extends Type
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name ?: \array_search(\get_class($this), self::getTypesMap(), true);
     }
@@ -143,7 +162,7 @@ abstract class AbstractEnumType extends Type
      *
      * @throws \InvalidArgumentException
      */
-    public static function assertValidChoice(string $value)
+    public static function assertValidChoice(string $value): void
     {
         if (!isset(static::$choices[$value])) {
             throw new \InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM type "%s".', $value, static::class));

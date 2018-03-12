@@ -31,27 +31,31 @@ class FreshDoctrineEnumExtensionTest extends TestCase
     /** @var ContainerBuilder */
     private $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->extension = new FreshDoctrineEnumExtension();
         $this->container = new ContainerBuilder();
         $this->container->registerExtension($this->extension);
     }
 
-    public function testLoadExtension()
+    protected function tearDown(): void
+    {
+        unset($this->extension, $this->container);
+    }
+
+    public function testLoadExtension(): void
     {
         $this->container->setParameter('doctrine.dbal.connection_factory.types', []); // Just add a dummy required parameter
-
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        $this->assertArrayHasKey(EnumTypeGuesser::class, $this->container->getRemovedIds());
-        $this->assertArrayHasKey(ReadableEnumValueTwigExtension::class, $this->container->getRemovedIds());
-        $this->assertArrayHasKey(EnumConstantTwigExtension::class, $this->container->getRemovedIds());
+        self::assertArrayHasKey(EnumTypeGuesser::class, $this->container->getRemovedIds());
+        self::assertArrayHasKey(ReadableEnumValueTwigExtension::class, $this->container->getRemovedIds());
+        self::assertArrayHasKey(EnumConstantTwigExtension::class, $this->container->getRemovedIds());
 
-        $this->assertArrayNotHasKey(EnumTypeGuesser::class, $this->container->getDefinitions());
-        $this->assertArrayNotHasKey(ReadableEnumValueTwigExtension::class, $this->container->getDefinitions());
-        $this->assertArrayNotHasKey(EnumConstantTwigExtension::class, $this->container->getDefinitions());
+        self::assertArrayNotHasKey(EnumTypeGuesser::class, $this->container->getDefinitions());
+        self::assertArrayNotHasKey(ReadableEnumValueTwigExtension::class, $this->container->getDefinitions());
+        self::assertArrayNotHasKey(EnumConstantTwigExtension::class, $this->container->getDefinitions());
 
         $this->expectException(ServiceNotFoundException::class);
         $this->container->get(EnumTypeGuesser::class);

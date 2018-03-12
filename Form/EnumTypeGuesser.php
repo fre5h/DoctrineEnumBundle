@@ -48,11 +48,11 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
      * @param string $class
      * @param string $property
      *
-     * @return TypeGuess
+     * @return TypeGuess|null
      *
      * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      */
-    public function guessType($class, $property)
+    public function guessType($class, $property): ?TypeGuess
     {
         $classMetadata = $this->getMetadata($class);
 
@@ -62,7 +62,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
         }
 
         /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo $metadata */
-        list($metadata) = $classMetadata;
+        [$metadata] = $classMetadata;
         $fieldType = $metadata->getTypeOfField($property);
 
         // This is not one of the registered ENUM types
@@ -80,7 +80,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             ));
         }
 
-        if (!is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
+        if (!\is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
             return null;
         }
 

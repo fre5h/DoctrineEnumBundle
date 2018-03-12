@@ -13,6 +13,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Validator\Exception\MissingOptionsException;
 
 /**
  * EnumTest.
@@ -21,40 +22,36 @@ use PHPUnit\Framework\TestCase;
  */
 class EnumTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $constraint = new Enum([
             'entity' => BasketballPositionType::class,
         ]);
 
-        $this->assertEquals(BasketballPositionType::getValues(), $constraint->choices);
+        self::assertEquals(BasketballPositionType::getValues(), $constraint->choices);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Validator\Exception\MissingOptionsException
-     */
-    public function testMissedRequiredOption()
+    public function testMissedRequiredOption(): void
     {
-        $constraint = new Enum();
-
-        $this->assertEquals(['entity'], $constraint->getRequiredOptions());
+        $this->expectException(MissingOptionsException::class);
+        self::assertEquals(['entity'], (new Enum())->getRequiredOptions());
     }
 
-    public function testGetRequiredOptions()
+    public function testGetRequiredOptions(): void
     {
         $constraint = new Enum([
             'entity' => BasketballPositionType::class,
         ]);
 
-        $this->assertEquals(['entity'], $constraint->getRequiredOptions());
+        self::assertEquals(['entity'], $constraint->getRequiredOptions());
     }
 
-    public function testGetDefaultOption()
+    public function testGetDefaultOption(): void
     {
         $constraint = new Enum([
             'entity' => BasketballPositionType::class,
         ]);
 
-        $this->assertEquals('choices', $constraint->getDefaultOption());
+        self::assertEquals('choices', $constraint->getDefaultOption());
     }
 }
