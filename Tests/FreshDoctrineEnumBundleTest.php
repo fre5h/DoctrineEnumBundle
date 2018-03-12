@@ -10,7 +10,7 @@
 
 namespace Fresh\DoctrineEnumBundle\Tests;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
@@ -28,12 +28,12 @@ class FreshDoctrineEnumBundleTest extends TestCase
     /** @var Container|MockObject */
     private $container;
 
-    /** @@var Registry|MockObject */
+    /** @@var ManagerRegistry|MockObject */
     private $doctrine;
 
     protected function setUp(): void
     {
-        $this->doctrine = $this->createMock(Registry::class);
+        $this->doctrine = $this->createMock(ManagerRegistry::class);
 
         $this->container = $this->createMock(Container::class);
         $this->container
