@@ -34,7 +34,7 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
     }
 
     /**
-     * @param string|null $enumConstant
+     * @param string      $enumConstant
      * @param string|null $enumType
      *
      * @throws EnumTypeIsNotRegisteredException
@@ -42,11 +42,10 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
      * @throws ConstantIsFoundInFewRegisteredEnumTypesException
      * @throws ConstantIsNotFoundInAnyRegisteredEnumTypeException
      * @throws \InvalidArgumentException
-     * @throws \ReflectionException
      *
      * @return string
      */
-    public function getEnumConstant(?string $enumConstant, ?string $enumType = null): string
+    public function getEnumConstant(string $enumConstant, ?string $enumType = null): string
     {
         if ($this->hasRegisteredEnumTypes()) {
             // If ENUM type was set, e.g. {{ 'CENTER'|enum_constant('BasketballPositionType') }}
