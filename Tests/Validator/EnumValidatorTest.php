@@ -16,6 +16,7 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContext;
+use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 /**
@@ -34,23 +35,29 @@ class EnumValidatorTest extends TestCase
     public function setUp(): void
     {
         $this->enumValidator = new EnumValidator();
-
-        $this->context = $this
-            ->getMockBuilder(ExecutionContext::class)
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
+        $this->context = $this->createMock(ExecutionContext::class);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Validator\Exception\ConstraintDefinitionException
-     */
+    protected function tearDown(): void
+    {
+        unset($this->enumValidator, $this->context);
+    }
+
+    public function testValidateIncorrectConstraintClass(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessageRegExp('/^Object of class .* is not instance of .*$/');
+
+        $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new DummyConstraint());
+    }
+
     public function testExceptionEntityNotSpecified(): void
     {
         $constraint = new Enum([
             'entity' => null,
         ]);
 
+        $this->expectException(ConstraintDefinitionException::class);
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
     }
 
@@ -75,23 +82,27 @@ class EnumValidatorTest extends TestCase
             'entity' => BasketballPositionType::class,
         ]);
 
-        $constraintValidationBuilder = $this->getMockBuilder(ConstraintViolationBuilder::class)
-                                            ->disableOriginalConstructor()
-                                            ->getMock();
+        $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
-        $constraintValidationBuilder->expects($this->once())
-                                    ->method('setParameter')
-                                    ->with($this->equalTo('{{ value }}'), $this->equalTo('"Pitcher"'))
-                                    ->will($this->returnSelf());
+        $constraintValidationBuilder
+            ->expects($this->once())
+            ->method('setParameter')
+            ->with($this->equalTo('{{ value }}'), $this->equalTo('"Pitcher"'))
+            ->will($this->returnSelf())
+        ;
 
-        $constraintValidationBuilder->expects($this->once())
-                                    ->method('setCode')
-                                    ->will($this->returnSelf());
+        $constraintValidationBuilder
+            ->expects($this->once())
+            ->method('setCode')
+            ->will($this->returnSelf())
+        ;
 
-        $this->context->expects($this->once())
-                      ->method('buildViolation')
-                      ->with($this->equalTo('The value you selected is not a valid choice.'))
-                      ->will($this->returnValue($constraintValidationBuilder));
+        $this->context
+            ->expects($this->once())
+            ->method('buildViolation')
+            ->with($this->equalTo('The value you selected is not a valid choice.'))
+            ->will($this->returnValue($constraintValidationBuilder))
+        ;
 
         $this->enumValidator->initialize($this->context);
         $this->enumValidator->validate('Pitcher', $constraint); // It's not a baseball =)

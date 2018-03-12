@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Tests\Validator;
+namespace Fresh\DoctrineEnumBundle\Tests;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
- * FreshDoctrineEnumBundleTest.
+ * FreshDoctrineEnumBundleTest
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
@@ -28,26 +28,20 @@ class FreshDoctrineEnumBundleTest extends TestCase
     /** @var Container|MockObject */
     private $container;
 
-    /** @@var Registry|MockObject */
+    /** @@var ManagerRegistry|MockObject */
     private $doctrine;
 
     protected function setUp(): void
     {
-        $this->container = $this->getMockBuilder(Container::class)
-                                ->disableOriginalConstructor()
-                                ->setMethods(['get'])
-                                ->getMock();
+        $this->doctrine = $this->createMock(ManagerRegistry::class);
 
-        $this->doctrine = $this->getMockBuilder(Registry::class)
-                               ->disableOriginalConstructor()
-                               ->setMethods(['getConnections'])
-                               ->getMock();
-
-        $this->container->expects($this->once())
-                        ->method('get')
-                        ->with('doctrine')
-                        ->willReturn($this->doctrine);
-
+        $this->container = $this->createMock(Container::class);
+        $this->container
+            ->expects($this->once())
+            ->method('get')
+            ->with('doctrine')
+            ->willReturn($this->doctrine)
+        ;
     }
 
     protected function tearDown(): void
@@ -64,27 +58,27 @@ class FreshDoctrineEnumBundleTest extends TestCase
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
         $databasePlatformDef = $this->getMockForAbstractClass(AbstractPlatform::class);
 
-        $connectionAbc = $this->getMockBuilder(Connection::class)
-                              ->disableOriginalConstructor()
-                              ->setMethods(['getDatabasePlatform'])
-                              ->getMock();
+        $connectionAbc = $this->createMock(Connection::class);
 
-        $connectionAbc->expects($this->once())
-                      ->method('getDatabasePlatform')
-                      ->willReturn($databasePlatformAbc);
+        $connectionAbc
+            ->expects($this->once())
+            ->method('getDatabasePlatform')
+            ->willReturn($databasePlatformAbc)
+        ;
 
-        $connectionDef = $this->getMockBuilder(Connection::class)
-                              ->disableOriginalConstructor()
-                              ->setMethods(['getDatabasePlatform'])
-                              ->getMock();
+        $connectionDef = $this->createMock(Connection::class);
 
-        $connectionDef->expects($this->once())
-                      ->method('getDatabasePlatform')
-                      ->willReturn($databasePlatformDef);
+        $connectionDef
+            ->expects($this->once())
+            ->method('getDatabasePlatform')
+            ->willReturn($databasePlatformDef)
+        ;
 
-        $this->doctrine->expects($this->once())
-                       ->method('getConnections')
-                       ->willReturn([$connectionAbc, $connectionDef]);
+        $this->doctrine
+            ->expects($this->once())
+            ->method('getConnections')
+            ->willReturn([$connectionAbc, $connectionDef])
+        ;
 
         $bundle = new FreshDoctrineEnumBundle();
         $bundle->setContainer($this->container);
@@ -102,18 +96,19 @@ class FreshDoctrineEnumBundleTest extends TestCase
         /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
-        $connectionAbc = $this->getMockBuilder(Connection::class)
-                              ->disableOriginalConstructor()
-                              ->setMethods(['getDatabasePlatform'])
-                              ->getMock();
+        $connectionAbc = $this->createMock(Connection::class);
 
-        $connectionAbc->expects($this->once())
-                      ->method('getDatabasePlatform')
-                      ->willReturn($databasePlatformAbc);
+        $connectionAbc
+            ->expects($this->once())
+            ->method('getDatabasePlatform')
+            ->willReturn($databasePlatformAbc)
+        ;
 
-        $this->doctrine->expects($this->once())
-                       ->method('getConnections')
-                       ->willReturn([$connectionAbc]);
+        $this->doctrine
+            ->expects($this->once())
+            ->method('getConnections')
+            ->willReturn([$connectionAbc])
+        ;
 
         $databasePlatformAbc->registerDoctrineTypeMapping('enum', 'string');
 
@@ -130,18 +125,19 @@ class FreshDoctrineEnumBundleTest extends TestCase
         /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
-        $connectionAbc = $this->getMockBuilder(Connection::class)
-                              ->disableOriginalConstructor()
-                              ->setMethods(['getDatabasePlatform'])
-                              ->getMock();
+        $connectionAbc = $this->createMock(Connection::class);
 
-        $connectionAbc->expects($this->once())
-                      ->method('getDatabasePlatform')
-                      ->willReturn($databasePlatformAbc);
+        $connectionAbc
+            ->expects($this->once())
+            ->method('getDatabasePlatform')
+            ->willReturn($databasePlatformAbc)
+        ;
 
-        $this->doctrine->expects($this->once())
-                       ->method('getConnections')
-                       ->willReturn([$connectionAbc]);
+        $this->doctrine
+            ->expects($this->once())
+            ->method('getConnections')
+            ->willReturn([$connectionAbc])
+        ;
 
         $databasePlatformAbc->registerDoctrineTypeMapping('enum', 'boolean');
 

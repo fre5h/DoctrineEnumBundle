@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints\Choice;
  */
 class Enum extends Choice
 {
-    /** @var string */
+    /** @var string|AbstractEnumType */
     public $entity;
 
     /**
