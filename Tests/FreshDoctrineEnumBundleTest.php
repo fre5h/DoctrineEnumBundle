@@ -90,11 +90,11 @@ class FreshDoctrineEnumBundleTest extends TestCase
         $bundle->setContainer($this->container);
         $bundle->boot();
 
-        $this->assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
-        $this->assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
+        self::assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
+        self::assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
 
-        $this->assertTrue($databasePlatformDef->hasDoctrineTypeMappingFor('enum'));
-        $this->assertEquals('string', $databasePlatformDef->getDoctrineTypeMapping('enum'));
+        self::assertTrue($databasePlatformDef->hasDoctrineTypeMappingFor('enum'));
+        self::assertEquals('string', $databasePlatformDef->getDoctrineTypeMapping('enum'));
     }
 
     public function testAlreadyRegisteredEnumMapping(): void
@@ -121,8 +121,8 @@ class FreshDoctrineEnumBundleTest extends TestCase
         $bundle->setContainer($this->container);
         $bundle->boot();
 
-        $this->assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
-        $this->assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
+        self::assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
+        self::assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
     }
 
     public function testEnumMappingReregistrationToString(): void
@@ -149,7 +149,7 @@ class FreshDoctrineEnumBundleTest extends TestCase
         $bundle->setContainer($this->container);
         $bundle->boot();
 
-        $this->assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
-        $this->assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
+        self::assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
+        self::assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
     }
 }

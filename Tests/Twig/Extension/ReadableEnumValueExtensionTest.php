@@ -35,9 +35,14 @@ class ReadableEnumValueExtensionTest extends TestCase
         ]);
     }
 
+    protected function tearDown(): void
+    {
+        unset($this->readableEnumValueExtension);
+    }
+
     public function testGetFilters(): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             [new \Twig_SimpleFilter('readable_enum', [$this->readableEnumValueExtension, 'getReadableEnumValue'])],
             $this->readableEnumValueExtension->getFilters()
         );
@@ -48,7 +53,7 @@ class ReadableEnumValueExtensionTest extends TestCase
      */
     public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, ?string $enumType): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             $expectedReadableValue,
             $this->readableEnumValueExtension->getReadableEnumValue($enumValue, $enumType)
         );

@@ -27,7 +27,7 @@ class EnumTest extends TestCase
             'entity' => BasketballPositionType::class,
         ]);
 
-        $this->assertEquals(BasketballPositionType::getValues(), $constraint->choices);
+        self::assertEquals(BasketballPositionType::getValues(), $constraint->choices);
     }
 
     /**
@@ -37,7 +37,7 @@ class EnumTest extends TestCase
     {
         $constraint = new Enum();
 
-        $this->assertEquals(['entity'], $constraint->getRequiredOptions());
+        self::assertEquals(['entity'], $constraint->getRequiredOptions());
     }
 
     public function testGetRequiredOptions(): void
@@ -46,7 +46,7 @@ class EnumTest extends TestCase
             'entity' => BasketballPositionType::class,
         ]);
 
-        $this->assertEquals(['entity'], $constraint->getRequiredOptions());
+        self::assertEquals(['entity'], $constraint->getRequiredOptions());
     }
 
     public function testGetDefaultOption(): void
@@ -55,6 +55,6 @@ class EnumTest extends TestCase
             'entity' => BasketballPositionType::class,
         ]);
 
-        $this->assertEquals('choices', $constraint->getDefaultOption());
+        self::assertEquals('choices', $constraint->getDefaultOption());
     }
 }

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\DoctrineEnumBundle\Tests\DForm;
+namespace Fresh\DoctrineEnumBundle\Tests\Form;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
@@ -32,40 +32,52 @@ class EnumTypeGuesserTest extends TestCase
     public function testNullResultWhenClassMetadataNotFound(): void
     {
         /** @var EnumTypeGuesser|MockObject */
-        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
+        $enumTypeGuesser = $this
+            ->getMockBuilder(EnumTypeGuesser::class)
             ->disableOriginalConstructor()
             ->setMethods(['getMetadata'])
-            ->getMock();
+            ->getMock()
+        ;
 
-        $enumTypeGuesser->expects($this->once())
+        $enumTypeGuesser
+            ->expects($this->once())
             ->method('getMetadata')
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
-        $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
+        self::assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     public function testNullResultWhenEnumTypeNotRegistered(): void
     {
         /** @var EnumTypeGuesser|MockObject */
-        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
-                                ->disableOriginalConstructor()
-                                ->setMethods(['getMetadata'])
-                                ->getMock();
+        $enumTypeGuesser = $this
+            ->getMockBuilder(EnumTypeGuesser::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getMetadata'])
+            ->getMock()
+        ;
 
-        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
             ->disableOriginalConstructor()
             ->setMethods(['getTypeOfField'])
-            ->getMock();
+            ->getMock()
+        ;
 
-        $metadata->expects($this->once())
-                 ->method('getTypeOfField')
-                 ->willReturn('unregistered_enum_type');
+        $metadata
+            ->expects($this->once())
+            ->method('getTypeOfField')
+            ->willReturn('unregistered_enum_type')
+        ;
 
-        $enumTypeGuesser->expects($this->once())
-                        ->method('getMetadata')
-                        ->willReturn([$metadata]);
+        $enumTypeGuesser
+            ->expects($this->once())
+            ->method('getMetadata')
+            ->willReturn([$metadata])
+        ;
 
-        $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
+        self::assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     /**
@@ -73,9 +85,12 @@ class EnumTypeGuesserTest extends TestCase
      */
     public function testExceptionWhenClassDoesNotExist(): void
     {
-        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
-                                ->disableOriginalConstructor()
-                                ->getMock();
+        $managerRegistry = $this
+            ->getMockBuilder(ManagerRegistry::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
         $registeredTypes = [
             'stub' => [
                 'class' => '\Acme\Foo\Bar\Baz',
@@ -83,32 +98,43 @@ class EnumTypeGuesserTest extends TestCase
         ];
 
         /** @var EnumTypeGuesser|MockObject */
-        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
-                                ->setConstructorArgs([$managerRegistry, $registeredTypes])
-                                ->setMethods(['getMetadata'])
-                                ->getMock();
+        $enumTypeGuesser = $this
+            ->getMockBuilder(EnumTypeGuesser::class)
+            ->setConstructorArgs([$managerRegistry, $registeredTypes])
+            ->setMethods(['getMetadata'])
+            ->getMock()
+        ;
 
-        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
-                         ->disableOriginalConstructor()
-                         ->setMethods(['getTypeOfField'])
-                         ->getMock();
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTypeOfField'])
+            ->getMock()
+        ;
 
-        $metadata->expects($this->once())
-                 ->method('getTypeOfField')
-                 ->willReturn('stub');
+        $metadata
+            ->expects($this->once())
+            ->method('getTypeOfField')
+            ->willReturn('stub')
+        ;
 
-        $enumTypeGuesser->expects($this->once())
-                        ->method('getMetadata')
-                        ->willReturn([$metadata]);
+        $enumTypeGuesser
+            ->expects($this->once())
+            ->method('getMetadata')
+            ->willReturn([$metadata])
+        ;
 
-        $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
+        self::assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     public function testNullResultWhenIsNotChildOfAbstractEnumType(): void
     {
-        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
-                                ->disableOriginalConstructor()
-                                ->getMock();
+        $managerRegistry = $this
+            ->getMockBuilder(ManagerRegistry::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
         $registeredTypes = [
             'NotAChildType' => [
                 'class' => NotAChildType::class,
@@ -116,32 +142,43 @@ class EnumTypeGuesserTest extends TestCase
         ];
 
         /** @var EnumTypeGuesser|MockObject */
-        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
-                                ->setConstructorArgs([$managerRegistry, $registeredTypes])
-                                ->setMethods(['getMetadata'])
-                                ->getMock();
+        $enumTypeGuesser = $this
+            ->getMockBuilder(EnumTypeGuesser::class)
+            ->setConstructorArgs([$managerRegistry, $registeredTypes])
+            ->setMethods(['getMetadata'])
+            ->getMock()
+        ;
 
-        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
-                         ->disableOriginalConstructor()
-                         ->setMethods(['getTypeOfField'])
-                         ->getMock();
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTypeOfField'])
+            ->getMock()
+        ;
 
-        $metadata->expects($this->once())
-                 ->method('getTypeOfField')
-                 ->willReturn('NotAChildType');
+        $metadata
+            ->expects($this->once())
+            ->method('getTypeOfField')
+            ->willReturn('NotAChildType')
+        ;
 
-        $enumTypeGuesser->expects($this->once())
-                        ->method('getMetadata')
-                        ->willReturn([$metadata]);
+        $enumTypeGuesser
+            ->expects($this->once())
+            ->method('getMetadata')
+            ->willReturn([$metadata])
+        ;
 
-        $this->assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
+        self::assertNull($enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     public function testSuccessfulTypeGuessingWithAncestor(): void
     {
-        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
-                                ->disableOriginalConstructor()
-                                ->getMock();
+        $managerRegistry = $this
+            ->getMockBuilder(ManagerRegistry::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
         $registeredTypes = [
             'InheritedType' => [
                 'class' => InheritedType::class,
@@ -149,27 +186,37 @@ class EnumTypeGuesserTest extends TestCase
         ];
 
         /** @var EnumTypeGuesser|MockObject */
-        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
-                                ->setConstructorArgs([$managerRegistry, $registeredTypes])
-                                ->setMethods(['getMetadata'])
-                                ->getMock();
+        $enumTypeGuesser = $this
+            ->getMockBuilder(EnumTypeGuesser::class)
+            ->setConstructorArgs([$managerRegistry, $registeredTypes])
+            ->setMethods(['getMetadata'])
+            ->getMock()
+        ;
 
-        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
-                         ->disableOriginalConstructor()
-                         ->setMethods(['getTypeOfField', 'isNullable'])
-                         ->getMock();
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTypeOfField', 'isNullable'])
+            ->getMock()
+        ;
 
-        $metadata->expects($this->once())
-                 ->method('getTypeOfField')
-                 ->willReturn('InheritedType');
+        $metadata
+            ->expects($this->once())
+            ->method('getTypeOfField')
+            ->willReturn('InheritedType')
+        ;
 
-        $metadata->expects($this->once())
-                 ->method('isNullable')
-                 ->willReturn(true);
+        $metadata
+            ->expects($this->once())
+            ->method('isNullable')
+            ->willReturn(true)
+        ;
 
-        $enumTypeGuesser->expects($this->once())
-                        ->method('getMetadata')
-                        ->willReturn([$metadata]);
+        $enumTypeGuesser
+            ->expects($this->once())
+            ->method('getMetadata')
+            ->willReturn([$metadata])
+        ;
 
         $typeGuess = new TypeGuess(
             ChoiceType::class,
@@ -180,14 +227,17 @@ class EnumTypeGuesserTest extends TestCase
             Guess::VERY_HIGH_CONFIDENCE
         );
 
-        $this->assertEquals($typeGuess, $enumTypeGuesser->guessType(\stdClass::class, 'position'));
+        self::assertEquals($typeGuess, $enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 
     public function testSuccessfulTypeGuessing(): void
     {
-        $managerRegistry = $this->getMockBuilder(ManagerRegistry::class)
-                                ->disableOriginalConstructor()
-                                ->getMock();
+        $managerRegistry = $this
+            ->getMockBuilder(ManagerRegistry::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
         $registeredTypes = [
             'BasketballPositionType' => [
                 'class' => BasketballPositionType::class,
@@ -195,27 +245,37 @@ class EnumTypeGuesserTest extends TestCase
         ];
 
         /** @var EnumTypeGuesser|MockObject */
-        $enumTypeGuesser = $this->getMockBuilder(EnumTypeGuesser::class)
-                                ->setConstructorArgs([$managerRegistry, $registeredTypes])
-                                ->setMethods(['getMetadata'])
-                                ->getMock();
+        $enumTypeGuesser = $this
+            ->getMockBuilder(EnumTypeGuesser::class)
+            ->setConstructorArgs([$managerRegistry, $registeredTypes])
+            ->setMethods(['getMetadata'])
+            ->getMock()
+        ;
 
-        $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
-                         ->disableOriginalConstructor()
-                         ->setMethods(['getTypeOfField', 'isNullable'])
-                         ->getMock();
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTypeOfField', 'isNullable'])
+            ->getMock()
+        ;
 
-        $metadata->expects($this->once())
-                 ->method('getTypeOfField')
-                 ->willReturn('BasketballPositionType');
+        $metadata
+            ->expects($this->once())
+            ->method('getTypeOfField')
+            ->willReturn('BasketballPositionType')
+        ;
 
-        $metadata->expects($this->once())
-                 ->method('isNullable')
-                 ->willReturn(true);
+        $metadata
+            ->expects($this->once())
+            ->method('isNullable')
+            ->willReturn(true)
+        ;
 
-        $enumTypeGuesser->expects($this->once())
-                        ->method('getMetadata')
-                        ->willReturn([$metadata]);
+        $enumTypeGuesser
+            ->expects($this->once())
+            ->method('getMetadata')
+            ->willReturn([$metadata])
+        ;
 
         $typeGuess = new TypeGuess(
             ChoiceType::class,
@@ -226,6 +286,6 @@ class EnumTypeGuesserTest extends TestCase
             Guess::VERY_HIGH_CONFIDENCE
         );
 
-        $this->assertEquals($typeGuess, $enumTypeGuesser->guessType(\stdClass::class, 'position'));
+        self::assertEquals($typeGuess, $enumTypeGuesser->guessType(\stdClass::class, 'position'));
     }
 }

@@ -35,9 +35,11 @@ class EnumValidatorTest extends TestCase
     {
         $this->enumValidator = new EnumValidator();
 
-        $this->context = $this->getMockBuilder(ExecutionContext::class)
-                              ->disableOriginalConstructor()
-                              ->getMock();
+        $this->context = $this
+            ->getMockBuilder(ExecutionContext::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
     }
 
     /**
@@ -58,8 +60,10 @@ class EnumValidatorTest extends TestCase
             'entity' => BasketballPositionType::class,
         ]);
 
-        $this->context->expects($this->never())
-                      ->method('buildViolation');
+        $this->context
+            ->expects($this->never())
+            ->method('buildViolation')
+        ;
 
         $this->enumValidator->initialize($this->context);
         $this->enumValidator->validate(BasketballPositionType::SMALL_FORWARD, $constraint);
