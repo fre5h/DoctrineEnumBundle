@@ -114,7 +114,7 @@ abstract class AbstractEnumType extends Type
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name ?: \array_search(\get_class($this), self::getTypesMap(), true);
     }

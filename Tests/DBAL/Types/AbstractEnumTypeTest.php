@@ -103,11 +103,9 @@ class AbstractEnumTypeTest extends TestCase
         self::assertEquals('SF', $this->type->convertToDatabaseValue('SF', new MySqlPlatform()));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidArgumentExceptionInConvertToDatabaseValue(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
     }
 
@@ -128,11 +126,9 @@ class AbstractEnumTypeTest extends TestCase
         self::assertNull($this->type::assertValidChoice(BasketballPositionType::SMALL_FORWARD));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidArgumentExceptionInAssertValidChoice(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->type::assertValidChoice('YO');
     }
 
@@ -141,11 +137,9 @@ class AbstractEnumTypeTest extends TestCase
         self::assertEquals('Small Forward', $this->type::getReadableValue(BasketballPositionType::SMALL_FORWARD));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidArgumentExceptionInGetReadableValue(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->type::getReadableValue('YO');
     }
 

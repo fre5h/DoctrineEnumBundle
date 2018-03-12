@@ -12,6 +12,10 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
+use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsFoundInFewRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegisteredEnumTypeException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
+use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
@@ -69,37 +73,27 @@ class EnumConstantExtensionTest extends TestCase
         ];
     }
 
-    /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException
-     */
     public function testEnumTypeIsNotRegisteredException(): void
     {
+        $this->expectException(EnumTypeIsNotRegisteredException::class);
         $this->enumConstantExtension->getEnumConstant('Pitcher', 'BaseballPositionType');
     }
 
-    /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsFoundInFewRegisteredEnumTypesException
-     */
     public function testConstantIsFoundInFewRegisteredEnumTypesException(): void
     {
+        $this->expectException(ConstantIsFoundInFewRegisteredEnumTypesException::class);
         $this->enumConstantExtension->getEnumConstant('CENTER');
     }
 
-    /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegisteredEnumTypeException
-     */
     public function testConstantIsNotFoundInAnyRegisteredEnumTypeException(): void
     {
+        $this->expectException(ConstantIsNotFoundInAnyRegisteredEnumTypeException::class);
         $this->enumConstantExtension->getEnumConstant('Pitcher');
     }
 
-    /**
-     * @expectedException \Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException
-     */
     public function testNoRegisteredEnumTypesException(): void
     {
-        // Create EnumConstantExtension without any registered ENUM type
-        $extension = new EnumConstantTwigExtension([]);
-        $extension->getEnumConstant(BasketballPositionType::POINT_GUARD, 'BasketballPositionType');
+        $this->expectException(NoRegisteredEnumTypesException::class);
+        (new EnumConstantTwigExtension([]))->getEnumConstant(BasketballPositionType::POINT_GUARD, 'BasketballPositionType');
     }
 }

@@ -36,7 +36,7 @@ class FreshDoctrineEnumExtension extends Extension
         $loader->load('services.yml');
 
         if (\interface_exists(FormTypeGuesserInterface::class)) {
-            $loader->load('enum_guesser.yml');
+            $loader->load('form_type_guesser.yml');
         }
     }
 }
