@@ -23,15 +23,13 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ### Add dependency via Composer
 
-```composer req fresh/doctrine-enum-bundle='~6.1'```
-
-Registration in Kernel for Symfony 4.0 is done automatically.
+```composer req fresh/doctrine-enum-bundle='~6.2'```
 
 ##### Choose the appropriate version if you need
 
 | Bundle Version (X.Y.Z) | PHP             | Symfony            | Doctrine DBAL | Comment             |
 |:----------------------:|:---------------:|:------------------:|:-------------:|:--------------------|
-| 6.1.*                  | >= 7.1.3        | >= 4.0             | >= 2.6        | **Current version** |
+| 6.2.*                  | >= 7.1.3        | >= 4.0             | >= 2.6        | **Current version** |
 | 5.3.*                  | >= 5.6, <= 7.1  | >= 3.2, <= 3.4     | >= 2.5        | *Bug fix support*   |
 
 ## Using
@@ -45,6 +43,7 @@ Registration in Kernel for Symfony 4.0 is done automatically.
 * [Additional methods](./Resources/docs/additional_methods.md "Additional methods")
 * [Readable ENUM values in templates](./Resources/docs/readable_enum_values_in_template.md "Readable ENUM values in templates")
 * [ENUM constants in templates](./Resources/docs/enum_constants_in_templates.md "ENUM constants in templates")
+* [ENUM values as array in templates](./Resources/docs/enum_values_as_array_in_templates.md "ENUM values as array in templates")
 * [Hook for Doctrine migrations](./Resources/docs/hook_for_doctrine_migrations.md "Hook for Doctrine migrations")
 
 ## Contributing
