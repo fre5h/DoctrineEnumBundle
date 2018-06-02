@@ -20,6 +20,7 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueTwigExtension;
 use PHPUnit\Framework\TestCase;
+use Twig\TwigFilter;
 
 /**
  * ReadableEnumValueExtensionTest.
@@ -47,7 +48,7 @@ class ReadableEnumValueExtensionTest extends TestCase
     public function testGetFilters(): void
     {
         self::assertEquals(
-            [new \Twig_SimpleFilter('readable_enum', [$this->readableEnumValueExtension, 'getReadableEnumValue'])],
+            [new TwigFilter('readable_enum', [$this->readableEnumValueExtension, 'getReadableEnumValue'])],
             $this->readableEnumValueExtension->getFilters()
         );
     }

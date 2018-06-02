@@ -20,6 +20,7 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
 use PHPUnit\Framework\TestCase;
+use Twig\TwigFilter;
 
 /**
  * EnumConstantExtensionTest.
@@ -47,7 +48,7 @@ class EnumConstantExtensionTest extends TestCase
     public function testGetFilters(): void
     {
         self::assertEquals(
-            [new \Twig_SimpleFilter('enum_constant', [$this->enumConstantExtension, 'getEnumConstant'])],
+            [new TwigFilter('enum_constant', [$this->enumConstantExtension, 'getEnumConstant'])],
             $this->enumConstantExtension->getFilters()
         );
     }

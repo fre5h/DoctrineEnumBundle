@@ -41,7 +41,7 @@ class EnumTypeGuesserTest extends TestCase
         ;
 
         $enumTypeGuesser
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getMetadata')
             ->willReturn(null)
         ;
@@ -67,13 +67,13 @@ class EnumTypeGuesserTest extends TestCase
         ;
 
         $metadata
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getTypeOfField')
             ->willReturn('unregistered_enum_type')
         ;
 
         $enumTypeGuesser
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getMetadata')
             ->willReturn([$metadata])
         ;
@@ -107,13 +107,13 @@ class EnumTypeGuesserTest extends TestCase
         ;
 
         $metadata
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getTypeOfField')
             ->willReturn('stub')
         ;
 
         $enumTypeGuesser
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getMetadata')
             ->willReturn([$metadata])
         ;
@@ -149,13 +149,13 @@ class EnumTypeGuesserTest extends TestCase
         ;
 
         $metadata
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getTypeOfField')
             ->willReturn('NotAChildType')
         ;
 
         $enumTypeGuesser
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getMetadata')
             ->willReturn([$metadata])
         ;
@@ -189,19 +189,19 @@ class EnumTypeGuesserTest extends TestCase
         ;
 
         $metadata
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getTypeOfField')
             ->willReturn('InheritedType')
         ;
 
         $metadata
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('isNullable')
             ->willReturn(true)
         ;
 
         $enumTypeGuesser
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getMetadata')
             ->willReturn([$metadata])
         ;
@@ -244,19 +244,19 @@ class EnumTypeGuesserTest extends TestCase
         ;
 
         $metadata
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getTypeOfField')
             ->willReturn('BasketballPositionType')
         ;
 
         $metadata
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('isNullable')
             ->willReturn(true)
         ;
 
         $enumTypeGuesser
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getMetadata')
             ->willReturn([$metadata])
         ;
