@@ -1,4 +1,4 @@
-## ENUM values as array in templates
+## ENUM values in templates
 
 There are two TWIG functions which can help you to get array of ENUM values in your templates.
 They are `enum_values()` and `enum_readable_values()`.
