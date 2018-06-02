@@ -59,7 +59,12 @@ class EnumTypeGuesserTest extends TestCase
             ->getMock()
         ;
 
-        $metadata = $this->createMock(ClassMetadataInfo::class);
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTypeOfField'])
+            ->getMock()
+        ;
 
         $metadata
             ->expects(self::once())
@@ -94,7 +99,12 @@ class EnumTypeGuesserTest extends TestCase
             ->getMock()
         ;
 
-        $metadata = $this->createMock(ClassMetadataInfo::class);
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTypeOfField'])
+            ->getMock()
+        ;
 
         $metadata
             ->expects(self::once())
@@ -131,7 +141,12 @@ class EnumTypeGuesserTest extends TestCase
             ->getMock()
         ;
 
-        $metadata = $this->createMock(ClassMetadataInfo::class);
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTypeOfField'])
+            ->getMock()
+        ;
 
         $metadata
             ->expects(self::once())
@@ -166,7 +181,12 @@ class EnumTypeGuesserTest extends TestCase
             ->getMock()
         ;
 
-        $metadata = $this->createMock(ClassMetadataInfo::class);
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTypeOfField', 'isNullable'])
+            ->getMock()
+        ;
 
         $metadata
             ->expects(self::once())
@@ -216,7 +236,12 @@ class EnumTypeGuesserTest extends TestCase
             ->getMock()
         ;
 
-        $metadata = $this->createMock(ClassMetadataInfo::class);
+        $metadata = $this
+            ->getMockBuilder(ClassMetadataInfo::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getTypeOfField', 'isNullable'])
+            ->getMock()
+        ;
 
         $metadata
             ->expects(self::once())
