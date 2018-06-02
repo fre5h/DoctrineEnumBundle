@@ -36,7 +36,7 @@
     "require-dev": {
         "phpstan/phpstan": "^0.9",
         "phpunit/phpunit": "^7.1",
-        "escapestudios/symfony2-coding-standard": "^3.3",
+        "escapestudios/symfony2-coding-standard": "^3.4",
         "squizlabs/php_codesniffer": "^3.2",
         "symfony/form": "^4.0"
     },
