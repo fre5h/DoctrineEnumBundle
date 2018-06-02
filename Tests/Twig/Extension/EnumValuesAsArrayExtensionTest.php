@@ -52,7 +52,6 @@ class EnumValuesAsArrayExtensionTest extends TestCase
         );
     }
 
-
     public function testGetEnumValuesAsArray(): void
     {
         self::assertEquals(

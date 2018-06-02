@@ -30,7 +30,7 @@ class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
     {
         return [
             new TwigFunction('enum_values_as_array', [$this, 'getEnumValuesAsArray']),
-            new TwigFunction('enum_readable_values_as_array', [$this, 'getReadableEnumValuesAsArray'])
+            new TwigFunction('enum_readable_values_as_array', [$this, 'getReadableEnumValuesAsArray']),
         ];
     }
 
