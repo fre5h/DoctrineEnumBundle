@@ -34,8 +34,8 @@ class FreshDoctrineEnumBundleTest extends TestCase
     protected function setUp(): void
     {
         $this->doctrine = $this->createMock(ManagerRegistry::class);
-
         $this->container = $this->createMock(Container::class);
+
         $this->container
             ->expects($this->once())
             ->method('get')
