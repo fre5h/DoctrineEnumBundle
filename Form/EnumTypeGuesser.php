@@ -12,10 +12,10 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Form;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
@@ -32,10 +32,10 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     protected $registeredEnumTypes = [];
 
     /**
-     * @param ManagerRegistry $registry
-     * @param array           $registeredTypes
+     * @param RegistryInterface $registry
+     * @param array             $registeredTypes
      */
-    public function __construct(ManagerRegistry $registry, array $registeredTypes)
+    public function __construct(RegistryInterface $registry, array $registeredTypes)
     {
         parent::__construct($registry);
 
