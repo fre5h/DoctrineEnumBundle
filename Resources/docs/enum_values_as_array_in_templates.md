@@ -1,12 +1,12 @@
 ## ENUM values as array in templates
 
 There are two TWIG functions which can help you to get array of ENUM values in your templates.
-They are `enum_values_as_array()` and `enum_readable_values_as_array()`.
+They are `enum_values()` and `enum_readable_values()`.
 
-#### Example of using `enum_values_as_array()`
+#### Example of using `enum_values()`
 
 ```jinja
-{% for value in enum_values_as_array('BasketballPositionType') %}
+{% for value in enum_values('BasketballPositionType') %}
     {{ value }}<br />
 {% endfor %}
 ```
@@ -20,10 +20,10 @@ PF
 C
 ```
 
-#### Example of using `enum_readable_values_as_array()`
+#### Example of using `enum_readable_values()`
 
 ```jinja
-{% for key, value in enum_readable_values_as_array('BasketballPositionType') %}
+{% for key, value in enum_readable_values('BasketballPositionType') %}
     {{ key }} => {{ value }}<br />
 {% endfor %}
 ```

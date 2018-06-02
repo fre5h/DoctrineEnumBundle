@@ -27,5 +27,5 @@ You can specify the correct class for this constant and it solves the problem.
 * [Building the form](./building_the_form.md "Building the form")
 * [Additional methods](./additional_methods.md "Additional methods")
 * [Readable ENUM values in templates](./readable_enum_values_in_template.md "Readable ENUM values in templates")
-* [ENUM values as array in templates](./enum_values_as_array_in_templates.md "ENUM values as array in templates")
+* [ENUM values as array in templates](./enum_values_in_templates.md "ENUM values as array in templates")
 * [Hook for Doctrine migrations](./hook_for_doctrine_migrations.md "Hook for Doctrine migrations")

@@ -45,8 +45,8 @@ class EnumValuesAsArrayExtensionTest extends TestCase
     {
         self::assertEquals(
             [
-                new TwigFunction('enum_values_as_array', [$this->enumValuesAsArrayTwigExtension, 'getEnumValuesAsArray']),
-                new TwigFunction('enum_readable_values_as_array', [$this->enumValuesAsArrayTwigExtension, 'getReadableEnumValuesAsArray']),
+                new TwigFunction('enum_values', [$this->enumValuesAsArrayTwigExtension, 'getEnumValuesAsArray']),
+                new TwigFunction('enum_readable_values', [$this->enumValuesAsArrayTwigExtension, 'getReadableEnumValuesAsArray']),
             ],
             $this->enumValuesAsArrayTwigExtension->getFunctions()
         );

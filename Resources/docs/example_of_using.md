@@ -113,5 +113,5 @@ use App\DBAL\Types\BasketballPositionType;
 * [Additional methods](./additional_methods.md "Additional methods")
 * [Readable ENUM values in templates](./readable_enum_values_in_template.md "Readable ENUM values in templates")
 * [ENUM constants in templates](./enum_constants_in_templates.md "ENUM constants in templates")
-* [ENUM values as array in templates](./enum_values_as_array_in_templates.md "ENUM values as array in templates")
+* [ENUM values as array in templates](./enum_values_in_templates.md "ENUM values as array in templates")
 * [Hook for Doctrine migrations](./hook_for_doctrine_migrations.md "Hook for Doctrine migrations")

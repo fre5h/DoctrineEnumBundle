@@ -41,7 +41,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 * [Additional methods](./Resources/docs/additional_methods.md "Additional methods")
 * [Readable ENUM values in templates](./Resources/docs/readable_enum_values_in_template.md "Readable ENUM values in templates")
 * [ENUM constants in templates](./Resources/docs/enum_constants_in_templates.md "ENUM constants in templates")
-* [ENUM values as array in templates](./Resources/docs/enum_values_as_array_in_templates.md "ENUM values as array in templates")
+* [ENUM values as array in templates](./Resources/docs/enum_values_in_templates.md "ENUM values as array in templates")
 * [Hook for Doctrine migrations](./Resources/docs/hook_for_doctrine_migrations.md "Hook for Doctrine migrations")
 
 ## Contributing
