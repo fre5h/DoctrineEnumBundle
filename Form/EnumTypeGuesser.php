@@ -28,7 +28,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
  */
 class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 {
-    /** @var AbstractEnumType[] */
+    /** @var string[] */
     protected $registeredEnumTypes = [];
 
     /**
@@ -84,9 +84,9 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             return null;
         }
 
-        // Get the choices from the fully qualified class name
+        /** @var AbstractEnumType $registeredEnumTypeFQCN */
         $parameters = [
-            'choices' => $registeredEnumTypeFQCN::getChoices(),
+            'choices' => $registeredEnumTypeFQCN::getChoices(), // Get the choices from the fully qualified class name
             'required' => !$metadata->isNullable($property),
         ];
 

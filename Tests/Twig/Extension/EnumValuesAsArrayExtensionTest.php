@@ -85,4 +85,19 @@ class EnumValuesAsArrayExtensionTest extends TestCase
         $this->expectException(NoRegisteredEnumTypesException::class);
         (new EnumValuesAsArrayTwigExtension([]))->getEnumValuesAsArray('MapLocationType');
     }
+
+    public function testInvalidCallable(): void
+    {
+        $extension = new EnumValuesAsArrayTwigExtension([]);
+
+        $property = new \ReflectionProperty(EnumValuesAsArrayTwigExtension::class, 'registeredEnumTypes');
+        $property->setAccessible(true);
+        $property->setValue($extension, ['invalid_callable' => 'dummy']);
+        $property->setAccessible(false);
+
+        self::expectException(\LogicException::class);
+        self::expectExceptionMessage('dummy::getReadableValues is not a valid exception');
+
+        $extension->getReadableEnumValuesAsArray('invalid_callable');
+    }
 }

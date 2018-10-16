@@ -10,6 +10,8 @@
 
 namespace Fresh\DoctrineEnumBundle;
 
+use Doctrine\Common\Persistence\ConnectionRegistry;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -22,6 +24,7 @@ class FreshDoctrineEnumBundle extends Bundle
     /**
      * {@inheritdoc}
      *
+     * @throws \InvalidArgumentException
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
      * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
@@ -30,7 +33,10 @@ class FreshDoctrineEnumBundle extends Bundle
     {
         parent::boot();
 
-        $doctrine = $this->container->get('doctrine');
+        $doctrine = $this->container->get('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        if (!$doctrine instanceof ConnectionRegistry) {
+            throw new \InvalidArgumentException('Service "doctrine" is missed in container');
+        }
 
         /** @var \Doctrine\DBAL\Connection $connection */
         foreach ($doctrine->getConnections() as $connection) {
