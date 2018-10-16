@@ -52,14 +52,14 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
             if (null !== $enumType) {
                 $this->throwExceptionIfEnumTypeIsNotRegistered($enumType);
 
-                return \constant($this->registeredEnumTypes[$enumType].'::'.$enumConstant);
+                return (string) \constant($this->registeredEnumTypes[$enumType].'::'.$enumConstant);
             }
 
             // If ENUM type wasn't set, e.g. {{ 'CENTER'|enum_constant }}
             $this->findOccurrences($enumConstant);
 
             if ($this->onlyOneOccurrenceFound()) {
-                return \constant(\array_pop($this->occurrences).'::'.$enumConstant);
+                return (string) \constant(\array_pop($this->occurrences).'::'.$enumConstant);
             }
 
             if ($this->moreThanOneOccurrenceFound()) {
