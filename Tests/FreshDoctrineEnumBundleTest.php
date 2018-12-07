@@ -16,7 +16,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * FreshDoctrineEnumBundleTest
@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\Container;
  */
 class FreshDoctrineEnumBundleTest extends TestCase
 {
-    /** @var Container|MockObject */
+    /** @var ContainerInterface|MockObject */
     private $container;
 
     /** @@var ManagerRegistry|MockObject */
@@ -34,23 +34,26 @@ class FreshDoctrineEnumBundleTest extends TestCase
     protected function setUp(): void
     {
         $this->doctrine = $this->createMock(ManagerRegistry::class);
-
-        $this->container = $this->createMock(Container::class);
-        $this->container
-            ->expects($this->once())
-            ->method('get')
-            ->with('doctrine')
-            ->willReturn($this->doctrine)
-        ;
+        $this->container = $this->createMock(ContainerInterface::class);
     }
 
     protected function tearDown(): void
     {
-        unset($this->container, $this->doctrine);
+        unset(
+            $this->container,
+            $this->doctrine
+        );
     }
 
     public function testEnumMappingRegistration(): void
     {
+        $this->container
+            ->expects(self::once())
+            ->method('get')
+            ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
+            ->willReturn($this->doctrine)
+        ;
+
         /**
          * @var AbstractPlatform|MockObject $databasePlatformAbc
          * @var AbstractPlatform|MockObject $databasePlatformDef
@@ -61,21 +64,20 @@ class FreshDoctrineEnumBundleTest extends TestCase
         $connectionAbc = $this->createMock(Connection::class);
 
         $connectionAbc
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getDatabasePlatform')
             ->willReturn($databasePlatformAbc)
         ;
 
         $connectionDef = $this->createMock(Connection::class);
-
         $connectionDef
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getDatabasePlatform')
             ->willReturn($databasePlatformDef)
         ;
 
         $this->doctrine
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getConnections')
             ->willReturn([$connectionAbc, $connectionDef])
         ;
@@ -93,19 +95,25 @@ class FreshDoctrineEnumBundleTest extends TestCase
 
     public function testAlreadyRegisteredEnumMapping(): void
     {
+        $this->container
+            ->expects(self::once())
+            ->method('get')
+            ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
+            ->willReturn($this->doctrine)
+        ;
+
         /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
         $connectionAbc = $this->createMock(Connection::class);
-
         $connectionAbc
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getDatabasePlatform')
             ->willReturn($databasePlatformAbc)
         ;
 
         $this->doctrine
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getConnections')
             ->willReturn([$connectionAbc])
         ;
@@ -122,19 +130,26 @@ class FreshDoctrineEnumBundleTest extends TestCase
 
     public function testEnumMappingReregistrationToString(): void
     {
+        $this->container
+            ->expects(self::once())
+            ->method('get')
+            ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
+            ->willReturn($this->doctrine)
+        ;
+
         /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
         $connectionAbc = $this->createMock(Connection::class);
 
         $connectionAbc
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getDatabasePlatform')
             ->willReturn($databasePlatformAbc)
         ;
 
         $this->doctrine
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getConnections')
             ->willReturn([$connectionAbc])
         ;
@@ -147,5 +162,22 @@ class FreshDoctrineEnumBundleTest extends TestCase
 
         self::assertTrue($databasePlatformAbc->hasDoctrineTypeMappingFor('enum'));
         self::assertEquals('string', $databasePlatformAbc->getDoctrineTypeMapping('enum'));
+    }
+
+    public function testMissedDoctrine(): void
+    {
+        $this->container
+            ->expects(self::once())
+            ->method('get')
+            ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
+            ->willReturn(null)
+        ;
+
+        self::expectException(\InvalidArgumentException::class);
+        self::expectExceptionMessage('Service "doctrine" is missed in container');
+
+        $bundle = new FreshDoctrineEnumBundle();
+        $bundle->setContainer($this->container);
+        $bundle->boot();
     }
 }

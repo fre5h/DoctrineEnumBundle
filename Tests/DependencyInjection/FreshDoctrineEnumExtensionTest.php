@@ -58,6 +58,7 @@ class FreshDoctrineEnumExtensionTest extends TestCase
         self::assertArrayNotHasKey(EnumConstantTwigExtension::class, $this->container->getDefinitions());
 
         $this->expectException(ServiceNotFoundException::class);
+
         $this->container->get(EnumTypeGuesser::class);
         $this->container->get(ReadableEnumValueTwigExtension::class);
         $this->container->get(EnumConstantTwigExtension::class);
