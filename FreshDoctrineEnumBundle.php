@@ -30,6 +30,7 @@ class FreshDoctrineEnumBundle extends Bundle
     {
         parent::boot();
 
+        /** @var \Doctrine\Bundle\DoctrineBundle\Registry $doctrine */
         $doctrine = $this->container->get('doctrine');
 
         /** @var \Doctrine\DBAL\Connection $connection */
