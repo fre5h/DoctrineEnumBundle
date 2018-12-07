@@ -74,7 +74,13 @@ class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
         if ($this->hasRegisteredEnumTypes()) {
             $this->throwExceptionIfEnumTypeIsNotRegistered($enumType);
 
-            return \call_user_func([$this->registeredEnumTypes[$enumType], $staticMethodName]);
+            $function = [$this->registeredEnumTypes[$enumType], $staticMethodName];
+
+            if (!\is_callable($function)) {
+                throw new \LogicException(\sprintf('%s::%s is not a valid exception', $this->registeredEnumTypes[$enumType], $staticMethodName));
+            }
+
+            return \call_user_func($function);
         }
 
         throw $this->createNoRegisteredEnumTypesException();

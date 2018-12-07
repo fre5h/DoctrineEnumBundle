@@ -67,7 +67,7 @@ abstract class AbstractEnumType extends Type
             return $value;
         }
 
-        // Check whether choice list is using integers as valies
+        // Check whether choice list is using integers as values
         $choice = static::$choices[$value];
         $choices = \array_flip(static::$choices);
         if (\is_int($choices[$choice])) {
@@ -177,8 +177,6 @@ abstract class AbstractEnumType extends Type
      * @static
      *
      * @return string $value Value in readable format
-     *
-     * @throws \InvalidArgumentException
      */
     public static function getReadableValue(string $value): string
     {

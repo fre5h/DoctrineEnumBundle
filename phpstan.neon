@@ -1,4 +1,9 @@
+includes:
+    - 'vendor/phpstan/phpstan-phpunit/extension.neon'
+    - 'vendor/phpstan/phpstan-phpunit/rules.neon'
+    - 'vendor/phpstan/phpstan-doctrine/extension.neon'
 parameters:
+    level: 7
     excludes_analyse:
         - '%rootDir%/../../../Tests/*'
         - '%rootDir%/../../../vendor/*'

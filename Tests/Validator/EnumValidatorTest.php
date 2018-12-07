@@ -68,7 +68,7 @@ class EnumValidatorTest extends TestCase
         ]);
 
         $this->context
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('buildViolation')
         ;
 
@@ -85,20 +85,20 @@ class EnumValidatorTest extends TestCase
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraintValidationBuilder
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('setParameter')
             ->with($this->equalTo('{{ value }}'), $this->equalTo('"Pitcher"'))
             ->will($this->returnSelf())
         ;
 
         $constraintValidationBuilder
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('setCode')
             ->will($this->returnSelf())
         ;
 
         $this->context
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('buildViolation')
             ->with($this->equalTo('The value you selected is not a valid choice.'))
             ->will($this->returnValue($constraintValidationBuilder))

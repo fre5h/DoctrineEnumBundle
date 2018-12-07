@@ -18,6 +18,7 @@ use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException
 use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFilter;
@@ -37,6 +38,7 @@ class EnumConstantExtensionTest extends TestCase
         $this->enumConstantExtension = new EnumConstantTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
+            'NumericType' => ['class' => NumericType::class],
         ]);
     }
 
@@ -54,7 +56,7 @@ class EnumConstantExtensionTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderForGetReadableEnumValueTest
+     * @dataProvider dataProviderForGetEnumConstantTest
      */
     public function testGetEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType): void
     {
@@ -64,13 +66,14 @@ class EnumConstantExtensionTest extends TestCase
         );
     }
 
-    public function dataProviderForGetReadableEnumValueTest(): array
+    public function dataProviderForGetEnumConstantTest(): array
     {
         return [
             ['PG', 'POINT_GUARD', 'BasketballPositionType'],
             ['PG', 'POINT_GUARD', null],
             ['C', 'CENTER', 'BasketballPositionType'],
             ['C', 'CENTER', 'MapLocationType'],
+            ['3', 'THREE', 'NumericType'],
         ];
     }
 
