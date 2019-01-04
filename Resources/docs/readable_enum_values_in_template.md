@@ -8,7 +8,7 @@ In the example below if Player is a Point Guard in their basketball team then po
 {{ player.position|readable_enum }}
 ```
 
-How it works? If there is no additional parameter for the filter, [ReadableEnumValueExtension](./../../Twig/Extension/ReadableEnumValueExtension.php "ReadableEnumValueExtension")
+How it works? If there is no additional parameter for the filter, [ReadableEnumValueTwigExtension](./../../Twig/Extension/ReadableEnumValueTwigExtension.php "ReadableEnumValueTwigExtension")
 tries to find which ENUM type from registered ENUM types has this value.
 If only one ENUM type found, then it is possible to get the readable value from it. Otherwise it will throw an exception.
 
