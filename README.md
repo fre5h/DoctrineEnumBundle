@@ -30,6 +30,20 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 | `6.2.*`                | `>= 7.1.3`       | `>= 4.0` | `>= 2.6`      | **Current version** |
 | `5.3.*`                | `>= 5.6, <= 7.1` | `3.4`    | `>= 2.5`      | *Bug fix support*   |
 
+#### Check the `config/bundles.php` file
+
+By default Symfony Flex will add FreshDoctrineEnumBundle to the `config/bundles.php` file. But in case when you ignored `contrib-recipe` during bundle installation it would not be added. In this case add the bundle manually.
+
+```php
+# config/bundles.php
+
+return [
+    // other bundles
+    Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle::class => ['all' => true],
+    // other bundles
+];
+```
+
 ## Using
 
 * [Example](./Resources/docs/example_of_using.md "Example")
