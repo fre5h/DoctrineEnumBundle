@@ -144,6 +144,21 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
+     * Get random value for the ENUM field.
+     *
+     * @static
+     *
+     * @return int|string
+     */
+    public static function getRandomValue()
+    {
+        $values = self::getValues();
+        $randomKey = \random_int(0, \count($values) - 1);
+
+        return $values[$randomKey];
+    }
+
+    /**
      * Get array of ENUM Values, where ENUM values are keys and their readable versions are values.
      *
      * @static

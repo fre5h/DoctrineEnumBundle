@@ -16,11 +16,20 @@ BasketballPositionType::getReadableValue(BasketballPositionType::SHOOTING_GUARD)
 // Will return: Shooting Guard
 ```
 
-##### If you need to get values in the readable format:
+##### If you need to get all values:
 
 ```php
 BasketballPositionType::getValues();
 // Will return: ['PG', 'SG', 'SF', 'PF', 'C']
+```
+
+---
+
+##### If you need to return a random value:
+
+```php
+BasketballPositionType::getRandomValue();
+// Will randomly return one of the available values: 'PG', 'SG', 'SF', 'PF', 'C'
 ```
 
 ---
