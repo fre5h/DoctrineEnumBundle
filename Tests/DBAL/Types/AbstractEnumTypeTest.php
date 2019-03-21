@@ -109,6 +109,15 @@ class AbstractEnumTypeTest extends TestCase
         $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
     }
 
+    public function testGetRandomValue(): void
+    {
+        $values = $this->type::getValues();
+
+        self::assertContains($this->type::getRandomValue(), $values);
+        self::assertContains($this->type::getRandomValue(), $values);
+        self::assertContains($this->type::getRandomValue(), $values);
+    }
+
     public function testGetReadableValues(): void
     {
         $choices = [
