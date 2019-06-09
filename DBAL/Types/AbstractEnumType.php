@@ -85,7 +85,7 @@ abstract class AbstractEnumType extends Type
         $values = \implode(
             ', ',
             \array_map(
-                function ($value) {
+                static function ($value) {
                     return "'{$value}'";
                 },
                 static::getValues()
