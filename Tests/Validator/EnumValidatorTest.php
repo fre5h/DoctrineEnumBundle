@@ -90,20 +90,20 @@ class EnumValidatorTest extends TestCase
             ->expects(self::once())
             ->method('setParameter')
             ->with($this->equalTo('{{ value }}'), $this->equalTo('"Pitcher"'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $constraintValidationBuilder
             ->expects(self::once())
             ->method('setCode')
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $this->context
             ->expects(self::once())
             ->method('buildViolation')
             ->with($this->equalTo('The value you selected is not a valid choice.'))
-            ->will($this->returnValue($constraintValidationBuilder))
+            ->willReturn($constraintValidationBuilder)
         ;
 
         $this->enumValidator->initialize($this->context);
