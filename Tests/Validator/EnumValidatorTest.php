@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumValidatorTest extends TestCase
+final class EnumValidatorTest extends TestCase
 {
     /** @var EnumValidator */
     private $enumValidator;

@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class FreshDoctrineEnumBundleTest extends TestCase
+final class FreshDoctrineEnumBundleTest extends TestCase
 {
     /** @var ContainerInterface|MockObject */
     private $container;
@@ -175,8 +175,8 @@ class FreshDoctrineEnumBundleTest extends TestCase
             ->willReturn(null)
         ;
 
-        self::expectException(\InvalidArgumentException::class);
-        self::expectExceptionMessage('Service "doctrine" is missed in container');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Service "doctrine" is missed in container');
 
         $bundle = new FreshDoctrineEnumBundle();
         $bundle->setContainer($this->container);

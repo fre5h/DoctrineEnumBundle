@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class FreshDoctrineEnumExtensionTest extends TestCase
+final class FreshDoctrineEnumExtensionTest extends TestCase
 {
     /** @var FreshDoctrineEnumExtension */
     private $extension;

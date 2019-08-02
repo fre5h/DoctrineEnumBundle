@@ -27,7 +27,7 @@ use Twig\TwigFilter;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class ReadableEnumValueExtensionTest extends TestCase
+final class ReadableEnumValueExtensionTest extends TestCase
 {
     /** @var ReadableEnumValueTwigExtension */
     private $readableEnumValueExtension;

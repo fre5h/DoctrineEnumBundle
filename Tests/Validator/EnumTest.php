@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Exception\MissingOptionsException;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumTest extends TestCase
+final class EnumTest extends TestCase
 {
     public function testConstructor(): void
     {
