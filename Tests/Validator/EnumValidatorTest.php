@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumValidatorTest extends TestCase
+final class EnumValidatorTest extends TestCase
 {
     /** @var EnumValidator */
     private $enumValidator;
@@ -87,9 +87,16 @@ class EnumValidatorTest extends TestCase
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraintValidationBuilder
-            ->expects(self::once())
+            ->expects(self::at(0))
             ->method('setParameter')
             ->with($this->equalTo('{{ value }}'), $this->equalTo('"Pitcher"'))
+            ->willReturnSelf()
+        ;
+
+        $constraintValidationBuilder
+            ->expects(self::at(1))
+            ->method('setParameter')
+            ->with($this->equalTo('{{ choices }}'), $this->equalTo('"PG", "SG", "SF", "PF", "C"'))
             ->willReturnSelf()
         ;
 

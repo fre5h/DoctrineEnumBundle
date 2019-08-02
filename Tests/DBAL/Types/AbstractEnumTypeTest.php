@@ -30,7 +30,7 @@ use PHPUnit\Framework\TestCase;
  * @author Artem Henvald <genvaldartem@gmail.com>
  * @author Ben Davies    <ben.davies@gmail.com>
  */
-class AbstractEnumTypeTest extends TestCase
+final class AbstractEnumTypeTest extends TestCase
 {
     /** @var AbstractEnumType */
     private $type;
