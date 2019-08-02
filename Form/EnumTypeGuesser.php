@@ -66,7 +66,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
         $fieldType = $metadata->getTypeOfField($property);
 
         // This is not one of the registered ENUM types
-        if (!isset($this->registeredEnumTypes[$fieldType])) {
+        if (!\is_string($fieldType) || !isset($this->registeredEnumTypes[$fieldType])) {
             return null;
         }
 
