@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
@@ -24,7 +26,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumValidatorTest extends TestCase
+final class EnumValidatorTest extends TestCase
 {
     /** @var EnumValidator */
     private $enumValidator;
@@ -85,23 +87,30 @@ class EnumValidatorTest extends TestCase
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraintValidationBuilder
-            ->expects(self::once())
+            ->expects(self::at(0))
             ->method('setParameter')
             ->with($this->equalTo('{{ value }}'), $this->equalTo('"Pitcher"'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
+        ;
+
+        $constraintValidationBuilder
+            ->expects(self::at(1))
+            ->method('setParameter')
+            ->with($this->equalTo('{{ choices }}'), $this->equalTo('"PG", "SG", "SF", "PF", "C"'))
+            ->willReturnSelf()
         ;
 
         $constraintValidationBuilder
             ->expects(self::once())
             ->method('setCode')
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $this->context
             ->expects(self::once())
             ->method('buildViolation')
             ->with($this->equalTo('The value you selected is not a valid choice.'))
-            ->will($this->returnValue($constraintValidationBuilder))
+            ->willReturn($constraintValidationBuilder)
         ;
 
         $this->enumValidator->initialize($this->context);

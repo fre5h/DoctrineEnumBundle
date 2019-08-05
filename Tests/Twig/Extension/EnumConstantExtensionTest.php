@@ -28,7 +28,7 @@ use Twig\TwigFilter;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumConstantExtensionTest extends TestCase
+final class EnumConstantExtensionTest extends TestCase
 {
     /** @var EnumConstantTwigExtension */
     private $enumConstantExtension;

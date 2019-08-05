@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
@@ -20,7 +22,7 @@ use Symfony\Component\Validator\Exception\MissingOptionsException;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumTest extends TestCase
+final class EnumTest extends TestCase
 {
     public function testConstructor(): void
     {

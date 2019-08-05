@@ -8,8 +8,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Tests\Form;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
@@ -18,7 +21,6 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\InheritedType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NotAChildType;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
@@ -28,7 +30,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumTypeGuesserTest extends TestCase
+final class EnumTypeGuesserTest extends TestCase
 {
     public function testNullResultWhenClassMetadataNotFound(): void
     {
@@ -83,12 +85,12 @@ class EnumTypeGuesserTest extends TestCase
 
     public function testExceptionWhenClassDoesNotExist(): void
     {
-        $registry = $this->createMock(RegistryInterface::class);
+        $registry = $this->createMock(ManagerRegistry::class);
 
         $registeredTypes = [
             'stub' => [
                 'class' => '\Acme\Foo\Bar\Baz',
-            ]
+            ],
         ];
 
         /** @var EnumTypeGuesser|MockObject $enumTypeGuesser */
@@ -125,12 +127,12 @@ class EnumTypeGuesserTest extends TestCase
 
     public function testNullResultWhenIsNotChildOfAbstractEnumType(): void
     {
-        $registry = $this->createMock(RegistryInterface::class);
+        $registry = $this->createMock(ManagerRegistry::class);
 
         $registeredTypes = [
             'NotAChildType' => [
                 'class' => NotAChildType::class,
-            ]
+            ],
         ];
 
         /** @var EnumTypeGuesser|MockObject $enumTypeGuesser */
@@ -165,12 +167,12 @@ class EnumTypeGuesserTest extends TestCase
 
     public function testSuccessfulTypeGuessingWithAncestor(): void
     {
-        $registry = $this->createMock(RegistryInterface::class);
+        $registry = $this->createMock(ManagerRegistry::class);
 
         $registeredTypes = [
             'InheritedType' => [
                 'class' => InheritedType::class,
-            ]
+            ],
         ];
 
         /** @var EnumTypeGuesser|MockObject $enumTypeGuesser */
@@ -220,12 +222,12 @@ class EnumTypeGuesserTest extends TestCase
 
     public function testSuccessfulTypeGuessing(): void
     {
-        $registry = $this->createMock(RegistryInterface::class);
+        $registry = $this->createMock(ManagerRegistry::class);
 
         $registeredTypes = [
             'BasketballPositionType' => [
                 'class' => BasketballPositionType::class,
-            ]
+            ],
         ];
 
         /** @var EnumTypeGuesser|MockObject $enumTypeGuesser */

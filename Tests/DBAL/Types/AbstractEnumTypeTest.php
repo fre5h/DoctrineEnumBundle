@@ -30,7 +30,7 @@ use PHPUnit\Framework\TestCase;
  * @author Artem Henvald <genvaldartem@gmail.com>
  * @author Ben Davies    <ben.davies@gmail.com>
  */
-class AbstractEnumTypeTest extends TestCase
+final class AbstractEnumTypeTest extends TestCase
 {
     /** @var AbstractEnumType */
     private $type;
@@ -107,6 +107,15 @@ class AbstractEnumTypeTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
+    }
+
+    public function testGetRandomValue(): void
+    {
+        $values = $this->type::getValues();
+
+        self::assertContains($this->type::getRandomValue(), $values);
+        self::assertContains($this->type::getRandomValue(), $values);
+        self::assertContains($this->type::getRandomValue(), $values);
     }
 
     public function testGetReadableValues(): void

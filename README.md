@@ -11,7 +11,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 [![StyleCI](https://styleci.io/repos/6553368/shield?style=flat-square)](https://styleci.io/repos/6553368)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/fre5h/DoctrineEnumBundle)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/small.png)](https://insight.sensiolabs.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
+[![SymfonyInsight](https://insight.symfony.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/big.svg)](https://insight.symfony.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
 
 ## Supported platforms
@@ -29,6 +29,21 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 |:----------------------:|:----------------:|:--------:|:-------------:|:--------------------|
 | `6.2.*`                | `>= 7.1.3`       | `>= 4.0` | `>= 2.6`      | **Current version** |
 | `5.3.*`                | `>= 5.6, <= 7.1` | `3.4`    | `>= 2.5`      | *Bug fix support*   |
+
+#### Check the `config/bundles.php` file
+
+By default Symfony Flex will add this bundle to the `config/bundles.php` file.
+But in case when you ignored `contrib-recipe` during bundle installation it would not be added. In this case add the bundle manually.
+
+```php
+# config/bundles.php
+
+return [
+    // Other bundles...
+    Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle::class => ['all' => true],
+    // Other bundles...
+];
+```
 
 ## Using
 

@@ -85,7 +85,7 @@ abstract class AbstractEnumType extends Type
         $values = \implode(
             ', ',
             \array_map(
-                function ($value) {
+                static function ($value) {
                     return "'{$value}'";
                 },
                 static::getValues()
@@ -141,6 +141,21 @@ abstract class AbstractEnumType extends Type
     public static function getValues(): array
     {
         return \array_keys(static::$choices);
+    }
+
+    /**
+     * Get random value for the ENUM field.
+     *
+     * @static
+     *
+     * @return int|string
+     */
+    public static function getRandomValue()
+    {
+        $values = self::getValues();
+        $randomKey = \random_int(0, \count($values) - 1);
+
+        return $values[$randomKey];
     }
 
     /**

@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Tests\DependencyInjection;
 
 use Fresh\DoctrineEnumBundle\DependencyInjection\FreshDoctrineEnumExtension;
@@ -23,7 +25,7 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class FreshDoctrineEnumExtensionTest extends TestCase
+final class FreshDoctrineEnumExtensionTest extends TestCase
 {
     /** @var FreshDoctrineEnumExtension */
     private $extension;

@@ -24,7 +24,7 @@ use Twig\TwigFunction;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumValuesAsArrayExtensionTest extends TestCase
+final class EnumValuesAsArrayExtensionTest extends TestCase
 {
     /** @var EnumValuesAsArrayTwigExtension */
     private $enumValuesAsArrayTwigExtension;
@@ -95,8 +95,8 @@ class EnumValuesAsArrayExtensionTest extends TestCase
         $property->setValue($extension, ['invalid_callable' => 'dummy']);
         $property->setAccessible(false);
 
-        self::expectException(\LogicException::class);
-        self::expectExceptionMessage('dummy::getReadableValues is not a valid exception');
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('dummy::getReadableValues is not a valid exception');
 
         $extension->getReadableEnumValuesAsArray('invalid_callable');
     }

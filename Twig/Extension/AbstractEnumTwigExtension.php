@@ -24,7 +24,7 @@ use Twig\Extension\AbstractExtension;
  */
 abstract class AbstractEnumTwigExtension extends AbstractExtension
 {
-    /** @var string[] */
+    /** @var string[]|AbstractEnumType[] */
     protected $registeredEnumTypes = [];
 
     /** @var array */
@@ -37,7 +37,7 @@ abstract class AbstractEnumTwigExtension extends AbstractExtension
     {
         foreach ($registeredTypes as $type => $details) {
             $class = $details['class'];
-            if (\is_subclass_of($class, AbstractEnumType::class) && \is_string($class)) {
+            if (\is_string($class) && \is_subclass_of($class, AbstractEnumType::class)) {
                 $this->registeredEnumTypes[$type] = $class;
             }
         }
