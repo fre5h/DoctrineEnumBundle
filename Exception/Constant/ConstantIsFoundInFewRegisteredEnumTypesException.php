@@ -12,11 +12,13 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Exception\Constant;
 
+use Fresh\DoctrineEnumBundle\Exception\LogicException;
+
 /**
  * ConstantIsFoundInFewRegisteredEnumTypesException.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class ConstantIsFoundInFewRegisteredEnumTypesException extends \LogicException
+class ConstantIsFoundInFewRegisteredEnumTypesException extends LogicException
 {
 }

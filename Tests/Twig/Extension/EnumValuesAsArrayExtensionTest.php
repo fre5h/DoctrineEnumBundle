@@ -14,6 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\LogicException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumValuesAsArrayTwigExtension;
 use PHPUnit\Framework\TestCase;
@@ -95,7 +96,7 @@ final class EnumValuesAsArrayExtensionTest extends TestCase
         $property->setValue($extension, ['invalid_callable' => 'dummy']);
         $property->setAccessible(false);
 
-        $this->expectException(\LogicException::class);
+        $this->expectException(LogicException::class);
         $this->expectExceptionMessage('dummy::getReadableValues is not a valid exception');
 
         $extension->getReadableEnumValuesAsArray('invalid_callable');

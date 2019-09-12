@@ -15,6 +15,7 @@ namespace Fresh\DoctrineEnumBundle\Tests;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -175,7 +176,7 @@ final class FreshDoctrineEnumBundleTest extends TestCase
             ->willReturn(null)
         ;
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Service "doctrine" is missed in container');
 
         $bundle = new FreshDoctrineEnumBundle();
