@@ -14,6 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
+use Fresh\DoctrineEnumBundle\Exception\LogicException;
 use Twig\TwigFunction;
 
 /**
@@ -64,6 +65,7 @@ class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
      * @param string $enumType
      * @param string $staticMethodName
      *
+     * @throws LogicException
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
      *
@@ -77,7 +79,7 @@ class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
             $function = [$this->registeredEnumTypes[$enumType], $staticMethodName];
 
             if (!\is_callable($function)) {
-                throw new \LogicException(\sprintf('%s::%s is not a valid exception', $this->registeredEnumTypes[$enumType], $staticMethodName));
+                throw new LogicException(\sprintf('%s::%s is not a valid exception', $this->registeredEnumTypes[$enumType], $staticMethodName));
             }
 
             return $function();

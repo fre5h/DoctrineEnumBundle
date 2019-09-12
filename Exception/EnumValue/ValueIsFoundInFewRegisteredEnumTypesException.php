@@ -12,11 +12,13 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Exception\EnumValue;
 
+use Fresh\DoctrineEnumBundle\Exception\LogicException;
+
 /**
  * ValueIsFoundInFewRegisteredEnumTypesException.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class ValueIsFoundInFewRegisteredEnumTypesException extends \LogicException
+class ValueIsFoundInFewRegisteredEnumTypesException extends LogicException
 {
 }

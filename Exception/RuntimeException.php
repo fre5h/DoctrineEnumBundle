@@ -10,15 +10,13 @@
 
 declare(strict_types=1);
 
-namespace Fresh\DoctrineEnumBundle\Exception\Constant;
-
-use Fresh\DoctrineEnumBundle\Exception\LogicException;
+namespace Fresh\DoctrineEnumBundle\Exception;
 
 /**
- * ConstantIsNotFoundInAnyRegisteredEnumTypeException.
+ * RuntimeException.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class ConstantIsNotFoundInAnyRegisteredEnumTypeException extends LogicException
+class RuntimeException extends \LogicException
 {
 }
