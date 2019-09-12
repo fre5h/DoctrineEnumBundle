@@ -25,10 +25,10 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ##### Choose the version you need
 
-| Bundle Version (X.Y.Z) | PHP              | Symfony  | Doctrine DBAL | Comment             |
-|:----------------------:|:----------------:|:--------:|:-------------:|:--------------------|
-| `6.2.*`                | `>= 7.1.3`       | `>= 4.0` | `>= 2.6`      | **Current version** |
-| `5.3.*`                | `>= 5.6, <= 7.1` | `3.4`    | `>= 2.5`      | *Bug fix support*   |
+| Bundle Version (X.Y.Z) | PHP              | Symfony          | Doctrine DBAL | Comment             |
+|:----------------------:|:----------------:|:----------------:|:-------------:|:--------------------|
+| `6.4.*`                | `>= 7.1.3`       | `>= 4.3        ` | `>= 2.6`      | **Current version** |
+| `6.3.*`                | `>= 7.1.3`       | `>= 4.0, <= 4.2` | `>= 2.6`      | *Bug fix support*   |
 
 #### Check the `config/bundles.php` file
 
@@ -54,6 +54,7 @@ return [
 * [NULL values](./Resources/docs/null_values.md "NULL values")
 * [Building the form](./Resources/docs/building_the_form.md "Building the form")
 * [Additional methods](./Resources/docs/additional_methods.md "Additional methods")
+* [Common types](./Resources/docs/common_types.md "Common types")
 * [Readable ENUM values in templates](./Resources/docs/readable_enum_values_in_template.md "Readable ENUM values in templates")
 * [ENUM constants in templates](./Resources/docs/enum_constants_in_templates.md "ENUM constants in templates")
 * [ENUM values in templates](./Resources/docs/enum_values_in_templates.md "ENUM values in templates")
