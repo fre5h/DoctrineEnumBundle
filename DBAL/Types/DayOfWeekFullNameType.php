@@ -17,7 +17,7 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-abstract class DayOfWeekFullNameType extends AbstractEnumType
+final class DayOfWeekFullNameType extends AbstractEnumType
 {
     public const MONDAY = 'monday';
     public const TUESDAY = 'tuesday';

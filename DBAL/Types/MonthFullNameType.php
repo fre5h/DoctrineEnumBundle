@@ -17,7 +17,7 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-abstract class MonthFullNameType extends AbstractEnumType
+final class MonthFullNameType extends AbstractEnumType
 {
     public const JANUARY = 'january';
     public const FEBRUARY = 'february';
