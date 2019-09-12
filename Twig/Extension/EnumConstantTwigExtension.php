@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the FreshDoctrineEnumBundle
+ * This file is part of the FreshDoctrineEnumBundle.
  *
  * (c) Artem Henvald <genvaldartem@gmail.com>
  *
