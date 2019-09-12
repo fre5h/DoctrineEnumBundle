@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
+use Fresh\DoctrineEnumBundle\Exception\RuntimeException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
@@ -47,7 +48,7 @@ final class EnumValidatorTest extends TestCase
 
     public function testValidateIncorrectConstraintClass(): void
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessageRegExp('/^Object of class .* is not instance of .*$/');
 
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new DummyConstraint());

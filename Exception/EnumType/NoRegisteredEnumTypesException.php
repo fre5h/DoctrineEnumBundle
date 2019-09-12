@@ -12,11 +12,13 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Exception\EnumType;
 
+use Fresh\DoctrineEnumBundle\Exception\LogicException;
+
 /**
  * NoRegisteredEnumTypesException.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class NoRegisteredEnumTypesException extends \LogicException
+class NoRegisteredEnumTypesException extends LogicException
 {
 }

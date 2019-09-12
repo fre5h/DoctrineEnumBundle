@@ -10,6 +10,7 @@
 
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
+use Fresh\DoctrineEnumBundle\Exception\RuntimeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
@@ -25,13 +26,13 @@ class EnumValidator extends ChoiceValidator
      * @param mixed           $value
      * @param Constraint|Enum $constraint
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      * @throws ConstraintDefinitionException
      */
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof Enum) {
-            throw new \RuntimeException(\sprintf('Object of class %s is not instance of %s', \get_class($constraint), Enum::class));
+            throw new RuntimeException(\sprintf('Object of class %s is not instance of %s', \get_class($constraint), Enum::class));
         }
 
         if (!$constraint->entity) {
