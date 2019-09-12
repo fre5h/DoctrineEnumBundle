@@ -54,6 +54,7 @@ return [
 * [NULL values](./Resources/docs/null_values.md "NULL values")
 * [Building the form](./Resources/docs/building_the_form.md "Building the form")
 * [Additional methods](./Resources/docs/additional_methods.md "Additional methods")
+* [Common types](./Resources/docs/common_types.md "Common types")
 * [Readable ENUM values in templates](./Resources/docs/readable_enum_values_in_template.md "Readable ENUM values in templates")
 * [ENUM constants in templates](./Resources/docs/enum_constants_in_templates.md "ENUM constants in templates")
 * [ENUM values in templates](./Resources/docs/enum_values_in_templates.md "ENUM values in templates")
