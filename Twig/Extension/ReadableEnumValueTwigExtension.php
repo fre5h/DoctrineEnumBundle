@@ -67,20 +67,18 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
             }
 
             if ($this->moreThanOneOccurrenceFound()) {
-                throw new ValueIsFoundInFewRegisteredEnumTypesException(
-                    \sprintf(
-                        'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
-                        $enumValue
-                    )
+                $exceptionMessage = \sprintf(
+                    'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
+                    $enumValue
                 );
+                throw new ValueIsFoundInFewRegisteredEnumTypesException($exceptionMessage);
             }
 
-            throw new ValueIsNotFoundInAnyRegisteredEnumTypeException(
-                \sprintf(
-                    'Value "%s" was not found in any registered ENUM type.',
-                    $enumValue
-                )
+            $exceptionMessage = \sprintf(
+                'Value "%s" was not found in any registered ENUM type.',
+                $enumValue
             );
+            throw new ValueIsNotFoundInAnyRegisteredEnumTypeException($exceptionMessage);
         }
 
         throw $this->createNoRegisteredEnumTypesException();

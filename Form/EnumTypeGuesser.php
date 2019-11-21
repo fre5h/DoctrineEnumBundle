@@ -73,11 +73,12 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
         $registeredEnumTypeFQCN = $this->registeredEnumTypes[$fieldType];
 
         if (!\class_exists($registeredEnumTypeFQCN)) {
-            throw new EnumTypeIsRegisteredButClassDoesNotExistException(\sprintf(
+            $exceptionMessage = \sprintf(
                 'ENUM type "%s" is registered as "%s", but that class does not exist',
                 $fieldType,
                 $registeredEnumTypeFQCN
-            ));
+            );
+            throw new EnumTypeIsRegisteredButClassDoesNotExistException($exceptionMessage);
         }
 
         if (!\is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {

@@ -38,6 +38,12 @@ final class FreshDoctrineEnumBundleTest extends TestCase
     {
         $this->doctrine = $this->createMock(ManagerRegistry::class);
         $this->container = $this->createMock(ContainerInterface::class);
+        $this->container
+            ->expects(self::once())
+            ->method('get')
+            ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
+            ->willReturn($this->doctrine)
+        ;
     }
 
     protected function tearDown(): void
@@ -50,13 +56,6 @@ final class FreshDoctrineEnumBundleTest extends TestCase
 
     public function testEnumMappingRegistration(): void
     {
-        $this->container
-            ->expects(self::once())
-            ->method('get')
-            ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
-            ->willReturn($this->doctrine)
-        ;
-
         /**
          * @var AbstractPlatform|MockObject $databasePlatformAbc
          * @var AbstractPlatform|MockObject $databasePlatformDef
@@ -98,13 +97,6 @@ final class FreshDoctrineEnumBundleTest extends TestCase
 
     public function testAlreadyRegisteredEnumMapping(): void
     {
-        $this->container
-            ->expects(self::once())
-            ->method('get')
-            ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
-            ->willReturn($this->doctrine)
-        ;
-
         /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
@@ -133,13 +125,6 @@ final class FreshDoctrineEnumBundleTest extends TestCase
 
     public function testEnumMappingReregistrationToString(): void
     {
-        $this->container
-            ->expects(self::once())
-            ->method('get')
-            ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
-            ->willReturn($this->doctrine)
-        ;
-
         /** @var AbstractPlatform|MockObject $databasePlatformAbc */
         $databasePlatformAbc = $this->getMockForAbstractClass(AbstractPlatform::class);
 
@@ -169,7 +154,8 @@ final class FreshDoctrineEnumBundleTest extends TestCase
 
     public function testMissedDoctrine(): void
     {
-        $this->container
+        $container = $this->createMock(ContainerInterface::class);
+        $container
             ->expects(self::once())
             ->method('get')
             ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)

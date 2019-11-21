@@ -63,20 +63,18 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
             }
 
             if ($this->moreThanOneOccurrenceFound()) {
-                throw new ConstantIsFoundInFewRegisteredEnumTypesException(
-                    \sprintf(
-                        'Constant "%s" is found in few registered ENUM types. You should manually set the appropriate one.',
-                        $enumConstant
-                    )
+                $exceptionMessage = \sprintf(
+                    'Constant "%s" is found in few registered ENUM types. You should manually set the appropriate one.',
+                    $enumConstant
                 );
+                throw new ConstantIsFoundInFewRegisteredEnumTypesException($exceptionMessage);
             }
 
-            throw new ConstantIsNotFoundInAnyRegisteredEnumTypeException(
-                \sprintf(
-                    'Constant "%s" was not found in any registered ENUM type.',
-                    $enumConstant
-                )
+            $exceptionMessage = \sprintf(
+                'Constant "%s" was not found in any registered ENUM type.',
+                $enumConstant
             );
+            throw new ConstantIsNotFoundInAnyRegisteredEnumTypeException($exceptionMessage);
         }
 
         throw $this->createNoRegisteredEnumTypesException();
