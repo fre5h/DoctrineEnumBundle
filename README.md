@@ -25,10 +25,10 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ##### Choose the version you need
 
-| Bundle Version (X.Y.Z) | PHP              | Symfony          | Doctrine DBAL | Comment             |
-|:----------------------:|:----------------:|:----------------:|:-------------:|:--------------------|
-| `6.5.*`                | `>= 7.1.3`       | `>= 4.3        ` | `>= 2.6`      | **Current version** |
-| `6.3.*`                | `>= 7.1.3`       | `>= 4.0, <= 4.2` | `>= 2.6`      | *Bug fix support*   |
+| Bundle Version (X.Y.Z) | PHP              | Symfony          | Doctrine Bundle   | Comment                   |
+|:----------------------:|:----------------:|:----------------:|:-----------------:|:--------------------------|
+| `7.0.*`                | `>= 7.2.5`       | `>= 5.0`         | `>= 2.0`          | **Next planning release** |
+| `6.5.*`                | `>= 7.1.3`       | `4.3, 4.4`       | `> 1.11`, `< 2.0` | **Current version**       |
 
 #### Check the `config/bundles.php` file
 
