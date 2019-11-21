@@ -78,6 +78,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
                 $fieldType,
                 $registeredEnumTypeFQCN
             );
+
             throw new EnumTypeIsRegisteredButClassDoesNotExistException($exceptionMessage);
         }
 

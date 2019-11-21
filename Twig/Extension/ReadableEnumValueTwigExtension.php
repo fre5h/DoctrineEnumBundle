@@ -71,6 +71,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
                     'Value "%s" is found in few registered ENUM types. You should manually set the appropriate one',
                     $enumValue
                 );
+
                 throw new ValueIsFoundInFewRegisteredEnumTypesException($exceptionMessage);
             }
 
@@ -78,6 +79,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
                 'Value "%s" was not found in any registered ENUM type.',
                 $enumValue
             );
+
             throw new ValueIsNotFoundInAnyRegisteredEnumTypeException($exceptionMessage);
         }
 

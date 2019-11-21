@@ -67,6 +67,7 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
                     'Constant "%s" is found in few registered ENUM types. You should manually set the appropriate one.',
                     $enumConstant
                 );
+
                 throw new ConstantIsFoundInFewRegisteredEnumTypesException($exceptionMessage);
             }
 
@@ -74,6 +75,7 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
                 'Constant "%s" was not found in any registered ENUM type.',
                 $enumConstant
             );
+
             throw new ConstantIsNotFoundInAnyRegisteredEnumTypeException($exceptionMessage);
         }
 
