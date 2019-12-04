@@ -166,7 +166,7 @@ final class FreshDoctrineEnumBundleTest extends TestCase
         $this->expectExceptionMessage('Service "doctrine" is missed in container');
 
         $bundle = new FreshDoctrineEnumBundle();
-        $bundle->setContainer($this->container);
+        $bundle->setContainer($container);
         $bundle->boot();
     }
 }
