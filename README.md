@@ -28,7 +28,7 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 | Bundle Version (X.Y.Z) | PHP              | Symfony          | Doctrine Bundle    | Comment                   |
 |:----------------------:|:----------------:|:----------------:|:------------------:|:--------------------------|
 | `7.0.*`                | `>= 7.2.5`       | `>= 5.0`         | `>= 2.0`           | **Current version**       |
-| `6.5.*`                | `>= 7.1.3`       | `4.3, 4.4`       | `> 1.11`, `>= 2.0` | Bugfix support            |
+| `6.6.*`                | `>= 7.1.3`       | `4.3, 4.4`       | `> 1.11`, `>= 2.0` | Bugfix support            |
 
 #### Check the `config/bundles.php` file
 
