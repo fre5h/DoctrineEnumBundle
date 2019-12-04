@@ -27,11 +27,11 @@ abstract class AbstractEnumTwigExtension extends AbstractExtension
     /** @var string[]|AbstractEnumType[] */
     protected $registeredEnumTypes = [];
 
-    /** @var array */
+    /** @var string[]|AbstractEnumType[] */
     protected $occurrences = [];
 
     /**
-     * @param array $registeredTypes
+     * @param mixed[] $registeredTypes
      */
     public function __construct(array $registeredTypes)
     {

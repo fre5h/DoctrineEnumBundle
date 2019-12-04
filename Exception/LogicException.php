@@ -17,6 +17,6 @@ namespace Fresh\DoctrineEnumBundle\Exception;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class LogicException extends \LogicException
+class LogicException extends \LogicException implements ExceptionInterface
 {
 }

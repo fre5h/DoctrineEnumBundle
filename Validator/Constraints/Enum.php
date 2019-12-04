@@ -47,7 +47,7 @@ class Enum extends Choice
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
     public function getRequiredOptions(): array
     {

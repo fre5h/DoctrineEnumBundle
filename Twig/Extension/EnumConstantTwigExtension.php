@@ -41,7 +41,6 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
      * @throws NoRegisteredEnumTypesException
      * @throws ConstantIsFoundInFewRegisteredEnumTypesException
      * @throws ConstantIsNotFoundInAnyRegisteredEnumTypeException
-     * @throws \InvalidArgumentException
      *
      * @return string
      */
@@ -89,6 +88,7 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
      */
     private function findOccurrences(string $enumConstant): void
     {
+        /** @var class-string<\Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType> $registeredEnumType */
         foreach ($this->registeredEnumTypes as $registeredEnumType) {
             $reflection = new \ReflectionClass($registeredEnumType);
 

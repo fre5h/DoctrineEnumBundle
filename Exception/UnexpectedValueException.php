@@ -10,15 +10,13 @@
 
 declare(strict_types=1);
 
-namespace Fresh\DoctrineEnumBundle\Exception\EnumType;
-
-use Fresh\DoctrineEnumBundle\Exception\UnexpectedValueException;
+namespace Fresh\DoctrineEnumBundle\Exception;
 
 /**
- * EnumTypeIsRegisteredButClassDoesNotExistException.
+ * UnexpectedValueException.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumTypeIsRegisteredButClassDoesNotExistException extends UnexpectedValueException
+class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
 {
 }
