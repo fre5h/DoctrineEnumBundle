@@ -21,14 +21,14 @@ Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 ## Installation
 
-```composer req fresh/doctrine-enum-bundle='~6.7'```
+```composer req fresh/doctrine-enum-bundle='~6.6'```
 
 ##### Choose the version you need
 
 | Bundle Version (X.Y.Z) | PHP              | Symfony          | Doctrine Bundle    | Comment                   |
 |:----------------------:|:----------------:|:----------------:|:------------------:|:--------------------------|
 | `7.0.*`                | `>= 7.2.5`       | `>= 5.0`         | `>= 2.0`           | **Next planning release** |
-| `6.7.*`                | `>= 7.1.3`       | `4.3, 4.4`       | `> 1.11`, `>= 2.0` | **Current version**       |
+| `6.6.*`                | `>= 7.1.3`       | `4.3, 4.4`       | `> 1.11`, `>= 2.0` | **Current version**       |
 
 #### Check the `config/bundles.php` file
 
