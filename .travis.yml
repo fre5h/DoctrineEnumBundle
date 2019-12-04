@@ -8,7 +8,6 @@ cache:
     - $HOME/symfony-bridge/.phpunit
 
 php:
-  - 7.1
   - 7.2
   - 7.3
   - 7.4
@@ -18,8 +17,7 @@ env:
     - PHPUNIT_FLAGS="-v"
     - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
   jobs:
-    - SYMFONY_VERSION=4.3.*
-    - SYMFONY_VERSION=4.4.*
+    - SYMFONY_VERSION=5.0.*
 
 stages:
   - composer validation
@@ -33,24 +31,24 @@ jobs:
   include:
     # Composer validation
     - stage: composer validation
-      php: 7.3
-      env: SYMFONY_VERSION=4.4.*
+      php: 7.2
+      env: SYMFONY_VERSION=5.0.*
       script:
         - composer validate --strict --no-check-lock
     # Code style
     - stage: code style
-      php: 7.3
-      env: SYMFONY_VERSION=4.4.*
+      php: 7.2
+      env: SYMFONY_VERSION=5.0.*
       script: ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
     # PHPStan analyze
     - stage: static analyze
-      php: 7.3
-      env: SYMFONY_VERSION=4.4.*
+      php: 7.2
+      env: SYMFONY_VERSION=5.0.*
       script: ./vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon ./
     # Code coverage with Codecov.io
     - stage: code coverage
-      php: 7.3
-      env: COVERAGE=true SYMFONY_VERSION=4.4.*
+      php: 7.2
+      env: COVERAGE=true SYMFONY_VERSION=5.0.*
       script:
         - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
       after_script:

@@ -43,13 +43,16 @@ final class EnumValidatorTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->enumValidator, $this->context);
+        unset(
+            $this->enumValidator,
+            $this->context
+        );
     }
 
     public function testValidateIncorrectConstraintClass(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessageRegExp('/^Object of class .* is not instance of .*$/');
+        $this->expectExceptionMessageMatches('/^Object of class .* is not instance of .*$/');
 
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new DummyConstraint());
     }

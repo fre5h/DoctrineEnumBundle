@@ -10,7 +10,7 @@
 
 namespace Fresh\DoctrineEnumBundle;
 
-use Doctrine\Common\Persistence\ConnectionRegistry;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -35,7 +35,7 @@ class FreshDoctrineEnumBundle extends Bundle
         parent::boot();
 
         $doctrine = $this->container->get('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE);
-        if (!$doctrine instanceof ConnectionRegistry) {
+        if (!$doctrine instanceof ManagerRegistry) {
             throw new InvalidArgumentException('Service "doctrine" is missed in container');
         }
 

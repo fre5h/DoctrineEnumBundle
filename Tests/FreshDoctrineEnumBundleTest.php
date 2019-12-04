@@ -169,7 +169,8 @@ final class FreshDoctrineEnumBundleTest extends TestCase
 
     public function testMissedDoctrine(): void
     {
-        $this->container
+        $container = $this->createMock(ContainerInterface::class);
+        $container
             ->expects(self::once())
             ->method('get')
             ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
@@ -180,7 +181,7 @@ final class FreshDoctrineEnumBundleTest extends TestCase
         $this->expectExceptionMessage('Service "doctrine" is missed in container');
 
         $bundle = new FreshDoctrineEnumBundle();
-        $bundle->setContainer($this->container);
+        $bundle->setContainer($container);
         $bundle->boot();
     }
 }

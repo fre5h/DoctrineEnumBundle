@@ -22,16 +22,16 @@
         "issues": "https://github.com/fre5h/DoctrineEnumBundle/issues"
     },
     "require": {
-        "php": ">=7.1.3",
-        "doctrine/doctrine-bundle": "~1.11 || ^2.0",
-        "doctrine/common": "~2.8",
-        "doctrine/orm": "~2.6",
-        "symfony/config": "^4.3",
-        "symfony/dependency-injection": "^4.3",
-        "symfony/doctrine-bridge": "^4.3",
-        "symfony/framework-bundle": "^4.3",
-        "symfony/http-kernel": "^4.3",
-        "symfony/validator": "^4.3",
+        "php": ">=7.2.5",
+        "doctrine/doctrine-bundle": "^2.0",
+        "doctrine/common": "^2.11",
+        "doctrine/orm": "^2.7",
+        "symfony/config": "^5.0",
+        "symfony/dependency-injection": "^5.0",
+        "symfony/doctrine-bridge": "^5.0",
+        "symfony/framework-bundle": "^5.0",
+        "symfony/http-kernel": "^5.0",
+        "symfony/validator": "^5.0",
         "twig/twig": "~2.11 || ^3.0"
     },
     "require-dev": {
@@ -39,10 +39,10 @@
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine":"^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
-        "phpunit/phpunit": "^7.5",
-        "symfony/form": "^4.3",
-        "symfony/phpunit-bridge": "^4.3",
-        "symfony/yaml": "^4.3"
+        "phpunit/phpunit": "^8.4",
+        "symfony/form": "^5.0",
+        "symfony/phpunit-bridge": "^5.0",
+        "symfony/yaml": "^5.0"
     },
     "autoload": {
         "psr-4": {
@@ -59,7 +59,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.x-dev"
+            "dev-master": "7.x-dev"
         }
     }
 }

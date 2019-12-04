@@ -42,7 +42,10 @@ final class FreshDoctrineEnumExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->extension, $this->container);
+        unset(
+            $this->extension,
+            $this->container
+        );
     }
 
     public function testLoadExtension(): void
