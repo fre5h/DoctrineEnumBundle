@@ -21,11 +21,42 @@ env:
     - SYMFONY_VERSION=4.3.*
     - SYMFONY_VERSION=4.4.*
 
-matrix:
+stages:
+  - composer validation
+  - code style
+  - static analyze
+  - test
+  - code coverage
+
+jobs:
   fast_finish: true
   include:
-    - php: 7.3
-      env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-clover=coverage.xml" SYMFONY_VERSION=4.4.*
+    # Composer validation
+    - stage: composer validation
+      php: 7.3
+      env: SYMFONY_VERSION=4.4.*
+      script:
+        - composer validate --strict --no-check-lock
+    # Code style
+    - stage: code style
+      php: 7.3
+      env: SYMFONY_VERSION=4.4.*
+      script: ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
+    # PHPStan analyze
+    - stage: static analyze
+      php: 7.3
+      env: SYMFONY_VERSION=4.4.*
+      script: ./vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon ./
+    # Code coverage with Codecov.io
+    - stage: code coverage
+      php: 7.3
+      env: COVERAGE=true SYMFONY_VERSION=4.4.*
+      script:
+        - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
+      after_script:
+        - bash <(curl -s https://codecov.io/bash)
+        - wget https://scrutinizer-ci.com/ocular.phar
+        - php ocular.phar code-coverage:upload --format=php-clover coverage.xml
 
 before_install:
   - composer self-update
@@ -34,17 +65,9 @@ before_install:
 
 install:
   - composer install --no-interaction --prefer-dist
-  - ./vendor/bin/simple-phpunit install
 
 script:
-  - composer validate --strict --no-check-lock
-  - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
-#  - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
   - ./vendor/bin/simple-phpunit $PHPUNIT_FLAG -c phpunit.xml.dist
-  - ./vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon ./
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email:
