@@ -41,6 +41,7 @@
         "phpstan/phpstan-phpunit": "^0.12",
         "phpunit/phpunit": "^7.5",
         "symfony/form": "^4.3",
+        "symfony/phpunit-bridge": "^4.3",
         "symfony/yaml": "^4.3"
     },
     "autoload": {

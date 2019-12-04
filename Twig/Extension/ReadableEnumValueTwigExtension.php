@@ -43,7 +43,6 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
      * @throws NoRegisteredEnumTypesException
      * @throws ValueIsFoundInFewRegisteredEnumTypesException
      * @throws ValueIsNotFoundInAnyRegisteredEnumTypeException
-     * @throws \InvalidArgumentException
      */
     public function getReadableEnumValue(?string $enumValue, ?string $enumType = null): ?string
     {

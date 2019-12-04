@@ -17,6 +17,6 @@ namespace Fresh\DoctrineEnumBundle\Exception;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class InvalidArgumentException extends \InvalidArgumentException
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

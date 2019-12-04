@@ -33,7 +33,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
     /**
      * @param ManagerRegistry $registry
-     * @param array           $registeredTypes
+     * @param mixed[]         $registeredTypes
      */
     public function __construct(ManagerRegistry $registry, array $registeredTypes)
     {
