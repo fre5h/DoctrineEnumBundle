@@ -32,13 +32,13 @@
         "symfony/framework-bundle": "^4.3",
         "symfony/http-kernel": "^4.3",
         "symfony/validator": "^4.3",
-        "twig/twig": "~2.11"
+        "twig/twig": "~2.11 || ^3.0"
     },
     "require-dev": {
-        "escapestudios/symfony2-coding-standard": "^3.9",
-        "phpstan/phpstan": "^0.11",
-        "phpstan/phpstan-doctrine":"^0.11",
-        "phpstan/phpstan-phpunit": "^0.11",
+        "escapestudios/symfony2-coding-standard": "^3.10",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-doctrine":"^0.12",
+        "phpstan/phpstan-phpunit": "^0.12",
         "phpunit/phpunit": "^7.5",
         "symfony/form": "^4.3",
         "symfony/yaml": "^4.3"
