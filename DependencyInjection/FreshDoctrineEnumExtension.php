@@ -26,9 +26,8 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class FreshDoctrineEnumExtension extends Extension
 {
     /**
-     * {@inheritdoc}
-     *
-     * @throws \Exception
+     * @param mixed[]          $configs
+     * @param ContainerBuilder $container
      */
     public function load(array $configs, ContainerBuilder $container): void
     {

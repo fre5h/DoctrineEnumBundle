@@ -2,33 +2,49 @@ language: php
 
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+    - $HOME/symfony-bridge/.phpunit
+
 php:
   - 7.1
   - 7.2
   - 7.3
+  - 7.4
 
 env:
-  - SYMFONY_VERSION=4.3.*
-  - SYMFONY_VERSION=4.4.*
+  global:
+    - PHPUNIT_FLAGS="-v"
+    - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
+  jobs:
+    - SYMFONY_VERSION=4.3.*
+    - SYMFONY_VERSION=4.4.*
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.3
+      env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-clover=coverage.xml" SYMFONY_VERSION=4.4.*
 
 before_install:
   - composer self-update
   - composer require --no-update symfony/symfony "$SYMFONY_VERSION"
+  - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
 
 install:
   - composer install --no-interaction --prefer-dist
+  - ./vendor/bin/simple-phpunit install
 
 script:
+  - composer validate --strict --no-check-lock
   - ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
-  - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
+#  - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
+  - ./vendor/bin/simple-phpunit $PHPUNIT_FLAG -c phpunit.xml.dist
   - ./vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon ./
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
-cache:
-  directories:
-    - $COMPOSER_CACHE_DIR
 
 notifications:
   email:

@@ -7,7 +7,7 @@ enabled:
   - ordered_imports
 
 finder:
-    exclude:
-        - "Tests"
-    name:
-        - "*.php"
+  exclude:
+    - "Tests"
+  name:
+    - "*.php"
