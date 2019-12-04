@@ -19,6 +19,7 @@ use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
+use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
@@ -105,7 +106,7 @@ final class AbstractEnumTypeTest extends TestCase
 
     public function testInvalidArgumentExceptionInConvertToDatabaseValue(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
     }
 
@@ -137,7 +138,7 @@ final class AbstractEnumTypeTest extends TestCase
 
     public function testInvalidArgumentExceptionInAssertValidChoice(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->type::assertValidChoice('YO');
     }
 
@@ -148,7 +149,7 @@ final class AbstractEnumTypeTest extends TestCase
 
     public function testInvalidArgumentExceptionInGetReadableValue(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->type::getReadableValue('YO');
     }
 

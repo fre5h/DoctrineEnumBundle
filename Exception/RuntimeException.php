@@ -17,6 +17,6 @@ namespace Fresh\DoctrineEnumBundle\Exception;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class RuntimeException extends \LogicException
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }

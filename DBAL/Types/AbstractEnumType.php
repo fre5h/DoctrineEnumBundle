@@ -18,6 +18,7 @@ use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
+use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 
 /**
  * AbstractEnumType.
@@ -34,7 +35,7 @@ abstract class AbstractEnumType extends Type
     protected $name = '';
 
     /**
-     * @var array Array of ENUM Values, where ENUM values are keys and their readable versions are values
+     * @var array|mixed[] Array of ENUM Values, where ENUM values are keys and their readable versions are values
      *
      * @static
      */
@@ -43,7 +44,7 @@ abstract class AbstractEnumType extends Type
     /**
      * {@inheritdoc}
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
@@ -52,7 +53,7 @@ abstract class AbstractEnumType extends Type
         }
 
         if (!isset(static::$choices[$value])) {
-            throw new \InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM "%s".', $value, $this->getName()));
+            throw new InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM "%s".', $value, $this->getName()));
         }
 
         return $value;
@@ -78,7 +79,12 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * {@inheritdoc}
+     * Gets the SQL declaration snippet for a field of this type.
+     *
+     * @param mixed[]          $fieldDeclaration The field declaration
+     * @param AbstractPlatform $platform         The currently used database platform
+     *
+     * @return string
      */
     public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
@@ -124,7 +130,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return array Values for the ENUM field
+     * @return string[] Values for the ENUM field
      */
     public static function getChoices(): array
     {
@@ -136,7 +142,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return array Values for the ENUM field
+     * @return string[] Values for the ENUM field
      */
     public static function getValues(): array
     {
@@ -163,7 +169,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return array Array of values with readable format
+     * @return string[] Array of values with readable format
      */
     public static function getReadableValues(): array
     {
@@ -175,12 +181,12 @@ abstract class AbstractEnumType extends Type
      *
      * @param string $value ENUM value
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function assertValidChoice(string $value): void
     {
         if (!isset(static::$choices[$value])) {
-            throw new \InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM type "%s".', $value, static::class));
+            throw new InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM type "%s".', $value, static::class));
         }
     }
 
@@ -219,7 +225,7 @@ abstract class AbstractEnumType extends Type
      *
      * @param AbstractPlatform $platform
      *
-     * @return array
+     * @return string[]
      */
     public function getMappedDatabaseTypes(AbstractPlatform $platform): array
     {
