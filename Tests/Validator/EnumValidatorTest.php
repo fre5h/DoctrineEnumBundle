@@ -45,7 +45,7 @@ final class EnumValidatorTest extends TestCase
     {
         unset(
             $this->enumValidator,
-            $this->context,
+            $this->context
         );
     }
 
