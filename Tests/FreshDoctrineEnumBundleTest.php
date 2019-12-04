@@ -50,7 +50,7 @@ final class FreshDoctrineEnumBundleTest extends TestCase
     {
         unset(
             $this->container,
-            $this->doctrine
+            $this->doctrine,
         );
     }
 

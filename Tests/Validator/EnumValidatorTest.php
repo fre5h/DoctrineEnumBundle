@@ -43,7 +43,10 @@ final class EnumValidatorTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->enumValidator, $this->context);
+        unset(
+            $this->enumValidator,
+            $this->context,
+        );
     }
 
     public function testValidateIncorrectConstraintClass(): void
