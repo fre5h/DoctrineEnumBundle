@@ -26,11 +26,11 @@ use Twig\TwigFilter;
 class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
 {
     /**
-     * @return TwigFilter[]|iterable
+     * {@inheritdoc}
      */
-    public function getFilters(): iterable
+    public function getFilters(): array
     {
-        yield new TwigFilter('readable_enum', [$this, 'getReadableEnumValue']);
+        return [new TwigFilter('readable_enum', [$this, 'getReadableEnumValue'])];
     }
 
     /**

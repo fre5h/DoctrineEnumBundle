@@ -26,11 +26,11 @@ use Twig\TwigFilter;
 class EnumConstantTwigExtension extends AbstractEnumTwigExtension
 {
     /**
-     * @return TwigFilter[]|iterable
+     * {@inheritdoc}
      */
-    public function getFilters(): iterable
+    public function getFilters(): array
     {
-        yield new TwigFilter('enum_constant', [$this, 'getEnumConstant']);
+        return [new TwigFilter('enum_constant', [$this, 'getEnumConstant'])];
     }
 
     /**

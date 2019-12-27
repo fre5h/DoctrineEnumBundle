@@ -25,12 +25,14 @@ use Twig\TwigFunction;
 class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
 {
     /**
-     * @return TwigFunction[]|iterable
+     * {@inheritdoc}
      */
-    public function getFunctions(): iterable
+    public function getFunctions(): array
     {
-        yield new TwigFunction('enum_values', [$this, 'getEnumValuesAsArray']);
-        yield new TwigFunction('enum_readable_values', [$this, 'getReadableEnumValuesAsArray']);
+        return [
+            new TwigFunction('enum_values', [$this, 'getEnumValuesAsArray']),
+            new TwigFunction('enum_readable_values', [$this, 'getReadableEnumValuesAsArray']),
+        ];
     }
 
     /**
