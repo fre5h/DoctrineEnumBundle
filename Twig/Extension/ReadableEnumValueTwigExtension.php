@@ -26,9 +26,9 @@ use Twig\TwigFilter;
 class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
 {
     /**
-     * {@inheritdoc}
+     * @return TwigFilter[]|iterable
      */
-    public function getFilters(): \Generator
+    public function getFilters(): iterable
     {
         yield new TwigFilter('readable_enum', [$this, 'getReadableEnumValue']);
     }

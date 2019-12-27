@@ -50,9 +50,7 @@ final class AbstractEnumTypeTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset(
-            $this->type,
-        );
+        unset($this->type);
     }
 
     /**
@@ -63,7 +61,7 @@ final class AbstractEnumTypeTest extends TestCase
         self::assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
-    public static function platformProvider(): \Generator
+    public static function platformProvider(): iterable
     {
         yield [
             ['name' => 'position'],

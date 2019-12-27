@@ -44,9 +44,7 @@ final class EnumConstantExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset(
-            $this->enumConstantExtension,
-        );
+        unset($this->enumConstantExtension);
     }
 
     public function testGetFilters(): void
@@ -68,7 +66,7 @@ final class EnumConstantExtensionTest extends TestCase
         );
     }
 
-    public function dataProviderForGetEnumConstantTest(): \Generator
+    public function dataProviderForGetEnumConstantTest(): iterable
     {
         yield ['PG', 'POINT_GUARD', 'BasketballPositionType'];
         yield ['PG', 'POINT_GUARD', null];

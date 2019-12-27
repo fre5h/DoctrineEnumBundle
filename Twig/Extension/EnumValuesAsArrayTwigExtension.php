@@ -25,9 +25,9 @@ use Twig\TwigFunction;
 class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
 {
     /**
-     * {@inheritdoc}
+     * @return TwigFunction[]|iterable
      */
-    public function getFunctions(): \Generator
+    public function getFunctions(): iterable
     {
         yield new TwigFunction('enum_values', [$this, 'getEnumValuesAsArray']);
         yield new TwigFunction('enum_readable_values', [$this, 'getReadableEnumValuesAsArray']);

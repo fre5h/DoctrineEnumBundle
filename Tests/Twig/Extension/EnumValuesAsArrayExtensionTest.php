@@ -39,9 +39,7 @@ final class EnumValuesAsArrayExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset(
-            $this->enumValuesAsArrayTwigExtension,
-        );
+        unset($this->enumValuesAsArrayTwigExtension);
     }
 
     public function testGetFunctions(): void

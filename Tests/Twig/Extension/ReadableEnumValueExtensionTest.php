@@ -42,9 +42,7 @@ final class ReadableEnumValueExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset(
-            $this->readableEnumValueExtension,
-        );
+        unset($this->readableEnumValueExtension);
     }
 
     public function testGetFilters(): void
@@ -64,7 +62,7 @@ final class ReadableEnumValueExtensionTest extends TestCase
         );
     }
 
-    public function dataProviderForGetReadableEnumValueTest(): \Generator
+    public function dataProviderForGetReadableEnumValueTest(): iterable
     {
         yield ['Point Guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'];
         yield ['Point Guard', BasketballPositionType::POINT_GUARD, null];

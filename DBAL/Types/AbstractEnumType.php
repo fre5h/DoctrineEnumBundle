@@ -91,22 +91,28 @@ abstract class AbstractEnumType extends Type
         $values = \implode(
             ', ',
             \array_map(
-                static function ($value) {
+                static function (string $value) {
                     return "'{$value}'";
                 },
                 static::getValues()
             )
         );
 
-        if ($platform instanceof SqlitePlatform) {
-            return \sprintf('TEXT CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
+                $sqlDeclaration = \sprintf('TEXT CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
+
+                break;
+            case $platform instanceof PostgreSqlPlatform:
+            case $platform instanceof SQLServerPlatform:
+                $sqlDeclaration = \sprintf('VARCHAR(255) CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
+
+                break;
+            default:
+                $sqlDeclaration = \sprintf('ENUM(%s)', $values);
         }
 
-        if ($platform instanceof PostgreSqlPlatform || $platform instanceof SQLServerPlatform) {
-            return \sprintf('VARCHAR(255) CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
-        }
-
-        return \sprintf('ENUM(%s)', $values);
+        return $sqlDeclaration;
     }
 
     /**

@@ -26,9 +26,9 @@ use Twig\TwigFilter;
 class EnumConstantTwigExtension extends AbstractEnumTwigExtension
 {
     /**
-     * {@inheritdoc}
+     * @return TwigFilter[]|iterable
      */
-    public function getFilters(): \Generator
+    public function getFilters(): iterable
     {
         yield new TwigFilter('enum_constant', [$this, 'getEnumConstant']);
     }
