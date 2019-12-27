@@ -43,7 +43,7 @@ final class AbstractEnumTypeTest extends TestCase
         Type::addType('NumericType', NumericType::class);
     }
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->type = Type::getType('BasketballPositionType');
     }
@@ -61,29 +61,27 @@ final class AbstractEnumTypeTest extends TestCase
         self::assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
-    public function platformProvider(): array
+    public static function platformProvider(): iterable
     {
-        return [
-            [
-                ['name' => 'position'],
-                new MySqlPlatform(),
-                "ENUM('PG', 'SG', 'SF', 'PF', 'C')",
-            ],
-            [
-                ['name' => 'position'],
-                new SqlitePlatform(),
-                "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
-            ],
-            [
-                ['name' => 'position'],
-                new PostgreSqlPlatform(),
-                "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
-            ],
-            [
-                ['name' => 'position'],
-                new SQLServerPlatform(),
-                "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
-            ],
+        yield [
+            ['name' => 'position'],
+            new MySqlPlatform(),
+            "ENUM('PG', 'SG', 'SF', 'PF', 'C')",
+        ];
+        yield [
+            ['name' => 'position'],
+            new SqlitePlatform(),
+            "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
+        ];
+        yield [
+            ['name' => 'position'],
+            new PostgreSqlPlatform(),
+            "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
+        ];
+        yield [
+            ['name' => 'position'],
+            new SQLServerPlatform(),
+            "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
     }
 

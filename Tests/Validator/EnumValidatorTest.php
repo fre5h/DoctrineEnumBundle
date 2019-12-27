@@ -35,7 +35,7 @@ final class EnumValidatorTest extends TestCase
     /** @var ExecutionContext|MockObject */
     private $context;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->enumValidator = new EnumValidator();
         $this->context = $this->createMock(ExecutionContext::class);

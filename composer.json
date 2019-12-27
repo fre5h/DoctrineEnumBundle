@@ -23,8 +23,8 @@
     },
     "require": {
         "php": ">=7.2.5",
-        "doctrine/doctrine-bundle": "^2.0",
         "doctrine/common": "^2.11",
+        "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.7",
         "symfony/config": "^5.0",
         "symfony/dependency-injection": "^5.0",
@@ -36,10 +36,13 @@
     },
     "require-dev": {
         "escapestudios/symfony2-coding-standard": "^3.10",
+        "johnkary/phpunit-speedtrap": "^3.1",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine":"^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
-        "phpunit/phpunit": "^8.4",
+        "phpstan/phpstan-symfony": "^0.12",
+        "phpunit/phpunit": "^8.5",
+        "slam/phpstan-extensions": "^4.0",
         "symfony/form": "^5.0",
         "symfony/phpunit-bridge": "^5.0",
         "symfony/yaml": "^5.0"
@@ -56,6 +59,9 @@
         "psr-4": {
             "Fresh\\DoctrineEnumBundle\\Tests\\": "Tests/"
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
