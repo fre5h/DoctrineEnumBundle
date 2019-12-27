@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Form;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;

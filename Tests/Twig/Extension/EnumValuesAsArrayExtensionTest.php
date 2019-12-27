@@ -30,7 +30,7 @@ final class EnumValuesAsArrayExtensionTest extends TestCase
     /** @var EnumValuesAsArrayTwigExtension */
     private $enumValuesAsArrayTwigExtension;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->enumValuesAsArrayTwigExtension = new EnumValuesAsArrayTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
@@ -39,7 +39,9 @@ final class EnumValuesAsArrayExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->enumValuesAsArrayTwigExtension);
+        unset(
+            $this->enumValuesAsArrayTwigExtension,
+        );
     }
 
     public function testGetFunctions(): void

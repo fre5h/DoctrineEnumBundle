@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Tests;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -44,7 +44,7 @@ final class FreshDoctrineEnumBundleTest extends TestCase
     {
         unset(
             $this->container,
-            $this->doctrine
+            $this->doctrine,
         );
     }
 

@@ -10,7 +10,7 @@
 
 namespace Fresh\DoctrineEnumBundle;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

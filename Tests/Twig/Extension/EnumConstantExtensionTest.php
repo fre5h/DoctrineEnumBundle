@@ -33,7 +33,7 @@ final class EnumConstantExtensionTest extends TestCase
     /** @var EnumConstantTwigExtension */
     private $enumConstantExtension;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->enumConstantExtension = new EnumConstantTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
@@ -44,7 +44,9 @@ final class EnumConstantExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->enumConstantExtension);
+        unset(
+            $this->enumConstantExtension,
+        );
     }
 
     public function testGetFilters(): void
@@ -66,15 +68,13 @@ final class EnumConstantExtensionTest extends TestCase
         );
     }
 
-    public function dataProviderForGetEnumConstantTest(): array
+    public function dataProviderForGetEnumConstantTest(): \Generator
     {
-        return [
-            ['PG', 'POINT_GUARD', 'BasketballPositionType'],
-            ['PG', 'POINT_GUARD', null],
-            ['C', 'CENTER', 'BasketballPositionType'],
-            ['C', 'CENTER', 'MapLocationType'],
-            ['3', 'THREE', 'NumericType'],
-        ];
+        yield ['PG', 'POINT_GUARD', 'BasketballPositionType'];
+        yield ['PG', 'POINT_GUARD', null];
+        yield ['C', 'CENTER', 'BasketballPositionType'];
+        yield ['C', 'CENTER', 'MapLocationType'];
+        yield ['3', 'THREE', 'NumericType'];
     }
 
     public function testEnumTypeIsNotRegisteredException(): void

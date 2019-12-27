@@ -32,7 +32,7 @@ final class ReadableEnumValueExtensionTest extends TestCase
     /** @var ReadableEnumValueTwigExtension */
     private $readableEnumValueExtension;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->readableEnumValueExtension = new ReadableEnumValueTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
@@ -42,7 +42,9 @@ final class ReadableEnumValueExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->readableEnumValueExtension);
+        unset(
+            $this->readableEnumValueExtension,
+        );
     }
 
     public function testGetFilters(): void
@@ -53,9 +55,7 @@ final class ReadableEnumValueExtensionTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider dataProviderForGetReadableEnumValueTest
-     */
+    /** @dataProvider dataProviderForGetReadableEnumValueTest */
     public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, ?string $enumType): void
     {
         self::assertEquals(
@@ -64,15 +64,13 @@ final class ReadableEnumValueExtensionTest extends TestCase
         );
     }
 
-    public function dataProviderForGetReadableEnumValueTest(): array
+    public function dataProviderForGetReadableEnumValueTest(): \Generator
     {
-        return [
-            ['Point Guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'],
-            ['Point Guard', BasketballPositionType::POINT_GUARD, null],
-            ['Center', BasketballPositionType::CENTER, 'BasketballPositionType'],
-            ['Center', MapLocationType::CENTER, 'MapLocationType'],
-            [null, null, 'MapLocationType'],
-        ];
+        yield ['Point Guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'];
+        yield ['Point Guard', BasketballPositionType::POINT_GUARD, null];
+        yield ['Center', BasketballPositionType::CENTER, 'BasketballPositionType'];
+        yield ['Center', MapLocationType::CENTER, 'MapLocationType'];
+        yield [null, null, 'MapLocationType'];
     }
 
     public function testEnumTypeIsNotRegisteredException(): void

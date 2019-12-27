@@ -28,9 +28,9 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters(): array
+    public function getFilters(): \Generator
     {
-        return [new TwigFilter('enum_constant', [$this, 'getEnumConstant'])];
+        yield new TwigFilter('enum_constant', [$this, 'getEnumConstant']);
     }
 
     /**

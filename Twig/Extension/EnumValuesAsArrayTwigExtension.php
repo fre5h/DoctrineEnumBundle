@@ -27,12 +27,10 @@ class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions(): array
+    public function getFunctions(): \Generator
     {
-        return [
-            new TwigFunction('enum_values', [$this, 'getEnumValuesAsArray']),
-            new TwigFunction('enum_readable_values', [$this, 'getReadableEnumValuesAsArray']),
-        ];
+        yield new TwigFunction('enum_values', [$this, 'getEnumValuesAsArray']);
+        yield new TwigFunction('enum_readable_values', [$this, 'getReadableEnumValuesAsArray']);
     }
 
     /**

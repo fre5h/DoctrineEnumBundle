@@ -28,9 +28,9 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters(): array
+    public function getFilters(): \Generator
     {
-        return [new TwigFilter('readable_enum', [$this, 'getReadableEnumValue'])];
+        yield new TwigFilter('readable_enum', [$this, 'getReadableEnumValue']);
     }
 
     /**

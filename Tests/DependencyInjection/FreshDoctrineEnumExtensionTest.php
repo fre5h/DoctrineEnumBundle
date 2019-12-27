@@ -44,7 +44,7 @@ final class FreshDoctrineEnumExtensionTest extends TestCase
     {
         unset(
             $this->extension,
-            $this->container
+            $this->container,
         );
     }
 
