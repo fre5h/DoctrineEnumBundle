@@ -1,6 +1,6 @@
 # DoctrineEnumBundle
 
-Provides support of **ENUM type** for Doctrine in Symfony applications.
+:package: Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/fre5h/DoctrineEnumBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
 [![Build Status](https://img.shields.io/travis/fre5h/DoctrineEnumBundle/master.svg?style=flat-square)](https://travis-ci.org/fre5h/DoctrineEnumBundle)

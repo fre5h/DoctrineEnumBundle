@@ -33,7 +33,7 @@ final class EnumConstantExtensionTest extends TestCase
     /** @var EnumConstantTwigExtension */
     private $enumConstantExtension;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->enumConstantExtension = new EnumConstantTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],

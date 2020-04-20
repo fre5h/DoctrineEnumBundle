@@ -43,7 +43,7 @@ final class AbstractEnumTypeTest extends TestCase
         Type::addType('NumericType', NumericType::class);
     }
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->type = Type::getType('BasketballPositionType');
     }
@@ -65,7 +65,7 @@ final class AbstractEnumTypeTest extends TestCase
         self::assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
-    public function platformProvider(): iterable
+    public static function platformProvider(): iterable
     {
         yield [
             ['name' => 'position'],

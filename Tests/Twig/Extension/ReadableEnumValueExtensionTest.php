@@ -32,7 +32,7 @@ final class ReadableEnumValueExtensionTest extends TestCase
     /** @var ReadableEnumValueTwigExtension */
     private $readableEnumValueExtension;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->readableEnumValueExtension = new ReadableEnumValueTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
