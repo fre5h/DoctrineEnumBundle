@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
+use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsFoundInFewRegisteredEnumTypesException;
@@ -62,7 +63,11 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
             $this->findOccurrences($enumValue);
 
             if ($this->onlyOneOccurrenceFound()) {
-                return \array_pop($this->occurrences)::getReadableValue($enumValue);
+                $occurrence = \array_pop($this->occurrences);
+
+                if ($occurrence instanceof AbstractEnumType) {
+                    return \array_pop($this->occurrences)::getReadableValue($enumValue);
+                }
             }
 
             if ($this->moreThanOneOccurrenceFound()) {
