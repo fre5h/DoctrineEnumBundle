@@ -49,7 +49,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
     {
         if ($this->hasRegisteredEnumTypes()) {
             if (null === $enumValue) {
-                return null;
+                return $enumValue;
             }
 
             // If ENUM type was set, e.g. {{ player.position|readable_enum('BasketballPositionType') }}
