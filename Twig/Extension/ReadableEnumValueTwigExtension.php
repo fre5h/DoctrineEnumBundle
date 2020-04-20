@@ -66,7 +66,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
                 $occurrence = \array_pop($this->occurrences);
 
                 if ($occurrence instanceof AbstractEnumType) {
-                    return \array_pop($this->occurrences)::getReadableValue($enumValue);
+                    return $occurrence::getReadableValue($enumValue);
                 }
             }
 
