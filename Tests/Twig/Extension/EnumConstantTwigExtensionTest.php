@@ -24,18 +24,18 @@ use PHPUnit\Framework\TestCase;
 use Twig\TwigFilter;
 
 /**
- * EnumConstantExtensionTest.
+ * EnumConstantTwigExtensionTest.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-final class EnumConstantExtensionTest extends TestCase
+final class EnumConstantTwigExtensionTest extends TestCase
 {
     /** @var EnumConstantTwigExtension */
-    private $enumConstantExtension;
+    private $enumConstantTwigExtension;
 
     protected function setUp(): void
     {
-        $this->enumConstantExtension = new EnumConstantTwigExtension([
+        $this->enumConstantTwigExtension = new EnumConstantTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
             'NumericType' => ['class' => NumericType::class],
@@ -44,14 +44,14 @@ final class EnumConstantExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->enumConstantExtension);
+        unset($this->enumConstantTwigExtension);
     }
 
     public function testGetFilters(): void
     {
         self::assertEquals(
-            [new TwigFilter('enum_constant', [$this->enumConstantExtension, 'getEnumConstant'])],
-            $this->enumConstantExtension->getFilters()
+            [new TwigFilter('enum_constant', [$this->enumConstantTwigExtension, 'getEnumConstant'])],
+            $this->enumConstantTwigExtension->getFilters()
         );
     }
 
@@ -66,7 +66,7 @@ final class EnumConstantExtensionTest extends TestCase
     {
         self::assertEquals(
             $expectedValueOfConstant,
-            $this->enumConstantExtension->getEnumConstant($enumConstant, $enumType)
+            $this->enumConstantTwigExtension->getEnumConstant($enumConstant, $enumType)
         );
     }
 
@@ -82,19 +82,19 @@ final class EnumConstantExtensionTest extends TestCase
     public function testEnumTypeIsNotRegisteredException(): void
     {
         $this->expectException(EnumTypeIsNotRegisteredException::class);
-        $this->enumConstantExtension->getEnumConstant('Pitcher', 'BaseballPositionType');
+        $this->enumConstantTwigExtension->getEnumConstant('Pitcher', 'BaseballPositionType');
     }
 
     public function testConstantIsFoundInFewRegisteredEnumTypesException(): void
     {
         $this->expectException(ConstantIsFoundInFewRegisteredEnumTypesException::class);
-        $this->enumConstantExtension->getEnumConstant('CENTER');
+        $this->enumConstantTwigExtension->getEnumConstant('CENTER');
     }
 
     public function testConstantIsNotFoundInAnyRegisteredEnumTypeException(): void
     {
         $this->expectException(ConstantIsNotFoundInAnyRegisteredEnumTypeException::class);
-        $this->enumConstantExtension->getEnumConstant('Pitcher');
+        $this->enumConstantTwigExtension->getEnumConstant('Pitcher');
     }
 
     public function testNoRegisteredEnumTypesException(): void
