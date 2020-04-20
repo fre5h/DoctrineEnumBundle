@@ -27,8 +27,12 @@ final class BasketballPositionType extends AbstractEnumType
     public const POWER_FORWARD = 'PF';
     public const CENTER = 'C';
 
+    /** @var string */
     protected $name = 'BasketballPositionType';
 
+    /**
+     * {@inheritdoc}
+     */
     protected static $choices = [
         self::POINT_GUARD => 'Point Guard',
         self::SHOOTING_GUARD => 'Shooting Guard',

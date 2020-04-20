@@ -55,35 +55,37 @@ final class AbstractEnumTypeTest extends TestCase
 
     /**
      * @dataProvider platformProvider
+     *
+     * @param array            $fieldDeclaration
+     * @param AbstractPlatform $platform
+     * @param string           $expected
      */
     public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
     {
         self::assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
-    public function platformProvider(): array
+    public function platformProvider(): iterable
     {
-        return [
-            [
-                ['name' => 'position'],
-                new MySqlPlatform(),
-                "ENUM('PG', 'SG', 'SF', 'PF', 'C')",
-            ],
-            [
-                ['name' => 'position'],
-                new SqlitePlatform(),
-                "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
-            ],
-            [
-                ['name' => 'position'],
-                new PostgreSqlPlatform(),
-                "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
-            ],
-            [
-                ['name' => 'position'],
-                new SQLServerPlatform(),
-                "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
-            ],
+        yield [
+            ['name' => 'position'],
+            new MySqlPlatform(),
+            "ENUM('PG', 'SG', 'SF', 'PF', 'C')",
+        ];
+        yield [
+            ['name' => 'position'],
+            new SqlitePlatform(),
+            "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
+        ];
+        yield [
+            ['name' => 'position'],
+            new PostgreSqlPlatform(),
+            "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
+        ];
+        yield [
+            ['name' => 'position'],
+            new SQLServerPlatform(),
+            "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
     }
 

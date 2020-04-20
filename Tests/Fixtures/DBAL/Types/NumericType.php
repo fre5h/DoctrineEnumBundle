@@ -27,8 +27,12 @@ final class NumericType extends AbstractEnumType
     public const THREE = 3;
     public const FOUR = 4;
 
+    /** @var string */
     protected $name = 'NumericType';
 
+    /**
+     * {@inheritdoc}
+     */
     protected static $choices = [
         self::ZERO => 0,
         self::ONE => 1,

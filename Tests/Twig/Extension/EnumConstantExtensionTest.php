@@ -57,6 +57,10 @@ final class EnumConstantExtensionTest extends TestCase
 
     /**
      * @dataProvider dataProviderForGetEnumConstantTest
+     *
+     * @param string      $expectedValueOfConstant
+     * @param string      $enumConstant
+     * @param string|null $enumType
      */
     public function testGetEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType): void
     {
@@ -66,15 +70,13 @@ final class EnumConstantExtensionTest extends TestCase
         );
     }
 
-    public function dataProviderForGetEnumConstantTest(): array
+    public function dataProviderForGetEnumConstantTest(): iterable
     {
-        return [
-            ['PG', 'POINT_GUARD', 'BasketballPositionType'],
-            ['PG', 'POINT_GUARD', null],
-            ['C', 'CENTER', 'BasketballPositionType'],
-            ['C', 'CENTER', 'MapLocationType'],
-            ['3', 'THREE', 'NumericType'],
-        ];
+        yield ['PG', 'POINT_GUARD', 'BasketballPositionType'];
+        yield ['PG', 'POINT_GUARD', null];
+        yield ['C', 'CENTER', 'BasketballPositionType'];
+        yield ['C', 'CENTER', 'MapLocationType'];
+        yield ['3', 'THREE', 'NumericType'];
     }
 
     public function testEnumTypeIsNotRegisteredException(): void

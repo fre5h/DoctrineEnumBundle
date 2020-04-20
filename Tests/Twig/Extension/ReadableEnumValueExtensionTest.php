@@ -55,6 +55,10 @@ final class ReadableEnumValueExtensionTest extends TestCase
 
     /**
      * @dataProvider dataProviderForGetReadableEnumValueTest
+     *
+     * @param string|null $expectedReadableValue
+     * @param string|null $enumValue
+     * @param string|null $enumType
      */
     public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, ?string $enumType): void
     {
@@ -64,15 +68,13 @@ final class ReadableEnumValueExtensionTest extends TestCase
         );
     }
 
-    public function dataProviderForGetReadableEnumValueTest(): array
+    public function dataProviderForGetReadableEnumValueTest(): iterable
     {
-        return [
-            ['Point Guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'],
-            ['Point Guard', BasketballPositionType::POINT_GUARD, null],
-            ['Center', BasketballPositionType::CENTER, 'BasketballPositionType'],
-            ['Center', MapLocationType::CENTER, 'MapLocationType'],
-            [null, null, 'MapLocationType'],
-        ];
+        yield ['Point Guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'];
+        yield ['Point Guard', BasketballPositionType::POINT_GUARD, null];
+        yield ['Center', BasketballPositionType::CENTER, 'BasketballPositionType'];
+        yield ['Center', MapLocationType::CENTER, 'MapLocationType'];
+        yield [null, null, 'MapLocationType'];
     }
 
     public function testEnumTypeIsNotRegisteredException(): void

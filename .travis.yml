@@ -44,7 +44,7 @@ jobs:
     - stage: static analyze
       php: 7.2
       env: SYMFONY_VERSION=5.0.*
-      script: ./vendor/bin/phpstan analyse -l 7 --no-progress -c phpstan.neon ./
+      script: ./vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./
     # Code coverage with Codecov.io
     - stage: code coverage
       php: 7.2

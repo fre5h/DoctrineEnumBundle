@@ -32,14 +32,14 @@
         "symfony/framework-bundle": "^5.0",
         "symfony/http-kernel": "^5.0",
         "symfony/validator": "^5.0",
-        "twig/twig": "~2.11 || ^3.0"
+        "twig/twig": "^3.0"
     },
     "require-dev": {
-        "escapestudios/symfony2-coding-standard": "^3.10",
+        "escapestudios/symfony2-coding-standard": "^3.11",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine":"^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
-        "phpunit/phpunit": "^8.4",
+        "phpunit/phpunit": "^9.1",
         "symfony/form": "^5.0",
         "symfony/phpunit-bridge": "^5.0",
         "symfony/yaml": "^5.0"
@@ -61,5 +61,8 @@
         "branch-alias": {
             "dev-master": "7.x-dev"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
