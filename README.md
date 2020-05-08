@@ -1,6 +1,6 @@
 # DoctrineEnumBundle
 
-:package: Provides support of **ENUM type** for Doctrine in Symfony applications.
+📦 Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/fre5h/DoctrineEnumBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
 [![Build Status](https://img.shields.io/travis/fre5h/DoctrineEnumBundle/master.svg?style=flat-square)](https://travis-ci.org/fre5h/DoctrineEnumBundle)
@@ -14,12 +14,12 @@
 [![SymfonyInsight](https://insight.symfony.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3/big.svg)](https://insight.symfony.com/projects/0cff4816-374a-474e-a1d5-9d5db34562e3)
 [![knpbundles.com](http://knpbundles.com/fre5h/DoctrineEnumBundle/badge-short)](http://knpbundles.com/fre5h/DoctrineEnumBundle)
 
-## Supported platforms
+## Supported platforms 🧐
 
 | MySQL | SQLite | PostgreSQL | MSSQL |
 |-------|--------|------------|-------|
 
-## Installation
+## Installation 🌱
 
 ```composer req fresh/doctrine-enum-bundle='~7.0'```
 
@@ -45,11 +45,11 @@ return [
 ];
 ```
 
-## Using
+## Using 🧑‍🎓
 
 * [Example](./Resources/docs/example_of_using.md "Example")
 
-## Features
+## Features 🎁
 
 * [NULL values](./Resources/docs/null_values.md "NULL values")
 * [Building the form](./Resources/docs/building_the_form.md "Building the form")
@@ -60,6 +60,6 @@ return [
 * [ENUM values in templates](./Resources/docs/enum_values_in_templates.md "ENUM values in templates")
 * [Hook for Doctrine migrations](./Resources/docs/hook_for_doctrine_migrations.md "Hook for Doctrine migrations")
 
-## Contributing
+## Contributing 🤝
 
 Read the [CONTRIBUTING](https://github.com/fre5h/DoctrineEnumBundle/blob/master/.github/CONTRIBUTING.md) file.
