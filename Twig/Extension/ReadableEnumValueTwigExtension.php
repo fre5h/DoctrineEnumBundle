@@ -65,7 +65,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
             if ($this->onlyOneOccurrenceFound()) {
                 $occurrence = \array_pop($this->occurrences);
 
-                if (\is_subclass_of($occurrence, AbstractEnumType::class)) {
+                if (null !== $occurrence && \is_subclass_of($occurrence, AbstractEnumType::class)) {
                     return $occurrence::getReadableValue($enumValue);
                 }
             }
