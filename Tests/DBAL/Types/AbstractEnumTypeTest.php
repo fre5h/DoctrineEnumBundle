@@ -55,6 +55,10 @@ final class AbstractEnumTypeTest extends TestCase
 
     /**
      * @dataProvider platformProvider
+     *
+     * @param array            $fieldDeclaration
+     * @param AbstractPlatform $platform
+     * @param string           $expected
      */
     public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
     {

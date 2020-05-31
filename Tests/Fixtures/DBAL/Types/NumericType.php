@@ -30,6 +30,9 @@ final class NumericType extends AbstractEnumType
     /** @var string */
     protected $name = 'NumericType';
 
+    /**
+     * {@inheritdoc}
+     */
     protected static $choices = [
         self::ZERO => 0,
         self::ONE => 1,

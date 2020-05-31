@@ -52,7 +52,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
      *
      * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      */
-    public function guessType($class, $property): ?TypeGuess
+    public function guessType(string $class, string $property): ?TypeGuess
     {
         $classMetadata = $this->getMetadata($class);
 

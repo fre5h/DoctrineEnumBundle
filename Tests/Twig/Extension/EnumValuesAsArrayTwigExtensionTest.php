@@ -21,11 +21,11 @@ use PHPUnit\Framework\TestCase;
 use Twig\TwigFunction;
 
 /**
- * EnumValuesAsArrayExtensionTest.
+ * EnumValuesAsArrayTwigExtensionTest.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-final class EnumValuesAsArrayExtensionTest extends TestCase
+final class EnumValuesAsArrayTwigExtensionTest extends TestCase
 {
     /** @var EnumValuesAsArrayTwigExtension */
     private $enumValuesAsArrayTwigExtension;
