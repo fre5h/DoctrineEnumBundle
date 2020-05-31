@@ -49,7 +49,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
     {
         if ($this->hasRegisteredEnumTypes()) {
             if (null === $enumValue) {
-                return $enumValue;
+                return null;
             }
 
             // If ENUM type was set, e.g. {{ player.position|readable_enum('BasketballPositionType') }}
@@ -65,7 +65,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
             if ($this->onlyOneOccurrenceFound()) {
                 $occurrence = \array_pop($this->occurrences);
 
-                if ($occurrence instanceof AbstractEnumType) {
+                if (\is_subclass_of($occurrence, AbstractEnumType::class)) {
                     return $occurrence::getReadableValue($enumValue);
                 }
             }

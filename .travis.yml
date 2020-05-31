@@ -17,6 +17,7 @@ env:
     - PHPUNIT_FLAGS="-v"
     - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
   jobs:
+    - SYMFONY_VERSION=5.1.*
     - SYMFONY_VERSION=5.0.*
 
 stages:
@@ -32,23 +33,23 @@ jobs:
     # Composer validation
     - stage: composer validation
       php: 7.2
-      env: SYMFONY_VERSION=5.0.*
+      env: SYMFONY_VERSION=5.1.*
       script:
         - composer validate --strict --no-check-lock
     # Code style
     - stage: code style
       php: 7.2
-      env: SYMFONY_VERSION=5.0.*
+      env: SYMFONY_VERSION=5.1.*
       script: ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
     # PHPStan analyze
     - stage: static analyze
       php: 7.2
-      env: SYMFONY_VERSION=5.0.*
+      env: SYMFONY_VERSION=5.1.*
       script: ./vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./
     # Code coverage with Codecov.io
     - stage: code coverage
       php: 7.2
-      env: COVERAGE=true SYMFONY_VERSION=5.0.*
+      env: COVERAGE=true SYMFONY_VERSION=5.1.*
       script:
         - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
       after_script:

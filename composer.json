@@ -23,8 +23,8 @@
     },
     "require": {
         "php": ">=7.2.5",
-        "doctrine/common": "^2.11",
-        "doctrine/doctrine-bundle": "^2.0",
+        "doctrine/common": "^2.11 || ^3.0",
+        "doctrine/doctrine-bundle": "^2.1",
         "doctrine/orm": "^2.7",
         "symfony/config": "^5.0",
         "symfony/dependency-injection": "^5.0",
