@@ -24,8 +24,8 @@
 
 | Bundle Version (X.Y.Z) | PHP              | Symfony          | Doctrine Bundle    | Comment                   |
 |:----------------------:|:----------------:|:----------------:|:------------------:|:--------------------------|
-| `7.0.*`                | `>= 7.2.5`       | `>= 5.0`         | `>= 2.0`           | **Current version**       |
-| `6.6.*`                | `>= 7.1.3`       | `4.3, 4.4`       | `> 1.11`, `>= 2.0` | Bugfix support            |
+| `7.1.*`                | `>= 7.2.5`       | `>= 5.0`         | `>= 2.0`           | **Current version**       |
+| `6.6.*`                | `>= 7.1.3`       | `4.3, 4.4`       | `> 1.11`, `>= 2.0` | Previous version          |
 
 #### Check the `config/bundles.php` file
 
@@ -49,6 +49,7 @@ return [
 ## Features 🎁
 
 * [NULL values](./Resources/docs/null_values.md "NULL values")
+* [Default value](./Resources/docs/default_value.md "Default value")
 * [Building the form](./Resources/docs/building_the_form.md "Building the form")
 * [Additional methods](./Resources/docs/additional_methods.md "Additional methods")
 * [Common types](./Resources/docs/common_types.md "Common types")
