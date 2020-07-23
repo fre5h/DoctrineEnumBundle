@@ -21,6 +21,7 @@ use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
 use PHPUnit\Framework\TestCase;
@@ -29,7 +30,7 @@ use PHPUnit\Framework\TestCase;
  * AbstractEnumTypeTest.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
- * @author Ben Davies    <ben.davies@gmail.com>
+ * @author Ben Davies <ben.davies@gmail.com>
  */
 final class AbstractEnumTypeTest extends TestCase
 {
@@ -39,6 +40,7 @@ final class AbstractEnumTypeTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         Type::addType('BasketballPositionType', BasketballPositionType::class);
+        Type::addType('MapLocationType', MapLocationType::class);
         Type::addType('StubType', StubType::class);
         Type::addType('NumericType', NumericType::class);
     }
