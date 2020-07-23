@@ -21,9 +21,9 @@ use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
-use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\TaskStatusType;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -40,7 +40,7 @@ final class AbstractEnumTypeTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         Type::addType('BasketballPositionType', BasketballPositionType::class);
-        Type::addType('MapLocationType', MapLocationType::class);
+        Type::addType('TaskStatusType', TaskStatusType::class);
         Type::addType('StubType', StubType::class);
         Type::addType('NumericType', NumericType::class);
     }
@@ -69,22 +69,22 @@ final class AbstractEnumTypeTest extends TestCase
 
     public static function platformProviderForGetSqlDeclarationWithoutDefaultValue(): iterable
     {
-        yield [
+        yield 'mysql' => [
             ['name' => 'position'],
             new MySqlPlatform(),
             "ENUM('PG', 'SG', 'SF', 'PF', 'C')",
         ];
-        yield [
+        yield 'sqlite' => [
             ['name' => 'position'],
             new SqlitePlatform(),
             "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
-        yield [
+        yield 'postgresql' => [
             ['name' => 'position'],
             new PostgreSqlPlatform(),
             "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
-        yield [
+        yield 'sql server' => [
             ['name' => 'position'],
             new SQLServerPlatform(),
             "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
@@ -100,31 +100,31 @@ final class AbstractEnumTypeTest extends TestCase
      */
     public function testGetSqlDeclarationWithDefaultValue(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
     {
-        $type = Type::getType('MapLocationType');
+        $type = Type::getType('TaskStatusType');
         self::assertEquals($expected, $type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
     public static function platformProviderForGetSqlDeclarationWithDefaultValue(): iterable
     {
-        yield [
+        yield 'mysql' => [
             ['name' => 'position'],
             new MySqlPlatform(),
-            "ENUM('PG', 'SG', 'SF', 'PF', 'C') DEFAULT 'C'",
+            "ENUM('pending', 'done', 'failed') DEFAULT 'pending'",
         ];
-        yield [
+        yield 'sqlite' => [
             ['name' => 'position'],
             new SqlitePlatform(),
-            "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C')) DEFAULT 'C'",
+            "TEXT CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
         ];
-        yield [
+        yield 'postgresql' => [
             ['name' => 'position'],
             new PostgreSqlPlatform(),
-            "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C')) DEFAULT 'C'",
+            "VARCHAR(255) CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
         ];
-        yield [
+        yield 'sql server' => [
             ['name' => 'position'],
             new SQLServerPlatform(),
-            "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C')) DEFAULT 'C'",
+            "VARCHAR(255) CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
         ];
     }
 
@@ -191,7 +191,7 @@ final class AbstractEnumTypeTest extends TestCase
     public function testGetDefaultValue(): void
     {
         self::assertNull($this->type::getDefaultValue());
-        self::assertEquals('C', Type::getType('MapLocationType')::getDefaultValue());
+        self::assertEquals('pending', Type::getType('TaskStatusType')::getDefaultValue());
     }
 
     public function testInvalidArgumentExceptionInGetReadableValue(): void
