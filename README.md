@@ -49,6 +49,7 @@ return [
 ## Features 🎁
 
 * [NULL values](./Resources/docs/null_values.md "NULL values")
+* [Default value](./Resources/docs/default_value.md "Default value")
 * [Building the form](./Resources/docs/building_the_form.md "Building the form")
 * [Additional methods](./Resources/docs/additional_methods.md "Additional methods")
 * [Common types](./Resources/docs/common_types.md "Common types")

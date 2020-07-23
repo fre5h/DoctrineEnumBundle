@@ -26,8 +26,10 @@ You should repeat these steps after each update of your custom ENUM type!
 ### More features
 
 * [NULL values](./null_values.md "NULL values")
+* [Default value](./default_value.md "Default value")
 * [Building the form](./building_the_form.md "Building the form")
 * [Additional methods](./additional_methods.md "Additional methods")
+* [Common types](./common_types.md "Common types")
 * [Readable ENUM values in templates](./readable_enum_values_in_template.md "Readable ENUM values in templates")
 * [ENUM constants in templates](./enum_constants_in_templates.md "ENUM constants in templates")
 * [ENUM values in templates](./enum_values_in_templates.md "ENUM values in templates")

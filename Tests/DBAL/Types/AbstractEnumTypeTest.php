@@ -54,18 +54,18 @@ final class AbstractEnumTypeTest extends TestCase
     }
 
     /**
-     * @dataProvider platformProvider
+     * @dataProvider platformProviderForGetSqlDeclarationWithoutDefaultValue
      *
      * @param array            $fieldDeclaration
      * @param AbstractPlatform $platform
      * @param string           $expected
      */
-    public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
+    public function testGetSqlDeclarationWithoutDefaultValue(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
     {
         self::assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
-    public static function platformProvider(): iterable
+    public static function platformProviderForGetSqlDeclarationWithoutDefaultValue(): iterable
     {
         yield [
             ['name' => 'position'],
@@ -86,6 +86,43 @@ final class AbstractEnumTypeTest extends TestCase
             ['name' => 'position'],
             new SQLServerPlatform(),
             "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
+        ];
+    }
+
+    /**
+     * @dataProvider platformProviderForGetSqlDeclarationWithDefaultValue
+     *
+     * @param array            $fieldDeclaration
+     * @param AbstractPlatform $platform
+     * @param string           $expected
+     */
+    public function testGetSqlDeclarationWithDefaultValue(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
+    {
+        $type = Type::getType('MapLocationType');
+        self::assertEquals($expected, $type->getSqlDeclaration($fieldDeclaration, $platform));
+    }
+
+    public static function platformProviderForGetSqlDeclarationWithDefaultValue(): iterable
+    {
+        yield [
+            ['name' => 'position'],
+            new MySqlPlatform(),
+            "ENUM('PG', 'SG', 'SF', 'PF', 'C') DEFAULT 'C'",
+        ];
+        yield [
+            ['name' => 'position'],
+            new SqlitePlatform(),
+            "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C')) DEFAULT 'C'",
+        ];
+        yield [
+            ['name' => 'position'],
+            new PostgreSqlPlatform(),
+            "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C')) DEFAULT 'C'",
+        ];
+        yield [
+            ['name' => 'position'],
+            new SQLServerPlatform(),
+            "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C')) DEFAULT 'C'",
         ];
     }
 
@@ -147,6 +184,12 @@ final class AbstractEnumTypeTest extends TestCase
     public function testGetReadableValue(): void
     {
         self::assertEquals('Small Forward', $this->type::getReadableValue(BasketballPositionType::SMALL_FORWARD));
+    }
+
+    public function testGetDefaultValue(): void
+    {
+        self::assertNull($this->type::getDefaultValue());
+        self::assertEquals('C', Type::getType('MapLocationType')::getDefaultValue());
     }
 
     public function testInvalidArgumentExceptionInGetReadableValue(): void

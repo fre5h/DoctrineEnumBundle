@@ -23,8 +23,6 @@ BasketballPositionType::getValues();
 // Will return: ['PG', 'SG', 'SF', 'PF', 'C']
 ```
 
----
-
 ##### If you need to return a random value:
 
 ```php
@@ -37,7 +35,9 @@ BasketballPositionType::getRandomValue();
 ### More features
 
 * [NULL values](./null_values.md "NULL values")
+* [Default value](./default_value.md "Default value")
 * [Building the form](./building_the_form.md "Building the form")
+* [Common types](./common_types.md "Common types")
 * [Readable ENUM values in templates](./readable_enum_values_in_template.md "Readable ENUM values in templates")
 * [ENUM constants in templates](./enum_constants_in_templates.md "ENUM constants in templates")
 * [ENUM values in templates](./enum_values_in_templates.md "ENUM values in templates")

@@ -5,7 +5,7 @@ They are `enum_values()` and `enum_readable_values()`.
 
 #### Example of using `enum_values()`
 
-```jinja
+```twig
 {% for value in enum_values('BasketballPositionType') %}
     {{ value }}<br />
 {% endfor %}
@@ -22,7 +22,7 @@ C
 
 #### Example of using `enum_readable_values()`
 
-```jinja
+```twig
 {% for key, value in enum_readable_values('BasketballPositionType') %}
     {{ key }} => {{ value }}<br />
 {% endfor %}
@@ -42,8 +42,10 @@ C => Center
 ### More features
 
 * [NULL values](./null_values.md "NULL values")
+* [Default value](./default_value.md "Default value")
 * [Building the form](./building_the_form.md "Building the form")
 * [Additional methods](./additional_methods.md "Additional methods")
+* [Common types](./common_types.md "Common types")
 * [Readable ENUM values in templates](./readable_enum_values_in_template.md "Readable ENUM values in templates")
 * [ENUM constants in templates](./enum_constants_in_templates.md "ENUM constants in templates")
 * [Hook for Doctrine migrations](./hook_for_doctrine_migrations.md "Hook for Doctrine migrations")
