@@ -32,8 +32,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     protected $registeredEnumTypes = [];
 
     /**
-     * @param ManagerRegistry $registry
-     * @param mixed[]         $registeredTypes
+     * @param mixed[] $registeredTypes
      */
     public function __construct(ManagerRegistry $registry, array $registeredTypes)
     {
@@ -47,8 +46,6 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     /**
      * @param string $class
      * @param string $property
-     *
-     * @return TypeGuess|null
      *
      * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      */
