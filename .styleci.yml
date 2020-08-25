@@ -10,6 +10,8 @@ enabled:
   - phpdoc_order
 disabled:
   - no_superfluous_phpdoc_tags_symfony
+  - native_function_invocation_symfony
+  - native_function_invocation
 finder:
   exclude:
     - "Tests"
