@@ -8,7 +8,7 @@ In this example will be shown how to create a custom ENUM field for basketball p
 * `PF` - Power Forward
 * `C` - Center
 
-Create a class for new ENUM type `BasketballPositionType`:
+Create a class for a new ENUM type `BasketballPositionType`:
 
 ```php
 <?php
@@ -34,9 +34,9 @@ final class BasketballPositionType extends AbstractEnumType
 }
 ```
 
-Register `BasketballPositionType` for Doctrine in config.yml:
+Register `BasketballPositionType` for Doctrine in config.yaml:
 
-```yml
+```yaml
 doctrine:
     dbal:
         types:
@@ -109,8 +109,10 @@ use App\DBAL\Types\BasketballPositionType;
 ### More features
 
 * [NULL values](./null_values.md "NULL values")
+* [Default value](./default_value.md "Default value")
 * [Building the form](./building_the_form.md "Building the form")
 * [Additional methods](./additional_methods.md "Additional methods")
+* [Common types](./common_types.md "Common types")
 * [Readable ENUM values in templates](./readable_enum_values_in_template.md "Readable ENUM values in templates")
 * [ENUM constants in templates](./enum_constants_in_templates.md "ENUM constants in templates")
 * [ENUM values in templates](./enum_values_in_templates.md "ENUM values in templates")

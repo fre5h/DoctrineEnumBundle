@@ -30,6 +30,9 @@ final class BasketballPositionType extends AbstractEnumType
     /** @var string */
     protected $name = 'BasketballPositionType';
 
+    /**
+     * {@inheritdoc}
+     */
     protected static $choices = [
         self::POINT_GUARD => 'Point Guard',
         self::SHOOTING_GUARD => 'Shooting Guard',

@@ -23,13 +23,14 @@ use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\TaskStatusType;
 use PHPUnit\Framework\TestCase;
 
 /**
  * AbstractEnumTypeTest.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
- * @author Ben Davies    <ben.davies@gmail.com>
+ * @author Ben Davies <ben.davies@gmail.com>
  */
 final class AbstractEnumTypeTest extends TestCase
 {
@@ -39,6 +40,7 @@ final class AbstractEnumTypeTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         Type::addType('BasketballPositionType', BasketballPositionType::class);
+        Type::addType('TaskStatusType', TaskStatusType::class);
         Type::addType('StubType', StubType::class);
         Type::addType('NumericType', NumericType::class);
     }
@@ -54,34 +56,75 @@ final class AbstractEnumTypeTest extends TestCase
     }
 
     /**
-     * @dataProvider platformProvider
+     * @dataProvider platformProviderForGetSqlDeclarationWithoutDefaultValue
+     *
+     * @param array            $fieldDeclaration
+     * @param AbstractPlatform $platform
+     * @param string           $expected
      */
-    public function testGetSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
+    public function testGetSqlDeclarationWithoutDefaultValue(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
     {
         self::assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
-    public static function platformProvider(): iterable
+    public static function platformProviderForGetSqlDeclarationWithoutDefaultValue(): iterable
     {
-        yield [
+        yield 'mysql' => [
             ['name' => 'position'],
             new MySqlPlatform(),
             "ENUM('PG', 'SG', 'SF', 'PF', 'C')",
         ];
-        yield [
+        yield 'sqlite' => [
             ['name' => 'position'],
             new SqlitePlatform(),
             "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
-        yield [
+        yield 'postgresql' => [
             ['name' => 'position'],
             new PostgreSqlPlatform(),
             "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
-        yield [
+        yield 'sql server' => [
             ['name' => 'position'],
             new SQLServerPlatform(),
             "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
+        ];
+    }
+
+    /**
+     * @dataProvider platformProviderForGetSqlDeclarationWithDefaultValue
+     *
+     * @param array            $fieldDeclaration
+     * @param AbstractPlatform $platform
+     * @param string           $expected
+     */
+    public function testGetSqlDeclarationWithDefaultValue(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
+    {
+        $type = Type::getType('TaskStatusType');
+        self::assertEquals($expected, $type->getSqlDeclaration($fieldDeclaration, $platform));
+    }
+
+    public static function platformProviderForGetSqlDeclarationWithDefaultValue(): iterable
+    {
+        yield 'mysql' => [
+            ['name' => 'position'],
+            new MySqlPlatform(),
+            "ENUM('pending', 'done', 'failed') DEFAULT 'pending'",
+        ];
+        yield 'sqlite' => [
+            ['name' => 'position'],
+            new SqlitePlatform(),
+            "TEXT CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
+        ];
+        yield 'postgresql' => [
+            ['name' => 'position'],
+            new PostgreSqlPlatform(),
+            "VARCHAR(255) CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
+        ];
+        yield 'sql server' => [
+            ['name' => 'position'],
+            new SQLServerPlatform(),
+            "VARCHAR(255) CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
         ];
     }
 
@@ -143,6 +186,12 @@ final class AbstractEnumTypeTest extends TestCase
     public function testGetReadableValue(): void
     {
         self::assertEquals('Small Forward', $this->type::getReadableValue(BasketballPositionType::SMALL_FORWARD));
+    }
+
+    public function testGetDefaultValue(): void
+    {
+        self::assertNull($this->type::getDefaultValue());
+        self::assertEquals('pending', Type::getType('TaskStatusType')::getDefaultValue());
     }
 
     public function testInvalidArgumentExceptionInGetReadableValue(): void

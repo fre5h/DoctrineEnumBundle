@@ -15,29 +15,30 @@ namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 /**
- * NumericType.
+ * TaskStatusType.
  *
- * @author Stephan Vock <stephan.vock@gmail.com>
+ * @author Artem Henvald <genvaldartem@gmail.com>
  */
-final class NumericType extends AbstractEnumType
+final class TaskStatusType extends AbstractEnumType
 {
-    public const ZERO = 0;
-    public const ONE = 1;
-    public const TWO = 2;
-    public const THREE = 3;
-    public const FOUR = 4;
-
-    /** @var string */
-    protected $name = 'NumericType';
+    public const PENDING = 'pending';
+    public const DONE = 'done';
+    public const FAILED = 'failed';
 
     /**
      * {@inheritdoc}
      */
     protected static $choices = [
-        self::ZERO => 0,
-        self::ONE => 1,
-        self::TWO => 2,
-        self::THREE => 3,
-        self::FOUR => 4,
+        self::PENDING => 'Pending',
+        self::DONE => 'Done',
+        self::FAILED => 'Failed',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getDefaultValue(): ?string
+    {
+        return self::PENDING;
+    }
 }

@@ -23,18 +23,18 @@ use PHPUnit\Framework\TestCase;
 use Twig\TwigFilter;
 
 /**
- * ReadableEnumValueExtensionTest.
+ * ReadableEnumValueTwigExtensionTest.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-final class ReadableEnumValueExtensionTest extends TestCase
+final class ReadableEnumValueTwigExtensionTest extends TestCase
 {
     /** @var ReadableEnumValueTwigExtension */
-    private $readableEnumValueExtension;
+    private $readableEnumValueTwigExtension;
 
     protected function setUp(): void
     {
-        $this->readableEnumValueExtension = new ReadableEnumValueTwigExtension([
+        $this->readableEnumValueTwigExtension = new ReadableEnumValueTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
         ]);
@@ -42,27 +42,33 @@ final class ReadableEnumValueExtensionTest extends TestCase
 
     protected function tearDown(): void
     {
-        unset($this->readableEnumValueExtension);
+        unset($this->readableEnumValueTwigExtension);
     }
 
     public function testGetFilters(): void
     {
         self::assertEquals(
-            [new TwigFilter('readable_enum', [$this->readableEnumValueExtension, 'getReadableEnumValue'])],
-            $this->readableEnumValueExtension->getFilters()
+            [new TwigFilter('readable_enum', [$this->readableEnumValueTwigExtension, 'getReadableEnumValue'])],
+            $this->readableEnumValueTwigExtension->getFilters()
         );
     }
 
-    /** @dataProvider dataProviderForGetReadableEnumValueTest */
+    /**
+     * @dataProvider dataProviderForGetReadableEnumValueTest
+     *
+     * @param string|null $expectedReadableValue
+     * @param string|null $enumValue
+     * @param string|null $enumType
+     */
     public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, ?string $enumType): void
     {
         self::assertEquals(
             $expectedReadableValue,
-            $this->readableEnumValueExtension->getReadableEnumValue($enumValue, $enumType)
+            $this->readableEnumValueTwigExtension->getReadableEnumValue($enumValue, $enumType)
         );
     }
 
-    public function dataProviderForGetReadableEnumValueTest(): iterable
+    public static function dataProviderForGetReadableEnumValueTest(): iterable
     {
         yield ['Point Guard', BasketballPositionType::POINT_GUARD, 'BasketballPositionType'];
         yield ['Point Guard', BasketballPositionType::POINT_GUARD, null];
@@ -74,19 +80,19 @@ final class ReadableEnumValueExtensionTest extends TestCase
     public function testEnumTypeIsNotRegisteredException(): void
     {
         $this->expectException(EnumTypeIsNotRegisteredException::class);
-        $this->readableEnumValueExtension->getReadableEnumValue('Pitcher', 'BaseballPositionType');
+        $this->readableEnumValueTwigExtension->getReadableEnumValue('Pitcher', 'BaseballPositionType');
     }
 
     public function testValueIsFoundInFewRegisteredEnumTypesException(): void
     {
         $this->expectException(ValueIsFoundInFewRegisteredEnumTypesException::class);
-        $this->readableEnumValueExtension->getReadableEnumValue(BasketballPositionType::CENTER);
+        $this->readableEnumValueTwigExtension->getReadableEnumValue(BasketballPositionType::CENTER);
     }
 
     public function testValueIsNotFoundInAnyRegisteredEnumTypeException(): void
     {
         $this->expectException(ValueIsNotFoundInAnyRegisteredEnumTypeException::class);
-        $this->readableEnumValueExtension->getReadableEnumValue('Pitcher');
+        $this->readableEnumValueTwigExtension->getReadableEnumValue('Pitcher');
     }
 
     public function testNoRegisteredEnumTypesException(): void

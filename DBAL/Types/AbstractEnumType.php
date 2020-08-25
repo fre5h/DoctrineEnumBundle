@@ -112,6 +112,11 @@ abstract class AbstractEnumType extends Type
                 $sqlDeclaration = \sprintf('ENUM(%s)', $values);
         }
 
+        $defaultValue = static::getDefaultValue();
+        if (null !== $defaultValue) {
+            $sqlDeclaration .= \sprintf(' DEFAULT %s', $platform->quoteStringLiteral($defaultValue));
+        }
+
         return $sqlDeclaration;
     }
 
@@ -128,7 +133,7 @@ abstract class AbstractEnumType extends Type
      */
     public function getName(): string
     {
-        return $this->name ?: \array_search(\get_class($this), self::getTypesMap(), true);
+        return $this->name ?: (string) \array_search(static::class, self::getTypesMap(), true);
     }
 
     /**
@@ -136,7 +141,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return string[] Values for the ENUM field
+     * @return string[]
      */
     public static function getChoices(): array
     {
@@ -175,7 +180,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return string[] Array of values with readable format
+     * @return string[] Array of values in readable format
      */
     public static function getReadableValues(): array
     {
@@ -203,7 +208,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return string $value Value in readable format
+     * @return string Value in readable format
      */
     public static function getReadableValue(string $value): string
     {
@@ -224,6 +229,18 @@ abstract class AbstractEnumType extends Type
     public static function isValueExist(string $value): bool
     {
         return isset(static::$choices[$value]);
+    }
+
+    /**
+     * Get default value for DDL statement.
+     *
+     * @static
+     *
+     * @return string|null Default value for DDL statement
+     */
+    public static function getDefaultValue(): ?string
+    {
+        return null;
     }
 
     /**
