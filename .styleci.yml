@@ -1,13 +1,19 @@
+risky: true
 preset: symfony
-
+tab-width: 4
+use-tabs: false
 enabled:
   - combine_consecutive_unsets
-  - linebreak_after_opening_tag
   - ordered_class_elements
-  - ordered_imports
-
+  - alpha_ordered_imports
+  - declare_strict_types
+  - phpdoc_order
+disabled:
+  - no_superfluous_phpdoc_tags_symfony
+  - native_function_invocation_symfony
 finder:
   exclude:
     - "Tests"
+    - "vendor"
   name:
     - "*.php"

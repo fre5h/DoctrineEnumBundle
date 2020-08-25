@@ -70,7 +70,7 @@ final class EnumConstantTwigExtensionTest extends TestCase
         );
     }
 
-    public function dataProviderForGetEnumConstantTest(): iterable
+    public static function dataProviderForGetEnumConstantTest(): iterable
     {
         yield ['PG', 'POINT_GUARD', 'BasketballPositionType'];
         yield ['PG', 'POINT_GUARD', null];

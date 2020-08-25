@@ -48,9 +48,9 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
      * @param string $class
      * @param string $property
      *
-     * @return TypeGuess|null
-     *
      * @throws EnumTypeIsRegisteredButClassDoesNotExistException
+     *
+     * @return TypeGuess|null
      */
     public function guessType(string $class, string $property): ?TypeGuess
     {

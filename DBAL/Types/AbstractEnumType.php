@@ -133,7 +133,7 @@ abstract class AbstractEnumType extends Type
      */
     public function getName(): string
     {
-        return $this->name ?: (string) \array_search(\get_class($this), self::getTypesMap(), true);
+        return $this->name ?: (string) \array_search(static::class, self::getTypesMap(), true);
     }
 
     /**
