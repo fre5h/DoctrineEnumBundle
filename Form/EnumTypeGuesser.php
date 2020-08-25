@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Form;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
@@ -48,9 +48,9 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
      * @param string $class
      * @param string $property
      *
-     * @return TypeGuess|null
-     *
      * @throws EnumTypeIsRegisteredButClassDoesNotExistException
+     *
+     * @return TypeGuess|null
      */
     public function guessType($class, $property): ?TypeGuess
     {

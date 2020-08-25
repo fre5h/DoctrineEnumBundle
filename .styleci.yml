@@ -1,8 +1,9 @@
 preset: symfony
 
+version: 7
+
 enabled:
   - combine_consecutive_unsets
-  - linebreak_after_opening_tag
   - ordered_class_elements
   - ordered_imports
 
