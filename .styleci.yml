@@ -9,6 +9,8 @@ enabled:
   - declare_strict_types
   - phpdoc_order
   - phpdoc_add_missing_param_annotation
+disbaled:
+  - no_superfluous_phpdoc_tags_symfony
 finder:
   exclude:
     - "Tests"
