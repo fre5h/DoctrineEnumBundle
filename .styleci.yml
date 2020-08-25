@@ -1,13 +1,18 @@
-preset: symfony
-
-enabled:
-  - combine_consecutive_unsets
-  - linebreak_after_opening_tag
-  - ordered_class_elements
-  - ordered_imports
-
-finder:
-  exclude:
-    - "Tests"
-  name:
-    - "*.php"
+php:
+  risky: false
+  preset: symfony
+  tab-width: 4
+  use-tabs: false
+  enabled:
+    - combine_consecutive_unsets
+    - ordered_class_elements
+    - alpha_ordered_imports
+    - declare_strict_types
+    - phpdoc_order
+    - phpdoc_add_missing_param_annotation
+  finder:
+    exclude:
+      - "Tests"
+      - "vendor"
+    name:
+      - "*.php"
