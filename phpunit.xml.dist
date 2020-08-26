@@ -9,10 +9,6 @@
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
     </php>
 
-    <listeners>
-        <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener" />
-    </listeners>
-
     <testsuites>
         <testsuite name="DoctrineEnumBundle Test Suite">
             <directory>./Tests</directory>

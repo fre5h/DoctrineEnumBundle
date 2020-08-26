@@ -5,6 +5,7 @@ enabled:
   - linebreak_after_opening_tag
   - ordered_class_elements
   - ordered_imports
+  - declare_strict_types
 
 finder:
   exclude:
