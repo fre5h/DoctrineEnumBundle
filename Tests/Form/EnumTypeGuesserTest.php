@@ -12,8 +12,8 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Tests\Form;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;

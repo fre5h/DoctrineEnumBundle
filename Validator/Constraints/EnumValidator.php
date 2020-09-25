@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
 use Fresh\DoctrineEnumBundle\Exception\RuntimeException;

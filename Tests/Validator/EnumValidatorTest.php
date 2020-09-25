@@ -90,14 +90,14 @@ final class EnumValidatorTest extends TestCase
         $constraintValidationBuilder
             ->expects(self::at(0))
             ->method('setParameter')
-            ->with($this->equalTo('{{ value }}'), $this->equalTo('"Pitcher"'))
+            ->with(self::equalTo('{{ value }}'), self::equalTo('"Pitcher"'))
             ->willReturnSelf()
         ;
 
         $constraintValidationBuilder
             ->expects(self::at(1))
             ->method('setParameter')
-            ->with($this->equalTo('{{ choices }}'), $this->equalTo('"PG", "SG", "SF", "PF", "C"'))
+            ->with(self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"'))
             ->willReturnSelf()
         ;
 
@@ -110,7 +110,7 @@ final class EnumValidatorTest extends TestCase
         $this->context
             ->expects(self::once())
             ->method('buildViolation')
-            ->with($this->equalTo('The value you selected is not a valid choice.'))
+            ->with(self::equalTo('The value you selected is not a valid choice.'))
             ->willReturn($constraintValidationBuilder)
         ;
 
