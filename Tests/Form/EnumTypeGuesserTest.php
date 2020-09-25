@@ -38,7 +38,7 @@ final class EnumTypeGuesserTest extends TestCase
         $enumTypeGuesser = $this
             ->getMockBuilder(EnumTypeGuesser::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['getMetadata'])
+            ->setMethods(['getMetadata'])
             ->getMock()
         ;
 
@@ -57,14 +57,14 @@ final class EnumTypeGuesserTest extends TestCase
         $enumTypeGuesser = $this
             ->getMockBuilder(EnumTypeGuesser::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['getMetadata'])
+            ->setMethods(['getMetadata'])
             ->getMock()
         ;
 
         $metadata = $this
             ->getMockBuilder(ClassMetadataInfo::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField'])
+            ->setMethods(['getTypeOfField'])
             ->getMock()
         ;
 
@@ -97,14 +97,14 @@ final class EnumTypeGuesserTest extends TestCase
         $enumTypeGuesser = $this
             ->getMockBuilder(EnumTypeGuesser::class)
             ->setConstructorArgs([$registry, $registeredTypes])
-            ->onlyMethods(['getMetadata'])
+            ->setMethods(['getMetadata'])
             ->getMock()
         ;
 
         $metadata = $this
             ->getMockBuilder(ClassMetadataInfo::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField'])
+            ->setMethods(['getTypeOfField'])
             ->getMock()
         ;
 
@@ -139,14 +139,14 @@ final class EnumTypeGuesserTest extends TestCase
         $enumTypeGuesser = $this
             ->getMockBuilder(EnumTypeGuesser::class)
             ->setConstructorArgs([$registry, $registeredTypes])
-            ->onlyMethods(['getMetadata'])
+            ->setMethods(['getMetadata'])
             ->getMock()
         ;
 
         $metadata = $this
             ->getMockBuilder(ClassMetadataInfo::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField'])
+            ->setMethods(['getTypeOfField'])
             ->getMock()
         ;
 
@@ -179,14 +179,14 @@ final class EnumTypeGuesserTest extends TestCase
         $enumTypeGuesser = $this
             ->getMockBuilder(EnumTypeGuesser::class)
             ->setConstructorArgs([$registry, $registeredTypes])
-            ->onlyMethods(['getMetadata'])
+            ->setMethods(['getMetadata'])
             ->getMock()
         ;
 
         $metadata = $this
             ->getMockBuilder(ClassMetadataInfo::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField', 'isNullable'])
+            ->setMethods(['getTypeOfField', 'isNullable'])
             ->getMock()
         ;
 
@@ -234,14 +234,14 @@ final class EnumTypeGuesserTest extends TestCase
         $enumTypeGuesser = $this
             ->getMockBuilder(EnumTypeGuesser::class)
             ->setConstructorArgs([$registry, $registeredTypes])
-            ->onlyMethods(['getMetadata'])
+            ->setMethods(['getMetadata'])
             ->getMock()
         ;
 
         $metadata = $this
             ->getMockBuilder(ClassMetadataInfo::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField', 'isNullable'])
+            ->setMethods(['getTypeOfField', 'isNullable'])
             ->getMock()
         ;
 
