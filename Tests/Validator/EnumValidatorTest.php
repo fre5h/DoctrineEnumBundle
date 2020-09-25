@@ -49,7 +49,7 @@ final class EnumValidatorTest extends TestCase
     public function testValidateIncorrectConstraintClass(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessageMatches('/^Object of class .* is not instance of .*$/');
+        $this->expectExceptionMessageRegExp('/^Object of class .* is not instance of .*$/');
 
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new DummyConstraint());
     }
