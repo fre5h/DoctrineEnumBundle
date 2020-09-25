@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle;
 
-use Doctrine\Common\Persistence\ConnectionRegistry;
+use Doctrine\Persistence\ConnectionRegistry;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
