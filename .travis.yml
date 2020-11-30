@@ -15,6 +15,7 @@ env:
   global:
     - PHPUNIT_FLAGS="-v"
   jobs:
+    - SYMFONY_VERSION=5.2.*
     - SYMFONY_VERSION=5.1.*
     - SYMFONY_VERSION=5.0.*
 
@@ -31,23 +32,23 @@ jobs:
     # Composer validation
     - stage: composer validation
       php: 7.2
-      env: SYMFONY_VERSION=5.1.*
+      env: SYMFONY_VERSION=5.2.*
       script:
         - composer validate --strict --no-check-lock
     # Code style
     - stage: code style
       php: 7.2
-      env: SYMFONY_VERSION=5.1.*
+      env: SYMFONY_VERSION=5.2.*
       script: ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
     # PHPStan analyze
     - stage: static analyze
       php: 7.2
-      env: SYMFONY_VERSION=5.1.*
+      env: SYMFONY_VERSION=5.2.*
       script: ./vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./
     # Code coverage with Codecov.io
     - stage: code coverage
       php: 7.2
-      env: COVERAGE=true SYMFONY_VERSION=5.1.*
+      env: COVERAGE=true SYMFONY_VERSION=5.2.*
       script:
         - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
       after_script:
