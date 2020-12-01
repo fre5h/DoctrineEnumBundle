@@ -10,6 +10,7 @@ php:
   - 7.2
   - 7.3
   - 7.4
+  - 8.0snapshot
 
 env:
   global:
@@ -31,23 +32,23 @@ jobs:
   include:
     # Composer validation
     - stage: composer validation
-      php: 7.2
+      php: 7.4
       env: SYMFONY_VERSION=5.2.*
       script:
         - composer validate --strict --no-check-lock
     # Code style
     - stage: code style
-      php: 7.2
+      php: 7.4
       env: SYMFONY_VERSION=5.2.*
       script: ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
     # PHPStan analyze
     - stage: static analyze
-      php: 7.2
+      php: 7.4
       env: SYMFONY_VERSION=5.2.*
       script: ./vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./
     # Code coverage with Codecov.io
     - stage: code coverage
-      php: 7.2
+      php: 7.4
       env: COVERAGE=true SYMFONY_VERSION=5.2.*
       script:
         - ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
