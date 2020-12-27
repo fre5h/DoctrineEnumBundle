@@ -91,17 +91,13 @@ final class EnumValidatorTest extends TestCase
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraintValidationBuilder
-            ->expects(self::at(0))
+            ->expects(self::exactly(2))
             ->method('setParameter')
-            ->with(self::equalTo('{{ value }}'), self::equalTo('"Pitcher"'))
-            ->willReturnSelf()
-        ;
-
-        $constraintValidationBuilder
-            ->expects(self::at(1))
-            ->method('setParameter')
-            ->with(self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"'))
-            ->willReturnSelf()
+            ->withConsecutive(
+                [self::equalTo('{{ value }}'), self::equalTo('"Pitcher"')],
+                [self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"')]
+            )
+            ->willReturn(self::returnSelf(), self::returnSelf())
         ;
 
         $constraintValidationBuilder
