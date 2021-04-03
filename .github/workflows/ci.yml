@@ -76,7 +76,7 @@ jobs:
         working-directory: './'
 
       - name: 'Run PHPStan'
-        run: './vendor/bin/phpstan analyse -c phpstan.neon ./'
+        run: './vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./'
 
   test:
     needs: composer-install
