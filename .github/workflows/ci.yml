@@ -2,80 +2,47 @@ name: CI
 
 on:
   push:
-    branches:
-      - master
   pull_request:
-    types:
-      - opened
-      - reopened
-      - edited
-      - synchronize
-
-env:
-  key: cache-v0.1
 
 jobs:
   composer-validate:
     runs-on: ubuntu-latest
-    name: "Composer validate"
+    name: "Composer Validate"
     steps:
       - uses: actions/checkout@v1
-      - name: Validate composer.json
+      - name: 'Validate composer.json'
         run: composer validate --no-check-all --strict --no-check-lock
 
   composer-install:
     needs: composer-validate
     runs-on: ubuntu-latest
-    name: "Composer install"
+    name: "Composer Install"
     steps:
       - uses: actions/checkout@v1
-      - name: Install dependencies
+      - name: 'Install dependencies'
         run: composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
   code-style:
     needs: composer-install
-    runs-on: '${{ matrix.operating_system }}'
-    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    name: "Code Style"
     strategy:
       matrix:
-        operating_system: ['ubuntu-latest']
         php_versions:
           - '7.2'
           - '7.3'
           - '7.4'
           - '8.0'
       fail-fast: false
-    env:
-      PHP_CS_FIXER_FUTURE_MODE: '0'
-    name: 'Code Style'
     steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-      - name: 'Setup cache environment'
-        id: cache-env
-        uses: shivammathur/cache-extensions@v1
-        with:
-          php-version: '${{ matrix.php_versions }}'
-          extensions: '${{ env.php_extensions }}'
-          key: '${{ env.key }}'
-      - name: 'Cache extensions'
-        uses: actions/cache@v1
-        with:
-          path: '${{ steps.cache-env.outputs.dir }}'
-          key: '${{ steps.cache-env.outputs.key }}'
-          restore-keys: '${{ steps.cache-env.outputs.key }}'
+      - uses: actions/checkout@v2
       - name: 'Setup PHP'
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php_versions }}
-          extensions: '${{ env.php_extensions }}'
           ini-values: memory_limit=-1
-          tools: pecl, composer
+          tools: composer
           coverage: none
-      - name: 'Setup problem matchers for PHP (aka PHP error logs)'
-        run: 'echo "::add-matcher::${{ runner.tool_cache }}/php.json"'
-      - name: 'Setup problem matchers for PHPUnit'
-        run: 'echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"'
       - name: 'Install PHP dependencies with Composer'
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
