@@ -14,9 +14,9 @@ namespace Fresh\DoctrineEnumBundle\Tests\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\DBAL\Platforms\SQLServerPlatform;
+use Doctrine\DBAL\Platforms\SQLServer2012Platform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
@@ -81,12 +81,12 @@ final class AbstractEnumTypeTest extends TestCase
         ];
         yield 'postgresql' => [
             ['name' => 'position'],
-            new PostgreSqlPlatform(),
+            new PostgreSQL100Platform(),
             "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
         yield 'sql server' => [
             ['name' => 'position'],
-            new SQLServerPlatform(),
+            new SQLServer2012Platform(),
             "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
     }
@@ -118,12 +118,12 @@ final class AbstractEnumTypeTest extends TestCase
         ];
         yield 'postgresql' => [
             ['name' => 'position'],
-            new PostgreSqlPlatform(),
+            new PostgreSQL100Platform(),
             "VARCHAR(255) CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
         ];
         yield 'sql server' => [
             ['name' => 'position'],
-            new SQLServerPlatform(),
+            new SQLServer2012Platform(),
             "VARCHAR(255) CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
         ];
     }
@@ -175,6 +175,7 @@ final class AbstractEnumTypeTest extends TestCase
     public function testAssertValidChoice(): void
     {
         self::assertNull($this->type::assertValidChoice(BasketballPositionType::SMALL_FORWARD));
+        self::assertNull($this->type::assertValidChoice(NumericType::TWO));
     }
 
     public function testInvalidArgumentExceptionInAssertValidChoice(): void
@@ -186,12 +187,14 @@ final class AbstractEnumTypeTest extends TestCase
     public function testGetReadableValue(): void
     {
         self::assertEquals('Small Forward', $this->type::getReadableValue(BasketballPositionType::SMALL_FORWARD));
+        self::assertEquals(2, $this->type::getReadableValue(NumericType::TWO));
     }
 
     public function testGetDefaultValue(): void
     {
         self::assertNull($this->type::getDefaultValue());
         self::assertEquals('pending', Type::getType('TaskStatusType')::getDefaultValue());
+        self::assertEquals(0, Type::getType('NumericType')::getDefaultValue());
     }
 
     public function testInvalidArgumentExceptionInGetReadableValue(): void
@@ -223,8 +226,8 @@ final class AbstractEnumTypeTest extends TestCase
     {
         $testProviders = [
             new SqlitePlatform(),
-            new PostgreSqlPlatform(),
-            new SQLServerPlatform(),
+            new PostgreSQL100Platform(),
+            new SQLServer2012Platform(),
         ];
 
         foreach ($testProviders as $testProvider) {
