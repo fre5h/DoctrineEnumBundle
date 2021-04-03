@@ -89,7 +89,8 @@ jobs:
           ini-values: memory_limit=-1
           tools: composer
           coverage: none
-        env: SYMFONY_VERSION=${{ matrix.symfony_versions }}
+        env:
+          SYMFONY_VERSION: ${{ matrix.symfony_versions }}
       - name: 'Install PHP dependencies with Composer'
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
