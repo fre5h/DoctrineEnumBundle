@@ -27,24 +27,39 @@ jobs:
     runs-on: ubuntu-latest
     name: "Code Style"
     strategy:
-      matrix:
-        php_versions:
-          - '7.2'
-          - '7.3'
-          - '7.4'
-          - '8.0'
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
       - name: 'Setup PHP'
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php_versions }}
+          php-version: 8.0
           ini-values: memory_limit=-1
           tools: composer
           coverage: none
       - name: 'Install PHP dependencies with Composer'
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
-      - name: 'Code Style'
+      - name: 'Run CodeSniffer'
         run: './vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony'
+
+  static-analysis:
+    needs: composer-install
+    runs-on: ubuntu-latest
+    name: "Static Analysis"
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          ini-values: memory_limit=-1
+          tools: composer
+          coverage: none
+      - name: 'Install PHP dependencies with Composer'
+        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+        working-directory: './'
+      - name: 'Run PHPStan'
+        run: './vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./'

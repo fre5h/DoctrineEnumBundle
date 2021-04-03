@@ -21,31 +21,31 @@ env:
     - SYMFONY_VERSION=5.0.*
 
 stages:
-  - composer validation
-  - code style
-  - static analyze
+#  - composer validation
+#  - code style
+#  - static analyze
   - test
   - code coverage
 
 jobs:
   fast_finish: true
   include:
-    # Composer validation
-    - stage: composer validation
-      php: 7.4
-      env: SYMFONY_VERSION=5.2.*
-      script:
-        - composer validate --strict --no-check-lock
-    # Code style
-    - stage: code style
-      php: 7.4
-      env: SYMFONY_VERSION=5.2.*
-      script: ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
-    # PHPStan analyze
-    - stage: static analyze
-      php: 7.4
-      env: SYMFONY_VERSION=5.2.*
-      script: ./vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./
+#    # Composer validation
+#    - stage: composer validation
+#      php: 7.4
+#      env: SYMFONY_VERSION=5.2.*
+#      script:
+#        - composer validate --strict --no-check-lock
+#    # Code style
+#    - stage: code style
+#      php: 7.4
+#      env: SYMFONY_VERSION=5.2.*
+#      script: ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
+#    # PHPStan analyze
+#    - stage: static analyze
+#      php: 7.4
+#      env: SYMFONY_VERSION=5.2.*
+#      script: ./vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./
     # Code coverage with Codecov.io
     - stage: code coverage
       php: 7.4
