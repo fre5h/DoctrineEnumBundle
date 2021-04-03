@@ -77,10 +77,9 @@ jobs:
           - '7.4'
           - '8.0'
         symfony_versions:
-          - '7.2'
-          - '7.3'
-          - '7.4'
-          - '8.0'
+          - '5.0'
+          - '5.1'
+          - '5.2'
     steps:
       - uses: actions/checkout@v2
       - name: 'Setup PHP'
