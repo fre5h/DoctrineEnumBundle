@@ -14,9 +14,9 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\DBAL\Platforms\SQLServerPlatform;
+use Doctrine\DBAL\Platforms\SQLServer2012Platform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 
@@ -103,8 +103,8 @@ abstract class AbstractEnumType extends Type
                 $sqlDeclaration = \sprintf('TEXT CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
 
                 break;
-            case $platform instanceof PostgreSqlPlatform:
-            case $platform instanceof SQLServerPlatform:
+            case $platform instanceof PostgreSQL100Platform:
+            case $platform instanceof SQLServer2012Platform:
                 $sqlDeclaration = \sprintf('VARCHAR(255) CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
 
                 break;
@@ -141,7 +141,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return string[]
+     * @return mixed[]
      */
     public static function getChoices(): array
     {
@@ -153,7 +153,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return string[] Values for the ENUM field
+     * @return mixed[] Values for the ENUM field
      */
     public static function getValues(): array
     {
@@ -180,7 +180,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return string[] Array of values in readable format
+     * @return mixed[] Array of values in readable format
      */
     public static function getReadableValues(): array
     {
@@ -190,27 +190,27 @@ abstract class AbstractEnumType extends Type
     /**
      * Asserts that given choice exists in the array of ENUM values.
      *
-     * @param string $value ENUM value
+     * @param mixed $value ENUM value
      *
      * @throws InvalidArgumentException
      */
-    public static function assertValidChoice(string $value): void
+    public static function assertValidChoice($value): void
     {
         if (!isset(static::$choices[$value])) {
-            throw new InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM type "%s".', $value, static::class));
+            throw new InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM type "%s".', (string) $value, static::class));
         }
     }
 
     /**
      * Get value in readable format.
      *
-     * @param string $value ENUM value
+     * @param mixed $value ENUM value
      *
      * @static
      *
-     * @return string Value in readable format
+     * @return mixed Value in readable format
      */
-    public static function getReadableValue(string $value): string
+    public static function getReadableValue($value)
     {
         static::assertValidChoice($value);
 
@@ -220,13 +220,13 @@ abstract class AbstractEnumType extends Type
     /**
      * Check if some string value exists in the array of ENUM values.
      *
-     * @param string $value ENUM value
+     * @param mixed $value ENUM value
      *
      * @static
      *
      * @return bool
      */
-    public static function isValueExist(string $value): bool
+    public static function isValueExist($value): bool
     {
         return isset(static::$choices[$value]);
     }
@@ -236,9 +236,9 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return string|null Default value for DDL statement
+     * @return mixed|null Default value for DDL statement
      */
-    public static function getDefaultValue(): ?string
+    public static function getDefaultValue()
     {
         return null;
     }

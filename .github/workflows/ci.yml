@@ -1,21 +1,50 @@
 name: CI
 
-on: [pull_request]
+on:
+  push:
+  pull_request:
 
 jobs:
   composer-validate:
     runs-on: ubuntu-latest
+    name: "Composer Validate"
     steps:
       - uses: actions/checkout@v1
-
-      - name: Validate composer.json
-        run: composer validate
+      - name: 'Validate composer.json'
+        run: composer validate --no-check-all --strict --no-check-lock
 
   composer-install:
     needs: composer-validate
     runs-on: ubuntu-latest
+    name: "Composer Install"
     steps:
       - uses: actions/checkout@v1
-
-      - name: Install dependencies
+      - name: 'Install dependencies'
         run: composer install --prefer-dist --no-progress --no-suggest --no-interaction
+
+  code-style:
+    needs: composer-install
+    runs-on: ubuntu-latest
+    name: "Code Style"
+    strategy:
+      matrix:
+        php_versions:
+          - '7.2'
+          - '7.3'
+          - '7.4'
+          - '8.0'
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php_versions }}
+          ini-values: memory_limit=-1
+          tools: composer
+          coverage: none
+      - name: 'Install PHP dependencies with Composer'
+        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+        working-directory: './'
+      - name: 'Code Style'
+        run: './vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony'
