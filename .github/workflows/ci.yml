@@ -86,9 +86,7 @@ jobs:
           php-version: ${{ matrix.php_versions }}
           ini-values: memory_limit=-1
           coverage: pcov
-          tools:
-            - composer
-            - phpunit
+          tools: composer
         env:
           SYMFONY_VERSION: ${{ matrix.symfony_versions }}
       - name: 'Install PHP dependencies with Composer'
