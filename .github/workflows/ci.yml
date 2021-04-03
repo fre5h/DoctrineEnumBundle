@@ -63,3 +63,36 @@ jobs:
         working-directory: './'
       - name: 'Run PHPStan'
         run: './vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./'
+
+  test:
+    needs: composer-install
+    runs-on: ubuntu-latest
+    name: "Tests"
+    strategy:
+      fail-fast: false
+      matrix:
+        php_versions:
+          - '7.2'
+          - '7.3'
+          - '7.4'
+          - '8.0'
+        symfony_versions:
+          - '7.2'
+          - '7.3'
+          - '7.4'
+          - '8.0'
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php_versions }}
+          ini-values: memory_limit=-1
+          tools: composer
+          coverage: none
+        env: SYMFONY_VERSION=${{ matrix.symfony_versions }}
+      - name: 'Install PHP dependencies with Composer'
+        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+        working-directory: './'
+      - name: 'Run PHPUnit'
+        run: './vendor/bin/phpunit -v -c phpunit.xml.dist'
