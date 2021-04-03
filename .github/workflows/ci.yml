@@ -81,16 +81,16 @@ jobs:
   test:
     needs: composer-install
     runs-on: ubuntu-latest
-    name: "Tests"
+    name: "Tests (PHP ${{ matrix.php-version }} / Symfony ${{ matrix.symfony-version }})"
     strategy:
       fail-fast: false
       matrix:
-        php_versions:
+        php-version:
           - 7.2
           - 7.3
           - 7.4
           - 8.0
-        symfony_versions:
+        symfony-version:
           - 5.0
           - 5.1
           - 5.2
@@ -101,12 +101,12 @@ jobs:
       - name: 'Setup PHP'
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php_versions }}
+          php-version: ${{ matrix.php-version }}
           ini-values: memory_limit=-1
           coverage: pcov
           tools: composer:v2
         env:
-          SYMFONY_VERSION: ${{ matrix.symfony_versions }}
+          SYMFONY_VERSION: ${{ matrix.symfony-version }}
 
       - name: 'Install PHP dependencies with Composer'
         run: composer install --prefer-dist --no-progress --optimize-autoloader
