@@ -179,7 +179,9 @@ final class AbstractEnumTypeTest extends TestCase
 
     public function testAssertValidChoiceNumeric(): void
     {
+        $this->type = Type::getType('NumericType');
         self::assertNull($this->type::assertValidChoice(NumericType::TWO));
+        $this->type = Type::getType('BasketballPositionType');
     }
 
     public function testInvalidArgumentExceptionInAssertValidChoice(): void
@@ -195,7 +197,9 @@ final class AbstractEnumTypeTest extends TestCase
 
     public function testGetReadableValueNumeric(): void
     {
+        $this->type = Type::getType('NumericType');
         self::assertEquals(2, $this->type::getReadableValue(NumericType::TWO));
+        $this->type = Type::getType('BasketballPositionType');
     }
 
     public function testGetDefaultValue(): void

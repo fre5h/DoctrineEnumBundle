@@ -35,7 +35,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
-        "escapestudios/symfony2-coding-standard": "^3.11",
+        "escapestudios/symfony2-coding-standard": "^3.12",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine":"^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
