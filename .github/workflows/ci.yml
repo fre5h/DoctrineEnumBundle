@@ -36,7 +36,6 @@ jobs:
           php-version: 8.0
           ini-values: memory_limit=-1
           tools: composer
-          coverage: none
       - name: 'Install PHP dependencies with Composer'
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
@@ -57,12 +56,11 @@ jobs:
           php-version: 8.0
           ini-values: memory_limit=-1
           tools: composer
-          coverage: none
       - name: 'Install PHP dependencies with Composer'
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
       - name: 'Run PHPStan'
-        run: './vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./'
+        run: './vendor/bin/phpstan analyse -c phpstan.neon ./'
 
   test:
     needs: composer-install
@@ -72,14 +70,14 @@ jobs:
       fail-fast: false
       matrix:
         php_versions:
-          - '7.2'
-          - '7.3'
-          - '7.4'
-          - '8.0'
+          - 7.2
+          - 7.3
+          - 7.4
+          - 8.0
         symfony_versions:
-          - '5.0'
-          - '5.1'
-          - '5.2'
+          - 5.0
+          - 5.1
+          - 5.2
     steps:
       - uses: actions/checkout@v2
       - name: 'Setup PHP'
@@ -87,8 +85,10 @@ jobs:
         with:
           php-version: ${{ matrix.php_versions }}
           ini-values: memory_limit=-1
-          tools: composer
-          coverage: none
+          coverage: pcov
+          tools:
+            - composer
+            - phpunit
         env:
           SYMFONY_VERSION: ${{ matrix.symfony_versions }}
       - name: 'Install PHP dependencies with Composer'
