@@ -1,0 +1,116 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  composer-validate:
+    runs-on: ubuntu-latest
+    name: "Composer Validate"
+    steps:
+      - name: 'Checkout Code'
+        uses: actions/checkout@v2
+
+      - name: 'Validate composer.json'
+        run: composer validate --no-check-all --strict --no-check-lock
+
+  composer-install:
+    needs: composer-validate
+    runs-on: ubuntu-latest
+    name: "Composer Install"
+    steps:
+      - name: 'Checkout Code'
+        uses: actions/checkout@v2
+
+      - name: 'Install Dependencies'
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+  code-style:
+    needs: composer-install
+    runs-on: ubuntu-latest
+    name: "Code Style"
+    strategy:
+      fail-fast: false
+    steps:
+      - name: 'Checkout Code'
+        uses: actions/checkout@v2
+
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          ini-values: memory_limit=-1
+          coverage: none
+          tools: composer:v2
+
+      - name: 'Install PHP dependencies with Composer'
+        run: composer install --prefer-dist --no-progress --optimize-autoloader
+        working-directory: './'
+
+      - name: 'Run CodeSniffer'
+        run: './vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony'
+
+  static-analysis:
+    needs: composer-install
+    runs-on: ubuntu-latest
+    name: "Static Analysis"
+    strategy:
+      fail-fast: false
+    steps:
+      - name: 'Checkout Code'
+        uses: actions/checkout@v2
+
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          ini-values: memory_limit=-1
+          coverage: none
+          tools: composer:v2
+
+      - name: 'Install PHP dependencies with Composer'
+        run: composer install --prefer-dist --no-progress --optimize-autoloader
+        working-directory: './'
+
+      - name: 'Run PHPStan'
+        run: './vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./'
+
+  test:
+    needs: composer-install
+    runs-on: ubuntu-latest
+    name: "Tests (PHP ${{ matrix.php-version }} / Symfony ${{ matrix.symfony-version }})"
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '7.2'
+          - '7.3'
+          - '7.4'
+          - '8.0'
+        symfony-version:
+          - '5.0'
+          - '5.1'
+          - '5.2'
+    steps:
+      - name: 'Checkout Code'
+        uses: actions/checkout@v2
+
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          ini-values: memory_limit=-1
+          coverage: pcov
+          tools: composer:v2
+        env:
+          SYMFONY_VERSION: ${{ matrix.symfony-version }}
+
+      - name: 'Install PHP dependencies with Composer'
+        run: composer install --prefer-dist --no-progress --optimize-autoloader
+        working-directory: './'
+
+      - name: 'Run PHPUnit'
+        run: './vendor/bin/phpunit -v -c phpunit.xml.dist'

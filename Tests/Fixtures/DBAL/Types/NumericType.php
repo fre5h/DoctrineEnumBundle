@@ -40,4 +40,12 @@ final class NumericType extends AbstractEnumType
         self::THREE => 3,
         self::FOUR => 4,
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getDefaultValue(): ?int
+    {
+        return self::ZERO;
+    }
 }
