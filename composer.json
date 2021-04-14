@@ -22,7 +22,7 @@
         "issues": "https://github.com/fre5h/DoctrineEnumBundle/issues"
     },
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.3.0",
         "doctrine/common": "^2.11 || ^3.0",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/orm": "^2.7",
@@ -40,7 +40,7 @@
         "phpstan/phpstan-doctrine":"^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
         "phpstan/phpstan-symfony": "^0.12",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "slam/phpstan-extensions": "^5.0",
         "symfony/form": "^5.0",
         "symfony/yaml": "^5.0"
