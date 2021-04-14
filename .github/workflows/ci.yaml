@@ -51,7 +51,7 @@ jobs:
         working-directory: './'
 
       - name: 'Run CodeSniffer'
-        run: './vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony'
+        run: ./vendor/bin/phpcs ./ -p --encoding=utf-8 --extensions=php --ignore="vendor|Tests" --standard=./vendor/escapestudios/symfony2-coding-standard/Symfony
 
   static-analysis:
     needs: composer-install
@@ -76,7 +76,7 @@ jobs:
         working-directory: './'
 
       - name: 'Run PHPStan'
-        run: './vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./'
+        run: ./vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./
 
   test:
     needs: composer-install
@@ -103,7 +103,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           ini-values: memory_limit=-1
-          coverage: pcov
+          coverage: none
           tools: composer:v2
         env:
           SYMFONY_VERSION: ${{ matrix.symfony-version }}
@@ -113,4 +113,39 @@ jobs:
         working-directory: './'
 
       - name: 'Run PHPUnit'
-        run: './vendor/bin/phpunit -v -c phpunit.xml.dist'
+        run: ./vendor/bin/phpunit -v -c phpunit.xml.dist
+
+  code-coverage:
+    needs: test
+    runs-on: ubuntu-latest
+    name: "Code Coverage"
+    strategy:
+      fail-fast: false
+    steps:
+      - name: 'Checkout Code'
+        uses: actions/checkout@v2
+
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          ini-values: memory_limit=-1
+          coverage: pcov
+          tools: composer:v2
+
+      - name: 'Install PHP dependencies with Composer'
+        run: composer install --prefer-dist --no-progress --optimize-autoloader
+        working-directory: './'
+
+      - name: 'Run PHPUnit with Code Coverage'
+        run: ./vendor/bin/phpunit -v -c phpunit.xml.dist --coverage-clover=coverage.xml
+
+      - name: 'Download Coverage Files'
+        uses: actions/download-artifact@v2
+        with:
+          path: reports
+
+      - name: 'Upload to Codecov'
+        uses: codecov/codecov-action@v1
+        with:
+          directory: reports
