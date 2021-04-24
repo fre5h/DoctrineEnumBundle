@@ -3,7 +3,7 @@
 📦 Provides support of **ENUM type** for Doctrine in Symfony applications.
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/fre5h/DoctrineEnumBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
-[![Build Status](https://img.shields.io/travis/fre5h/DoctrineEnumBundle/master.svg?style=flat-square)](https://travis-ci.com/fre5h/DoctrineEnumBundle)
+[![Build Status](https://img.shields.io/github/workflow/status/fre5h/DoctrineEnumBundle/CI/main?style=flat-square)](https://github.com/fre5h/DoctrineEnumBundle/actions?query=workflow%3ACI+branch%3Amain+)
 [![CodeCov](https://img.shields.io/codecov/c/github/fre5h/DoctrineEnumBundle.svg?style=flat-square)](https://codecov.io/github/fre5h/DoctrineEnumBundle)
 [![License](https://img.shields.io/packagist/l/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Latest Stable Version](https://img.shields.io/packagist/v/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
@@ -18,13 +18,13 @@
 
 ## Installation 🌱
 
-```composer req fresh/doctrine-enum-bundle='~7.1'```
+```composer req fresh/doctrine-enum-bundle='~7.3'```
 
 ##### Choose the version you need
 
 | Bundle Version (X.Y.Z) | PHP              | Symfony          | Doctrine Bundle    | Comment                   |
 |:----------------------:|:----------------:|:----------------:|:------------------:|:--------------------------|
-| `7.2.*`                | `>= 7.3.0`       | `>= 5.0`         | `>= 2.1`           | **Current version**       |
+| `7.3.*`                | `>= 7.3.0`       | `>= 5.0`         | `>= 2.1`           | **Current version**       |
 | `6.6.*`                | `>= 7.1.3`       | `4.3, 4.4`       | `>= 2.0`           | Previous version          |
 
 #### Check the `config/bundles.php` file
