@@ -18,13 +18,13 @@
 
 ## Installation 🌱
 
-```composer req fresh/doctrine-enum-bundle='~7.1'```
+```composer req fresh/doctrine-enum-bundle='~7.3'```
 
 ##### Choose the version you need
 
 | Bundle Version (X.Y.Z) | PHP              | Symfony          | Doctrine Bundle    | Comment                   |
 |:----------------------:|:----------------:|:----------------:|:------------------:|:--------------------------|
-| `7.2.*`                | `>= 7.3.0`       | `>= 5.0`         | `>= 2.1`           | **Current version**       |
+| `7.3.*`                | `>= 7.3.0`       | `>= 5.0`         | `>= 2.1`           | **Current version**       |
 | `6.6.*`                | `>= 7.1.3`       | `4.3, 4.4`       | `>= 2.0`           | Previous version          |
 
 #### Check the `config/bundles.php` file
