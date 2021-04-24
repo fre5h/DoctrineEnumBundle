@@ -34,7 +34,8 @@ final class RegisterEnumTypePassTest extends TestCase
     /** @var ManagerRegistry|MockObject */
     private $managerRegistry;
 
-    private RegisterEnumTypePass $registerEnumTypePass;
+    /** @var RegisterEnumTypePass */
+    private $registerEnumTypePass;
 
     protected function setUp(): void
     {
