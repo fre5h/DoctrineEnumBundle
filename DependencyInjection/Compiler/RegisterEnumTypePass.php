@@ -35,7 +35,7 @@ final class RegisterEnumTypePass implements CompilerPassInterface
             throw new InvalidArgumentException('Service "doctrine" is missed in container');
         }
 
-        /** @see \Doctrine\Bundle\DoctrineBundle\ConnectionFactory::createConnection */
+        /* @see \Doctrine\Bundle\DoctrineBundle\ConnectionFactory::createConnection */
         foreach ($doctrine->getConnectionNames() as $connectionName) {
             $definition = $container->getDefinition($connectionName);
             $mappingTypes = $definition->getArgument(3);
