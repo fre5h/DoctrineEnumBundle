@@ -12,9 +12,8 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle;
 
-use Doctrine\Persistence\ManagerRegistry;
-use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Fresh\DoctrineEnumBundle\DependencyInjection\Compiler\RegisterEnumTypePass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -26,29 +25,11 @@ class FreshDoctrineEnumBundle extends Bundle
 {
     /**
      * {@inheritdoc}
-     *
-     * @throws InvalidArgumentException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
-     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
      */
-    public function boot(): void
+    public function build(ContainerBuilder $container): void
     {
-        parent::boot();
+        parent::build($container);
 
-        $doctrine = $this->container->get('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE);
-        if (!$doctrine instanceof ManagerRegistry) {
-            throw new InvalidArgumentException('Service "doctrine" is missed in container');
-        }
-
-        /** @var \Doctrine\DBAL\Connection $connection */
-        foreach ($doctrine->getConnections() as $connection) {
-            /** @var \Doctrine\DBAL\Platforms\AbstractPlatform $databasePlatform */
-            $databasePlatform = $connection->getDatabasePlatform();
-
-            if (!$databasePlatform->hasDoctrineTypeMappingFor('enum') || 'string' !== $databasePlatform->getDoctrineTypeMapping('enum')) {
-                $databasePlatform->registerDoctrineTypeMapping('enum', 'string');
-            }
-        }
+        $container->addCompilerPass(new RegisterEnumTypePass());
     }
 }
