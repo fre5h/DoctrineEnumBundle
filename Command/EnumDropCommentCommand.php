@@ -46,8 +46,9 @@ final class EnumDropCommentCommand extends Command
     /**
      * @param EntityManagerInterface $em
      * @param mixed[]                $registeredTypes
+     * @param string|null            $name
      */
-    public function __construct(EntityManagerInterface $em, array $registeredTypes, string $name = null)
+    public function __construct(EntityManagerInterface $em, array $registeredTypes, ?string $name = null)
     {
         parent::__construct($name);
 

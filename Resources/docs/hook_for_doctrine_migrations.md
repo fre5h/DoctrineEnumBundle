@@ -24,6 +24,7 @@ You should repeat these steps after each update of your custom ENUM type!
 ### Console command for dropping comments
 
 This bundle provides a special console command that can help you easily drop comments for selected ENUM type.
+So you don't need to do this manually in DB.
 
 ```bash
 $ bin/console doctrine:enum:drop-comment BasketballPositionType
