@@ -60,7 +60,6 @@ final class EnumDropCommentCommand extends Command
         parent::__construct($name);
 
         $this->registry = $registry;
-        $this->em = $this->registry->getManager(); // Get default manager
 
         foreach ($registeredTypes as $type => $details) {
             $registeredEnumTypeFQCN = $details['class'];
@@ -120,13 +119,9 @@ HELP
 
         $this->enumType = $input->getArgument('enumType');
 
-        $emName = $input->getOption('em');
-        // Update used entity manager with specified from command
-        if (null !== $emName) {
-            $em = $this->registry->getManager($emName);
-            if ($em instanceof EntityManagerInterface) {
-                $this->em = $em;
-            }
+        $em = $this->registry->getManager($input->getOption('em'));
+        if ($em instanceof EntityManagerInterface) {
+            $this->em = $em;
         }
     }
 
