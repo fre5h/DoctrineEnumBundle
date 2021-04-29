@@ -45,7 +45,7 @@ final class EnumDropCommentCommand extends Command
     /** @var string[] */
     private $registeredEnumTypes = [];
 
-    /** @var string */
+    /** @var string|mixed */
     private $enumType;
 
     /**
@@ -119,7 +119,7 @@ HELP
 
         $this->enumType = $input->getArgument('enumType');
 
-        $em = $this->registry->getManager($input->getOption('em'));
+        $em = $this->registry->getManager((string) $input->getOption('em'));
         if ($em instanceof EntityManagerInterface) {
             $this->em = $em;
         }
