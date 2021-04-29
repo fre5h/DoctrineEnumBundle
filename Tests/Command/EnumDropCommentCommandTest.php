@@ -15,9 +15,12 @@ namespace Fresh\DoctrineEnumBundle\Tests\Command;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\Command\EnumDropCommentCommand;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\TaskStatusType;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -42,6 +45,9 @@ final class EnumDropCommentCommandTest extends TestCase
     /** @var Command */
     private $command;
 
+    /** @var ClassMetadataFactory */
+    private $metadataFactory;
+
     /** @var Application */
     private $application;
 
@@ -52,9 +58,11 @@ final class EnumDropCommentCommandTest extends TestCase
     {
         $this->connection = $this->createMock(Connection::class);
         $this->platform = $this->createMock(AbstractPlatform::class);
+        $this->metadataFactory = $this->createMock(ClassMetadataFactory::class);
 
         $this->em = $this->createMock(EntityManagerInterface::class);
         $this->em->method('getConnection')->willReturn($this->connection);
+        $this->em->method('getMetadataFactory')->willReturn($this->metadataFactory);
 
         $this->registry = $this->createMock(ManagerRegistry::class);
         $this->registry->method('getManager')->willReturn($this->em);
@@ -62,6 +70,7 @@ final class EnumDropCommentCommandTest extends TestCase
         $command = new EnumDropCommentCommand(
             $this->registry,
             [
+                'BasketballPositionType' => ['class' => BasketballPositionType::class],
                 'TaskStatusType' => ['class' => TaskStatusType::class],
             ],
             'doctrine:enum:drop-comment'
@@ -81,6 +90,7 @@ final class EnumDropCommentCommandTest extends TestCase
             $this->registry,
             $this->connection,
             $this->platform,
+            $this->metadataFactory,
             $this->command,
             $this->application,
             $this->commandTester,
@@ -189,5 +199,74 @@ final class EnumDropCommentCommandTest extends TestCase
 
         $output = $this->commandTester->getDisplay();
         self::assertStringContainsString('test', $output);
+    }
+
+    public function testSuccessfulExecutionWithNoMetadata(): void
+    {
+        $this->connection
+            ->expects(self::once())
+            ->method('getDatabasePlatform')
+            ->willReturn($this->platform)
+        ;
+
+        $this->metadataFactory
+            ->expects(self::once())
+            ->method('getAllMetadata')
+            ->willReturn([])
+        ;
+
+        $result = $this->commandTester->execute(
+            [
+                'command' => $this->command->getName(),
+                'enumType' => 'TaskStatusType',
+                '--em' => 'default',
+            ]
+        );
+        self::assertSame(0, $result);
+
+        $output = $this->commandTester->getDisplay();
+        self::assertStringContainsString('Dropping comments for TaskStatusType type...', $output);
+        self::assertStringContainsString('NO METADATA FOUND', $output);
+    }
+
+    public function testSuccessfulExecutionWithMetadata(): void
+    {
+        $this->connection
+            ->expects(self::once())
+            ->method('getDatabasePlatform')
+            ->willReturn($this->platform)
+        ;
+
+        $metadata = $this->createMock(ClassMetadata::class);
+        $this->metadataFactory
+            ->expects(self::once())
+            ->method('getAllMetadata')
+            ->willReturn([$metadata])
+        ;
+
+        $metadata->expects(self::once())->method('getName')->willReturn('Task');
+        $metadata->expects(self::once())->method('getTableName')->willReturn('tasks');
+        $metadata->expects(self::once())->method('getFieldNames')->willReturn(['status']);
+        $metadata->expects(self::once())->method('getTypeOfField')->with('status')->willReturn('TaskStatusType');
+        $metadata->expects(self::once())->method('getFieldMapping')->with('status')->willReturn(['columnName' => 'task_column_name']);
+
+        $this->platform->expects(self::once())->method('getCommentOnColumnSQL')->with('tasks', 'task_column_name', null)->willReturn('test SQL');
+
+        $this->connection->expects(self::once())->method('executeQuery')->with('test SQL');
+
+        $result = $this->commandTester->execute(
+            [
+                'command' => $this->command->getName(),
+                'enumType' => 'TaskStatusType',
+                '--em' => 'default',
+            ]
+        );
+        self::assertSame(0, $result);
+
+        $output = $this->commandTester->getDisplay();
+        self::assertStringContainsString('Dropping comments for TaskStatusType type...', $output);
+        self::assertStringContainsString(' * Task::$status   Dropped ✔', $output);
+        self::assertStringContainsString('TOTAL: 1', $output);
+        self::assertStringContainsString('DONE', $output);
     }
 }

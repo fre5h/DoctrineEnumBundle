@@ -146,8 +146,6 @@ HELP
                 throw new InvalidArgumentException('Argument "enumType" is not a registered ENUM type.', 2);
             }
 
-            $io->title(\sprintf('Dropping comments for <info>%s</info> type...', $this->enumType));
-
             $connection = $this->em->getConnection();
 
             $platform = $connection->getDatabasePlatform();
@@ -155,19 +153,21 @@ HELP
                 throw new RuntimeException('Missing database platform for connection.', 3);
             }
 
+            $io->title(\sprintf('Dropping comments for <info>%s</info> type...', $this->enumType));
+
             /** @var \Doctrine\ORM\Mapping\ClassMetadata[] $allMetadata */
             $allMetadata = $this->em->getMetadataFactory()->getAllMetadata();
 
             if (!empty($allMetadata)) {
                 $count = 0;
 
-                foreach ($allMetadata as $entityMetadata) {
-                    $entityName = $entityMetadata->getName();
-                    $tableName = $entityMetadata->getTableName();
+                foreach ($allMetadata as $metadata) {
+                    $entityName = $metadata->getName();
+                    $tableName = $metadata->getTableName();
 
-                    foreach ($entityMetadata->getFieldNames() as $fieldName) {
-                        if ($entityMetadata->getTypeOfField($fieldName) === $this->enumType) {
-                            $fieldMappingDetails = $entityMetadata->getFieldMapping($fieldName);
+                    foreach ($metadata->getFieldNames() as $fieldName) {
+                        if ($metadata->getTypeOfField($fieldName) === $this->enumType) {
+                            $fieldMappingDetails = $metadata->getFieldMapping($fieldName);
 
                             $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
                             $connection->executeQuery($sql);
