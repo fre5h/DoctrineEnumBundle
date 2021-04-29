@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Tests\DependencyInjection;
 
+use Fresh\DoctrineEnumBundle\Command\EnumDropCommentCommand;
 use Fresh\DoctrineEnumBundle\DependencyInjection\FreshDoctrineEnumExtension;
 use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
@@ -57,15 +58,18 @@ final class FreshDoctrineEnumExtensionTest extends TestCase
         self::assertArrayHasKey(EnumTypeGuesser::class, $this->container->getRemovedIds());
         self::assertArrayHasKey(ReadableEnumValueTwigExtension::class, $this->container->getRemovedIds());
         self::assertArrayHasKey(EnumConstantTwigExtension::class, $this->container->getRemovedIds());
+        self::assertArrayHasKey(EnumDropCommentCommand::class, $this->container->getRemovedIds());
 
         self::assertArrayNotHasKey(EnumTypeGuesser::class, $this->container->getDefinitions());
         self::assertArrayNotHasKey(ReadableEnumValueTwigExtension::class, $this->container->getDefinitions());
         self::assertArrayNotHasKey(EnumConstantTwigExtension::class, $this->container->getDefinitions());
+        self::assertArrayNotHasKey(EnumDropCommentCommand::class, $this->container->getDefinitions());
 
         $this->expectException(ServiceNotFoundException::class);
 
         $this->container->get(EnumTypeGuesser::class);
         $this->container->get(ReadableEnumValueTwigExtension::class);
         $this->container->get(EnumConstantTwigExtension::class);
+        $this->container->get(EnumDropCommentCommand::class);
     }
 }
