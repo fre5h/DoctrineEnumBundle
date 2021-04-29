@@ -23,7 +23,7 @@ You should repeat these steps after each update of your custom ENUM type!
 
 ### Console command for dropping comments
 
-This bundle provides a special console command that can help you easily drop comments for selected ENUM type.
+This bundle provides a special console command `doctrine:enum:drop-comment` that can help you easily drop comments for selected ENUM type.
 So you don't need to do this manually in DB.
 
 ```bash
