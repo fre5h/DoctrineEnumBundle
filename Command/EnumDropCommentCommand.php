@@ -14,6 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Command;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
@@ -22,6 +23,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -34,6 +36,9 @@ final class EnumDropCommentCommand extends Command
 {
     protected static $defaultName = 'doctrine:enum:drop-comment';
 
+    /** @var ManagerRegistry */
+    private $registry;
+
     /** @var EntityManagerInterface */
     private $em;
 
@@ -44,15 +49,18 @@ final class EnumDropCommentCommand extends Command
     private $enumType;
 
     /**
-     * @param EntityManagerInterface $em
-     * @param mixed[]                $registeredTypes
-     * @param string|null            $name
+     * @param ManagerRegistry $registry
+     * @param mixed[]         $registeredTypes
+     * @param string|null     $name
+     *
+     * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      */
-    public function __construct(EntityManagerInterface $em, array $registeredTypes, ?string $name = null)
+    public function __construct(ManagerRegistry $registry, array $registeredTypes, ?string $name = null)
     {
         parent::__construct($name);
 
-        $this->em = $em;
+        $this->registry = $registry;
+        $this->em = $this->registry->getManager(); // Get default manager
 
         foreach ($registeredTypes as $type => $details) {
             $registeredEnumTypeFQCN = $details['class'];
@@ -67,6 +75,7 @@ final class EnumDropCommentCommand extends Command
                 throw new EnumTypeIsRegisteredButClassDoesNotExistException($exceptionMessage);
             }
 
+            // Filter only ENUM types
             if (\is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
                 $this->registeredEnumTypes[$type] = $details['class'];
             }
@@ -83,6 +92,7 @@ final class EnumDropCommentCommand extends Command
             ->setDefinition(
                 new InputDefinition([
                     new InputArgument('enumType', InputArgument::REQUIRED, 'Registered ENUM type'),
+                    new InputOption('em', null, InputOption::VALUE_OPTIONAL, 'The entity manager to use for this command'),
                 ])
             )
             ->setHelp(
@@ -90,6 +100,10 @@ final class EnumDropCommentCommand extends Command
 The <info>%command.name%</info> command allows to drop comment in DB for the column of registered ENUM type:
 
 <info>%command.full_name%</info> <comment>CustomType</comment>
+
+You can also set different name of <fg=cyan>entity manager</>, if you have more than one in your project:
+
+<info>%command.full_name%</info> <comment>CustomType</comment> --em=<fg=cyan>custom</>
 
 Read more at https://github.com/fre5h/DoctrineEnumBundle/blob/main/Resources/docs/hook_for_doctrine_migrations.md
 HELP
@@ -104,22 +118,15 @@ HELP
     {
         parent::initialize($input, $output);
 
-        $enumType = $input->getArgument('enumType');
+        $this->enumType = $input->getArgument('enumType');
 
-        // @todo Allow to select entity manager
-
-        if (!\is_string($enumType)) {
-            throw new InvalidArgumentException('Argument "enumType" is not a string.');
-        }
-
-        try {
-            if (!isset($this->registeredEnumTypes[$enumType])) {
-                throw new InvalidArgumentException('Argument "enumType" is not a registered ENUM type.');
+        $emName = $input->getOption('em');
+        // Update used entity manager with specified from command
+        if (null !== $emName) {
+            $em = $this->registry->getManager($emName);
+            if ($em instanceof EntityManagerInterface) {
+                $this->em = $em;
             }
-
-            $this->enumType = $enumType;
-        } catch (\Throwable $e) {
-            throw new InvalidArgumentException($e->getMessage());
         }
     }
 
@@ -131,13 +138,21 @@ HELP
         $io = new SymfonyStyle($input, $output);
 
         try {
+            if (!\is_string($this->enumType)) {
+                throw new InvalidArgumentException('Argument "enumType" is not a string.', 1);
+            }
+
+            if (!isset($this->registeredEnumTypes[$this->enumType])) {
+                throw new InvalidArgumentException('Argument "enumType" is not a registered ENUM type.', 2);
+            }
+
             $io->title(\sprintf('Dropping comments for <info>%s</info> type...', $this->enumType));
 
             $connection = $this->em->getConnection();
 
             $platform = $connection->getDatabasePlatform();
             if (!$platform instanceof AbstractPlatform) {
-                throw new RuntimeException('Missing database platform for connection');
+                throw new RuntimeException('Missing database platform for connection.', 3);
             }
 
             /** @var \Doctrine\ORM\Mapping\ClassMetadata[] $allMetadata */
@@ -157,7 +172,7 @@ HELP
                             $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
                             $connection->executeQuery($sql);
 
-                            $io->text(\sprintf(' * %s::$%s   <info>Dropped</info>', $entityName, $fieldName));
+                            $io->text(\sprintf(' * %s::$%s   <info>Dropped ✔</info>', $entityName, $fieldName));
 
                             ++$count;
                         }
