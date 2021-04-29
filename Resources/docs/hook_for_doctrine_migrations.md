@@ -21,6 +21,24 @@ Fortunately you can do simple **hook** =) Access your database and delete commen
 
 You should repeat these steps after each update of your custom ENUM type!
 
+### Console command for dropping comments
+
+This bundle provides a special console command `doctrine:enum:drop-comment` that can help you easily drop comments for selected ENUM type.
+So you don't need to do this manually in DB.
+
+```bash
+$ bin/console doctrine:enum:drop-comment BasketballPositionType
+
+Dropping comments for BasketballPositionType type...
+==========================================
+
+  * App\Entity\Player::$position   Dropped
+
+ TOTAL: 1
+
+ [OK] DONE   
+```
+
 ---
 
 ### More features
