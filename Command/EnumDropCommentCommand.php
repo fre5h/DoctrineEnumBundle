@@ -119,7 +119,13 @@ HELP
 
         $this->enumType = $input->getArgument('enumType');
 
-        $em = $this->registry->getManager((string) $input->getOption('em'));
+        $emName = null;
+        $emOption = $input->getOption('em');
+        if (\is_string($emOption)) {
+            $emName = $emOption;
+        }
+
+        $em = $this->registry->getManager($emName);
         if ($em instanceof EntityManagerInterface) {
             $this->em = $em;
         }

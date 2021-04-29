@@ -15,6 +15,7 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
+use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Platforms\SQLServer2012Platform;
 use Doctrine\DBAL\Types\Type;
@@ -103,6 +104,7 @@ abstract class AbstractEnumType extends Type
                 $sqlDeclaration = \sprintf('TEXT CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
 
                 break;
+            case $platform instanceof PostgreSQL94Platform:
             case $platform instanceof PostgreSQL100Platform:
             case $platform instanceof SQLServer2012Platform:
                 $sqlDeclaration = \sprintf('VARCHAR(255) CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
