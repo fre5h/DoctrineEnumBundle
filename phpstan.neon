@@ -11,3 +11,4 @@ parameters:
         - '%rootDir%/../../../vendor/*'
     fileExtensions:
         - 'php'
+    checkGenericClassInNonGenericObjectType: false
