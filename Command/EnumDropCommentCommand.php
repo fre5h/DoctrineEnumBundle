@@ -169,7 +169,7 @@ HELP
                     foreach ($metadata->getFieldNames() as $fieldName) {
                         if ($metadata->getTypeOfField($fieldName) === $this->enumType) {
                             $fieldMappingDetails = $metadata->getFieldMapping($fieldName);
-                            
+
                             if (isset($fieldMappingDetails['columnName'])) {
                                 $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
                                 $connection->executeQuery($sql);
