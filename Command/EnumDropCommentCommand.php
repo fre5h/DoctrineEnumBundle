@@ -36,6 +36,9 @@ final class EnumDropCommentCommand extends Command
 {
     protected static $defaultName = 'doctrine:enum:drop-comment';
 
+    /** @var string */
+    protected static $defaultDescription = 'Drop comment in DB for the column of registered ENUM type';
+
     /** @var ManagerRegistry */
     private $registry;
 
@@ -87,7 +90,7 @@ final class EnumDropCommentCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Drop comment in DB for the column of registered ENUM type')
+            ->setDescription(self::$defaultDescription)
             ->setDefinition(
                 new InputDefinition([
                     new InputArgument('enumType', InputArgument::REQUIRED, 'Registered ENUM type'),
@@ -170,12 +173,14 @@ HELP
                         if ($metadata->getTypeOfField($fieldName) === $this->enumType) {
                             $fieldMappingDetails = $metadata->getFieldMapping($fieldName);
 
-                            $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
-                            $connection->executeQuery($sql);
+                            if (isset($fieldMappingDetails['columnName'])) {
+                                $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
+                                $connection->executeQuery($sql);
 
-                            $io->text(\sprintf(' * %s::$%s   <info>Dropped ✔</info>', $entityName, $fieldName));
+                                $io->text(\sprintf(' * %s::$%s   <info>Dropped ✔</info>', $entityName, $fieldName));
 
-                            ++$count;
+                                ++$count;
+                            }
                         }
                     }
                 }
