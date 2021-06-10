@@ -16,6 +16,8 @@ namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
  * InheritedType.
  *
  * @author Arturs Vonda <github@artursvonda.lv>
+ *
+ * @extends AbstractParentType<string>
  */
 final class InheritedType extends AbstractParentType
 {

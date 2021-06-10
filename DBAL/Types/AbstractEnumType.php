@@ -29,6 +29,8 @@ use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
  * @author Artem Henvald <genvaldartem@gmail.com>
  * @author Ben Davies <ben.davies@gmail.com>
  * @author Jaik Dean <jaik@fluoresce.co>
+ *
+ * @template T of int|string
  */
 abstract class AbstractEnumType extends Type
 {
@@ -36,7 +38,7 @@ abstract class AbstractEnumType extends Type
     protected $name = '';
 
     /**
-     * @var array|mixed[] Array of ENUM Values, where ENUM values are keys and their readable versions are values
+     * @var array<T, T> Array of ENUM Values, where ENUM values are keys and their readable versions are values
      *
      * @static
      */
@@ -46,6 +48,8 @@ abstract class AbstractEnumType extends Type
      * {@inheritdoc}
      *
      * @throws InvalidArgumentException
+     *
+     * @return T|null
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
@@ -62,6 +66,8 @@ abstract class AbstractEnumType extends Type
 
     /**
      * {@inheritdoc}
+     *
+     * @return T|null
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
@@ -155,7 +161,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return mixed[] Values for the ENUM field
+     * @return list<T> Values for the ENUM field
      */
     public static function getValues(): array
     {
@@ -167,7 +173,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return int|string
+     * @return T
      */
     public static function getRandomValue()
     {
@@ -182,7 +188,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return mixed[] Array of values in readable format
+     * @return array<T, T> Array of values in readable format
      */
     public static function getReadableValues(): array
     {
@@ -192,7 +198,7 @@ abstract class AbstractEnumType extends Type
     /**
      * Asserts that given choice exists in the array of ENUM values.
      *
-     * @param mixed $value ENUM value
+     * @param T $value ENUM value
      *
      * @throws InvalidArgumentException
      */
@@ -206,11 +212,11 @@ abstract class AbstractEnumType extends Type
     /**
      * Get value in readable format.
      *
-     * @param mixed $value ENUM value
+     * @param T $value ENUM value
      *
      * @static
      *
-     * @return mixed Value in readable format
+     * @return T Value in readable format
      */
     public static function getReadableValue($value)
     {
@@ -220,9 +226,9 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-     * Check if some string value exists in the array of ENUM values.
+     * Check if some value exists in the array of ENUM values.
      *
-     * @param mixed $value ENUM value
+     * @param T $value ENUM value
      *
      * @static
      *

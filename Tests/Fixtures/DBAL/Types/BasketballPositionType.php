@@ -18,6 +18,8 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  * BasketballPositionType.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
+ *
+ * @extends AbstractEnumType<string>
  */
 final class BasketballPositionType extends AbstractEnumType
 {
