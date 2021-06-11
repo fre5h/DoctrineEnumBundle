@@ -36,7 +36,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
 
     /**
      * @param int|string|null $enumValue
-     * @param string|null $enumType
+     * @param string|null     $enumType
      *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
