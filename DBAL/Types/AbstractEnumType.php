@@ -30,7 +30,7 @@ use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
  * @author Ben Davies <ben.davies@gmail.com>
  * @author Jaik Dean <jaik@fluoresce.co>
  *
- * @template T of int|string
+ * @template T
  */
 abstract class AbstractEnumType extends Type
 {
@@ -79,7 +79,7 @@ abstract class AbstractEnumType extends Type
         $choice = static::$choices[$value];
         $choices = \array_flip(static::$choices);
         if (\is_int($choices[$choice])) {
-            return (int) $value;
+            return (int) $value; // @phpstan-ignore-line T can be int
         }
 
         return $value;
@@ -161,7 +161,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return list<T> Values for the ENUM field
+     * @return mixed[] Values for the ENUM field
      */
     public static function getValues(): array
     {
@@ -188,7 +188,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return array<T, T> Array of values in readable format
+     * @return mixed[] Array of values in readable format
      */
     public static function getReadableValues(): array
     {
@@ -198,7 +198,7 @@ abstract class AbstractEnumType extends Type
     /**
      * Asserts that given choice exists in the array of ENUM values.
      *
-     * @param T $value ENUM value
+     * @param int|string $value ENUM value
      *
      * @throws InvalidArgumentException
      */
@@ -212,7 +212,7 @@ abstract class AbstractEnumType extends Type
     /**
      * Get value in readable format.
      *
-     * @param T $value ENUM value
+     * @param int|string $value ENUM value
      *
      * @static
      *
@@ -228,7 +228,7 @@ abstract class AbstractEnumType extends Type
     /**
      * Check if some value exists in the array of ENUM values.
      *
-     * @param T $value ENUM value
+     * @param int|string $value ENUM value
      *
      * @static
      *
