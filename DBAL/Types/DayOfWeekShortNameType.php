@@ -16,6 +16,8 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
  * DayOfWeekShortNameType.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
+ *
+ * @extends AbstractEnumType<string>
  */
 final class DayOfWeekShortNameType extends AbstractEnumType
 {

@@ -16,6 +16,8 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
  * MonthShortNameType.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
+ *
+ * @extends AbstractEnumType<string>
  */
 final class MonthShortNameType extends AbstractEnumType
 {

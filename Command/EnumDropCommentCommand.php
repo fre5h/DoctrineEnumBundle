@@ -159,7 +159,7 @@ HELP
 
             $io->title(\sprintf('Dropping comments for <info>%s</info> type...', $this->enumType));
 
-            /** @var \Doctrine\ORM\Mapping\ClassMetadata[] $allMetadata */
+            /** @var \Doctrine\ORM\Mapping\ClassMetadata<object>[] $allMetadata */
             $allMetadata = $this->em->getMetadataFactory()->getAllMetadata();
 
             if (!empty($allMetadata)) {

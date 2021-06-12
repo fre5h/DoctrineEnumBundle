@@ -18,6 +18,8 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  * TaskStatusType.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
+ *
+ * @extends AbstractEnumType<string>
  */
 final class TaskStatusType extends AbstractEnumType
 {
