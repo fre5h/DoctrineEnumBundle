@@ -35,7 +35,7 @@ class EnumConstraint extends Choice
     {
         $this->strict = true;
 
-        if (!is_null($entity)) {
+        if (null !== $entity) {
             /** @var AbstractEnumType<int|string> $entity */
             if (\is_subclass_of($entity, AbstractEnumType::class)) {
                 $this->choices = $entity::getValues();
