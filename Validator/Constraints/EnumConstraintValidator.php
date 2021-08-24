@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 class EnumConstraintValidator extends ChoiceValidator
 {
     /**
-     * @param mixed           $value
+     * @param mixed                     $value
      * @param Constraint|EnumConstraint $constraint
      *
      * @throws RuntimeException
