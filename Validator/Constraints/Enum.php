@@ -17,40 +17,21 @@ use Symfony\Component\Validator\Constraints\Choice;
 
 /**
  * ENUM Constraint.
- *
- * @author Artem Henvald <genvaldartem@gmail.com>
- *
- * @Annotation
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class Enum extends Choice
 {
-    /** @var string|AbstractEnumType<int|string> */
-    public $entity;
-
     /**
      * {@inheritdoc}
+     * @property string|AbstractEnumType<int|string> $entity
      */
-    public function __construct($options = null)
+    public function __construct(public string $entity, ...$options)
     {
         $this->strict = true;
 
-        if (isset($options['entity'])) {
-            /** @var AbstractEnumType<int|string> $entity */
-            $entity = $options['entity'];
-
-            if (\is_subclass_of($entity, AbstractEnumType::class)) {
-                $this->choices = $entity::getValues();
-            }
+        if (\is_subclass_of($entity, AbstractEnumType::class)) {
+            $this->choices = $entity::getValues();
         }
-
-        parent::__construct($options);
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getRequiredOptions(): array
-    {
-        return ['entity'];
+        parent::__construct(...$options);
     }
 }
