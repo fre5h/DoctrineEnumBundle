@@ -19,7 +19,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  *
  * @author Stephan Vock <stephan.vock@gmail.com>
  *
- * @extends AbstractEnumType<int>
+ * @extends AbstractEnumType<int, int>
  */
 final class NumericType extends AbstractEnumType
 {
