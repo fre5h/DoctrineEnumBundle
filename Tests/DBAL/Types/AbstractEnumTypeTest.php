@@ -22,6 +22,7 @@ use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\HTTPStatusCodeType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\TaskStatusType;
@@ -44,6 +45,7 @@ final class AbstractEnumTypeTest extends TestCase
         Type::addType('TaskStatusType', TaskStatusType::class);
         Type::addType('StubType', StubType::class);
         Type::addType('NumericType', NumericType::class);
+        Type::addType('HTTPStatusCodeType', HTTPStatusCodeType::class);
     }
 
     protected function setUp(): void
@@ -192,6 +194,10 @@ final class AbstractEnumTypeTest extends TestCase
     {
         $this->type = Type::getType('NumericType');
         self::assertNull($this->type::assertValidChoice(NumericType::TWO));
+
+        $this->type = Type::getType('HTTPStatusCodeType');
+        self::assertNull($this->type::assertValidChoice(HTTPStatusCodeType::HTTP_NOT_FOUND));
+
         $this->type = Type::getType('BasketballPositionType');
     }
 
@@ -203,6 +209,10 @@ final class AbstractEnumTypeTest extends TestCase
 
     public function testGetReadableValueString(): void
     {
+        $this->type = Type::getType('HTTPStatusCodeType');
+        self::assertEquals('Not Found', $this->type::getReadableValue(HTTPStatusCodeType::HTTP_NOT_FOUND));
+
+        $this->type = Type::getType('BasketballPositionType');
         self::assertEquals('Small Forward', $this->type::getReadableValue(BasketballPositionType::SMALL_FORWARD));
     }
 
@@ -218,6 +228,7 @@ final class AbstractEnumTypeTest extends TestCase
         self::assertNull($this->type::getDefaultValue());
         self::assertEquals('pending', Type::getType('TaskStatusType')::getDefaultValue());
         self::assertEquals(0, Type::getType('NumericType')::getDefaultValue());
+        self::assertEquals(200, Type::getType('HTTPStatusCodeType')::getDefaultValue());
     }
 
     public function testInvalidArgumentExceptionInGetReadableValue(): void
@@ -268,5 +279,9 @@ final class AbstractEnumTypeTest extends TestCase
         $this->type = Type::getType('NumericType');
         self::assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
         self::assertEquals(1, $this->type->convertToPHPValue('1', new MySqlPlatform()));
+
+        $this->type = Type::getType('HTTPStatusCodeType');
+        self::assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
+        self::assertEquals(200, $this->type->convertToPHPValue('200', new MySqlPlatform()));
     }
 }

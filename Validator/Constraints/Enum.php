@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints\Choice;
  */
 class Enum extends Choice
 {
-    /** @var string|AbstractEnumType<int|string> */
+    /** @var string|AbstractEnumType<int|string, int|string> */
     public $entity;
 
     /**
@@ -35,7 +35,7 @@ class Enum extends Choice
         $this->strict = true;
 
         if (isset($options['entity'])) {
-            /** @var AbstractEnumType<int|string> $entity */
+            /** @var AbstractEnumType<int|string, int|string> $entity */
             $entity = $options['entity'];
 
             if (\is_subclass_of($entity, AbstractEnumType::class)) {

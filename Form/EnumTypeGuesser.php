@@ -86,7 +86,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             return null;
         }
 
-        /** @var AbstractEnumType<int|string> $registeredEnumTypeFQCN */
+        /** @var AbstractEnumType<int|string, int|string> $registeredEnumTypeFQCN */
         $parameters = [
             'choices' => $registeredEnumTypeFQCN::getChoices(), // Get the choices from the fully qualified class name
             'required' => !$metadata->isNullable($property),

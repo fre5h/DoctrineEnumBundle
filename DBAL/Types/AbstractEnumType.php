@@ -30,7 +30,8 @@ use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
  * @author Ben Davies <ben.davies@gmail.com>
  * @author Jaik Dean <jaik@fluoresce.co>
  *
- * @template T
+ * @template TValue of int|string
+ * @template TReadable of int|string
  */
 abstract class AbstractEnumType extends Type
 {
@@ -38,7 +39,7 @@ abstract class AbstractEnumType extends Type
     protected $name = '';
 
     /**
-     * @var array<T, T> Array of ENUM Values, where ENUM values are keys and their readable versions are values
+     * @var array<TValue, TReadable> Array of ENUM Values, where ENUM values are keys and their readable versions are values
      *
      * @static
      */
@@ -49,7 +50,7 @@ abstract class AbstractEnumType extends Type
      *
      * @throws InvalidArgumentException
      *
-     * @return T|null
+     * @return TValue|null
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
@@ -67,7 +68,7 @@ abstract class AbstractEnumType extends Type
     /**
      * {@inheritdoc}
      *
-     * @return T|null
+     * @return TValue|null
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
@@ -79,7 +80,7 @@ abstract class AbstractEnumType extends Type
         $choice = static::$choices[$value];
         $choices = \array_flip(static::$choices);
         if (\is_int($choices[$choice])) {
-            return (int) $value; // @phpstan-ignore-line T can be int
+            return (int) $value;
         }
 
         return $value;
@@ -122,7 +123,7 @@ abstract class AbstractEnumType extends Type
 
         $defaultValue = static::getDefaultValue();
         if (null !== $defaultValue) {
-            $sqlDeclaration .= \sprintf(' DEFAULT %s', $platform->quoteStringLiteral($defaultValue));
+            $sqlDeclaration .= \sprintf(' DEFAULT %s', $platform->quoteStringLiteral((string) $defaultValue));
         }
 
         return $sqlDeclaration;
@@ -149,7 +150,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return mixed[]
+     * @return array<TReadable, TValue>
      */
     public static function getChoices(): array
     {
@@ -161,7 +162,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return mixed[] Values for the ENUM field
+     * @return array<int, TValue> Values for the ENUM field
      */
     public static function getValues(): array
     {
@@ -173,7 +174,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return T
+     * @return TValue
      */
     public static function getRandomValue()
     {
@@ -188,7 +189,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return mixed[] Array of values in readable format
+     * @return array<TValue, TReadable> Array of values in readable format
      */
     public static function getReadableValues(): array
     {
@@ -216,7 +217,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return T Value in readable format
+     * @return TReadable Value in readable format
      */
     public static function getReadableValue($value)
     {
@@ -244,7 +245,7 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @return mixed|null Default value for DDL statement
+     * @return TValue|null Default value for DDL statement
      */
     public static function getDefaultValue()
     {

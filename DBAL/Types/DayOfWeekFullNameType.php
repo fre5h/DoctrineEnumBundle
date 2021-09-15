@@ -17,7 +17,7 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  *
- * @extends AbstractEnumType<string>
+ * @extends AbstractEnumType<string, string>
  */
 final class DayOfWeekFullNameType extends AbstractEnumType
 {

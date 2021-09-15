@@ -89,7 +89,7 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
      */
     private function findOccurrences(string $enumConstant): void
     {
-        /** @var class-string<AbstractEnumType<int|string>> $registeredEnumType */
+        /** @var class-string<AbstractEnumType<int|string, int|string>> $registeredEnumType */
         foreach ($this->registeredEnumTypes as $registeredEnumType) {
             $reflection = new \ReflectionClass($registeredEnumType);
 

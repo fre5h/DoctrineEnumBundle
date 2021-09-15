@@ -19,9 +19,9 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  *
  * @author Arturs Vonda <github@artursvonda.lv>
  *
- * @template T of int|string
+ * @template TValue of int|string
  *
- * @extends AbstractEnumType<T>
+ * @extends AbstractEnumType<TValue, string>
  */
 abstract class AbstractParentType extends AbstractEnumType
 {

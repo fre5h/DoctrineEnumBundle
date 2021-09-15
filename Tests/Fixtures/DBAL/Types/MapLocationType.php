@@ -19,7 +19,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  *
- * @extends AbstractEnumType<string>
+ * @extends AbstractEnumType<string, string>
  */
 final class MapLocationType extends AbstractEnumType
 {

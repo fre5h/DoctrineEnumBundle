@@ -17,6 +17,7 @@ use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsFoundInFewRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsNotFoundInAnyRegisteredEnumTypeException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\HTTPStatusCodeType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueTwigExtension;
@@ -39,6 +40,7 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
             'NumericType' => ['class' => NumericType::class],
+            'HTTPStatusCodeType' => ['class' => HTTPStatusCodeType::class],
         ]);
     }
 
@@ -79,6 +81,7 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
         yield [null, null, 'MapLocationType'];
         yield [1, NumericType::ONE, 'NumericType'];
         yield [1, NumericType::ONE, null];
+        yield ['Not Found', HTTPStatusCodeType::HTTP_NOT_FOUND, 'HTTPStatusCodeType'];
     }
 
     public function testEnumTypeIsNotRegisteredException(): void
