@@ -27,8 +27,7 @@ use Twig\TwigFunction;
  */
 final class EnumValuesAsArrayTwigExtensionTest extends TestCase
 {
-    /** @var EnumValuesAsArrayTwigExtension */
-    private $enumValuesAsArrayTwigExtension;
+    private EnumValuesAsArrayTwigExtension $enumValuesAsArrayTwigExtension;
 
     protected function setUp(): void
     {

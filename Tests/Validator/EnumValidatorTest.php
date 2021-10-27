@@ -29,11 +29,10 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
  */
 final class EnumValidatorTest extends TestCase
 {
-    /** @var EnumValidator */
-    private $enumValidator;
-
     /** @var ExecutionContext|MockObject */
     private $context;
+
+    private EnumValidator $enumValidator;
 
     protected function setUp(): void
     {

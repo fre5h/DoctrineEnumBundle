@@ -48,7 +48,7 @@ final class MonthShortNameType extends AbstractEnumType
     /**
      * {@inheritdoc}
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::JANUARY => 'January',
         self::FEBRUARY => 'February',
         self::MARCH => 'March',

@@ -64,7 +64,7 @@ class Player
      * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * Note, that type of a field should be same as you set in Doctrine config
@@ -73,7 +73,7 @@ class Player
      * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
      * @DoctrineAssert\Enum(entity="App\DBAL\Types\BasketballPositionType")     
      */
-    protected $position;
+    private $position;
 
     public function getId()
     {
@@ -82,6 +82,8 @@ class Player
 
     public function setPosition(string $position)
     {
+        BasketballPositionType::assertValidChoice($position);
+        
         $this->position = $position;
     }
 

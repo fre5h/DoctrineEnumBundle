@@ -38,23 +38,26 @@ final class EnumDropCommentCommand extends Command
 
     /** @var string */
     protected static $defaultDescription = 'Drop comment in DB for the column of registered ENUM type';
+<<<<<<< HEAD
+=======
 
     /** @var ManagerRegistry */
     private $registry;
+>>>>>>> c3a6fcd... Main into 7.x (#194)
 
-    /** @var EntityManagerInterface */
-    private $em;
+    private ManagerRegistry $registry;
+    private EntityManagerInterface $em;
 
     /** @var string[] */
-    private $registeredEnumTypes = [];
+    private array $registeredEnumTypes = [];
 
     /** @var string|mixed */
     private $enumType;
 
     /**
-     * @param ManagerRegistry $registry
-     * @param mixed[]         $registeredTypes
-     * @param string|null     $name
+     * @param ManagerRegistry                      $registry
+     * @param array<string, array<string, string>> $registeredTypes
+     * @param string|null                          $name
      *
      * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      */
@@ -193,10 +196,11 @@ HELP
             }
         } catch (\Throwable $e) {
             $io->error($e->getMessage());
+            $code = $e->getCode();
 
-            return $e->getCode();
+            return \is_int($code) ? $code : self::FAILURE;
         }
 
-        return 0;
+        return self::SUCCESS;
     }
 }

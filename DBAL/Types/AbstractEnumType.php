@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace Fresh\DoctrineEnumBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
 use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
@@ -35,30 +35,34 @@ use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
  */
 abstract class AbstractEnumType extends Type
 {
-    /** @var string */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var array<TValue, TReadable> Array of ENUM Values, where ENUM values are keys and their readable versions are values
      *
      * @static
      */
-    protected static $choices = [];
+    protected static array $choices = [];
 
     /**
-     * {@inheritdoc}
+     * @param TValue           $value
+     * @param AbstractPlatform $platform
      *
      * @throws InvalidArgumentException
      *
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @return TValue
+=======
      * @return TValue|null
+>>>>>>> 4f0f9ab... Main to 7.x (#203)
+=======
+     * @return TValue|int|string
+>>>>>>> 9a3a8ef... Fixes
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (null === $value) {
-            return null;
-        }
-
-        if (!isset(static::$choices[$value])) {
+        if (null !== $value && !isset(static::$choices[$value])) {
             throw new InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM "%s".', $value, $this->getName()));
         }
 
@@ -66,9 +70,18 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @param TValue|null      $value
+=======
+     * @param TValue           $value
+>>>>>>> 9a3a8ef... Fixes
+     * @param AbstractPlatform $platform
+=======
      * {@inheritdoc}
+>>>>>>> 4f0f9ab... Main to 7.x (#203)
      *
-     * @return TValue|null
+     * @return TValue
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
@@ -89,8 +102,8 @@ abstract class AbstractEnumType extends Type
     /**
      * Gets the SQL declaration snippet for a field of this type.
      *
-     * @param mixed[]          $fieldDeclaration The field declaration
-     * @param AbstractPlatform $platform         The currently used database platform
+     * @param array<string, string> $fieldDeclaration The field declaration
+     * @param AbstractPlatform      $platform         The currently used database platform
      *
      * @return string
      */
@@ -99,7 +112,8 @@ abstract class AbstractEnumType extends Type
         $values = \implode(
             ', ',
             \array_map(
-                static function (string $value) {
+                /** @var TValue $value */
+                static function ($value) {
                     return "'{$value}'";
                 },
                 static::getValues()
@@ -174,14 +188,23 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
+<<<<<<< HEAD
+     * @throws InvalidArgumentException
+     *
+=======
+>>>>>>> 4f0f9ab... Main to 7.x (#203)
      * @return TValue
      */
     public static function getRandomValue()
     {
         $values = self::getValues();
-        $randomKey = \random_int(0, \count($values) - 1);
 
-        return $values[$randomKey];
+        $count = \count($values);
+        if (0 === $count) {
+            throw new InvalidArgumentException('There is no value in Enum type');
+        }
+
+        return $values[\random_int(0, $count - 1)];
     }
 
     /**
@@ -261,7 +284,7 @@ abstract class AbstractEnumType extends Type
      */
     public function getMappedDatabaseTypes(AbstractPlatform $platform): array
     {
-        if ($platform instanceof MySqlPlatform) {
+        if ($platform instanceof MySQLPlatform) {
             return \array_merge(parent::getMappedDatabaseTypes($platform), ['enum']);
         }
 
