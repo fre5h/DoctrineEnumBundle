@@ -24,10 +24,10 @@ use Twig\Extension\AbstractExtension;
  */
 abstract class AbstractEnumTwigExtension extends AbstractExtension
 {
-    /** @var string[]|AbstractEnumType[] */
+    /** @var string[]|AbstractEnumType<int|string, int|string>[] */
     protected $registeredEnumTypes = [];
 
-    /** @var string[]|AbstractEnumType[] */
+    /** @var string[]|AbstractEnumType<int|string, int|string>[] */
     protected $occurrences = [];
 
     /**

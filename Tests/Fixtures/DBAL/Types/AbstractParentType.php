@@ -18,6 +18,10 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  * AbstractParentType.
  *
  * @author Arturs Vonda <github@artursvonda.lv>
+ *
+ * @template TValue of int|string
+ *
+ * @extends AbstractEnumType<TValue, string>
  */
 abstract class AbstractParentType extends AbstractEnumType
 {

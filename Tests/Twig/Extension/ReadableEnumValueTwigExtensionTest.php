@@ -17,7 +17,9 @@ use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsFoundInFewRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\EnumValue\ValueIsNotFoundInAnyRegisteredEnumTypeException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\HTTPStatusCodeType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueTwigExtension;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFilter;
@@ -37,6 +39,8 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
         $this->readableEnumValueTwigExtension = new ReadableEnumValueTwigExtension([
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
+            'NumericType' => ['class' => NumericType::class],
+            'HTTPStatusCodeType' => ['class' => HTTPStatusCodeType::class],
         ]);
     }
 
@@ -56,11 +60,11 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
     /**
      * @dataProvider dataProviderForGetReadableEnumValueTest
      *
-     * @param string|null $expectedReadableValue
-     * @param string|null $enumValue
+     * @param int|string|null $expectedReadableValue
+     * @param int|string|null $enumValue
      * @param string|null $enumType
      */
-    public function testGetReadableEnumValue(?string $expectedReadableValue, ?string $enumValue, ?string $enumType): void
+    public function testGetReadableEnumValue($expectedReadableValue, $enumValue, ?string $enumType): void
     {
         self::assertEquals(
             $expectedReadableValue,
@@ -75,6 +79,9 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
         yield ['Center', BasketballPositionType::CENTER, 'BasketballPositionType'];
         yield ['Center', MapLocationType::CENTER, 'MapLocationType'];
         yield [null, null, 'MapLocationType'];
+        yield [1, NumericType::ONE, 'NumericType'];
+        yield [1, NumericType::ONE, null];
+        yield ['Not Found', HTTPStatusCodeType::HTTP_NOT_FOUND, 'HTTPStatusCodeType'];
     }
 
     public function testEnumTypeIsNotRegisteredException(): void

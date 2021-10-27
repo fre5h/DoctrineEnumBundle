@@ -61,7 +61,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             return null;
         }
 
-        /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo $metadata */
+        /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo<object> $metadata */
         [$metadata] = $classMetadata;
         $fieldType = $metadata->getTypeOfField($property);
 
@@ -86,7 +86,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             return null;
         }
 
-        /** @var AbstractEnumType $registeredEnumTypeFQCN */
+        /** @var AbstractEnumType<int|string, int|string> $registeredEnumTypeFQCN */
         $parameters = [
             'choices' => $registeredEnumTypeFQCN::getChoices(), // Get the choices from the fully qualified class name
             'required' => !$metadata->isNullable($property),

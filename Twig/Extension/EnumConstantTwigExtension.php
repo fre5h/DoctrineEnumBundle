@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 
+use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsFoundInFewRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegisteredEnumTypeException;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
@@ -88,7 +89,7 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
      */
     private function findOccurrences(string $enumConstant): void
     {
-        /** @var class-string<\Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType> $registeredEnumType */
+        /** @var class-string<AbstractEnumType<int|string, int|string>> $registeredEnumType */
         foreach ($this->registeredEnumTypes as $registeredEnumType) {
             $reflection = new \ReflectionClass($registeredEnumType);
 

@@ -18,6 +18,8 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  * StubType.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
+ *
+ * @extends AbstractEnumType<string, string>
  */
 final class StubType extends AbstractEnumType
 {

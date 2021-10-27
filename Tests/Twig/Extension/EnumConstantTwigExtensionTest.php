@@ -17,6 +17,7 @@ use Fresh\DoctrineEnumBundle\Exception\Constant\ConstantIsNotFoundInAnyRegistere
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\HTTPStatusCodeType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
@@ -39,6 +40,7 @@ final class EnumConstantTwigExtensionTest extends TestCase
             'BasketballPositionType' => ['class' => BasketballPositionType::class],
             'MapLocationType' => ['class' => MapLocationType::class],
             'NumericType' => ['class' => NumericType::class],
+            'HTTPStatusCodeType' => ['class' => HTTPStatusCodeType::class],
         ]);
     }
 
@@ -77,6 +79,7 @@ final class EnumConstantTwigExtensionTest extends TestCase
         yield ['C', 'CENTER', 'BasketballPositionType'];
         yield ['C', 'CENTER', 'MapLocationType'];
         yield ['3', 'THREE', 'NumericType'];
+        yield ['200', 'HTTP_OK', 'HTTPStatusCodeType'];
     }
 
     public function testEnumTypeIsNotRegisteredException(): void
