@@ -23,6 +23,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\HTTPStatusCodeType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NoValueType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\TaskStatusType;
