@@ -23,10 +23,6 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\HTTPStatusCodeType;
-<<<<<<< HEAD
-use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NoValueType;
-=======
->>>>>>> 4f0f9ab... Main to 7.x (#203)
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\TaskStatusType;
@@ -288,20 +284,11 @@ final class AbstractEnumTypeTest extends TestCase
         self::assertSame('SF', $this->type->convertToPHPValue('SF', new MySQLPlatform()));
 
         $this->type = Type::getType('NumericType');
-<<<<<<< HEAD
         self::assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
         self::assertEquals(1, $this->type->convertToPHPValue('1', new MySQLPlatform()));
 
         $this->type = Type::getType('HTTPStatusCodeType');
         self::assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
         self::assertEquals(200, $this->type->convertToPHPValue('200', new MySQLPlatform()));
-=======
-        self::assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
-        self::assertEquals(1, $this->type->convertToPHPValue('1', new MySqlPlatform()));
-
-        $this->type = Type::getType('HTTPStatusCodeType');
-        self::assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
-        self::assertEquals(200, $this->type->convertToPHPValue('200', new MySqlPlatform()));
->>>>>>> 4f0f9ab... Main to 7.x (#203)
     }
 }

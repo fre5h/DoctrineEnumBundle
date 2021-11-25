@@ -50,15 +50,7 @@ abstract class AbstractEnumType extends Type
      *
      * @throws InvalidArgumentException
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
-     * @return TValue
-=======
-     * @return TValue|null
->>>>>>> 4f0f9ab... Main to 7.x (#203)
-=======
      * @return TValue|int|string
->>>>>>> 9a3a8ef... Fixes
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
@@ -70,16 +62,8 @@ abstract class AbstractEnumType extends Type
     }
 
     /**
-<<<<<<< HEAD
-<<<<<<< HEAD
-     * @param TValue|null      $value
-=======
      * @param TValue           $value
->>>>>>> 9a3a8ef... Fixes
      * @param AbstractPlatform $platform
-=======
-     * {@inheritdoc}
->>>>>>> 4f0f9ab... Main to 7.x (#203)
      *
      * @return TValue
      */
@@ -188,11 +172,8 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-<<<<<<< HEAD
      * @throws InvalidArgumentException
      *
-=======
->>>>>>> 4f0f9ab... Main to 7.x (#203)
      * @return TValue
      */
     public static function getRandomValue()

@@ -90,14 +90,7 @@ jobs:
           - '8.0'
           - '8.1'
         symfony-version:
-<<<<<<< HEAD
           - '5.4'
-=======
-          - '5.0'
-          - '5.1'
-          - '5.2'
-          - '5.3'
->>>>>>> c3a6fcd... Main into 7.x (#194)
     steps:
       - name: 'Checkout Code'
         uses: actions/checkout@v2

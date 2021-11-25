@@ -38,12 +38,6 @@ final class EnumDropCommentCommand extends Command
 
     /** @var string */
     protected static $defaultDescription = 'Drop comment in DB for the column of registered ENUM type';
-<<<<<<< HEAD
-=======
-
-    /** @var ManagerRegistry */
-    private $registry;
->>>>>>> c3a6fcd... Main into 7.x (#194)
 
     private ManagerRegistry $registry;
     private EntityManagerInterface $em;
