@@ -5,9 +5,10 @@ includes:
     - 'vendor/phpstan/phpstan-symfony/extension.neon'
     - 'vendor/slam/phpstan-extensions/conf/slam-rules.neon'
 parameters:
-    level: 8
+    level: 9
     excludePaths:
         - '%rootDir%/../../../Tests/*'
         - '%rootDir%/../../../vendor/*'
     fileExtensions:
         - 'php'
+    checkGenericClassInNonGenericObjectType: false

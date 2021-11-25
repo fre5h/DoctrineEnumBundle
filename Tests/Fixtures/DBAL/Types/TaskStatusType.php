@@ -32,7 +32,7 @@ final class TaskStatusType extends AbstractEnumType
     /**
      * {@inheritdoc}
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::PENDING => 'Pending',
         self::DONE => 'Done',
         self::FAILED => 'Failed',

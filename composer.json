@@ -22,28 +22,29 @@
         "issues": "https://github.com/fre5h/DoctrineEnumBundle/issues"
     },
     "require": {
-        "php": ">=7.4.0",
-        "doctrine/common": "^2.11 || ^3.0",
-        "doctrine/doctrine-bundle": "^2.1",
-        "doctrine/orm": "^2.7",
-        "symfony/config": "^5.0",
-        "symfony/dependency-injection": "^5.0",
-        "symfony/doctrine-bridge": "^5.0",
-        "symfony/framework-bundle": "^5.0",
-        "symfony/http-kernel": "^5.0",
-        "symfony/validator": "^5.0",
-        "twig/twig": "^3.0"
+        "php": ">=8.1.0",
+        "doctrine/common": "^3.2",
+        "doctrine/dbal": "^3.1",
+        "doctrine/doctrine-bundle": "^2.5",
+        "doctrine/orm": "^2.10",
+        "symfony/config": "^6.0",
+        "symfony/dependency-injection": "^6.0",
+        "symfony/doctrine-bridge": "^6.0",
+        "symfony/framework-bundle": "^6.0",
+        "symfony/http-kernel": "^6.0",
+        "symfony/validator": "^6.0",
+        "twig/twig": "^3.3"
     },
     "require-dev": {
         "escapestudios/symfony2-coding-standard": "^3.12",
-        "phpstan/phpstan": "^0.12",
-        "phpstan/phpstan-doctrine":"^0.12",
-        "phpstan/phpstan-phpunit": "^0.12",
-        "phpstan/phpstan-symfony": "^0.12",
+        "phpstan/phpstan": "^1.2",
+        "phpstan/phpstan-doctrine": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5",
-        "slam/phpstan-extensions": "^5.0",
-        "symfony/form": "^5.0",
-        "symfony/yaml": "^5.0"
+        "slam/phpstan-extensions": "^6.0",
+        "symfony/form": "^6.0",
+        "symfony/yaml": "^6.0"
     },
     "autoload": {
         "psr-4": {

@@ -12,21 +12,15 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
 
-/**
- * InheritedType.
- *
- * @author Arturs Vonda <github@artursvonda.lv>
- *
- * @extends AbstractParentType<string>
- */
-final class InheritedType extends AbstractParentType
-{
-    protected string $name = 'InheritedType';
+use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
-    /**
-     * {@inheritdoc}
-     */
-    protected static array $choices = [
-        'foo' => 'bar',
-    ];
+/**
+ * NoValueType.
+ *
+ * @author Artem Henvald <genvaldartem@gmail.com>
+ *
+ * @extends AbstractEnumType<string, string>
+ */
+final class NoValueType extends AbstractEnumType
+{
 }

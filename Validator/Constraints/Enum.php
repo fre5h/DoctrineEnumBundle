@@ -28,7 +28,7 @@ class Enum extends Choice
     public $entity;
 
     /**
-     * {@inheritdoc}
+     * @param array<string, array<string, string>> $options
      */
     public function __construct($options = null)
     {

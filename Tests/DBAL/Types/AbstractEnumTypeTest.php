@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace Fresh\DoctrineEnumBundle\Tests\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
 use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
@@ -23,6 +23,7 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\HTTPStatusCodeType;
+use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NoValueType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\StubType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\TaskStatusType;
@@ -73,7 +74,7 @@ final class AbstractEnumTypeTest extends TestCase
     {
         yield 'mysql' => [
             ['name' => 'position'],
-            new MySqlPlatform(),
+            new MySQLPlatform(),
             "ENUM('PG', 'SG', 'SF', 'PF', 'C')",
         ];
         yield 'sqlite' => [
@@ -115,7 +116,7 @@ final class AbstractEnumTypeTest extends TestCase
     {
         yield 'mysql' => [
             ['name' => 'position'],
-            new MySqlPlatform(),
+            new MySQLPlatform(),
             "ENUM('pending', 'done', 'failed') DEFAULT 'pending'",
         ];
         yield 'sqlite' => [
@@ -170,6 +171,14 @@ final class AbstractEnumTypeTest extends TestCase
         self::assertContains($this->type::getRandomValue(), $values);
         self::assertContains($this->type::getRandomValue(), $values);
         self::assertContains($this->type::getRandomValue(), $values);
+    }
+
+    public function testGetRandomValueWithException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectErrorMessage('There is no value in Enum type');
+
+        NoValueType::getRandomValue();
     }
 
     public function testGetReadableValues(): void
@@ -251,7 +260,7 @@ final class AbstractEnumTypeTest extends TestCase
 
     public function testMappedDatabaseTypesContainEnumOnMySQL(): void
     {
-        $actual = $this->type->getMappedDatabaseTypes(new MySqlPlatform());
+        $actual = $this->type->getMappedDatabaseTypes(new MySQLPlatform());
         self::assertContains('enum', $actual);
     }
 
@@ -272,15 +281,15 @@ final class AbstractEnumTypeTest extends TestCase
 
     public function testConvertToPHPValue(): void
     {
-        self::assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
-        self::assertSame('SF', $this->type->convertToPHPValue('SF', new MySqlPlatform()));
+        self::assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
+        self::assertSame('SF', $this->type->convertToPHPValue('SF', new MySQLPlatform()));
 
         $this->type = Type::getType('NumericType');
-        self::assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
-        self::assertEquals(1, $this->type->convertToPHPValue('1', new MySqlPlatform()));
+        self::assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
+        self::assertEquals(1, $this->type->convertToPHPValue('1', new MySQLPlatform()));
 
         $this->type = Type::getType('HTTPStatusCodeType');
-        self::assertNull($this->type->convertToPHPValue(null, new MySqlPlatform()));
-        self::assertEquals(200, $this->type->convertToPHPValue('200', new MySqlPlatform()));
+        self::assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
+        self::assertEquals(200, $this->type->convertToPHPValue('200', new MySQLPlatform()));
     }
 }

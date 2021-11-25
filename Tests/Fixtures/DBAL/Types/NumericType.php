@@ -34,7 +34,7 @@ final class NumericType extends AbstractEnumType
     /**
      * {@inheritdoc}
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::ZERO => 0,
         self::ONE => 1,
         self::TWO => 2,

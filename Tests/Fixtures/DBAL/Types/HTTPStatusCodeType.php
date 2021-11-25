@@ -47,7 +47,7 @@ final class HTTPStatusCodeType extends AbstractEnumType
     /**
      * {@inheritdoc}
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::HTTP_CONTINUE  => 'Continue',
         self::HTTP_OK  => 'Ok',
         self::HTTP_CREATED  => 'Created',
