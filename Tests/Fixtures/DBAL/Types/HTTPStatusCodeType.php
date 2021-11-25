@@ -42,8 +42,7 @@ final class HTTPStatusCodeType extends AbstractEnumType
     public const HTTP_SERVICE_UNAVAILABLE = 503;
     public const HTTP_GATEWAY_TIMEOUT = 504;
 
-    /** @var string */
-    protected $name = 'HTTPStatusCodeType';
+    protected string $name = 'HTTPStatusCodeType';
 
     /**
      * {@inheritdoc}

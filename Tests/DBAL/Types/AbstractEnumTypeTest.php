@@ -36,8 +36,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class AbstractEnumTypeTest extends TestCase
 {
-    /** @var AbstractEnumType */
-    private $type;
+    private AbstractEnumType $type;
 
     public static function setUpBeforeClass(): void
     {

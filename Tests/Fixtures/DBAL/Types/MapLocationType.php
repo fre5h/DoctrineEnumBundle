@@ -33,8 +33,7 @@ final class MapLocationType extends AbstractEnumType
     public const SOUTH_WEST = 'SW';
     public const SOUTH_EAST = 'SE';
 
-    /** @var string */
-    protected $name = 'MapLocationType';
+    protected string $name = 'MapLocationType';
 
     /**
      * {@inheritdoc}

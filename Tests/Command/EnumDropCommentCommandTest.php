@@ -42,17 +42,13 @@ final class EnumDropCommentCommandTest extends TestCase
     /** @var AbstractPlatform|MockObject */
     private $platform;
 
-    /** @var Command */
-    private $command;
+    private Command $command;
 
-    /** @var ClassMetadataFactory */
-    private $metadataFactory;
+    private ClassMetadataFactory $metadataFactory;
 
-    /** @var Application */
-    private $application;
+    private Application$application;
 
-    /** @var CommandTester */
-    private $commandTester;
+    private CommandTester $commandTester;
 
     protected function setUp(): void
     {

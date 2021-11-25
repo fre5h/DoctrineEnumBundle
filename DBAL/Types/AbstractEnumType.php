@@ -35,8 +35,7 @@ use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
  */
 abstract class AbstractEnumType extends Type
 {
-    /** @var string */
-    protected $name = '';
+    protected string $name = '';
 
     /**
      * @var array<TValue, TReadable> Array of ENUM Values, where ENUM values are keys and their readable versions are values

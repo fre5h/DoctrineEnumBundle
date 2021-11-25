@@ -27,6 +27,8 @@ final class TaskStatusType extends AbstractEnumType
     public const DONE = 'done';
     public const FAILED = 'failed';
 
+    protected string $name = 'TaskStatusType';
+
     /**
      * {@inheritdoc}
      */
