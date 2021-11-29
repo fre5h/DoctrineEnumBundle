@@ -21,13 +21,12 @@ namespace Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types;
  */
 final class InheritedType extends AbstractParentType
 {
-    /** @var string */
-    protected $name = 'InheritedType';
+    protected string $name = 'InheritedType';
 
     /**
      * {@inheritdoc}
      */
-    protected static $choices = [
+    protected static array $choices = [
         'foo' => 'bar',
     ];
 }

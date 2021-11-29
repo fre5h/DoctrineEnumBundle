@@ -31,8 +31,7 @@ use Twig\TwigFilter;
  */
 final class ReadableEnumValueTwigExtensionTest extends TestCase
 {
-    /** @var ReadableEnumValueTwigExtension */
-    private $readableEnumValueTwigExtension;
+    private ReadableEnumValueTwigExtension $readableEnumValueTwigExtension;
 
     protected function setUp(): void
     {

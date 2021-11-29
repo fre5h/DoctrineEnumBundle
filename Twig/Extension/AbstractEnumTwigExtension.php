@@ -24,14 +24,14 @@ use Twig\Extension\AbstractExtension;
  */
 abstract class AbstractEnumTwigExtension extends AbstractExtension
 {
-    /** @var string[]|AbstractEnumType<int|string, int|string>[] */
-    protected $registeredEnumTypes = [];
+    /** @var array<string, string> */
+    protected array $registeredEnumTypes = [];
 
     /** @var string[]|AbstractEnumType<int|string, int|string>[] */
-    protected $occurrences = [];
+    protected array $occurrences = [];
 
     /**
-     * @param mixed[] $registeredTypes
+     * @param array<string, array<string, string>> $registeredTypes
      */
     public function __construct(array $registeredTypes)
     {
