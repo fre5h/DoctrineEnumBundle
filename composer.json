@@ -45,7 +45,6 @@
         "symfony/form": "^5.4",
         "symfony/yaml": "^5.4"
     },
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Fresh\\DoctrineEnumBundle\\": ""
