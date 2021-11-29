@@ -38,7 +38,7 @@ final class RegisterEnumTypePass implements CompilerPassInterface
         /* @see \Doctrine\Bundle\DoctrineBundle\ConnectionFactory::createConnection */
         foreach ($doctrine->getConnectionNames() as $connectionName) {
             $definition = $container->getDefinition($connectionName);
-            $mappingTypes = $definition->getArgument(3);
+            $mappingTypes = (array) $definition->getArgument(3);
             if (!isset($mappingTypes['enum']) || 'string' !== $mappingTypes['enum']) {
                 $mappingTypes['enum'] = 'string';
                 $definition->setArgument(3, $mappingTypes);

@@ -31,8 +31,7 @@ use Twig\TwigFilter;
  */
 final class EnumConstantTwigExtensionTest extends TestCase
 {
-    /** @var EnumConstantTwigExtension */
-    private $enumConstantTwigExtension;
+    private EnumConstantTwigExtension $enumConstantTwigExtension;
 
     protected function setUp(): void
     {

@@ -38,7 +38,7 @@ final class DayOfWeekShortNameType extends AbstractEnumType
     /**
      * {@inheritdoc}
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::MONDAY => 'Monday',
         self::TUESDAY => 'Tuesday',
         self::WEDNESDAY => 'Wednesday',
