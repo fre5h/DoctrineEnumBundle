@@ -46,7 +46,7 @@ final class EnumDropCommentCommandTest extends TestCase
 
     private ClassMetadataFactory $metadataFactory;
 
-    private Application$application;
+    private Application $application;
 
     private CommandTester $commandTester;
 
