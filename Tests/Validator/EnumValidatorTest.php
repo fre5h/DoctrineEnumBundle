@@ -96,7 +96,7 @@ final class EnumValidatorTest extends TestCase
                 [self::equalTo('{{ value }}'), self::equalTo('"Pitcher"')],
                 [self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"')]
             )
-            ->willReturn(self::returnSelf(), self::returnSelf())
+            ->willReturn($constraintValidationBuilder, $constraintValidationBuilder)
         ;
 
         $constraintValidationBuilder
