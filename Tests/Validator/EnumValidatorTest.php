@@ -29,10 +29,10 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
  */
 final class EnumValidatorTest extends TestCase
 {
+    private EnumValidator $enumValidator;
+
     /** @var ExecutionContext|MockObject */
     private $context;
-
-    private EnumValidator $enumValidator;
 
     protected function setUp(): void
     {
@@ -96,7 +96,7 @@ final class EnumValidatorTest extends TestCase
                 [self::equalTo('{{ value }}'), self::equalTo('"Pitcher"')],
                 [self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"')]
             )
-            ->willReturn(self::returnSelf(), self::returnSelf())
+            ->willReturn($constraintValidationBuilder, $constraintValidationBuilder)
         ;
 
         $constraintValidationBuilder
