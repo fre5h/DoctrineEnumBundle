@@ -1,6 +1,6 @@
 # DoctrineEnumBundle
 
-📦 Provides support of **ENUM type** for Doctrine in Symfony applications.
+📦 Provides **ENUM type** support for Doctrine in Symfony applications.
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/fre5h/DoctrineEnumBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
 [![Build Status](https://img.shields.io/github/workflow/status/fre5h/DoctrineEnumBundle/CI/main?style=flat-square)](https://github.com/fre5h/DoctrineEnumBundle/actions?query=workflow%3ACI+branch%3Amain+)
@@ -31,7 +31,7 @@
 #### Check the `config/bundles.php` file
 
 By default, Symfony Flex will add this bundle to the `config/bundles.php` file.
-But in case when you ignored `contrib-recipe` during bundle installation it would not be added. In this case add the bundle manually.
+But in case when you ignored `contrib-recipe` during bundle installation it would not be added. In this case add the bundle manually:
 
 ```php
 # config/bundles.php
@@ -43,7 +43,7 @@ return [
 ];
 ```
 
-## Using 🧑‍🎓
+## Usage 🧑‍🎓
 
 * [Example](./Resources/docs/example_of_using.md "Example")
 
