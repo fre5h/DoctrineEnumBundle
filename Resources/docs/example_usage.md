@@ -1,4 +1,4 @@
-## Example usage
+## Usage example
 
 This example will show how to create a custom ENUM field for basketball positions. This ENUM should contain five values:
 
