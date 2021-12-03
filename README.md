@@ -45,7 +45,7 @@ return [
 
 ## Usage 🧑‍🎓
 
-* [Example](./Resources/docs/example_of_using.md "Example")
+* [Example](./Resources/docs/example_of_usage.md "Example")
 
 ## Features 🎁
 
