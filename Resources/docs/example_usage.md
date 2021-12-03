@@ -1,6 +1,6 @@
-## Example of using
+## Example usage
 
-In this example will be shown how to create a custom ENUM field for basketball positions. This ENUM should contain five values:
+This example will show how to create a custom ENUM field for basketball positions. This ENUM should contain five values:
 
 * `PG` - Point Guard
 * `SG` - Shooting Guard
