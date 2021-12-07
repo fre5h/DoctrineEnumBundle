@@ -16,7 +16,7 @@ final class MapLocationType extends AbstractEnumType
     public const WEST = 'W';
     public const CENTER = 'C';
 
-    protected static $choices = [
+    protected static array $choices = [
         self::NORTH => 'North',
         self::EAST => 'East',
         self::SOUTH => 'South',
