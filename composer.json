@@ -23,6 +23,7 @@
     },
     "require": {
         "php": ">=7.4.0",
+        "doctrine/dbal": "^2.13",
         "doctrine/common": "^2.11 || ^3.0",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/orm": "^2.7",
