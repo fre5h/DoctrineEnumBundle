@@ -22,16 +22,17 @@
         "issues": "https://github.com/fre5h/DoctrineEnumBundle/issues"
     },
     "require": {
-        "php": ">=7.3.0",
+        "php": ">=7.4.0",
         "doctrine/common": "^2.11 || ^3.0",
+        "doctrine/dbal": "^2.13",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/orm": "^2.7",
-        "symfony/config": ">=5.0 <5.4",
-        "symfony/dependency-injection": ">=5.0 <5.4",
-        "symfony/doctrine-bridge": ">=5.0 <5.4",
-        "symfony/framework-bundle": ">=5.0 <5.4",
-        "symfony/http-kernel": ">=5.0 <5.4",
-        "symfony/validator": ">=5.0 <5.4",
+        "symfony/config": "^5.0",
+        "symfony/dependency-injection": "^5.0",
+        "symfony/doctrine-bridge": "^5.0",
+        "symfony/framework-bundle": "^5.0",
+        "symfony/http-kernel": "^5.0",
+        "symfony/validator": "^5.0",
         "twig/twig": "^3.0"
     },
     "require-dev": {
@@ -42,8 +43,8 @@
         "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^9.5",
         "slam/phpstan-extensions": "^5.0",
-        "symfony/form": ">=5.0 <5.4",
-        "symfony/yaml": ">=5.0 <5.4"
+        "symfony/form": "^5.0",
+        "symfony/yaml": "^5.0"
     },
     "autoload": {
         "psr-4": {
