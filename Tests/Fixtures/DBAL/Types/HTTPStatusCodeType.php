@@ -42,13 +42,12 @@ final class HTTPStatusCodeType extends AbstractEnumType
     public const HTTP_SERVICE_UNAVAILABLE = 503;
     public const HTTP_GATEWAY_TIMEOUT = 504;
 
-    /** @var string */
-    protected $name = 'HTTPStatusCodeType';
+    protected string $name = 'HTTPStatusCodeType';
 
     /**
      * {@inheritdoc}
      */
-    protected static $choices = [
+    protected static array $choices = [
         self::HTTP_CONTINUE  => 'Continue',
         self::HTTP_OK  => 'Ok',
         self::HTTP_CREATED  => 'Created',
