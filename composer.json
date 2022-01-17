@@ -42,7 +42,6 @@
         "phpstan/phpstan-phpunit": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5",
-        "slam/phpstan-extensions": "^5.0",
         "symfony/form": "^5.0",
         "symfony/yaml": "^5.0"
     },
