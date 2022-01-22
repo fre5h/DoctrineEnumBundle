@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 class Enum extends Choice
 {
     /**
-     * @param string|AbstractEnumType<int|string> $entity
+     * @param string $entity
      * {@inheritdoc}
      */
     public function __construct(public string $entity, ...$options)
