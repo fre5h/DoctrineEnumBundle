@@ -59,20 +59,14 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
  */
 class Player
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+     #[ORM\Id]
+     #[ORM\Column(type: 'integer', name: 'id')]
+     #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
-    /**
-     * Note, that type of a field should be same as you set in Doctrine config
-     * (in this case it is BasketballPositionType)
-     *
-     * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
-     * @DoctrineAssert\Enum(entity="App\DBAL\Types\BasketballPositionType")     
-     */
+    // Note, that type of field should be same as you set in Doctrine config (in this case it is BasketballPositionType)
+    #[ORM\Column(type: BasketballPositionType::class)]
+    #[DoctrineAssert\Enum(entity: BasketballPositionType::class)]
     private $position;
 
     public function getId()
