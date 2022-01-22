@@ -18,7 +18,7 @@
 
 ## Installation 🌱
 
-```composer req fresh/doctrine-enum-bundle='~7.4'```
+```composer req fresh/doctrine-enum-bundle='~7.5'```
 
 ##### Choose the version you need
 
