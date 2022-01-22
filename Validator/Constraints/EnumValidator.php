@@ -31,7 +31,7 @@ class EnumValidator extends ChoiceValidator
      * @throws RuntimeException
      * @throws ConstraintDefinitionException
      */
-    public function validate($value, Constraint $constraint): void
+    public function validate($value, Constraint|Enum $constraint): void
     {
         if (!$constraint instanceof Enum) {
             throw new RuntimeException(\sprintf('Object of class %s is not instance of %s', \get_class($constraint), Enum::class));

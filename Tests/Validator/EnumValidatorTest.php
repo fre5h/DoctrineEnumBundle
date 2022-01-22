@@ -58,19 +58,14 @@ final class EnumValidatorTest extends TestCase
 
     public function testExceptionEntityNotSpecified(): void
     {
-        $constraint = new Enum([
-            'entity' => null,
-        ]);
-
+        $constraint = new Enum(entity: '');
         $this->expectException(ConstraintDefinitionException::class);
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
     }
 
     public function testValidBasketballPositionType(): void
     {
-        $constraint = new Enum([
-            'entity' => BasketballPositionType::class,
-        ]);
+        $constraint = new Enum(entity: BasketballPositionType::class);
 
         $this->context
             ->expects(self::never())
@@ -83,10 +78,7 @@ final class EnumValidatorTest extends TestCase
 
     public function testInvalidBasketballPositionType(): void
     {
-        $constraint = new Enum([
-            'entity' => BasketballPositionType::class,
-        ]);
-
+        $constraint = new Enum(entity: BasketballPositionType::class);
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraintValidationBuilder
