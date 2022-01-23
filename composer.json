@@ -27,7 +27,7 @@
         "doctrine/dbal": "^3.3",
         "doctrine/doctrine-bundle": "^2.5",
         "doctrine/orm": "^2.11",
-        "symfony/config": "^5.4 | |^6.0",
+        "symfony/config": "^5.4 || ^6.0",
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/doctrine-bridge": "^5.4 || ^6.0",
         "symfony/framework-bundle": "^5.4 || ^6.0",
