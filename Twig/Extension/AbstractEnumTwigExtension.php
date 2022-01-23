@@ -15,6 +15,7 @@ namespace Fresh\DoctrineEnumBundle\Twig\Extension;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsNotRegisteredException;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
+use JetBrains\PhpStorm\Pure;
 use Twig\Extension\AbstractExtension;
 
 /**
@@ -70,6 +71,7 @@ abstract class AbstractEnumTwigExtension extends AbstractExtension
     /**
      * @return NoRegisteredEnumTypesException
      */
+    #[Pure]
     protected function createNoRegisteredEnumTypesException(): NoRegisteredEnumTypesException
     {
         return new NoRegisteredEnumTypesException('There are no registered ENUM types.');

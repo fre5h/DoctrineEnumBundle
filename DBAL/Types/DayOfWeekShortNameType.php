@@ -21,19 +21,19 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
  */
 final class DayOfWeekShortNameType extends AbstractEnumType
 {
-    public const MONDAY = 'mon';
+    public final const MONDAY = 'mon';
 
-    public const TUESDAY = 'tue';
+    public final const TUESDAY = 'tue';
 
-    public const WEDNESDAY = 'wed';
+    public final const WEDNESDAY = 'wed';
 
-    public const THURSDAY = 'thu';
+    public final const THURSDAY = 'thu';
 
-    public const FRIDAY = 'fri';
+    public final const FRIDAY = 'fri';
 
-    public const SATURDAY = 'sat';
+    public final const SATURDAY = 'sat';
 
-    public const SUNDAY = 'sun';
+    public final const SUNDAY = 'sun';
 
     /**
      * {@inheritdoc}

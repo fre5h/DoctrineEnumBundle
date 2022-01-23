@@ -10,11 +10,11 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 final class MapLocationType extends AbstractEnumType
 {
-    public const NORTH = 'N';
-    public const EAST = 'E';
-    public const SOUTH = 'S';
-    public const WEST = 'W';
-    public const CENTER = 'C';
+    public final const NORTH = 'N';
+    public final const EAST = 'E';
+    public final const SOUTH = 'S';
+    public final const WEST = 'W';
+    public final const CENTER = 'C';
 
     protected static array $choices = [
         self::NORTH => 'North',
