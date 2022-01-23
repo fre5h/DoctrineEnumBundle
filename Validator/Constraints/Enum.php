@@ -34,7 +34,9 @@ class Enum extends Choice
         $this->strict = true;
 
         if (\is_subclass_of($entity, AbstractEnumType::class)) {
-            parent::__construct($entity::getValues(), ...$options);
+            $this->choices = $entity::getValues(); // @phpstan-ignore-line
         }
+
+        parent::__construct(...$options);
     }
 }
