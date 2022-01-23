@@ -19,7 +19,6 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContext;
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 /**
@@ -54,13 +53,6 @@ final class EnumValidatorTest extends TestCase
         $this->expectExceptionMessageMatches('/^Object of class .* is not instance of .*$/');
 
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new DummyConstraint());
-    }
-
-    public function testExceptionEntityNotSpecified(): void
-    {
-        $constraint = new Enum(entity: '');
-        $this->expectException(ConstraintDefinitionException::class);
-        $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
     }
 
     public function testValidBasketballPositionType(): void

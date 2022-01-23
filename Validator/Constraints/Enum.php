@@ -14,6 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
 use Attribute;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
+use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Symfony\Component\Validator\Constraints\Choice;
 
 /**
@@ -25,18 +26,23 @@ use Symfony\Component\Validator\Constraints\Choice;
 class Enum extends Choice
 {
     /**
-     * @param string $entity
-     *
-     * {@inheritdoc}
+     * @param string      $entity
+     * @param string|null $message
+     * @param array|null  $groups
+     * @param mixed       $payload
      */
-    public function __construct(public string $entity, ...$options)
+    public function __construct(public string $entity, ?string $message = null, ?array $groups = null, mixed $payload = null)
     {
-        $this->strict = true;
-
-        if (\is_subclass_of($entity, AbstractEnumType::class)) {
-            $this->choices = $entity::getValues();
+        if (!\is_subclass_of($entity, AbstractEnumType::class)) {
+            throw new InvalidArgumentException(\sprintf('%s is not instance of %s', $entity, AbstractEnumType::class));
         }
 
-        parent::__construct(...$options); // @phpstan-ignore-line
+        parent::__construct(
+            choices: $entity::getValues(),
+            strict: true,
+            message: $message,
+            groups: $groups,
+            payload: $payload
+        );
     }
 }
