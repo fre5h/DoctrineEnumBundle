@@ -26,10 +26,10 @@ use Symfony\Component\Validator\Constraints\Choice;
 class Enum extends Choice
 {
     /**
-     * @param string      $entity
-     * @param string|null $message
-     * @param array|null  $groups
-     * @param mixed       $payload
+     * @param string        $entity
+     * @param string|null   $message
+     * @param string[]|null $groups
+     * @param mixed         $payload
      */
     public function __construct(public string $entity, ?string $message = null, ?array $groups = null, mixed $payload = null)
     {
