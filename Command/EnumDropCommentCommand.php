@@ -170,15 +170,12 @@ HELP
                     foreach ($metadata->getFieldNames() as $fieldName) {
                         if ($metadata->getTypeOfField($fieldName) === $this->enumType) {
                             $fieldMappingDetails = $metadata->getFieldMapping($fieldName);
+                            $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
+                            $connection->executeQuery($sql);
 
-                            if (isset($fieldMappingDetails['columnName'])) {
-                                $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
-                                $connection->executeQuery($sql);
+                            $io->text(\sprintf(' * %s::$%s   <info>Dropped ✔</info>', $entityName, $fieldName));
 
-                                $io->text(\sprintf(' * %s::$%s   <info>Dropped ✔</info>', $entityName, $fieldName));
-
-                                ++$count;
-                            }
+                            ++$count;
                         }
                     }
                 }

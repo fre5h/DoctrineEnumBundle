@@ -2,7 +2,7 @@ risky: true
 preset: symfony
 tab-width: 4
 use-tabs: false
-version: 8.1
+version: 8.0
 enabled:
   - combine_consecutive_unsets
   - ordered_class_elements
