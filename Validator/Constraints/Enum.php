@@ -12,45 +12,37 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
+use Attribute;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
+use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Symfony\Component\Validator\Constraints\Choice;
 
 /**
  * ENUM Constraint.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
- *
- * @Annotation
  */
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class Enum extends Choice
 {
-    /** @var string|AbstractEnumType<int|string, int|string> */
-    public $entity;
-
     /**
-     * @param array<string, array<string, string>> $options
+     * @param string        $entity
+     * @param string|null   $message
+     * @param string[]|null $groups
+     * @param mixed         $payload
      */
-    public function __construct($options = null)
+    public function __construct(public string $entity, ?string $message = null, ?array $groups = null, mixed $payload = null)
     {
-        $this->strict = true;
-
-        if (isset($options['entity'])) {
-            /** @var AbstractEnumType<int|string, int|string> $entity */
-            $entity = $options['entity'];
-
-            if (\is_subclass_of($entity, AbstractEnumType::class)) {
-                $this->choices = $entity::getValues();
-            }
+        if (!\is_subclass_of($entity, AbstractEnumType::class)) {
+            throw new InvalidArgumentException(\sprintf('%s is not instance of %s', $entity, AbstractEnumType::class));
         }
 
-        parent::__construct($options);
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getRequiredOptions(): array
-    {
-        return ['entity'];
+        parent::__construct(
+            choices: $entity::getValues(),
+            strict: true,
+            message: $message,
+            groups: $groups,
+            payload: $payload
+        );
     }
 }

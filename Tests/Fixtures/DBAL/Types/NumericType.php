@@ -23,11 +23,11 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  */
 final class NumericType extends AbstractEnumType
 {
-    public const ZERO = 0;
-    public const ONE = 1;
-    public const TWO = 2;
-    public const THREE = 3;
-    public const FOUR = 4;
+    public final const ZERO = 0;
+    public final const ONE = 1;
+    public final const TWO = 2;
+    public final const THREE = 3;
+    public final const FOUR = 4;
 
     protected string $name = 'NumericType';
 

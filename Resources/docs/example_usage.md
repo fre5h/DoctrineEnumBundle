@@ -18,11 +18,11 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 final class BasketballPositionType extends AbstractEnumType
 {
-    public const POINT_GUARD = 'PG';
-    public const SHOOTING_GUARD = 'SG';
-    public const SMALL_FORWARD = 'SF';
-    public const POWER_FORWARD = 'PF';
-    public const CENTER = 'C';
+    public final const POINT_GUARD = 'PG';
+    public final const SHOOTING_GUARD = 'SG';
+    public final const SMALL_FORWARD = 'SF';
+    public final const POWER_FORWARD = 'PF';
+    public final const CENTER = 'C';
 
     protected static array $choices = [
         self::POINT_GUARD => 'Point Guard',
@@ -59,20 +59,14 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
  */
 class Player
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+     #[ORM\Id]
+     #[ORM\Column(type: 'integer', name: 'id')]
+     #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
-    /**
-     * Note, that type of a field should be same as you set in Doctrine config
-     * (in this case it is BasketballPositionType)
-     *
-     * @ORM\Column(name="position", type="BasketballPositionType", nullable=false)
-     * @DoctrineAssert\Enum(entity="App\DBAL\Types\BasketballPositionType")     
-     */
+    // Note, that type of field should be same as you set in Doctrine config (in this case it is BasketballPositionType)
+    #[ORM\Column(type: BasketballPositionType::class)]
+    #[DoctrineAssert\Enum(entity: BasketballPositionType::class)]
     private $position;
 
     public function getId()

@@ -3,12 +3,12 @@
 `NULL` values are also supported by ENUM field. You can set *nullable* parameter of column to `true` or `false` depends on if you want or not to allow `NULL` values:
 
 ```php
-/** @ORM\Column(name="position", type="BasketballPositionType", nullable=true) */
+#[ORM\Column(type: BasketballPositionType::class, nullable: true)]
 private $position;
 
 // or
 
-/** @ORM\Column(name="position", type="BasketballPositionType", nullable=false) */
+#[ORM\Column(type: BasketballPositionType::class, nullable: false)]
 private $position;
 ```
 
