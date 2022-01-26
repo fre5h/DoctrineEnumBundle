@@ -80,7 +80,6 @@ final class EnumValidatorTest extends TestCase
     public function testInvalidBasketballPositionType(): void
     {
         $constraint = new Enum(['entity' => BasketballPositionType::class]);
-
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraintValidationBuilder
@@ -90,7 +89,7 @@ final class EnumValidatorTest extends TestCase
                 [self::equalTo('{{ value }}'), self::equalTo('"Pitcher"')],
                 [self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"')]
             )
-            ->willReturn(self::returnSelf(), self::returnSelf())
+            ->willReturn($constraintValidationBuilder, $constraintValidationBuilder)
         ;
 
         $constraintValidationBuilder
