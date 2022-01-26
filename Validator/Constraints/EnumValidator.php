@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 /**
  * EnumValidator validates that the value is one of the expected ENUM values.
  *
- * @deprecated Support for Enum annotation will be dropped in 9.0. Please switch to using EnumType attribute instead.
+ * @deprecated Support for Enum annotation will be dropped in 9.0. Please switch to using \Fresh\DoctrineEnumBundle\Validator\Constraints\EnumType attribute instead.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
