@@ -18,8 +18,9 @@ use Symfony\Component\Validator\Constraints\Choice;
 /**
  * ENUM Constraint.
  *
- * @deprecated Support for Enum annotation will be dropped in 9.0. Please switch to using EnumType attribute instead.
  * @see \Fresh\DoctrineEnumBundle\Validator\Constraints\EnumType
+ *
+ * @deprecated Support for Enum annotation will be dropped in 9.0. Please switch to using EnumType attribute instead.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  *
