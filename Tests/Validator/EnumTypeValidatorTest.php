@@ -14,12 +14,11 @@ namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
 use Fresh\DoctrineEnumBundle\Exception\RuntimeException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
-use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
-use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
+use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumType;
+use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumTypeValidator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContext;
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 /**
@@ -27,16 +26,16 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-final class EnumValidatorTest extends TestCase
+final class EnumTypeValidatorTest extends TestCase
 {
     /** @var ExecutionContext|MockObject */
     private $context;
 
-    private EnumValidator $enumValidator;
+    private EnumTypeValidator $enumValidator;
 
     protected function setUp(): void
     {
-        $this->enumValidator = new EnumValidator();
+        $this->enumValidator = new EnumTypeValidator();
         $this->context = $this->createMock(ExecutionContext::class);
     }
 
@@ -56,17 +55,9 @@ final class EnumValidatorTest extends TestCase
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new DummyConstraint());
     }
 
-    public function testExceptionEntityNotSpecified(): void
-    {
-        $constraint = new Enum(['entity' => null]);
-
-        $this->expectException(ConstraintDefinitionException::class);
-        $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
-    }
-
     public function testValidBasketballPositionType(): void
     {
-        $constraint = new Enum(['entity' => BasketballPositionType::class]);
+        $constraint = new EnumType(entity: BasketballPositionType::class);
 
         $this->context
             ->expects(self::never())
@@ -79,7 +70,7 @@ final class EnumValidatorTest extends TestCase
 
     public function testInvalidBasketballPositionType(): void
     {
-        $constraint = new Enum(['entity' => BasketballPositionType::class]);
+        $constraint = new EnumType(entity: BasketballPositionType::class);
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraintValidationBuilder

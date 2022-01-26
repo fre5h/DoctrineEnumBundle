@@ -24,10 +24,8 @@
 
 | Bundle Version (X.Y.Z) |    PHP     |  Symfony   | Doctrine Bundle | Comment             |
 |:----------------------:|:----------:|:----------:|:---------------:|:--------------------|
-|        `8.1.*`         | `>= 8.1.0` | `5.4, 6.0` | `>= 2.5`        | **Current version** |
-|        `8.0.*`         | `>= 8.0.0` |   `6.0`    | `>= 2.5`        | Previous version    |
-|        `7.5.*`         | `>= 8.0.0` |   `5.4`    | `>= 2.5`        | Previous version    |
-|        `7.4.*`         | `>= 7.4.0` |   `5.4`    | `>= 2.1`        | Previous version    |
+|        `8.1.*`         | `>= 8.1.0` | `5.4, 6.0` |    `>= 2.5`     | **Current version** |
+|        `7.5.*`         | `>= 8.0.0` |   `5.4`    |    `>= 2.5`     | Previous version    |
 
 #### Check the `config/bundles.php` file
 
@@ -46,7 +44,7 @@ return [
 
 ## Usage 🧑‍🎓
 
-* [Example](./Resources/docs/example_usage.md "Example")
+* [Example](./Resources/docs/usage_example.md "Example")
 
 ## Features 🎁
 
