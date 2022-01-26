@@ -12,37 +12,47 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
-use Attribute;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
-use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Symfony\Component\Validator\Constraints\Choice;
 
 /**
  * ENUM Constraint.
  *
+ * @deprecated Support for Enum annotation will be dropped in 9.0. Please switch to using \Fresh\DoctrineEnumBundle\Validator\Constraints\EnumType attribute instead.
+ *
  * @author Artem Henvald <genvaldartem@gmail.com>
+ *
+ * @Annotation
  */
-#[Attribute(Attribute::TARGET_PROPERTY)]
 class Enum extends Choice
 {
+    /** @var string|AbstractEnumType<int|string, int|string> */
+    public $entity;
+
     /**
-     * @param string        $entity
-     * @param string|null   $message
-     * @param string[]|null $groups
-     * @param mixed         $payload
+     * @param array<string, array<string, string>> $options
      */
-    public function __construct(public string $entity, ?string $message = null, ?array $groups = null, mixed $payload = null)
+    public function __construct($options = null)
     {
-        if (!\is_subclass_of($entity, AbstractEnumType::class)) {
-            throw new InvalidArgumentException(\sprintf('%s is not instance of %s', $entity, AbstractEnumType::class));
+        $this->strict = true;
+
+        if (isset($options['entity'])) {
+            /** @var AbstractEnumType<int|string, int|string> $entity */
+            $entity = $options['entity'];
+
+            if (\is_subclass_of($entity, AbstractEnumType::class)) {
+                $this->choices = $entity::getValues();
+            }
         }
 
-        parent::__construct(
-            choices: $entity::getValues(),
-            strict: true,
-            message: $message,
-            groups: $groups,
-            payload: $payload
-        );
+        parent::__construct($options);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRequiredOptions(): array
+    {
+        return ['entity'];
     }
 }
