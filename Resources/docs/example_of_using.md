@@ -66,7 +66,7 @@ class Player
 
     // Note, that type of field should be same as you set in Doctrine config (in this case it is BasketballPositionType)
     #[ORM\Column(type: BasketballPositionType::class)]
-    #[DoctrineAssert\Enum(entity: BasketballPositionType::class)]
+    #[DoctrineAssert\EnumType(entity: BasketballPositionType::class)]
     private $position;
 
     public function getId()

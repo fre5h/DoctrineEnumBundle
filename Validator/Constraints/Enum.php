@@ -12,31 +12,47 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
-use Attribute;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Symfony\Component\Validator\Constraints\Choice;
 
 /**
  * ENUM Constraint.
  *
+ * @deprecated Support for Enum annotation will be dropped in 9.0. Please switch to using \Fresh\DoctrineEnumBundle\Validator\Constraints\EnumType attribute instead.
+ *
  * @author Artem Henvald <genvaldartem@gmail.com>
+ *
+ * @Annotation
  */
-#[Attribute(Attribute::TARGET_PROPERTY)]
 class Enum extends Choice
 {
+    /** @var string|AbstractEnumType<int|string, int|string> */
+    public $entity;
+
     /**
-     * @param string $entity
-     *
-     * {@inheritdoc}
+     * @param array<string, array<string, string>> $options
      */
-    public function __construct(public string $entity, ...$options)
+    public function __construct($options = null)
     {
         $this->strict = true;
 
-        if (\is_subclass_of($entity, AbstractEnumType::class)) {
-            $this->choices = $entity::getValues();
+        if (isset($options['entity'])) {
+            /** @var AbstractEnumType<int|string, int|string> $entity */
+            $entity = $options['entity'];
+
+            if (\is_subclass_of($entity, AbstractEnumType::class)) {
+                $this->choices = $entity::getValues();
+            }
         }
 
-        parent::__construct(...$options);
+        parent::__construct($options);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRequiredOptions(): array
+    {
+        return ['entity'];
     }
 }
