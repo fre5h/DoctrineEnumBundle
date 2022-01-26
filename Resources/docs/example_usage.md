@@ -53,10 +53,8 @@ use App\DBAL\Types\BasketballPositionType;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
-/**
- * @ORM\Entity()
- * @ORM\Table(name="players")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'players')]
 class Player
 {
      #[ORM\Id]
