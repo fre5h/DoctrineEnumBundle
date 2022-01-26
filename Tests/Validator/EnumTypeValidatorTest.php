@@ -19,7 +19,6 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumTypeValidator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContext;
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 /**
@@ -56,13 +55,6 @@ final class EnumTypeValidatorTest extends TestCase
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new DummyConstraint());
     }
 
-    public function testExceptionEntityNotSpecified(): void
-    {
-        $constraint = new EnumType(entity: '');
-        $this->expectException(ConstraintDefinitionException::class);
-        $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
-    }
-
     public function testValidBasketballPositionType(): void
     {
         $constraint = new EnumType(entity: BasketballPositionType::class);
@@ -88,7 +80,7 @@ final class EnumTypeValidatorTest extends TestCase
                 [self::equalTo('{{ value }}'), self::equalTo('"Pitcher"')],
                 [self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"')]
             )
-            ->willReturn(self::returnSelf(), self::returnSelf())
+            ->willReturn($constraintValidationBuilder, $constraintValidationBuilder)
         ;
 
         $constraintValidationBuilder
