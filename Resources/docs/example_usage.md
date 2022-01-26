@@ -1,6 +1,6 @@
-## Example of using
+## Usage example
 
-In this example will be shown how to create a custom ENUM field for basketball positions. This ENUM should contain five values:
+This example will show how to create a custom ENUM field for basketball positions. This ENUM should contain five values:
 
 * `PG` - Point Guard
 * `SG` - Shooting Guard
@@ -18,13 +18,13 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
 final class BasketballPositionType extends AbstractEnumType
 {
-    public const POINT_GUARD = 'PG';
-    public const SHOOTING_GUARD = 'SG';
-    public const SMALL_FORWARD = 'SF';
-    public const POWER_FORWARD = 'PF';
-    public const CENTER = 'C';
+    public final const POINT_GUARD = 'PG';
+    public final const SHOOTING_GUARD = 'SG';
+    public final const SMALL_FORWARD = 'SF';
+    public final const POWER_FORWARD = 'PF';
+    public final const CENTER = 'C';
 
-    protected static $choices = [
+    protected static array $choices = [
         self::POINT_GUARD => 'Point Guard',
         self::SHOOTING_GUARD => 'Shooting Guard',
         self::SMALL_FORWARD => 'Small Forward',
@@ -53,10 +53,8 @@ use App\DBAL\Types\BasketballPositionType;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
-/**
- * @ORM\Entity()
- * @ORM\Table(name="players")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'players')]
 class Player
 {
      #[ORM\Id]

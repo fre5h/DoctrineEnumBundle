@@ -23,9 +23,11 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
  */
 final class TaskStatusType extends AbstractEnumType
 {
-    public const PENDING = 'pending';
-    public const DONE = 'done';
-    public const FAILED = 'failed';
+    public final const PENDING = 'pending';
+    public final const DONE = 'done';
+    public final const FAILED = 'failed';
+
+    protected string $name = 'TaskStatusType';
 
     /**
      * {@inheritdoc}

@@ -45,7 +45,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
      *
      * @return int|string|null
      */
-    public function getReadableEnumValue($enumValue, ?string $enumType = null)
+    public function getReadableEnumValue(int|string|null $enumValue, ?string $enumType = null): int|string|null
     {
         if ($this->hasRegisteredEnumTypes()) {
             if (null === $enumValue) {
@@ -93,7 +93,7 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
     /**
      * @param int|string $enumValue
      */
-    private function findOccurrences($enumValue): void
+    private function findOccurrences(int|string $enumValue): void
     {
         foreach ($this->registeredEnumTypes as $registeredEnumType) {
             if ($registeredEnumType::isValueExist($enumValue)) {

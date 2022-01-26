@@ -207,7 +207,7 @@ abstract class AbstractEnumType extends Type
      *
      * @throws InvalidArgumentException
      */
-    public static function assertValidChoice($value): void
+    public static function assertValidChoice(int|string $value): void
     {
         if (!isset(static::$choices[$value])) {
             throw new InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM type "%s".', (string) $value, static::class));
@@ -223,7 +223,7 @@ abstract class AbstractEnumType extends Type
      *
      * @return TReadable Value in readable format
      */
-    public static function getReadableValue($value)
+    public static function getReadableValue(int|string $value)
     {
         static::assertValidChoice($value);
 
@@ -239,7 +239,7 @@ abstract class AbstractEnumType extends Type
      *
      * @return bool
      */
-    public static function isValueExist($value): bool
+    public static function isValueExist(int|string $value): bool
     {
         return isset(static::$choices[$value]);
     }

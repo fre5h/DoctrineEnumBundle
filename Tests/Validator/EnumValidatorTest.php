@@ -19,7 +19,6 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumValidator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContext;
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 /**
@@ -29,10 +28,10 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
  */
 final class EnumValidatorTest extends TestCase
 {
+    private EnumValidator $enumValidator;
+
     /** @var ExecutionContext|MockObject */
     private $context;
-
-    private EnumValidator $enumValidator;
 
     protected function setUp(): void
     {
@@ -56,17 +55,9 @@ final class EnumValidatorTest extends TestCase
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new DummyConstraint());
     }
 
-    public function testExceptionEntityNotSpecified(): void
-    {
-        $constraint = new Enum(['entity' => null]);
-
-        $this->expectException(ConstraintDefinitionException::class);
-        $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, $constraint);
-    }
-
     public function testValidBasketballPositionType(): void
     {
-        $constraint = new Enum(['entity' => BasketballPositionType::class]);
+        $constraint = new Enum(entity: BasketballPositionType::class);
 
         $this->context
             ->expects(self::never())
@@ -79,8 +70,7 @@ final class EnumValidatorTest extends TestCase
 
     public function testInvalidBasketballPositionType(): void
     {
-        $constraint = new Enum(['entity' => BasketballPositionType::class]);
-
+        $constraint = new Enum(entity: BasketballPositionType::class);
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraintValidationBuilder
@@ -90,7 +80,7 @@ final class EnumValidatorTest extends TestCase
                 [self::equalTo('{{ value }}'), self::equalTo('"Pitcher"')],
                 [self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"')]
             )
-            ->willReturn(self::returnSelf(), self::returnSelf())
+            ->willReturn($constraintValidationBuilder, $constraintValidationBuilder)
         ;
 
         $constraintValidationBuilder

@@ -86,10 +86,10 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - '8.0'
           - '8.1'
         symfony-version:
           - '5.4'
+          - '6.0'
     steps:
       - name: 'Checkout Code'
         uses: actions/checkout@v2

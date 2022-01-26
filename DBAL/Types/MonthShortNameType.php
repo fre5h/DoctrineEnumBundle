@@ -21,29 +21,29 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
  */
 final class MonthShortNameType extends AbstractEnumType
 {
-    public const JANUARY = 'jan';
+    public final const JANUARY = 'jan';
 
-    public const FEBRUARY = 'feb';
+    public final const FEBRUARY = 'feb';
 
-    public const MARCH = 'mar';
+    public final const MARCH = 'mar';
 
-    public const APRIL = 'apr';
+    public final const APRIL = 'apr';
 
-    public const MAY = 'may';
+    public final const MAY = 'may';
 
-    public const JUNE = 'jun';
+    public final const JUNE = 'jun';
 
-    public const JULY = 'jul';
+    public final const JULY = 'jul';
 
-    public const AUGUST = 'aug';
+    public final const AUGUST = 'aug';
 
-    public const SEPTEMBER = 'sep';
+    public final const SEPTEMBER = 'sep';
 
-    public const OCTOBER = 'oct';
+    public final const OCTOBER = 'oct';
 
-    public const NOVEMBER = 'nov';
+    public final const NOVEMBER = 'nov';
 
-    public const DECEMBER = 'dec';
+    public final const DECEMBER = 'dec';
 
     /**
      * {@inheritdoc}
