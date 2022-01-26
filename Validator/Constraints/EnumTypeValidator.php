@@ -18,25 +18,23 @@ use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
- * EnumValidator validates that the value is one of the expected ENUM values.
- *
- * @deprecated Support for Enum annotation will be dropped in 9.0. Please switch to using EnumType attribute instead.
+ * EnumTypeValidator validates that the value is one of the expected ENUM values.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-class EnumValidator extends ChoiceValidator
+class EnumTypeValidator extends ChoiceValidator
 {
     /**
-     * @param mixed           $value
-     * @param Constraint|Enum $constraint
+     * @param mixed               $value
+     * @param Constraint|EnumType $constraint
      *
      * @throws RuntimeException
      * @throws ConstraintDefinitionException
      */
-    public function validate($value, Constraint|Enum $constraint): void
+    public function validate($value, Constraint|EnumType $constraint): void
     {
-        if (!$constraint instanceof Enum) {
-            throw new RuntimeException(\sprintf('Object of class %s is not instance of %s', \get_class($constraint), Enum::class));
+        if (!$constraint instanceof EnumType) {
+            throw new RuntimeException(\sprintf('Object of class %s is not instance of %s', \get_class($constraint), EnumType::class));
         }
 
         if (!$constraint->entity) {
