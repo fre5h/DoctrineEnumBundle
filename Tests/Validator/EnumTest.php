@@ -12,10 +12,10 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 
-use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\Enum;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Validator\Exception\MissingOptionsException;
 
 /**
  * EnumTest.
@@ -24,41 +24,29 @@ use PHPUnit\Framework\TestCase;
  */
 final class EnumTest extends TestCase
 {
-    public function testConstructorWithRequiredArguments(): void
+    public function testConstructor(): void
     {
-        $constraint = new Enum(entity: BasketballPositionType::class);
+        $constraint = new Enum(['entity' => BasketballPositionType::class]);
 
         self::assertEquals(BasketballPositionType::getValues(), $constraint->choices);
-        self::assertTrue($constraint->strict);
     }
 
-    public function testConstructorWithAllArguments(): void
+    public function testMissedRequiredOption(): void
     {
-        $constraint = new Enum(entity: BasketballPositionType::class, message: 'test', groups: ['foo'], payload: ['bar' => 'baz']);
-
-        self::assertEquals(BasketballPositionType::getValues(), $constraint->choices);
-        self::assertTrue($constraint->strict);
-        self::assertEquals(BasketballPositionType::class, $constraint->entity);
-        self::assertEquals('test', $constraint->message);
-        self::assertEquals(['foo'], $constraint->groups);
-        self::assertEquals(['bar' => 'baz'], $constraint->payload);
-        self::assertNull($constraint->callback);
-        self::assertFalse($constraint->multiple);
-        self::assertNull($constraint->min);
-        self::assertNull($constraint->max);
+        $this->expectException(MissingOptionsException::class);
+        self::assertEquals(['entity'], (new Enum())->getRequiredOptions());
     }
 
-    public function testNotEnumType(): void
+    public function testGetRequiredOptions(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('stdClass is not instance of Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType');
+        $constraint = new Enum(['entity' => BasketballPositionType::class]);
 
-        new Enum(entity: \stdClass::class);
+        self::assertEquals(['entity'], $constraint->getRequiredOptions());
     }
 
     public function testGetDefaultOption(): void
     {
-        $constraint = new Enum(entity: BasketballPositionType::class);
+        $constraint = new Enum(['entity' => BasketballPositionType::class]);
 
         self::assertEquals('choices', $constraint->getDefaultOption());
     }
