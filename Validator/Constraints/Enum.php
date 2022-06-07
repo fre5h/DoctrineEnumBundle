@@ -50,7 +50,7 @@ class Enum extends Choice
             }
         }
 
-        parent::__construct($options); // @phpstan-ignore-line
+        parent::__construct($options);
     }
 
     /**
