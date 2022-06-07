@@ -14,10 +14,9 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
-use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
-use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\DBAL\Platforms\SQLServer2012Platform;
+use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 
@@ -86,38 +85,33 @@ abstract class AbstractEnumType extends Type
     /**
      * Gets the SQL declaration snippet for a field of this type.
      *
-     * @param array<string, string> $fieldDeclaration The field declaration
-     * @param AbstractPlatform      $platform         The currently used database platform
+     * @param array<string, string> $column   The column definition
+     * @param AbstractPlatform      $platform The currently used database platform
      *
      * @return string
      */
-    public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
+    public function getSqlDeclaration(array $column, AbstractPlatform $platform): string
     {
         $values = \implode(
             ', ',
             \array_map(
                 /** @var TValue $value */
-                static function ($value) {
+                static function (int|string $value) {
                     return "'{$value}'";
                 },
                 static::getValues()
             )
         );
 
-        switch (true) {
-            case $platform instanceof SqlitePlatform:
-                $sqlDeclaration = \sprintf('TEXT CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
-
-                break;
-            case $platform instanceof PostgreSQL94Platform:
-            case $platform instanceof PostgreSQL100Platform:
-            case $platform instanceof SQLServer2012Platform:
-                $sqlDeclaration = \sprintf('VARCHAR(255) CHECK(%s IN (%s))', $fieldDeclaration['name'], $values);
-
-                break;
-            default:
-                $sqlDeclaration = \sprintf('ENUM(%s)', $values);
-        }
+        $sqlDeclaration = match (true) {
+            $platform instanceof SqlitePlatform => \sprintf('TEXT CHECK(%s IN (%s))', $column['name'], $values),
+            $platform instanceof PostgreSQLPlatform, $platform instanceof SQLServerPlatform => \sprintf(
+                'VARCHAR(255) CHECK(%s IN (%s))',
+                $column['name'],
+                $values
+            ),
+            default => \sprintf('ENUM(%s)', $values),
+        };
 
         $defaultValue = static::getDefaultValue();
         if (null !== $defaultValue) {
