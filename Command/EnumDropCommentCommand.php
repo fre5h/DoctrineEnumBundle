@@ -26,19 +26,16 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 
 /**
  * EnumDropCommentCommand.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
+#[AsCommand(name: 'doctrine:enum:drop-comment', description: 'Drop comment in DB for the column of registered ENUM type')]
 final class EnumDropCommentCommand extends Command
 {
-    protected static $defaultName = 'doctrine:enum:drop-comment';
-
-    /** @var string */
-    protected static $defaultDescription = 'Drop comment in DB for the column of registered ENUM type';
-
     private ManagerRegistry $registry;
 
     private EntityManagerInterface $em;
@@ -88,7 +85,6 @@ final class EnumDropCommentCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription(self::$defaultDescription)
             ->setDefinition(
                 new InputDefinition([
                     new InputArgument('enumType', InputArgument::REQUIRED, 'Registered ENUM type'),
