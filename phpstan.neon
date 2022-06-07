@@ -3,7 +3,7 @@ includes:
     - 'vendor/phpstan/phpstan-phpunit/rules.neon'
     - 'vendor/phpstan/phpstan-doctrine/extension.neon'
     - 'vendor/phpstan/phpstan-symfony/extension.neon'
-#    - 'vendor/slam/phpstan-extensions/conf/slam-rules.neon'
+    - 'vendor/slam/phpstan-extensions/conf/slam-rules.neon'
 parameters:
     level: 9
     excludePaths:

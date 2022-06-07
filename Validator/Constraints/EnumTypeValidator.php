@@ -24,15 +24,15 @@ use Symfony\Component\Validator\Constraints\ChoiceValidator;
 class EnumTypeValidator extends ChoiceValidator
 {
     /**
-     * @param mixed           $value
-     * @param Constraint|Enum $constraint
+     * @param mixed               $value
+     * @param Constraint|EnumType $constraint
      *
      * @throws RuntimeException
      */
-    public function validate($value, Constraint|Enum $constraint): void
+    public function validate(mixed $value, Constraint|EnumType $constraint): void
     {
         if (!$constraint instanceof EnumType) {
-            throw new RuntimeException(\sprintf('Object of class %s is not instance of %s', \get_class($constraint), Enum::class));
+            throw new RuntimeException(\sprintf('Object of class %s is not instance of %s', \get_class($constraint), EnumType::class));
         }
 
         $constraint->choices = $constraint->entity::getValues();

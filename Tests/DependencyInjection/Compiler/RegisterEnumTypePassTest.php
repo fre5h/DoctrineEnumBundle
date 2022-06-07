@@ -29,10 +29,10 @@ use Symfony\Component\DependencyInjection\Definition;
 final class RegisterEnumTypePassTest extends TestCase
 {
     /** @var ContainerBuilder|MockObject */
-    private $containerBuilder;
+    private ContainerBuilder|MockObject $containerBuilder;
 
     /** @var ManagerRegistry|MockObject */
-    private $managerRegistry;
+    private ManagerRegistry|MockObject $managerRegistry;
 
     private RegisterEnumTypePass $registerEnumTypePass;
 
