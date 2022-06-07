@@ -31,16 +31,16 @@ use Symfony\Component\Console\Tester\CommandTester;
 final class EnumDropCommentCommandTest extends TestCase
 {
     /** @var EntityManagerInterface|MockObject */
-    private $em;
+    private EntityManagerInterface|MockObject $em;
 
     /** @var ManagerRegistry|MockObject */
-    private $registry;
+    private ManagerRegistry|MockObject $registry;
 
     /** @var Connection|MockObject */
-    private $connection;
+    private Connection|MockObject $connection;
 
     /** @var AbstractPlatform|MockObject */
-    private $platform;
+    private AbstractPlatform|MockObject $platform;
 
     private Command $command;
 

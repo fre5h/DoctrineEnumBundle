@@ -63,7 +63,7 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
      * @param int|string|null $enumValue
      * @param string|null $enumType
      */
-    public function testGetReadableEnumValue($expectedReadableValue, $enumValue, ?string $enumType): void
+    public function testGetReadableEnumValue(int|string|null $expectedReadableValue, int|string|null $enumValue, ?string $enumType): void
     {
         self::assertEquals(
             $expectedReadableValue,
