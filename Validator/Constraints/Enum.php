@@ -14,6 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Exception\MissingOptionsException;
 
 /**
  * ENUM Constraint.
@@ -36,16 +37,20 @@ class Enum extends Choice
     {
         $this->strict = true;
 
-        if (isset($options['entity'])) {
+        if (!\is_array($options) || !\array_key_exists('entity', $options)) {
+            throw new MissingOptionsException(sprintf('Option "entity" is required for constraint "%s".', __CLASS__), ['entity']);
+        }
+
+        if (null !== $options['entity']) {
             /** @var AbstractEnumType<int|string, int|string> $entity */
             $entity = $options['entity'];
 
-            if (\is_subclass_of($entity, AbstractEnumType::class)) {
+            if (\is_subclass_of($entity, AbstractEnumType::class)) { // @phpstan-ignore-line
                 $this->choices = $entity::getValues();
             }
         }
 
-        parent::__construct($options);
+        parent::__construct($options); // @phpstan-ignore-line
     }
 
     /**
