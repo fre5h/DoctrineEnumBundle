@@ -14,10 +14,9 @@ namespace Fresh\DoctrineEnumBundle\Tests\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
-use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
-use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\DBAL\Platforms\SQLServer2012Platform;
+use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
@@ -82,19 +81,14 @@ final class AbstractEnumTypeTest extends TestCase
             new SqlitePlatform(),
             "TEXT CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
-        yield 'postgresql_9' => [
+        yield 'postgresql' => [
             ['name' => 'position'],
-            new PostgreSQL94Platform(),
-            "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
-        ];
-        yield 'postgresql_10' => [
-            ['name' => 'position'],
-            new PostgreSQL100Platform(),
+            new PostgreSQLPlatform(),
             "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
         yield 'sql server' => [
             ['name' => 'position'],
-            new SQLServer2012Platform(),
+            new SQLServerPlatform(),
             "VARCHAR(255) CHECK(position IN ('PG', 'SG', 'SF', 'PF', 'C'))",
         ];
     }
@@ -124,19 +118,14 @@ final class AbstractEnumTypeTest extends TestCase
             new SqlitePlatform(),
             "TEXT CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
         ];
-        yield 'postgresql_9' => [
+        yield 'postgresql' => [
             ['name' => 'position'],
-            new PostgreSQL94Platform(),
-            "VARCHAR(255) CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
-        ];
-        yield 'postgresql_10' => [
-            ['name' => 'position'],
-            new PostgreSQL100Platform(),
+            new PostgreSQLPlatform(),
             "VARCHAR(255) CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
         ];
         yield 'sql server' => [
             ['name' => 'position'],
-            new SQLServer2012Platform(),
+            new SQLServerPlatform(),
             "VARCHAR(255) CHECK(position IN ('pending', 'done', 'failed')) DEFAULT 'pending'",
         ];
     }
@@ -268,9 +257,8 @@ final class AbstractEnumTypeTest extends TestCase
     {
         $testProviders = [
             new SqlitePlatform(),
-            new PostgreSQL94Platform(),
-            new PostgreSQL100Platform(),
-            new SQLServer2012Platform(),
+            new PostgreSQLPlatform(),
+            new SQLServerPlatform(),
         ];
 
         foreach ($testProviders as $testProvider) {
