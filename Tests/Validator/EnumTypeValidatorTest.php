@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 final class EnumTypeValidatorTest extends TestCase
 {
     /** @var ExecutionContext|MockObject */
-    private $context;
+    private ExecutionContext|MockObject $context;
 
     private EnumTypeValidator $enumValidator;
 
