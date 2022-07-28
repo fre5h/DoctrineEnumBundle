@@ -36,15 +36,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'doctrine:enum:drop-comment', description: 'Drop comment in DB for the column of registered ENUM type')]
 final class EnumDropCommentCommand extends Command
 {
-    private ManagerRegistry $registry;
-
     private EntityManagerInterface $em;
 
     /** @var string[] */
     private array $registeredEnumTypes = [];
 
     /** @var string|mixed */
-    private $enumType;
+    private mixed $enumType;
 
     /**
      * @param ManagerRegistry                      $registry
@@ -53,11 +51,9 @@ final class EnumDropCommentCommand extends Command
      *
      * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      */
-    public function __construct(ManagerRegistry $registry, array $registeredTypes, ?string $name = null)
+    public function __construct(private readonly ManagerRegistry $registry, array $registeredTypes, ?string $name = null)
     {
         parent::__construct($name);
-
-        $this->registry = $registry;
 
         foreach ($registeredTypes as $type => $details) {
             $registeredEnumTypeFQCN = $details['class'];
