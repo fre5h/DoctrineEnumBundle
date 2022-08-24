@@ -8,6 +8,9 @@ namespace App\DBAL\Types;
 
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 
+/**
+ * @extends AbstractEnumType<string, string>
+ */
 final class MapLocationType extends AbstractEnumType
 {
     public final const NORTH = 'N';
