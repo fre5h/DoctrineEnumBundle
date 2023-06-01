@@ -96,7 +96,7 @@ final class EnumDropCommentCommandTest extends TestCase
     public function testExceptionInConstructor(): void
     {
         $this->expectException(EnumTypeIsRegisteredButClassDoesNotExistException::class);
-        $this->expectErrorMessage('ENUM type "CustomType" is registered as "Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\CustomType", but that class does not exist');
+        $this->expectExceptionMessage('ENUM type "CustomType" is registered as "Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\CustomType", but that class does not exist');
 
         new EnumDropCommentCommand(
             $this->registry,
