@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
          colors="true"
          bootstrap="vendor/autoload.php"
 >
@@ -10,8 +10,8 @@
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>
-
-    <coverage includeUncoveredFiles="false">
+         
+    <source>
         <include>
             <directory suffix=".php">./</directory>
         </include>
@@ -20,5 +20,8 @@
             <directory suffix=".php">./Tests</directory>
             <directory suffix=".php">./vendor</directory>
         </exclude>
+    </source>
+
+    <coverage includeUncoveredFiles="false">
     </coverage>
 </phpunit>
