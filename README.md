@@ -24,7 +24,7 @@
 
 | Bundle Version (X.Y.Z) |    PHP     |  Symfony   | Doctrine Bundle | Comment             |
 |:----------------------:|:----------:|:----------:|:---------------:|:--------------------|
-|        `9.0.*`         | `>= 8.1.0` | `6.1, 6.2` |    `>= 2.6`     | **Current version** |
+|        `9.0.*`         | `>= 8.1.0` | `>= 6.1`   |    `>= 2.6`     | **Current version** |
 |        `8.1.*`         | `>= 8.1.0` | `5.4, 6.0` |    `>= 2.5`     | Previous version    |
 
 #### Check the `config/bundles.php` file
