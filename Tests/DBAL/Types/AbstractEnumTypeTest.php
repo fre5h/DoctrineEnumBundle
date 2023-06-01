@@ -165,7 +165,7 @@ final class AbstractEnumTypeTest extends TestCase
     public function testGetRandomValueWithException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectErrorMessage('There is no value in Enum type');
+        $this->expectExceptionMessage('There is no value in Enum type');
 
         NoValueType::getRandomValue();
     }
