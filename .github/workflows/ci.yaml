@@ -90,6 +90,7 @@ jobs:
           - '8.2'
         symfony-version:
           - '6.2'
+          - '6.3'
     steps:
       - name: 'Checkout Code'
         uses: actions/checkout@v2
