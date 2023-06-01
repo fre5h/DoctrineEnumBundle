@@ -12,3 +12,4 @@ parameters:
     fileExtensions:
         - 'php'
     checkGenericClassInNonGenericObjectType: false
+    treatPhpDocTypesAsCertain: false
