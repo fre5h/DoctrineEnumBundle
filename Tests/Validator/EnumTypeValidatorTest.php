@@ -73,13 +73,17 @@ final class EnumTypeValidatorTest extends TestCase
         $constraint = new EnumType(entity: BasketballPositionType::class);
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
+        $matcher = $this->exactly(2);
+
         $constraintValidationBuilder
             ->expects(self::exactly(2))
             ->method('setParameter')
-            ->withConsecutive(
-                [self::equalTo('{{ value }}'), self::equalTo('"Pitcher"')],
-                [self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"')]
-            )
+            ->willReturnCallback(function () use ($matcher, $secret) {
+                return match ($matcher->numberOfInvocations()) {
+                    1 => [self::equalTo('{{ value }}'), self::equalTo('"Pitcher"')],
+                    2 => [self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"')],
+                };
+            })
             ->willReturn($constraintValidationBuilder, $constraintValidationBuilder)
         ;
 

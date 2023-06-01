@@ -3,7 +3,7 @@
 📦 Provides **ENUM type** support for Doctrine in Symfony applications.
 
 [![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/fre5h/DoctrineEnumBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/fre5h/DoctrineEnumBundle/)
-[![Build Status](https://img.shields.io/github/workflow/status/fre5h/DoctrineEnumBundle/CI/main?style=flat-square)](https://github.com/fre5h/DoctrineEnumBundle/actions?query=workflow%3ACI+branch%3Amain+)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/fre5h/DoctrineEnumBundle/ci.yaml?branch=main&style=flat-square)](https://github.com/fre5h/DoctrineEnumBundle/actions?query=workflow%3ACI+branch%3Amain+)
 [![CodeCov](https://img.shields.io/codecov/c/github/fre5h/DoctrineEnumBundle.svg?style=flat-square)](https://codecov.io/github/fre5h/DoctrineEnumBundle)
 [![License](https://img.shields.io/packagist/l/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
 [![Latest Stable Version](https://img.shields.io/packagist/v/fresh/doctrine-enum-bundle.svg?style=flat-square)](https://packagist.org/packages/fresh/doctrine-enum-bundle)
@@ -24,7 +24,7 @@
 
 | Bundle Version (X.Y.Z) |    PHP     |  Symfony   | Doctrine Bundle | Comment             |
 |:----------------------:|:----------:|:----------:|:---------------:|:--------------------|
-|        `9.0.*`         | `>= 8.1.0` |   `6.1`    |    `>= 2.6`     | **Current version** |
+|        `9.1.*`         | `>= 8.1.0` | `>= 6.1`   |    `>= 2.9`     | **Current version** |
 |        `8.1.*`         | `>= 8.1.0` | `5.4, 6.0` |    `>= 2.5`     | Previous version    |
 
 #### Check the `config/bundles.php` file

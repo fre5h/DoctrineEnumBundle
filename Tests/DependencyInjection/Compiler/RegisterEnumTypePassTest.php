@@ -105,10 +105,18 @@ final class RegisterEnumTypePassTest extends TestCase
             ->method('setArgument')
         ;
 
+        $matcher = $this->exactly(2);
+
         $this->containerBuilder
             ->expects(self::exactly(3))
             ->method('getDefinition')
-            ->withConsecutive(['default'], ['custom1'], ['custom2'])
+            ->willReturnCallback(function () use ($matcher) {
+                return match ($matcher->numberOfInvocations()) {
+                    1 => ['default'],
+                    2 => ['custom1'],
+                    3 => ['custom2'],
+                };
+            })
             ->willReturnOnConsecutiveCalls($default, $custom1, $custom2)
         ;
 
@@ -125,7 +133,7 @@ final class RegisterEnumTypePassTest extends TestCase
         ;
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectErrorMessage('Service "doctrine" is missed in container');
+        $this->expectExceptionMessage('Service "doctrine" is missed in container');
 
         $this->registerEnumTypePass->process($this->containerBuilder);
     }
