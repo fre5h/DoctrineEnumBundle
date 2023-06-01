@@ -125,7 +125,7 @@ final class RegisterEnumTypePassTest extends TestCase
         ;
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectErrorMessage('Service "doctrine" is missed in container');
+        $this->expectExceptionMessage('Service "doctrine" is missed in container');
 
         $this->registerEnumTypePass->process($this->containerBuilder);
     }
