@@ -111,7 +111,7 @@ jobs:
         working-directory: './'
 
       - name: 'Run PHPUnit'
-        run: ./vendor/bin/phpunit -v -c phpunit.xml.dist
+        run: ./vendor/bin/phpunit -c phpunit.xml.dist
 
   code-coverage:
     needs: test
