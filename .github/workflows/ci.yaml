@@ -136,7 +136,7 @@ jobs:
         working-directory: './'
 
       - name: 'Run PHPUnit with Code Coverage'
-        run: ./vendor/bin/phpunit -v -c phpunit.xml.dist --coverage-clover=coverage.xml
+        run: ./vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.xml
 
       - name: 'Download Coverage Files'
         uses: actions/download-artifact@v2
