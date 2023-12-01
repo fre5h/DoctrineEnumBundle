@@ -22,15 +22,15 @@
 
 ##### Choose the version you need
 
-| Bundle Version (X.Y.Z) |    PHP     |  Symfony   | Doctrine Bundle | Comment             |
-|:----------------------:|:----------:|:----------:|:---------------:|:--------------------|
-|        `9.1.*`         | `>= 8.1.0` | `>= 6.1`   |    `>= 2.9`     | **Current version** |
-|        `8.1.*`         | `>= 8.1.0` | `5.4, 6.0` |    `>= 2.5`     | Previous version    |
+| Bundle Version (X.Y.Z) |    PHP   |  Symfony   | Doctrine Bundle |       Comment       |
+|:----------------------:|:--------:|:----------:|:---------------:|:--------------------|
+|       `10.0.*`         | `>= 8.2` | `>= 7.0`   |    `>= 2.9`     | **Current version** |
+|        `9.2.*`         | `>= 8.1` | `>= 6.1`   |    `>= 2.9`     | Previous version    |
 
 #### Check the `config/bundles.php` file
 
 By default, Symfony Flex will add this bundle to the `config/bundles.php` file.
-But in case when you ignored `contrib-recipe` during bundle installation it would not be added. In this case add the bundle manually:
+But in case you ignored `contrib-recipe` during bundle installation it would not be added. In this case add the bundle manually:
 
 ```php
 # config/bundles.php
