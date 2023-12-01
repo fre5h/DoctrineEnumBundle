@@ -157,8 +157,9 @@ jobs:
           path: reports
 
       - name: 'Upload to Codecov'
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           files: ./coverage.xml
           fail_ci_if_error: true
+          flags: unittests
           verbose: true
