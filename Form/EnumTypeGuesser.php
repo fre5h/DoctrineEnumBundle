@@ -47,8 +47,10 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
     }
 
     /**
-     * @param string $class
-     * @param string $property
+     * @template T of object
+     *
+     * @param class-string<T> $class
+     * @param string          $property
      *
      * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      *
