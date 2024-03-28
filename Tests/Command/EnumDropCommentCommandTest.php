@@ -17,6 +17,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
+use Doctrine\ORM\Mapping\FieldMapping;
 use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\Command\EnumDropCommentCommand;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
@@ -244,7 +245,7 @@ final class EnumDropCommentCommandTest extends TestCase
         $metadata->expects(self::once())->method('getTableName')->willReturn('tasks');
         $metadata->expects(self::once())->method('getFieldNames')->willReturn(['status']);
         $metadata->expects(self::once())->method('getTypeOfField')->with('status')->willReturn('TaskStatusType');
-        $metadata->expects(self::once())->method('getFieldMapping')->with('status')->willReturn(['columnName' => 'task_column_name']);
+        $metadata->expects(self::once())->method('getFieldMapping')->with('status')->willReturn(FieldMapping::fromMappingArray(['type'=> 'string', 'columnName' => 'task_column_name', 'fieldName' => 'test']));
 
         $this->platform->expects(self::once())->method('getCommentOnColumnSQL')->with('tasks', 'task_column_name', null)->willReturn('test SQL');
 

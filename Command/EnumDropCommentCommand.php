@@ -161,6 +161,7 @@ HELP
 
                     foreach ($metadata->getFieldNames() as $fieldName) {
                         if ($metadata->getTypeOfField($fieldName) === $this->enumType) {
+                            /** @var array{columnName: string} $fieldMappingDetails */
                             $fieldMappingDetails = $metadata->getFieldMapping($fieldName);
                             $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
                             $connection->executeQuery($sql);
