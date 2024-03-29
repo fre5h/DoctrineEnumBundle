@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Tests\Form;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
@@ -61,12 +62,19 @@ final class EnumTypeGuesserTest extends TestCase
             ->getMock()
         ;
 
-        $metadata = $this
-            ->getMockBuilder(ClassMetadataInfo::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField'])
-            ->getMock()
-        ;
+        if(class_exists(ClassMetadata::class)) {
+            $metadata = $this->getMockBuilder(ClassMetadata::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField'])
+                ->getMock()
+            ;
+        } else {
+            $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField'])
+                ->getMock()
+            ;
+        }
 
         $metadata
             ->expects(self::once())
@@ -101,12 +109,19 @@ final class EnumTypeGuesserTest extends TestCase
             ->getMock()
         ;
 
-        $metadata = $this
-            ->getMockBuilder(ClassMetadataInfo::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField'])
-            ->getMock()
-        ;
+        if(class_exists(ClassMetadata::class)) {
+            $metadata = $this->getMockBuilder(ClassMetadata::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField'])
+                ->getMock()
+            ;
+        } else {
+            $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField'])
+                ->getMock()
+            ;
+        }
 
         $metadata
             ->expects(self::once())
@@ -142,13 +157,19 @@ final class EnumTypeGuesserTest extends TestCase
             ->onlyMethods(['getMetadata'])
             ->getMock()
         ;
-
-        $metadata = $this
-            ->getMockBuilder(ClassMetadataInfo::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField'])
-            ->getMock()
-        ;
+        if(class_exists(ClassMetadata::class)) {
+            $metadata = $this->getMockBuilder(ClassMetadata::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField'])
+                ->getMock()
+            ;
+        } else {
+            $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField'])
+                ->getMock()
+            ;
+        }
 
         $metadata
             ->expects(self::once())
@@ -183,13 +204,18 @@ final class EnumTypeGuesserTest extends TestCase
             ->getMock()
         ;
 
-        $metadata = $this
-            ->getMockBuilder(ClassMetadataInfo::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField', 'isNullable'])
-            ->getMock()
-        ;
-
+        if(class_exists(ClassMetadata::class)) {
+            $metadata = $this->getMockBuilder(ClassMetadata::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField', 'isNullable'])
+                ->getMock()
+            ;
+        } else {
+            $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField', 'isNullable'])
+                ->getMock();
+        }
         $metadata
             ->expects(self::once())
             ->method('getTypeOfField')
@@ -238,12 +264,19 @@ final class EnumTypeGuesserTest extends TestCase
             ->getMock()
         ;
 
-        $metadata = $this
-            ->getMockBuilder(ClassMetadataInfo::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getTypeOfField', 'isNullable'])
-            ->getMock()
-        ;
+        if(class_exists(ClassMetadata::class)) {
+            $metadata = $this->getMockBuilder(ClassMetadata::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField', 'isNullable'])
+                ->getMock()
+            ;
+        } else {
+            $metadata = $this->getMockBuilder(ClassMetadataInfo::class)
+                ->disableOriginalConstructor()
+                ->onlyMethods(['getTypeOfField', 'isNullable'])
+                ->getMock()
+            ;
+        }
 
         $metadata
             ->expects(self::once())

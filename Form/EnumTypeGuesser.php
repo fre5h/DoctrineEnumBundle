@@ -65,7 +65,7 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
             return null;
         }
 
-        /** @var \Doctrine\ORM\Mapping\ClassMetadataInfo<object> $metadata */
+        /** @var \Doctrine\ORM\Mapping\ClassMetadata<object> $metadata */
         [$metadata] = $classMetadata;
         $fieldType = $metadata->getTypeOfField($property);
 
