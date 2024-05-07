@@ -12,13 +12,11 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Command;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
-use Fresh\DoctrineEnumBundle\Exception\RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -164,7 +162,7 @@ HELP
                         if ($metadata->getTypeOfField($fieldName) === $this->enumType) {
                             /** @var array{columnName: string} $fieldMappingDetails */
                             $fieldMappingDetails = $metadata->getFieldMapping($fieldName);
-                            $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
+                            $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], 'NULL');
                             $connection->executeQuery($sql);
 
                             $io->text(\sprintf(' * %s::$%s   <info>Dropped ✔</info>', $entityName, $fieldName));
