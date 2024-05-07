@@ -275,4 +275,12 @@ final class EnumDropCommentCommandTest extends TestCase
             'sqlColumnComment' => 'custom.tasks',
         ];
     }
+
+    #[Test]
+    public function autocomplete(): void
+    {
+        $enumTypes = $this->command->getEnumTypesForAutocompletion();
+
+        self::assertSame(['BasketballPositionType', 'TaskStatusType'], $enumTypes);
+    }
 }

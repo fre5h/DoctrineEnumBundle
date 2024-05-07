@@ -74,6 +74,16 @@ final class EnumDropCommentCommand extends Command
     }
 
     /**
+     * @return \Closure
+     */
+    public function getEnumTypesForAutocompletion(): \Closure
+    {
+        return function () {
+            return \array_keys($this->registeredEnumTypes);
+        };
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configure(): void
@@ -81,7 +91,7 @@ final class EnumDropCommentCommand extends Command
         $this
             ->setDefinition(
                 new InputDefinition([
-                    new InputArgument('enumType', InputArgument::REQUIRED, 'Registered ENUM type'),
+                    new InputArgument('enumType', InputArgument::REQUIRED, 'Registered ENUM type', null, $this->getEnumTypesForAutocompletion()),
                     new InputOption('em', null, InputOption::VALUE_OPTIONAL, 'The entity manager to use for this command'),
                 ])
             )
