@@ -279,7 +279,7 @@ final class EnumDropCommentCommandTest extends TestCase
     #[Test]
     public function autocomplete(): void
     {
-        $enumTypes = $this->command->getEnumTypesForAutocompletion();
+        $enumTypes = $this->command->getEnumTypesForAutocompletion()();
 
         self::assertSame(['BasketballPositionType', 'TaskStatusType'], $enumTypes);
     }
