@@ -240,7 +240,7 @@ final class EnumDropCommentCommandTest extends TestCase
             FieldMapping::fromMappingArray(['type'=> 'string', 'columnName' => 'task_column_name', 'fieldName' => 'test'])
         );
 
-        $this->platform->expects(self::once())->method('getCommentOnColumnSQL')->with($sqlColumnComment, 'task_column_name', null)->willReturn('test SQL');
+        $this->platform->expects(self::once())->method('getCommentOnColumnSQL')->with($sqlColumnComment, 'task_column_name', 'NULL')->willReturn('test SQL');
 
         $this->connection->expects(self::once())->method('executeQuery')->with('test SQL');
 
