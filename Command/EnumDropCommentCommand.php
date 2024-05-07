@@ -157,7 +157,11 @@ HELP
 
                 foreach ($allMetadata as $metadata) {
                     $entityName = $metadata->getName();
-                    $tableName = $metadata->getTableName();
+                    if (!empty($metadata->getSchemaName())) {
+                        $tableName = $metadata->getSchemaName().".".$metadata->getTableName();
+                    } else {
+                        $tableName = $metadata->getTableName();
+                    }
 
                     foreach ($metadata->getFieldNames() as $fieldName) {
                         if ($metadata->getTypeOfField($fieldName) === $this->enumType) {

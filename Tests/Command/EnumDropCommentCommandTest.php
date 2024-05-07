@@ -226,7 +226,13 @@ final class EnumDropCommentCommandTest extends TestCase
         self::assertStringContainsString('NO METADATA FOUND', $output);
     }
 
-    public function testSuccessfulExecutionWithMetadata(): void
+    /**
+     * @dataProvider dataProviderForMetadataTest
+     *
+     * @param string|null $schemaName
+     * @param string      $sqlColumnComment
+     */
+    public function testSuccessfulExecutionWithMetadata(?string $schemaName, string $sqlColumnComment): void
     {
         $this->connection
             ->expects(self::once())
@@ -242,12 +248,15 @@ final class EnumDropCommentCommandTest extends TestCase
         ;
 
         $metadata->expects(self::once())->method('getName')->willReturn('Task');
+        $metadata->expects(self::once())->method('getSchemaName')->willReturn($schemaName);
         $metadata->expects(self::once())->method('getTableName')->willReturn('tasks');
         $metadata->expects(self::once())->method('getFieldNames')->willReturn(['status']);
         $metadata->expects(self::once())->method('getTypeOfField')->with('status')->willReturn('TaskStatusType');
-        $metadata->expects(self::once())->method('getFieldMapping')->with('status')->willReturn(FieldMapping::fromMappingArray(['type'=> 'string', 'columnName' => 'task_column_name', 'fieldName' => 'test']));
+        $metadata->expects(self::once())->method('getFieldMapping')->with('status')->willReturn(
+            FieldMapping::fromMappingArray(['type'=> 'string', 'columnName' => 'task_column_name', 'fieldName' => 'test'])
+        );
 
-        $this->platform->expects(self::once())->method('getCommentOnColumnSQL')->with('tasks', 'task_column_name', null)->willReturn('test SQL');
+        $this->platform->expects(self::once())->method('getCommentOnColumnSQL')->with($sqlColumnComment, 'task_column_name', null)->willReturn('test SQL');
 
         $this->connection->expects(self::once())->method('executeQuery')->with('test SQL');
 
@@ -265,5 +274,21 @@ final class EnumDropCommentCommandTest extends TestCase
         self::assertStringContainsString(' * Task::$status   Dropped ✔', $output);
         self::assertStringContainsString('TOTAL: 1', $output);
         self::assertStringContainsString('DONE', $output);
+    }
+
+    public static function dataProviderForMetadataTest(): iterable
+    {
+        yield 'no schema' => [
+            'schema' => null,
+            'sql_comment' => 'tasks',
+        ];
+        yield 'public schema' => [
+            'schema' => 'public',
+            'sql_comment' => 'public.tasks',
+        ];
+        yield 'custom schema' => [
+            'schema' => 'custom',
+            'sql_comment' => 'custom.tasks',
+        ];
     }
 }
