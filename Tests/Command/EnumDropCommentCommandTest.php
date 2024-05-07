@@ -232,7 +232,7 @@ final class EnumDropCommentCommandTest extends TestCase
         ;
 
         $metadata->expects(self::once())->method('getName')->willReturn('Task');
-        $metadata->expects(self::once())->method('getSchemaName')->willReturn($schemaName);
+        $metadata->expects(self::atLeast(1))->method('getSchemaName')->willReturn($schemaName);
         $metadata->expects(self::once())->method('getTableName')->willReturn('tasks');
         $metadata->expects(self::once())->method('getFieldNames')->willReturn(['status']);
         $metadata->expects(self::once())->method('getTypeOfField')->with('status')->willReturn('TaskStatusType');
