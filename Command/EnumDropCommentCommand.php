@@ -143,9 +143,6 @@ HELP
             $connection = $this->em->getConnection();
 
             $platform = $connection->getDatabasePlatform();
-            if (!$platform instanceof AbstractPlatform) {
-                throw new RuntimeException('Missing database platform for connection.', 3);
-            }
 
             $io->title(\sprintf('Dropping comments for <info>%s</info> type...', $this->enumType));
 

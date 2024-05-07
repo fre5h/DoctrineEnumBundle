@@ -22,10 +22,10 @@
 
 ##### Choose the version you need
 
-| Bundle Version (X.Y.Z) |    PHP   |  Symfony   | Doctrine Bundle |       Comment       |
+| Bundle Version (X.Y.Z) |    PHP   |  Symfony   | Doctrine Bundle | Comment             |
 |:----------------------:|:--------:|:----------:|:---------------:|:--------------------|
-|       `10.1.*`         | `>= 8.2` | `>= 7.0`   |    `>= 2.11`    | **Current version** |
-|        `9.2.*`         | `>= 8.1` | `>= 6.1`   |    `>= 2.9`     | Previous version    |
+|        `11.0.*`        | `>= 8.2` | `>= 7.0`   |    `>= 2.11`    | **Current version** |
+|        `10.1.*`        | `>= 8.2` | `>= 7.0`   |    `>= 2.11`    | Previous            |
 
 #### Check the `config/bundles.php` file
 

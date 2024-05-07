@@ -165,27 +165,6 @@ final class EnumDropCommentCommandTest extends TestCase
     }
 
     #[Test]
-    public function missingDatabasePlatformForConnection(): void
-    {
-        $this->connection
-            ->expects(self::once())
-            ->method('getDatabasePlatform')
-            ->willReturn(null)
-        ;
-
-        $result = $this->commandTester->execute(
-            [
-                'command' => $this->command->getName(),
-                'enumType' => 'TaskStatusType',
-            ]
-        );
-        self::assertSame(3, $result);
-
-        $output = $this->commandTester->getDisplay();
-        self::assertStringContainsString('Missing database platform for connection.', $output);
-    }
-
-    #[Test]
     public function executionWithCaughtException(): void
     {
         $this->connection
