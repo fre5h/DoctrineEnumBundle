@@ -23,6 +23,8 @@ use Fresh\DoctrineEnumBundle\Command\EnumDropCommentCommand;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\TaskStatusType;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
@@ -94,7 +96,8 @@ final class EnumDropCommentCommandTest extends TestCase
         );
     }
 
-    public function testExceptionInConstructor(): void
+    #[Test]
+    public function exceptionInConstructor(): void
     {
         $this->expectException(EnumTypeIsRegisteredButClassDoesNotExistException::class);
         $this->expectExceptionMessage('ENUM type "CustomType" is registered as "Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\CustomType", but that class does not exist');
@@ -110,7 +113,8 @@ final class EnumDropCommentCommandTest extends TestCase
         $this->commandTester->getDisplay();
     }
 
-    public function testExceptionOnExecution(): void
+    #[Test]
+    public function exceptionOnExecution(): void
     {
         $this->em
             ->expects(self::once())
@@ -130,7 +134,8 @@ final class EnumDropCommentCommandTest extends TestCase
         self::assertStringContainsString('test', $output);
     }
 
-    public function testInvalidEnumTypeArgument(): void
+    #[Test]
+    public function invalidEnumTypeArgument(): void
     {
         $result = $this->commandTester->execute(
             [
@@ -144,7 +149,8 @@ final class EnumDropCommentCommandTest extends TestCase
         self::assertStringContainsString('Argument "enumType" is not a string.', $output);
     }
 
-    public function testExceptionNotRegisteredEnumType(): void
+    #[Test]
+    public function exceptionNotRegisteredEnumType(): void
     {
         $result = $this->commandTester->execute(
             [
@@ -158,7 +164,8 @@ final class EnumDropCommentCommandTest extends TestCase
         self::assertStringContainsString('Argument "enumType" is not a registered ENUM type.', $output);
     }
 
-    public function testMissingDatabasePlatformForConnection(): void
+    #[Test]
+    public function missingDatabasePlatformForConnection(): void
     {
         $this->connection
             ->expects(self::once())
@@ -178,7 +185,8 @@ final class EnumDropCommentCommandTest extends TestCase
         self::assertStringContainsString('Missing database platform for connection.', $output);
     }
 
-    public function testExecutionWithCaughtException(): void
+    #[Test]
+    public function executionWithCaughtException(): void
     {
         $this->connection
             ->expects(self::once())
@@ -198,7 +206,8 @@ final class EnumDropCommentCommandTest extends TestCase
         self::assertStringContainsString('test', $output);
     }
 
-    public function testSuccessfulExecutionWithNoMetadata(): void
+    #[Test]
+    public function successfulExecutionWithNoMetadata(): void
     {
         $this->connection
             ->expects(self::once())
@@ -226,13 +235,9 @@ final class EnumDropCommentCommandTest extends TestCase
         self::assertStringContainsString('NO METADATA FOUND', $output);
     }
 
-    /**
-     * @dataProvider dataProviderForMetadataTest
-     *
-     * @param string|null $schemaName
-     * @param string      $sqlColumnComment
-     */
-    public function testSuccessfulExecutionWithMetadata(?string $schemaName, string $sqlColumnComment): void
+    #[Test]
+    #[DataProvider('dataProviderForMetadataTest')]
+    public function successfulExecutionWithMetadata(?string $schemaName, string $sqlColumnComment): void
     {
         $this->connection
             ->expects(self::once())

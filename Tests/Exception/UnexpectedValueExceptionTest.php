@@ -14,6 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Exception;
 
 use Fresh\DoctrineEnumBundle\Exception\ExceptionInterface;
 use Fresh\DoctrineEnumBundle\Exception\UnexpectedValueException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,7 +24,8 @@ use PHPUnit\Framework\TestCase;
  */
 final class UnexpectedValueExceptionTest extends TestCase
 {
-    public function testConstructor(): void
+    #[Test]
+    public function validCreation(): void
     {
         $exception = new UnexpectedValueException();
 

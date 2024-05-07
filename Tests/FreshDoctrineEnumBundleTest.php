@@ -14,6 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Tests;
 
 use Fresh\DoctrineEnumBundle\DependencyInjection\Compiler\RegisterEnumTypePass;
 use Fresh\DoctrineEnumBundle\FreshDoctrineEnumBundle;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -24,7 +25,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 final class FreshDoctrineEnumBundleTest extends TestCase
 {
-    public function testBuild(): void
+    #[Test]
+    public function build(): void
     {
         $containerBuilder = $this->createMock(ContainerBuilder::class);
         $containerBuilder

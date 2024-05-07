@@ -16,6 +16,7 @@ use Fresh\DoctrineEnumBundle\Exception\RuntimeException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumTypeValidator;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContext;
@@ -47,7 +48,8 @@ final class EnumTypeValidatorTest extends TestCase
         );
     }
 
-    public function testValidateIncorrectConstraintClass(): void
+    #[Test]
+    public function validateIncorrectConstraintClass(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessageMatches('/^Object of class .* is not instance of .*$/');
@@ -55,7 +57,8 @@ final class EnumTypeValidatorTest extends TestCase
         $this->enumValidator->validate(BasketballPositionType::POINT_GUARD, new DummyConstraint());
     }
 
-    public function testValidBasketballPositionType(): void
+    #[Test]
+    public function validBasketballPositionType(): void
     {
         $constraint = new EnumType(entity: BasketballPositionType::class);
 
@@ -68,7 +71,8 @@ final class EnumTypeValidatorTest extends TestCase
         $this->enumValidator->validate(BasketballPositionType::SMALL_FORWARD, $constraint);
     }
 
-    public function testInvalidBasketballPositionType(): void
+    #[Test]
+    public function invalidBasketballPositionType(): void
     {
         $constraint = new EnumType(entity: BasketballPositionType::class);
         $constraintValidationBuilder = $this->createMock(ConstraintViolationBuilder::class);

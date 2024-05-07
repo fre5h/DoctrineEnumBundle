@@ -17,6 +17,7 @@ use Fresh\DoctrineEnumBundle\Exception\EnumType\NoRegisteredEnumTypesException;
 use Fresh\DoctrineEnumBundle\Exception\LogicException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumValuesAsArrayTwigExtension;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFunction;
 
@@ -41,7 +42,8 @@ final class EnumValuesAsArrayTwigExtensionTest extends TestCase
         unset($this->enumValuesAsArrayTwigExtension);
     }
 
-    public function testGetFunctions(): void
+    #[Test]
+    public function getFunctions(): void
     {
         self::assertEquals(
             [
@@ -52,7 +54,8 @@ final class EnumValuesAsArrayTwigExtensionTest extends TestCase
         );
     }
 
-    public function testGetEnumValuesAsArray(): void
+    #[Test]
+    public function getEnumValuesAsArray(): void
     {
         self::assertEquals(
             ['PG', 'SG', 'SF', 'PF', 'C'],
@@ -60,7 +63,8 @@ final class EnumValuesAsArrayTwigExtensionTest extends TestCase
         );
     }
 
-    public function testGetReadableEnumValuesAsArray(): void
+    #[Test]
+    public function getReadableEnumValuesAsArray(): void
     {
         self::assertEquals(
             [
@@ -74,19 +78,22 @@ final class EnumValuesAsArrayTwigExtensionTest extends TestCase
         );
     }
 
-    public function testEnumTypeIsNotRegisteredException(): void
+    #[Test]
+    public function enumTypeIsNotRegisteredException(): void
     {
         $this->expectException(EnumTypeIsNotRegisteredException::class);
         $this->enumValuesAsArrayTwigExtension->getEnumValuesAsArray('MapLocationType');
     }
 
-    public function testNoRegisteredEnumTypesException(): void
+    #[Test]
+    public function noRegisteredEnumTypesException(): void
     {
         $this->expectException(NoRegisteredEnumTypesException::class);
         (new EnumValuesAsArrayTwigExtension([]))->getEnumValuesAsArray('MapLocationType');
     }
 
-    public function testInvalidCallable(): void
+    #[Test]
+    public function invalidCallable(): void
     {
         $extension = new EnumValuesAsArrayTwigExtension([]);
 
