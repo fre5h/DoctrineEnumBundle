@@ -279,16 +279,16 @@ final class EnumDropCommentCommandTest extends TestCase
     public static function dataProviderForMetadataTest(): iterable
     {
         yield 'no schema' => [
-            'schema' => null,
-            'sql_comment' => 'tasks',
+            'schemaName' => null,
+            'sqlColumnComment' => 'tasks',
         ];
         yield 'public schema' => [
-            'schema' => 'public',
-            'sql_comment' => 'public.tasks',
+            'schemaName' => 'public',
+            'sqlColumnComment' => 'public.tasks',
         ];
         yield 'custom schema' => [
-            'schema' => 'custom',
-            'sql_comment' => 'custom.tasks',
+            'schemaName' => 'custom',
+            'sqlColumnComment' => 'custom.tasks',
         ];
     }
 }

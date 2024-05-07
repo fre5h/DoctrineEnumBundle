@@ -158,7 +158,7 @@ HELP
                 foreach ($allMetadata as $metadata) {
                     $entityName = $metadata->getName();
                     if (!empty($metadata->getSchemaName())) {
-                        $tableName = $metadata->getSchemaName().".".$metadata->getTableName();
+                        $tableName = $metadata->getSchemaName().'.'.$metadata->getTableName();
                     } else {
                         $tableName = $metadata->getTableName();
                     }
