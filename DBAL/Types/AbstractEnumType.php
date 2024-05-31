@@ -15,7 +15,7 @@ namespace Fresh\DoctrineEnumBundle\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\DBAL\Platforms\SQLitePlatform;
 use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use Doctrine\DBAL\Types\Type;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
@@ -51,7 +51,7 @@ abstract class AbstractEnumType extends Type
      *
      * @return TValue|int|string
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): mixed
     {
         if (null !== $value && !isset(static::$choices[$value])) {
             throw new InvalidArgumentException(\sprintf('Invalid value "%s" for ENUM "%s".', $value, $this->getName()));
@@ -66,7 +66,7 @@ abstract class AbstractEnumType extends Type
      *
      * @return TValue
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         if (!isset(static::$choices[$value])) {
             return $value;
@@ -104,7 +104,7 @@ abstract class AbstractEnumType extends Type
         );
 
         $sqlDeclaration = match (true) {
-            $platform instanceof SqlitePlatform => \sprintf('TEXT CHECK(%s IN (%s))', $column['name'], $values),
+            $platform instanceof SQLitePlatform => \sprintf('TEXT CHECK(%s IN (%s))', $column['name'], $values),
             $platform instanceof PostgreSQLPlatform, $platform instanceof SQLServerPlatform => \sprintf(
                 'VARCHAR(255) CHECK(%s IN (%s))',
                 $column['name'],

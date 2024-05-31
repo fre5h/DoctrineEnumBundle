@@ -12,13 +12,11 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Command;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\EnumType\EnumTypeIsRegisteredButClassDoesNotExistException;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
-use Fresh\DoctrineEnumBundle\Exception\RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -76,6 +74,16 @@ final class EnumDropCommentCommand extends Command
     }
 
     /**
+     * @return \Closure
+     */
+    public function getEnumTypesForAutocompletion(): \Closure
+    {
+        return function () {
+            return \array_keys($this->registeredEnumTypes);
+        };
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configure(): void
@@ -83,7 +91,7 @@ final class EnumDropCommentCommand extends Command
         $this
             ->setDefinition(
                 new InputDefinition([
-                    new InputArgument('enumType', InputArgument::REQUIRED, 'Registered ENUM type'),
+                    new InputArgument('enumType', InputArgument::REQUIRED, 'Registered ENUM type', null, $this->getEnumTypesForAutocompletion()),
                     new InputOption('em', null, InputOption::VALUE_OPTIONAL, 'The entity manager to use for this command'),
                 ])
             )
@@ -143,9 +151,6 @@ HELP
             $connection = $this->em->getConnection();
 
             $platform = $connection->getDatabasePlatform();
-            if (!$platform instanceof AbstractPlatform) {
-                throw new RuntimeException('Missing database platform for connection.', 3);
-            }
 
             $io->title(\sprintf('Dropping comments for <info>%s</info> type...', $this->enumType));
 
@@ -157,13 +162,17 @@ HELP
 
                 foreach ($allMetadata as $metadata) {
                     $entityName = $metadata->getName();
-                    $tableName = $metadata->getTableName();
+                    if (!empty($metadata->getSchemaName())) {
+                        $tableName = $metadata->getSchemaName().'.'.$metadata->getTableName();
+                    } else {
+                        $tableName = $metadata->getTableName();
+                    }
 
                     foreach ($metadata->getFieldNames() as $fieldName) {
                         if ($metadata->getTypeOfField($fieldName) === $this->enumType) {
                             /** @var array{columnName: string} $fieldMappingDetails */
                             $fieldMappingDetails = $metadata->getFieldMapping($fieldName);
-                            $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], null);
+                            $sql = $platform->getCommentOnColumnSQL($tableName, $fieldMappingDetails['columnName'], 'NULL');
                             $connection->executeQuery($sql);
 
                             $io->text(\sprintf(' * %s::$%s   <info>Dropped ✔</info>', $entityName, $fieldName));

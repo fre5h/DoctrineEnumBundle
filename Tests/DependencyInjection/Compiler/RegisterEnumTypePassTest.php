@@ -15,6 +15,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\DependencyInjection\Compiler;
 use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DependencyInjection\Compiler\RegisterEnumTypePass;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -52,7 +53,8 @@ final class RegisterEnumTypePassTest extends TestCase
         );
     }
 
-    public function testProcessSuccessful(): void
+    #[Test]
+    public function processSuccessful(): void
     {
         $this->containerBuilder
             ->expects(self::once())
@@ -123,7 +125,8 @@ final class RegisterEnumTypePassTest extends TestCase
         $this->registerEnumTypePass->process($this->containerBuilder);
     }
 
-    public function testMissingDoctrine(): void
+    #[Test]
+    public function missingDoctrine(): void
     {
         $this->containerBuilder
             ->expects(self::once())

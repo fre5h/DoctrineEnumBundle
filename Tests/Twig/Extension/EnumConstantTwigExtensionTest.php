@@ -21,6 +21,8 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\HTTPStatusCodeType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFilter;
 
@@ -48,7 +50,8 @@ final class EnumConstantTwigExtensionTest extends TestCase
         unset($this->enumConstantTwigExtension);
     }
 
-    public function testGetFilters(): void
+    #[Test]
+    public function getFilters(): void
     {
         self::assertEquals(
             [new TwigFilter('enum_constant', [$this->enumConstantTwigExtension, 'getEnumConstant'])],
@@ -56,14 +59,9 @@ final class EnumConstantTwigExtensionTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider dataProviderForGetEnumConstantTest
-     *
-     * @param string      $expectedValueOfConstant
-     * @param string      $enumConstant
-     * @param string|null $enumType
-     */
-    public function testGetEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType): void
+    #[Test]
+    #[DataProvider('dataProviderForGetEnumConstantTest')]
+    public function GetEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType): void
     {
         self::assertEquals(
             $expectedValueOfConstant,
@@ -81,25 +79,29 @@ final class EnumConstantTwigExtensionTest extends TestCase
         yield ['200', 'HTTP_OK', 'HTTPStatusCodeType'];
     }
 
-    public function testEnumTypeIsNotRegisteredException(): void
+    #[Test]
+    public function enumTypeIsNotRegisteredException(): void
     {
         $this->expectException(EnumTypeIsNotRegisteredException::class);
         $this->enumConstantTwigExtension->getEnumConstant('Pitcher', 'BaseballPositionType');
     }
 
-    public function testConstantIsFoundInFewRegisteredEnumTypesException(): void
+    #[Test]
+    public function constantIsFoundInFewRegisteredEnumTypesException(): void
     {
         $this->expectException(ConstantIsFoundInFewRegisteredEnumTypesException::class);
         $this->enumConstantTwigExtension->getEnumConstant('CENTER');
     }
 
-    public function testConstantIsNotFoundInAnyRegisteredEnumTypeException(): void
+    #[Test]
+    public function constantIsNotFoundInAnyRegisteredEnumTypeException(): void
     {
         $this->expectException(ConstantIsNotFoundInAnyRegisteredEnumTypeException::class);
         $this->enumConstantTwigExtension->getEnumConstant('Pitcher');
     }
 
-    public function testNoRegisteredEnumTypesException(): void
+    #[Test]
+    public function noRegisteredEnumTypesException(): void
     {
         $this->expectException(NoRegisteredEnumTypesException::class);
         (new EnumConstantTwigExtension([]))->getEnumConstant(BasketballPositionType::POINT_GUARD, 'BasketballPositionType');

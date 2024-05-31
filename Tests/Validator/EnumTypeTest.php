@@ -15,6 +15,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Validator;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\BasketballPositionType;
 use Fresh\DoctrineEnumBundle\Validator\Constraints\EnumType;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,7 +25,8 @@ use PHPUnit\Framework\TestCase;
  */
 final class EnumTypeTest extends TestCase
 {
-    public function testConstructorWithRequiredArguments(): void
+    #[Test]
+    public function constructorWithRequiredArguments(): void
     {
         $constraint = new EnumType(entity: BasketballPositionType::class);
 
@@ -32,7 +34,8 @@ final class EnumTypeTest extends TestCase
         self::assertTrue($constraint->strict);
     }
 
-    public function testConstructorWithAllArguments(): void
+    #[Test]
+    public function constructorWithAllArguments(): void
     {
         $constraint = new EnumType(entity: BasketballPositionType::class, message: 'test', groups: ['foo'], payload: ['bar' => 'baz']);
 
@@ -48,7 +51,8 @@ final class EnumTypeTest extends TestCase
         self::assertNull($constraint->max);
     }
 
-    public function testNotEnumType(): void
+    #[Test]
+    public function notEnumType(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('stdClass is not instance of Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType');
@@ -56,7 +60,8 @@ final class EnumTypeTest extends TestCase
         new EnumType(entity: \stdClass::class);
     }
 
-    public function testGetDefaultOption(): void
+    #[Test]
+    public function getDefaultOption(): void
     {
         $constraint = new EnumType(entity: BasketballPositionType::class);
 

@@ -14,6 +14,7 @@ namespace Fresh\DoctrineEnumBundle\Tests\Exception;
 
 use Fresh\DoctrineEnumBundle\Exception\ExceptionInterface;
 use Fresh\DoctrineEnumBundle\Exception\LogicException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,7 +24,8 @@ use PHPUnit\Framework\TestCase;
  */
 final class LogicExceptionTest extends TestCase
 {
-    public function testConstructor(): void
+    #[Test]
+    public function validCreation(): void
     {
         $exception = new LogicException();
 

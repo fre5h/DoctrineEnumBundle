@@ -17,6 +17,7 @@ use Fresh\DoctrineEnumBundle\DependencyInjection\FreshDoctrineEnumExtension;
 use Fresh\DoctrineEnumBundle\Form\EnumTypeGuesser;
 use Fresh\DoctrineEnumBundle\Twig\Extension\EnumConstantTwigExtension;
 use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueTwigExtension;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
@@ -47,7 +48,8 @@ final class FreshDoctrineEnumExtensionTest extends TestCase
         );
     }
 
-    public function testLoadExtension(): void
+    #[Test]
+    public function loadExtension(): void
     {
         $this->container->setParameter('doctrine.dbal.connection_factory.types', []); // Just add a dummy required parameter
         $this->container->loadFromExtension($this->extension->getAlias());

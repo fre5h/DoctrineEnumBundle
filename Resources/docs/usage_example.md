@@ -41,9 +41,9 @@ Register `BasketballPositionType` for Doctrine in config.yaml:
 
 ```yaml
 doctrine:
-    dbal:
-        types:
-            BasketballPositionType: App\DBAL\Types\BasketballPositionType
+  dbal:
+    types:
+      BasketballPositionType: App\DBAL\Types\BasketballPositionType
 ```
 
 Create a `Player` entity that has a `position` field:
@@ -60,9 +60,9 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 #[ORM\Table(name: 'players')]
 class Player
 {
-     #[ORM\Id]
-     #[ORM\Column(type: 'integer', name: 'id')]
-     #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer', name: 'id')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     // Note, that type of field should be same as you set in Doctrine config (in this case it is BasketballPositionType)

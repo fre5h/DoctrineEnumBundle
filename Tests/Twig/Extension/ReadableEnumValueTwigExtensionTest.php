@@ -21,6 +21,8 @@ use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\HTTPStatusCodeType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\MapLocationType;
 use Fresh\DoctrineEnumBundle\Tests\Fixtures\DBAL\Types\NumericType;
 use Fresh\DoctrineEnumBundle\Twig\Extension\ReadableEnumValueTwigExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFilter;
 
@@ -48,7 +50,8 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
         unset($this->readableEnumValueTwigExtension);
     }
 
-    public function testGetFilters(): void
+    #[Test]
+    public function getFilters(): void
     {
         self::assertEquals(
             [new TwigFilter('readable_enum', [$this->readableEnumValueTwigExtension, 'getReadableEnumValue'])],
@@ -56,14 +59,9 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider dataProviderForGetReadableEnumValueTest
-     *
-     * @param int|string|null $expectedReadableValue
-     * @param int|string|null $enumValue
-     * @param string|null $enumType
-     */
-    public function testGetReadableEnumValue(int|string|null $expectedReadableValue, int|string|null $enumValue, ?string $enumType): void
+    #[Test]
+    #[DataProvider('dataProviderForGetReadableEnumValueTest')]
+    public function getReadableEnumValue(int|string|null $expectedReadableValue, int|string|null $enumValue, ?string $enumType): void
     {
         self::assertEquals(
             $expectedReadableValue,
@@ -83,25 +81,29 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
         yield ['Not Found', HTTPStatusCodeType::HTTP_NOT_FOUND, 'HTTPStatusCodeType'];
     }
 
-    public function testEnumTypeIsNotRegisteredException(): void
+    #[Test]
+    public function enumTypeIsNotRegisteredException(): void
     {
         $this->expectException(EnumTypeIsNotRegisteredException::class);
         $this->readableEnumValueTwigExtension->getReadableEnumValue('Pitcher', 'BaseballPositionType');
     }
 
-    public function testValueIsFoundInFewRegisteredEnumTypesException(): void
+    #[Test]
+    public function valueIsFoundInFewRegisteredEnumTypesException(): void
     {
         $this->expectException(ValueIsFoundInFewRegisteredEnumTypesException::class);
         $this->readableEnumValueTwigExtension->getReadableEnumValue(BasketballPositionType::CENTER);
     }
 
-    public function testValueIsNotFoundInAnyRegisteredEnumTypeException(): void
+    #[Test]
+    public function valueIsNotFoundInAnyRegisteredEnumTypeException(): void
     {
         $this->expectException(ValueIsNotFoundInAnyRegisteredEnumTypeException::class);
         $this->readableEnumValueTwigExtension->getReadableEnumValue('Pitcher');
     }
 
-    public function testNoRegisteredEnumTypesException(): void
+    #[Test]
+    public function noRegisteredEnumTypesException(): void
     {
         $this->expectException(NoRegisteredEnumTypesException::class);
         (new ReadableEnumValueTwigExtension([]))->getReadableEnumValue(BasketballPositionType::POINT_GUARD, 'BasketballPositionType');
