@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\DependencyInjection\Compiler;
 
+use Doctrine\DBAL\Types\EnumType;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -39,8 +41,9 @@ final class RegisterEnumTypePass implements CompilerPassInterface
         foreach ($doctrine->getConnectionNames() as $connectionName) {
             $definition = $container->getDefinition($connectionName);
             $mappingTypes = (array) $definition->getArgument(3);
-            if (!isset($mappingTypes['enum']) || 'string' !== $mappingTypes['enum']) {
-                $mappingTypes['enum'] = 'string';
+            $expectedType = class_exists(EnumType::class) ? Types::ENUM : 'string';
+            if (!isset($mappingTypes['enum']) || $expectedType !== $mappingTypes['enum']) {
+                $mappingTypes['enum'] = $expectedType;
                 $definition->setArgument(3, $mappingTypes);
             }
         }
