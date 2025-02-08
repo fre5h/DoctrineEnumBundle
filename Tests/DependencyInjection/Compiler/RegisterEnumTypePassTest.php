@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Tests\DependencyInjection\Compiler;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 use Fresh\DoctrineEnumBundle\DependencyInjection\Compiler\RegisterEnumTypePass;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
@@ -79,7 +80,7 @@ final class RegisterEnumTypePassTest extends TestCase
         $default
             ->expects(self::once())
             ->method('setArgument')
-            ->with(3, ['test' => '_test', 'enum' => 'string'])
+            ->with(3, ['test' => '_test', 'enum' => Types::ENUM])
         ;
 
         $custom1 = $this->createMock(Definition::class);
@@ -92,7 +93,7 @@ final class RegisterEnumTypePassTest extends TestCase
         $custom1
             ->expects(self::once())
             ->method('setArgument')
-            ->with(3, ['test' => '_test', 'enum' => 'string'])
+            ->with(3, ['test' => '_test', 'enum' => Types::ENUM])
         ;
 
         $custom2 = $this->createMock(Definition::class);
@@ -100,7 +101,7 @@ final class RegisterEnumTypePassTest extends TestCase
             ->expects(self::once())
             ->method('getArgument')
             ->with(3)
-            ->willReturn(['test' => '_test', 'enum' => 'string'])
+            ->willReturn(['test' => '_test', 'enum' => Types::ENUM])
         ;
         $custom2
             ->expects(self::never())
