@@ -25,7 +25,7 @@
         "php": ">=8.1",
         "doctrine/common": "^3.4",
         "doctrine/dbal": "^4.0",
-        "doctrine/doctrine-bundle": "^2.12",
+        "doctrine/doctrine-bundle": "^2.12||^3.0",
         "doctrine/orm": "^3.1",
         "symfony/config": "^6.4||^7.0",
         "symfony/dependency-injection": "^6.4||^7.0",
