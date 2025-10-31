@@ -110,6 +110,7 @@ jobs:
           - '7.0'
           - '7.1'
           - '7.2'
+          - '7.3'
     steps:
       - name: 'Checkout Code'
         uses: actions/checkout@v4
