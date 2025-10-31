@@ -1,3 +1,15 @@
 /vendor/
 .phpunit.result.cache
 composer.lock
+
+###> PhpStrom Shared Project Settings ###
+.idea/*
+!.idea/DoctrineEnumBundle.iml
+!.idea/icon.svg
+!.idea/inspectionProfiles
+!.idea/modules.xml
+!.idea/php-test-framework.xml
+!.idea/php.xml
+!.idea/phpunit.xml
+!.idea/runConfigurations
+###< PhpStrom Shared Project Settings ###
