@@ -23,6 +23,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * RegisterEnumTypePassTest.
@@ -74,6 +75,16 @@ final class RegisterEnumTypePassTest extends TestCase
         $default = $this->createMock(Definition::class);
         $default
             ->expects(self::once())
+            ->method('getArguments')
+            ->willReturn([
+                ['url' => 'mysql:\\\\'],
+                new Reference('doctrine.dbal.default_connection.configuration'),
+                null,
+                [],
+            ])
+        ;
+        $default
+            ->expects(self::once())
             ->method('getArgument')
             ->with(3)
             ->willReturn(['test' => '_test'])
@@ -87,6 +98,16 @@ final class RegisterEnumTypePassTest extends TestCase
         $custom1 = $this->createMock(Definition::class);
         $custom1
             ->expects(self::once())
+            ->method('getArguments')
+            ->willReturn([
+                ['url' => 'mysql:\\\\'],
+                new Reference('doctrine.dbal.custom1_connection.configuration'),
+                null,
+                [],
+            ])
+        ;
+        $custom1
+            ->expects(self::once())
             ->method('getArgument')
             ->with(3)
             ->willReturn(['test' => '_test', 'enum' => '_test'])
@@ -98,6 +119,16 @@ final class RegisterEnumTypePassTest extends TestCase
         ;
 
         $custom2 = $this->createMock(Definition::class);
+        $custom2
+            ->expects(self::once())
+            ->method('getArguments')
+            ->willReturn([
+                ['url' => 'mysql:\\\\'],
+                new Reference('doctrine.dbal.custom2_connection.configuration'),
+                null,
+                [],
+            ])
+        ;
         $custom2
             ->expects(self::once())
             ->method('getArgument')
