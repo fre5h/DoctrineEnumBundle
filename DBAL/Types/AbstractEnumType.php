@@ -65,9 +65,9 @@ abstract class AbstractEnumType extends Type
      * @param TValue           $value
      * @param AbstractPlatform $platform
      *
-     * @return TValue
+     * @return mixed
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): mixed
     {
         if (!isset(static::$choices[$value])) {
             return $value;

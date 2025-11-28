@@ -44,6 +44,7 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^12.4",
+        "rregeer/phpunit-coverage-check": "^0.3.1",
         "symfony/form": "^7.4||^8.0"
     },
     "autoload": {
