@@ -33,7 +33,7 @@ class EnumTypeValidator extends ChoiceValidator
     public function validate(mixed $value, Constraint|EnumType $constraint): void
     {
         if (!$constraint instanceof EnumType) {
-            throw new RuntimeException(\sprintf('Object of class %s is not instance of %s', \get_class($constraint), EnumType::class));
+            throw new RuntimeException(\sprintf('Object of class %s is not instance of %s', $constraint::class, EnumType::class));
         }
 
         $constraint->choices = $constraint->entity::getValues();

@@ -1,11 +1,14 @@
 # Files and directories which won't be included in .zip archive during running `composer install --prefer-dist`
 
-/.github          export-ignore
-/.gitattributes   export-ignore
-/.gitignore       export-ignore
-/.scrutinizer.yml export-ignore
-/.styleci.yml     export-ignore
-/phpstan.neon     export-ignore
-/phpunit.xml.dist export-ignore
-/Tests            export-ignore
-/Resources/docs   export-ignore
+/.idea              export-ignore
+/.github            export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/.scrutinizer.yml   export-ignore
+/.styleci.yml       export-ignore
+/docker-compose.yml export-ignore
+/Dockerfile         export-ignore
+/phpstan.neon       export-ignore
+/phpunit.xml.dist   export-ignore
+/Tests              export-ignore
+/Resources/docs     export-ignore

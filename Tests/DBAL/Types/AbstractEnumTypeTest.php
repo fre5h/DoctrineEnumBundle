@@ -62,9 +62,9 @@ final class AbstractEnumTypeTest extends TestCase
 
     #[Test]
     #[DataProvider('platformProviderForGetSqlDeclarationWithoutDefaultValue')]
-    public function GetSqlDeclarationWithoutDefaultValue(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
+    public function getSqlDeclarationWithoutDefaultValue(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
     {
-        self::assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
+        $this->assertEquals($expected, $this->type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
     public static function platformProviderForGetSqlDeclarationWithoutDefaultValue(): iterable
@@ -96,7 +96,7 @@ final class AbstractEnumTypeTest extends TestCase
     public function getSqlDeclarationWithDefaultValue(array $fieldDeclaration, AbstractPlatform $platform, string $expected): void
     {
         $type = Type::getType('TaskStatusType');
-        self::assertEquals($expected, $type->getSqlDeclaration($fieldDeclaration, $platform));
+        $this->assertEquals($expected, $type->getSqlDeclaration($fieldDeclaration, $platform));
     }
 
     public static function platformProviderForGetSqlDeclarationWithDefaultValue(): iterable
@@ -126,28 +126,28 @@ final class AbstractEnumTypeTest extends TestCase
     #[Test]
     public function getName(): void
     {
-        self::assertEquals('BasketballPositionType', $this->type->getName());
-        self::assertEquals('StubType', Type::getType('StubType')->getName());
+        $this->assertEquals('BasketballPositionType', $this->type->getName());
+        $this->assertEquals('StubType', Type::getType('StubType')->getName());
     }
 
     #[Test]
     public function requiresSQLCommentHint(): void
     {
-        self::assertTrue($this->type->requiresSQLCommentHint(new MySqlPlatform()));
+        $this->assertTrue($this->type->requiresSQLCommentHint(new MySQLPlatform()));
     }
 
     #[Test]
     public function convertToDatabaseValue(): void
     {
-        self::assertNull($this->type->convertToDatabaseValue(null, new MySqlPlatform()));
-        self::assertEquals('SF', $this->type->convertToDatabaseValue('SF', new MySqlPlatform()));
+        $this->assertNull($this->type->convertToDatabaseValue(null, new MySQLPlatform()));
+        $this->assertEquals('SF', $this->type->convertToDatabaseValue('SF', new MySQLPlatform()));
     }
 
     #[Test]
     public function invalidArgumentExceptionInConvertToDatabaseValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->type->convertToDatabaseValue('YO', new MySqlPlatform());
+        $this->type->convertToDatabaseValue('YO', new MySQLPlatform());
     }
 
     #[Test]
@@ -155,9 +155,9 @@ final class AbstractEnumTypeTest extends TestCase
     {
         $values = $this->type::getValues();
 
-        self::assertContains($this->type::getRandomValue(), $values);
-        self::assertContains($this->type::getRandomValue(), $values);
-        self::assertContains($this->type::getRandomValue(), $values);
+        $this->assertContains($this->type::getRandomValue(), $values);
+        $this->assertContains($this->type::getRandomValue(), $values);
+        $this->assertContains($this->type::getRandomValue(), $values);
     }
 
     #[Test]
@@ -179,23 +179,23 @@ final class AbstractEnumTypeTest extends TestCase
             'PF' => 'Power Forward',
             'C' => 'Center',
         ];
-        self::assertEquals($choices, $this->type::getReadableValues());
+        $this->assertEquals($choices, $this->type::getReadableValues());
     }
 
     #[Test]
     public function assertValidChoiceString(): void
     {
-        self::assertNull($this->type::assertValidChoice(BasketballPositionType::SMALL_FORWARD));
+        $this->assertNull($this->type::assertValidChoice(BasketballPositionType::SMALL_FORWARD));
     }
 
     #[Test]
     public function assertValidChoiceNumeric(): void
     {
         $this->type = Type::getType('NumericType');
-        self::assertNull($this->type::assertValidChoice(NumericType::TWO));
+        $this->assertNull($this->type::assertValidChoice(NumericType::TWO));
 
         $this->type = Type::getType('HTTPStatusCodeType');
-        self::assertNull($this->type::assertValidChoice(HTTPStatusCodeType::HTTP_NOT_FOUND));
+        $this->assertNull($this->type::assertValidChoice(HTTPStatusCodeType::HTTP_NOT_FOUND));
 
         $this->type = Type::getType('BasketballPositionType');
     }
@@ -211,27 +211,27 @@ final class AbstractEnumTypeTest extends TestCase
     public function getReadableValueString(): void
     {
         $this->type = Type::getType('HTTPStatusCodeType');
-        self::assertEquals('Not Found', $this->type::getReadableValue(HTTPStatusCodeType::HTTP_NOT_FOUND));
+        $this->assertEquals('Not Found', $this->type::getReadableValue(HTTPStatusCodeType::HTTP_NOT_FOUND));
 
         $this->type = Type::getType('BasketballPositionType');
-        self::assertEquals('Small Forward', $this->type::getReadableValue(BasketballPositionType::SMALL_FORWARD));
+        $this->assertEquals('Small Forward', $this->type::getReadableValue(BasketballPositionType::SMALL_FORWARD));
     }
 
     #[Test]
     public function getReadableValueNumeric(): void
     {
         $this->type = Type::getType('NumericType');
-        self::assertEquals(2, $this->type::getReadableValue(NumericType::TWO));
+        $this->assertEquals(2, $this->type::getReadableValue(NumericType::TWO));
         $this->type = Type::getType('BasketballPositionType');
     }
 
     #[Test]
     public function getDefaultValue(): void
     {
-        self::assertNull($this->type::getDefaultValue());
-        self::assertEquals('pending', Type::getType('TaskStatusType')::getDefaultValue());
-        self::assertEquals(0, Type::getType('NumericType')::getDefaultValue());
-        self::assertEquals(200, Type::getType('HTTPStatusCodeType')::getDefaultValue());
+        $this->assertNull($this->type::getDefaultValue());
+        $this->assertEquals('pending', Type::getType('TaskStatusType')::getDefaultValue());
+        $this->assertEquals(0, Type::getType('NumericType')::getDefaultValue());
+        $this->assertEquals(200, Type::getType('HTTPStatusCodeType')::getDefaultValue());
     }
 
     #[Test]
@@ -252,14 +252,14 @@ final class AbstractEnumTypeTest extends TestCase
             'Center' => 'C',
         ];
 
-        self::assertEquals($choices, $this->type::getChoices());
+        $this->assertEquals($choices, $this->type::getChoices());
     }
 
     #[Test]
     public function mappedDatabaseTypesContainEnumOnMySQL(): void
     {
         $actual = $this->type->getMappedDatabaseTypes(new MySQLPlatform());
-        self::assertContains('enum', $actual);
+        $this->assertContains('enum', $actual);
     }
 
     #[Test]
@@ -273,22 +273,22 @@ final class AbstractEnumTypeTest extends TestCase
 
         foreach ($testProviders as $testProvider) {
             $actual = $this->type->getMappedDatabaseTypes($testProvider);
-            self::assertNotContains('enum', $actual);
+            $this->assertNotContains('enum', $actual);
         }
     }
 
     #[Test]
     public function convertToPHPValue(): void
     {
-        self::assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
-        self::assertSame('SF', $this->type->convertToPHPValue('SF', new MySQLPlatform()));
+        $this->assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
+        $this->assertSame('SF', $this->type->convertToPHPValue('SF', new MySQLPlatform()));
 
         $this->type = Type::getType('NumericType');
-        self::assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
-        self::assertEquals(1, $this->type->convertToPHPValue('1', new MySQLPlatform()));
+        $this->assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
+        $this->assertEquals(1, $this->type->convertToPHPValue('1', new MySQLPlatform()));
 
         $this->type = Type::getType('HTTPStatusCodeType');
-        self::assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
-        self::assertEquals(200, $this->type->convertToPHPValue('200', new MySQLPlatform()));
+        $this->assertNull($this->type->convertToPHPValue(null, new MySQLPlatform()));
+        $this->assertEquals(200, $this->type->convertToPHPValue('200', new MySQLPlatform()));
     }
 }

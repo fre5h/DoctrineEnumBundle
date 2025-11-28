@@ -1,0 +1,11 @@
+services:
+  fresh_doctrine_enum_bundle_php:
+    container_name: "fresh_doctrine_enum_bundle_php"
+    image: fresh-doctrine-enum-bundle-php:1.0
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/var/www/bundle

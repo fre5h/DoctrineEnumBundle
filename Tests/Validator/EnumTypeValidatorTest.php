@@ -64,7 +64,7 @@ final class EnumTypeValidatorTest extends TestCase
         $constraint = new EnumType(entity: BasketballPositionType::class);
 
         $this->context
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('buildViolation')
         ;
 
@@ -81,27 +81,27 @@ final class EnumTypeValidatorTest extends TestCase
         $matcher = $this->exactly(2);
 
         $constraintValidationBuilder
-            ->expects(self::exactly(2))
+            ->expects($this->exactly(2))
             ->method('setParameter')
-            ->willReturnCallback(function () use ($matcher, $secret) {
+            ->willReturnCallback(function () use ($matcher) {
                 return match ($matcher->numberOfInvocations()) {
-                    1 => [self::equalTo('{{ value }}'), self::equalTo('"Pitcher"')],
-                    2 => [self::equalTo('{{ choices }}'), self::equalTo('"PG", "SG", "SF", "PF", "C"')],
+                    1 => [$this->equalTo('{{ value }}'), $this->equalTo('"Pitcher"')],
+                    2 => [$this->equalTo('{{ choices }}'), $this->equalTo('"PG", "SG", "SF", "PF", "C"')],
                 };
             })
             ->willReturn($constraintValidationBuilder, $constraintValidationBuilder)
         ;
 
         $constraintValidationBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('setCode')
             ->willReturnSelf()
         ;
 
         $this->context
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('buildViolation')
-            ->with(self::equalTo('The value you selected is not a valid choice.'))
+            ->with($this->equalTo('The value you selected is not a valid choice.'))
             ->willReturn($constraintValidationBuilder)
         ;
 

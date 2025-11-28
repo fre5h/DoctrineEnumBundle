@@ -30,7 +30,7 @@ final class RuntimeExceptionTest extends TestCase
     {
         $exception = new RuntimeException();
 
-        self::assertInstanceOf(ExceptionInterface::class, $exception);
-        self::assertInstanceOf(\RuntimeException::class, $exception);
+        $this->assertInstanceOf(ExceptionInterface::class, $exception);
+        $this->assertInstanceOf(\RuntimeException::class, $exception);
     }
 }

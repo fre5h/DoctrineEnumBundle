@@ -118,7 +118,7 @@ final class EnumDropCommentCommandTest extends TestCase
     public function exceptionOnExecution(): void
     {
         $this->em
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getConnection')
             ->willThrowException(new \Exception('test', 5))
         ;
@@ -129,10 +129,10 @@ final class EnumDropCommentCommandTest extends TestCase
                 'enumType' => 'TaskStatusType',
             ]
         );
-        self::assertSame(5, $result);
+        $this->assertSame(5, $result);
 
         $output = $this->commandTester->getDisplay();
-        self::assertStringContainsString('test', $output);
+        $this->assertStringContainsString('test', $output);
     }
 
     #[Test]
@@ -144,10 +144,10 @@ final class EnumDropCommentCommandTest extends TestCase
                 'enumType' => null,
             ]
         );
-        self::assertSame(1, $result);
+        $this->assertSame(1, $result);
 
         $output = $this->commandTester->getDisplay();
-        self::assertStringContainsString('Argument "enumType" is not a string.', $output);
+        $this->assertStringContainsString('Argument "enumType" is not a string.', $output);
     }
 
     #[Test]
@@ -159,17 +159,17 @@ final class EnumDropCommentCommandTest extends TestCase
                 'enumType' => 'UnknownType',
             ]
         );
-        self::assertSame(2, $result);
+        $this->assertSame(2, $result);
 
         $output = $this->commandTester->getDisplay();
-        self::assertStringContainsString('Argument "enumType" is not a registered ENUM type.', $output);
+        $this->assertStringContainsString('Argument "enumType" is not a registered ENUM type.', $output);
     }
 
     #[Test]
     public function executionWithCaughtException(): void
     {
         $this->connection
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getDatabasePlatform')
             ->willThrowException(new \Exception('test', 5))
         ;
@@ -180,23 +180,23 @@ final class EnumDropCommentCommandTest extends TestCase
                 'enumType' => 'TaskStatusType',
             ]
         );
-        self::assertSame(5, $result);
+        $this->assertSame(5, $result);
 
         $output = $this->commandTester->getDisplay();
-        self::assertStringContainsString('test', $output);
+        $this->assertStringContainsString('test', $output);
     }
 
     #[Test]
     public function successfulExecutionWithNoMetadata(): void
     {
         $this->connection
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getDatabasePlatform')
             ->willReturn($this->platform)
         ;
 
         $this->metadataFactory
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getAllMetadata')
             ->willReturn([])
         ;
@@ -208,11 +208,11 @@ final class EnumDropCommentCommandTest extends TestCase
                 '--em' => 'default',
             ]
         );
-        self::assertSame(0, $result);
+        $this->assertSame(0, $result);
 
         $output = $this->commandTester->getDisplay();
-        self::assertStringContainsString('Dropping comments for TaskStatusType type...', $output);
-        self::assertStringContainsString('NO METADATA FOUND', $output);
+        $this->assertStringContainsString('Dropping comments for TaskStatusType type...', $output);
+        $this->assertStringContainsString('NO METADATA FOUND', $output);
     }
 
     #[Test]
@@ -220,30 +220,30 @@ final class EnumDropCommentCommandTest extends TestCase
     public function successfulExecutionWithMetadata(?string $schemaName, string $sqlColumnComment): void
     {
         $this->connection
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getDatabasePlatform')
             ->willReturn($this->platform)
         ;
 
         $metadata = $this->createMock(ClassMetadata::class);
         $this->metadataFactory
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getAllMetadata')
             ->willReturn([$metadata])
         ;
 
-        $metadata->expects(self::once())->method('getName')->willReturn('Task');
-        $metadata->expects(self::atLeast(1))->method('getSchemaName')->willReturn($schemaName);
-        $metadata->expects(self::once())->method('getTableName')->willReturn('tasks');
-        $metadata->expects(self::once())->method('getFieldNames')->willReturn(['status']);
-        $metadata->expects(self::once())->method('getTypeOfField')->with('status')->willReturn('TaskStatusType');
-        $metadata->expects(self::once())->method('getFieldMapping')->with('status')->willReturn(
-            FieldMapping::fromMappingArray(['type'=> 'string', 'columnName' => 'task_column_name', 'fieldName' => 'test'])
+        $metadata->expects($this->once())->method('getName')->willReturn('Task');
+        $metadata->expects($this->atLeast(1))->method('getSchemaName')->willReturn($schemaName);
+        $metadata->expects($this->once())->method('getTableName')->willReturn('tasks');
+        $metadata->expects($this->once())->method('getFieldNames')->willReturn(['status']);
+        $metadata->expects($this->once())->method('getTypeOfField')->with('status')->willReturn('TaskStatusType');
+        $metadata->expects($this->once())->method('getFieldMapping')->with('status')->willReturn(
+            FieldMapping::fromMappingArray(['type' => 'string', 'columnName' => 'task_column_name', 'fieldName' => 'test'])
         );
 
-        $this->platform->expects(self::once())->method('getCommentOnColumnSQL')->with($sqlColumnComment, 'task_column_name', 'NULL')->willReturn('test SQL');
+        $this->platform->expects($this->once())->method('getCommentOnColumnSQL')->with($sqlColumnComment, 'task_column_name', 'NULL')->willReturn('test SQL');
 
-        $this->connection->expects(self::once())->method('executeQuery')->with('test SQL');
+        $this->connection->expects($this->once())->method('executeQuery')->with('test SQL');
 
         $result = $this->commandTester->execute(
             [
@@ -252,13 +252,13 @@ final class EnumDropCommentCommandTest extends TestCase
                 '--em' => 'default',
             ]
         );
-        self::assertSame(0, $result);
+        $this->assertSame(0, $result);
 
         $output = $this->commandTester->getDisplay();
-        self::assertStringContainsString('Dropping comments for TaskStatusType type...', $output);
-        self::assertStringContainsString(' * Task::$status   Dropped ✔', $output);
-        self::assertStringContainsString('TOTAL: 1', $output);
-        self::assertStringContainsString('DONE', $output);
+        $this->assertStringContainsString('Dropping comments for TaskStatusType type...', $output);
+        $this->assertStringContainsString(' * Task::$status   Dropped ✔', $output);
+        $this->assertStringContainsString('TOTAL: 1', $output);
+        $this->assertStringContainsString('DONE', $output);
     }
 
     public static function dataProviderForMetadataTest(): iterable
@@ -282,6 +282,6 @@ final class EnumDropCommentCommandTest extends TestCase
     {
         $enumTypes = $this->command->getEnumTypesForAutocompletion()();
 
-        self::assertSame(['BasketballPositionType', 'TaskStatusType'], $enumTypes);
+        $this->assertSame(['BasketballPositionType', 'TaskStatusType'], $enumTypes);
     }
 }

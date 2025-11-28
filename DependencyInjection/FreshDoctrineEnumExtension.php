@@ -35,7 +35,7 @@ class FreshDoctrineEnumExtension extends Extension
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.php');
 
-        if (\interface_exists(FormTypeGuesserInterface::class)) {
+        if (interface_exists(FormTypeGuesserInterface::class)) {
             $loader->load('form_type_guesser.php');
         }
     }

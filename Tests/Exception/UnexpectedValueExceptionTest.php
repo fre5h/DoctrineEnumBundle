@@ -30,7 +30,7 @@ final class UnexpectedValueExceptionTest extends TestCase
     {
         $exception = new UnexpectedValueException();
 
-        self::assertInstanceOf(ExceptionInterface::class, $exception);
-        self::assertInstanceOf(\UnexpectedValueException::class, $exception);
+        $this->assertInstanceOf(ExceptionInterface::class, $exception);
+        $this->assertInstanceOf(\UnexpectedValueException::class, $exception);
     }
 }

@@ -22,29 +22,30 @@
         "issues": "https://github.com/fre5h/DoctrineEnumBundle/issues"
     },
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.4",
         "doctrine/common": "^3.4",
         "doctrine/dbal": "^4.0",
         "doctrine/doctrine-bundle": "^2.12||^3.0",
         "doctrine/orm": "^3.1",
-        "symfony/config": "^6.4||^7.0",
-        "symfony/dependency-injection": "^6.4||^7.0",
-        "symfony/doctrine-bridge": "^6.4||^7.0",
-        "symfony/framework-bundle": "^6.4||^7.0",
-        "symfony/http-kernel": "^6.4||^7.0",
-        "symfony/validator": "^6.4||^7.0",
-        "twig/twig": "^3.9"
+        "symfony/config": "^7.4||^8.0",
+        "symfony/dependency-injection": "^7.4||^8.0",
+        "symfony/doctrine-bridge": "^7.4||^8.0",
+        "symfony/framework-bundle": "^7.4||^8.0",
+        "symfony/http-kernel": "^7.4||^8.0",
+        "symfony/validator": "^7.4||^8.0",
+        "twig/twig": "^3.22"
     },
     "require-dev": {
-        "escapestudios/symfony2-coding-standard": "^3.13",
+        "escapestudios/symfony2-coding-standard": "^3.16",
+        "friendsofphp/php-cs-fixer": "^v3.90",
         "jetbrains/phpstorm-attributes": "^1.0",
-        "phpstan/phpstan": "^1.10",
-        "phpstan/phpstan-doctrine": "^1.3",
-        "phpstan/phpstan-phpunit": "^1.3",
-        "phpstan/phpstan-symfony": "^1.3",
-        "phpunit/phpunit": "^11.1",
-        "slam/phpstan-extensions": "^6.3",
-        "symfony/form": "^6.4||^7.0"
+        "phpstan/phpstan": "^2.1.32",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0",
+        "phpunit/phpunit": "^12.4",
+        "rregeer/phpunit-coverage-check": "^0.3.1",
+        "symfony/form": "^7.4||^8.0"
     },
     "autoload": {
         "psr-4": {
@@ -58,6 +59,28 @@
         "psr-4": {
             "Fresh\\DoctrineEnumBundle\\Tests\\": "Tests/"
         }
+    },
+    "scripts": {
+        "ci:pack": [
+            "@ci:composer-validate",
+            "@ci:psr-check",
+            "@ci:code-style",
+            "@ci:static-analysis",
+            "@ci:phpunit"
+        ],
+        "ci:composer-validate": "@composer validate --no-check-all",
+        "ci:psr-check": "@composer dump-autoload --dry-run --strict-psr --optimize",
+        "ci:code-style": [
+            "vendor/bin/phpcs --standard=phpcs.xml",
+            "vendor/bin/php-cs-fixer fix --dry-run --config=.php-cs-fixer.php -v"
+        ],
+        "ci:static-analysis": [
+            "XDEBUG_MODE=off vendor/bin/phpstan analyse --no-progress -c phpstan.neon ./"
+        ],
+        "ci:phpunit": [
+            "export XDEBUG_MODE=coverage && vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=clover-coverage.xml",
+            "vendor/bin/coverage-check clover-coverage.xml 100"
+        ]
     },
     "config": {
         "sort-packages": true,

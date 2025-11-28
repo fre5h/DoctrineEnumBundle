@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.4/phpunit.xsd"
          colors="true"
          bootstrap="vendor/autoload.php"
-         beStrictAboutTestsThatDoNotTestAnything="false"
 >
+    <php>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
+    </php>
+
     <testsuites>
         <testsuite name="DoctrineEnumBundle Test Suite">
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>
-         
+
     <source>
         <include>
-            <directory suffix=".php">./</directory>
+            <directory>./</directory>
         </include>
         <exclude>
-            <directory suffix=".php">./Resources</directory>
-            <directory suffix=".php">./Tests</directory>
-            <directory suffix=".php">./vendor</directory>
+            <directory>./Resources</directory>
+            <directory>./Tests</directory>
+            <directory>./vendor</directory>
         </exclude>
     </source>
 

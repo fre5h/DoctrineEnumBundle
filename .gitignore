@@ -1,6 +1,9 @@
 /vendor/
 .phpunit.result.cache
 composer.lock
+.phpcs-cache
+.php-cs-fixer.cache
+clover-coverage.xml
 
 ###> PhpStrom Shared Project Settings ###
 .idea/*

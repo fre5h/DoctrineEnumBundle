@@ -54,7 +54,7 @@ final class EnumConstantTwigExtensionTest extends TestCase
     #[Test]
     public function getFilters(): void
     {
-        self::assertEquals(
+        $this->assertEquals(
             [new TwigFilter('enum_constant', [$this->enumConstantTwigExtension, 'getEnumConstant'])],
             $this->enumConstantTwigExtension->getFilters()
         );
@@ -62,9 +62,9 @@ final class EnumConstantTwigExtensionTest extends TestCase
 
     #[Test]
     #[DataProvider('dataProviderForGetEnumConstantTest')]
-    public function GetEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType): void
+    public function getEnumConstant(string $expectedValueOfConstant, string $enumConstant, ?string $enumType): void
     {
-        self::assertEquals(
+        $this->assertEquals(
             $expectedValueOfConstant,
             $this->enumConstantTwigExtension->getEnumConstant($enumConstant, $enumType)
         );
