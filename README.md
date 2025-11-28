@@ -20,7 +20,7 @@
 
 ```composer req fresh/doctrine-enum-bundle```
 
-##### Choose the version you need ^2.12||^3.0
+##### Choose the version you need
 
 | Bundle Version (X.Y.Z) |    PHP   | Symfony  |  Doctrine Bundle  | Comment             |
 |:----------------------:|:--------:|:--------:|:-----------------:|:--------------------|
