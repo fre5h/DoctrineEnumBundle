@@ -60,21 +60,21 @@ final class RegisterEnumTypePassTest extends TestCase
     public function processSuccessful(): void
     {
         $this->containerBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('get')
             ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
             ->willReturn($this->managerRegistry)
         ;
 
         $this->managerRegistry
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getConnectionNames')
             ->willReturn(['default', 'custom1', 'custom2'])
         ;
 
         $default = $this->createMock(Definition::class);
         $default
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getArguments')
             ->willReturn([
                 ['url' => 'mysql:\\\\'],
@@ -84,20 +84,20 @@ final class RegisterEnumTypePassTest extends TestCase
             ])
         ;
         $default
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getArgument')
             ->with(3)
             ->willReturn(['test' => '_test'])
         ;
         $default
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('setArgument')
             ->with(3, ['test' => '_test', 'enum' => Types::ENUM])
         ;
 
         $custom1 = $this->createMock(Definition::class);
         $custom1
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getArguments')
             ->willReturn([
                 ['url' => 'mysql:\\\\'],
@@ -107,20 +107,20 @@ final class RegisterEnumTypePassTest extends TestCase
             ])
         ;
         $custom1
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getArgument')
             ->with(3)
             ->willReturn(['test' => '_test', 'enum' => '_test'])
         ;
         $custom1
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('setArgument')
             ->with(3, ['test' => '_test', 'enum' => Types::ENUM])
         ;
 
         $custom2 = $this->createMock(Definition::class);
         $custom2
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getArguments')
             ->willReturn([
                 ['url' => 'mysql:\\\\'],
@@ -130,20 +130,20 @@ final class RegisterEnumTypePassTest extends TestCase
             ])
         ;
         $custom2
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getArgument')
             ->with(3)
             ->willReturn(['test' => '_test', 'enum' => Types::ENUM])
         ;
         $custom2
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('setArgument')
         ;
 
         $matcher = $this->exactly(2);
 
         $this->containerBuilder
-            ->expects(self::exactly(3))
+            ->expects($this->exactly(3))
             ->method('getDefinition')
             ->willReturnCallback(function () use ($matcher) {
                 return match ($matcher->numberOfInvocations()) {
@@ -162,7 +162,7 @@ final class RegisterEnumTypePassTest extends TestCase
     public function missingDoctrine(): void
     {
         $this->containerBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('get')
             ->with('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE)
             ->willReturn(null)

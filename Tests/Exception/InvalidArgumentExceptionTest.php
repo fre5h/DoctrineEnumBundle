@@ -30,7 +30,7 @@ final class InvalidArgumentExceptionTest extends TestCase
     {
         $exception = new InvalidArgumentException();
 
-        self::assertInstanceOf(ExceptionInterface::class, $exception);
-        self::assertInstanceOf(\InvalidArgumentException::class, $exception);
+        $this->assertInstanceOf(ExceptionInterface::class, $exception);
+        $this->assertInstanceOf(\InvalidArgumentException::class, $exception);
     }
 }

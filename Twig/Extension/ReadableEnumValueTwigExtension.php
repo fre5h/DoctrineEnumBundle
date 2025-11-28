@@ -39,12 +39,12 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
      * @param int|string|null $enumValue
      * @param string|null     $enumType
      *
+     * @return int|string|null
+     *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
      * @throws ValueIsFoundInFewRegisteredEnumTypesException
      * @throws ValueIsNotFoundInAnyRegisteredEnumTypeException
-     *
-     * @return int|string|null
      */
     public function getReadableEnumValue(int|string|null $enumValue, ?string $enumType = null): int|string|null
     {
@@ -64,9 +64,9 @@ class ReadableEnumValueTwigExtension extends AbstractEnumTwigExtension
             $this->findOccurrences($enumValue);
 
             if ($this->onlyOneOccurrenceFound()) {
-                $occurrence = \array_pop($this->occurrences);
+                $occurrence = array_pop($this->occurrences);
 
-                if (null !== $occurrence && \is_subclass_of($occurrence, AbstractEnumType::class)) {
+                if (null !== $occurrence && is_subclass_of($occurrence, AbstractEnumType::class)) {
                     return $occurrence::getReadableValue($enumValue);
                 }
             }

@@ -39,10 +39,10 @@ class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
     /**
      * @param string $enumType
      *
+     * @return string[]
+     *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
-     *
-     * @return string[]
      */
     public function getEnumValuesAsArray(string $enumType): array
     {
@@ -52,10 +52,10 @@ class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
     /**
      * @param string $enumType
      *
+     * @return string[]
+     *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
-     *
-     * @return string[]
      */
     public function getReadableEnumValuesAsArray(string $enumType): array
     {
@@ -66,11 +66,11 @@ class EnumValuesAsArrayTwigExtension extends AbstractEnumTwigExtension
      * @param string $enumType
      * @param string $staticMethodName
      *
+     * @return string[]
+     *
      * @throws LogicException
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
-     *
-     * @return string[]
      */
     private function callEnumTypeStaticMethod(string $enumType, string $staticMethodName): array
     {

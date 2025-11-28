@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * FreshDoctrineEnumBundleTest
+ * FreshDoctrineEnumBundleTest.
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
@@ -31,9 +31,9 @@ final class FreshDoctrineEnumBundleTest extends TestCase
     {
         $containerBuilder = $this->createMock(ContainerBuilder::class);
         $containerBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('addCompilerPass')
-            ->with(self::isInstanceOf(RegisterEnumTypePass::class))
+            ->with($this->isInstanceOf(RegisterEnumTypePass::class))
         ;
 
         $bundle = new FreshDoctrineEnumBundle();

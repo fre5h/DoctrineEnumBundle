@@ -39,7 +39,7 @@ abstract class AbstractEnumTwigExtension extends AbstractExtension
     {
         foreach ($registeredTypes as $type => $details) {
             $class = $details['class'];
-            if (\is_string($class) && \is_subclass_of($class, AbstractEnumType::class)) {
+            if (\is_string($class) && is_subclass_of($class, AbstractEnumType::class)) {
                 $this->registeredEnumTypes[$type] = $class;
             }
         }

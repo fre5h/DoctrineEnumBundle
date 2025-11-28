@@ -48,9 +48,9 @@ abstract class AbstractEnumType extends Type
      * @param TValue           $value
      * @param AbstractPlatform $platform
      *
-     * @throws InvalidArgumentException
+     * @return int|string
      *
-     * @return TValue|int|string
+     * @throws InvalidArgumentException
      */
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): mixed
     {
@@ -75,7 +75,7 @@ abstract class AbstractEnumType extends Type
 
         // Check whether choice list is using integers as values
         $choice = static::$choices[$value];
-        $choices = \array_flip(static::$choices);
+        $choices = array_flip(static::$choices);
         if (\is_int($choices[$choice])) {
             return (int) $value;
         }
@@ -93,9 +93,9 @@ abstract class AbstractEnumType extends Type
      */
     public function getSqlDeclaration(array $column, AbstractPlatform $platform): string
     {
-        $values = \implode(
+        $values = implode(
             ', ',
-            \array_map(
+            array_map(
                 /** @var TValue $value */
                 static function (int|string $value) {
                     return "'{$value}'";
@@ -135,7 +135,7 @@ abstract class AbstractEnumType extends Type
      */
     public function getName(): string
     {
-        return $this->name ?: (string) \array_search(static::class, self::getTypesMap(), true);
+        return $this->name ?: (string) array_search(static::class, self::getTypesMap(), true);
     }
 
     /**
@@ -147,7 +147,7 @@ abstract class AbstractEnumType extends Type
      */
     public static function getChoices(): array
     {
-        return \array_flip(static::$choices);
+        return array_flip(static::$choices);
     }
 
     /**
@@ -159,7 +159,7 @@ abstract class AbstractEnumType extends Type
      */
     public static function getValues(): array
     {
-        return \array_keys(static::$choices);
+        return array_keys(static::$choices);
     }
 
     /**
@@ -167,9 +167,9 @@ abstract class AbstractEnumType extends Type
      *
      * @static
      *
-     * @throws InvalidArgumentException
-     *
      * @return TValue
+     *
+     * @throws InvalidArgumentException
      */
     public static function getRandomValue()
     {
@@ -180,7 +180,7 @@ abstract class AbstractEnumType extends Type
             throw new InvalidArgumentException('There is no value in Enum type');
         }
 
-        return $values[\random_int(0, $count - 1)];
+        return $values[random_int(0, $count - 1)];
     }
 
     /**
@@ -261,7 +261,7 @@ abstract class AbstractEnumType extends Type
     public function getMappedDatabaseTypes(AbstractPlatform $platform): array
     {
         if ($platform instanceof MySQLPlatform) {
-            return \array_merge(parent::getMappedDatabaseTypes($platform), ['enum']);
+            return array_merge(parent::getMappedDatabaseTypes($platform), ['enum']);
         }
 
         return parent::getMappedDatabaseTypes($platform);

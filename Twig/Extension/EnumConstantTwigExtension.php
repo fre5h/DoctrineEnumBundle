@@ -39,12 +39,12 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
      * @param string      $enumConstant
      * @param string|null $enumType
      *
+     * @return string
+     *
      * @throws EnumTypeIsNotRegisteredException
      * @throws NoRegisteredEnumTypesException
      * @throws ConstantIsFoundInFewRegisteredEnumTypesException
      * @throws ConstantIsNotFoundInAnyRegisteredEnumTypeException
-     *
-     * @return string
      */
     public function getEnumConstant(string $enumConstant, ?string $enumType = null): string
     {
@@ -54,7 +54,7 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
                 $this->throwExceptionIfEnumTypeIsNotRegistered($enumType);
 
                 if (\is_scalar($this->registeredEnumTypes[$enumType])) {
-                    $result = \constant(\implode('::', [(string) $this->registeredEnumTypes[$enumType], $enumConstant]));
+                    $result = \constant(implode('::', [(string) $this->registeredEnumTypes[$enumType], $enumConstant]));
                     if (\is_scalar($result)) {
                         return (string) $result;
                     }
@@ -64,8 +64,8 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
             // If ENUM type wasn't set, e.g. {{ 'CENTER'|enum_constant }}
             $this->findOccurrences($enumConstant);
 
-            if ($this->onlyOneOccurrenceFound() && ($firstOccurrence = \array_pop($this->occurrences)) && \is_scalar($firstOccurrence)) {
-                $result = \constant(\implode('::', [(string) $firstOccurrence, $enumConstant]));
+            if ($this->onlyOneOccurrenceFound() && ($firstOccurrence = array_pop($this->occurrences)) && \is_scalar($firstOccurrence)) {
+                $result = \constant(implode('::', [(string) $firstOccurrence, $enumConstant]));
                 if (\is_scalar($result)) {
                     return (string) $result;
                 }
@@ -74,7 +74,7 @@ class EnumConstantTwigExtension extends AbstractEnumTwigExtension
             if ($this->moreThanOneOccurrenceFound()) {
                 $exceptionMessage = \sprintf(
                     'Constant "%s" is found in few registered ENUM types. You should manually set the appropriate one.',
-                    $enumConstant
+                    $enumConstant,
                 );
 
                 throw new ConstantIsFoundInFewRegisteredEnumTypesException($exceptionMessage);

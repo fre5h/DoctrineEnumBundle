@@ -56,15 +56,15 @@ final class FreshDoctrineEnumExtensionTest extends TestCase
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
 
-        self::assertArrayHasKey(EnumTypeGuesser::class, $this->container->getRemovedIds());
-        self::assertArrayHasKey(ReadableEnumValueTwigExtension::class, $this->container->getRemovedIds());
-        self::assertArrayHasKey(EnumConstantTwigExtension::class, $this->container->getRemovedIds());
-        self::assertArrayHasKey(EnumDropCommentCommand::class, $this->container->getRemovedIds());
+        $this->assertArrayHasKey(EnumTypeGuesser::class, $this->container->getRemovedIds());
+        $this->assertArrayHasKey(ReadableEnumValueTwigExtension::class, $this->container->getRemovedIds());
+        $this->assertArrayHasKey(EnumConstantTwigExtension::class, $this->container->getRemovedIds());
+        $this->assertArrayHasKey(EnumDropCommentCommand::class, $this->container->getRemovedIds());
 
-        self::assertArrayNotHasKey(EnumTypeGuesser::class, $this->container->getDefinitions());
-        self::assertArrayNotHasKey(ReadableEnumValueTwigExtension::class, $this->container->getDefinitions());
-        self::assertArrayNotHasKey(EnumConstantTwigExtension::class, $this->container->getDefinitions());
-        self::assertArrayNotHasKey(EnumDropCommentCommand::class, $this->container->getDefinitions());
+        $this->assertArrayNotHasKey(EnumTypeGuesser::class, $this->container->getDefinitions());
+        $this->assertArrayNotHasKey(ReadableEnumValueTwigExtension::class, $this->container->getDefinitions());
+        $this->assertArrayNotHasKey(EnumConstantTwigExtension::class, $this->container->getDefinitions());
+        $this->assertArrayNotHasKey(EnumDropCommentCommand::class, $this->container->getDefinitions());
 
         $this->expectException(ServiceNotFoundException::class);
 

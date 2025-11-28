@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Composer install" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="/usr/local/bin/composer" scriptParameters="install">
+    <CommandLine>
+      <PhpTestInterpreterSettings>
+        <option name="interpreterName" value="fresh_doctrine_enum_bundle_php" />
+      </PhpTestInterpreterSettings>
+    </CommandLine>
+    <method v="2" />
+  </configuration>
+</component>

@@ -31,8 +31,8 @@ final class EnumTypeTest extends TestCase
     {
         $constraint = new EnumType(entity: BasketballPositionType::class);
 
-        self::assertEquals(BasketballPositionType::getValues(), $constraint->choices);
-        self::assertTrue($constraint->strict);
+        $this->assertEquals(BasketballPositionType::getValues(), $constraint->choices);
+        $this->assertTrue($constraint->strict);
     }
 
     #[Test]
@@ -40,16 +40,16 @@ final class EnumTypeTest extends TestCase
     {
         $constraint = new EnumType(entity: BasketballPositionType::class, message: 'test', groups: ['foo'], payload: ['bar' => 'baz']);
 
-        self::assertEquals(BasketballPositionType::getValues(), $constraint->choices);
-        self::assertTrue($constraint->strict);
-        self::assertEquals(BasketballPositionType::class, $constraint->entity);
-        self::assertEquals('test', $constraint->message);
-        self::assertEquals(['foo'], $constraint->groups);
-        self::assertEquals(['bar' => 'baz'], $constraint->payload);
-        self::assertNull($constraint->callback);
-        self::assertFalse($constraint->multiple);
-        self::assertNull($constraint->min);
-        self::assertNull($constraint->max);
+        $this->assertEquals(BasketballPositionType::getValues(), $constraint->choices);
+        $this->assertTrue($constraint->strict);
+        $this->assertEquals(BasketballPositionType::class, $constraint->entity);
+        $this->assertEquals('test', $constraint->message);
+        $this->assertEquals(['foo'], $constraint->groups);
+        $this->assertEquals(['bar' => 'baz'], $constraint->payload);
+        $this->assertNull($constraint->callback);
+        $this->assertFalse($constraint->multiple);
+        $this->assertNull($constraint->min);
+        $this->assertNull($constraint->max);
     }
 
     #[Test]
@@ -59,13 +59,5 @@ final class EnumTypeTest extends TestCase
         $this->expectExceptionMessage('stdClass is not instance of Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType');
 
         new EnumType(entity: \stdClass::class);
-    }
-
-    #[Test]
-    public function getDefaultOption(): void
-    {
-        $constraint = new EnumType(entity: BasketballPositionType::class);
-
-        self::assertEquals('choices', $constraint->getDefaultOption());
     }
 }

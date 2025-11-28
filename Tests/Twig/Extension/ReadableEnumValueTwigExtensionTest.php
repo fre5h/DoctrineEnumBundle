@@ -54,7 +54,7 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
     #[Test]
     public function getFilters(): void
     {
-        self::assertEquals(
+        $this->assertEquals(
             [new TwigFilter('readable_enum', [$this->readableEnumValueTwigExtension, 'getReadableEnumValue'])],
             $this->readableEnumValueTwigExtension->getFilters()
         );
@@ -64,7 +64,7 @@ final class ReadableEnumValueTwigExtensionTest extends TestCase
     #[DataProvider('dataProviderForGetReadableEnumValueTest')]
     public function getReadableEnumValue(int|string|null $expectedReadableValue, int|string|null $enumValue, ?string $enumType): void
     {
-        self::assertEquals(
+        $this->assertEquals(
             $expectedReadableValue,
             $this->readableEnumValueTwigExtension->getReadableEnumValue($enumValue, $enumType)
         );

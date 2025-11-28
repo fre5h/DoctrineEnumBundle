@@ -53,9 +53,9 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
      * @param class-string<T> $class
      * @param string          $property
      *
-     * @throws EnumTypeIsRegisteredButClassDoesNotExistException
-     *
      * @return TypeGuess|null
+     *
+     * @throws EnumTypeIsRegisteredButClassDoesNotExistException
      */
     public function guessType(string $class, string $property): ?TypeGuess
     {
@@ -77,22 +77,22 @@ class EnumTypeGuesser extends DoctrineOrmTypeGuesser
 
         $registeredEnumTypeFQCN = $this->registeredEnumTypes[$fieldType];
 
-        if (!\class_exists($registeredEnumTypeFQCN)) {
+        if (!class_exists($registeredEnumTypeFQCN)) {
             $exceptionMessage = \sprintf(
                 'ENUM type "%s" is registered as "%s", but that class does not exist',
                 $fieldType,
-                $registeredEnumTypeFQCN
+                $registeredEnumTypeFQCN,
             );
 
             throw new EnumTypeIsRegisteredButClassDoesNotExistException($exceptionMessage);
         }
 
-        if (!\is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
+        if (!is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
             return null;
         }
 
         /** @var AbstractEnumType<int|string, int|string> $registeredEnumTypeFQCN */
-        $parameters = [
+        $parameters = [ // @phpstan-ignore-line
             'choices' => $registeredEnumTypeFQCN::getChoices(), // Get the choices from the fully qualified class name
             'required' => !$metadata->isNullable($property),
         ];

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Fresh\DoctrineEnumBundle\Validator\Constraints;
 
-use Attribute;
 use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 use Fresh\DoctrineEnumBundle\Exception\InvalidArgumentException;
 use Symfony\Component\Validator\Constraints\Choice;
@@ -23,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Choice;
  *
  * @author Artem Henvald <genvaldartem@gmail.com>
  */
-#[Attribute(Attribute::TARGET_PROPERTY)]
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 class EnumType extends Choice
 {
     /**
@@ -36,7 +35,7 @@ class EnumType extends Choice
      */
     public function __construct(public string $entity, ?string $message = null, ?array $groups = null, mixed $payload = null)
     {
-        if (!\is_subclass_of($entity, AbstractEnumType::class)) {
+        if (!is_subclass_of($entity, AbstractEnumType::class)) {
             throw new InvalidArgumentException(\sprintf('%s is not instance of %s', $entity, AbstractEnumType::class));
         }
 

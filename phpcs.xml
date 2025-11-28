@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<ruleset name="GTC Codding Standard"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
+>
+    <arg name="basepath" value="."/>
+    <arg name="cache" value=".phpcs-cache"/>
+    <arg name="extensions" value="php"/>
+    <arg name="encoding" value="utf-8"/>
+    <arg name="colors"/>
+    <arg name="parallel" value="4"/>
+    <arg value="p"/>
+    <arg value="s"/>
+
+    <file>./</file>
+
+    <exclude-pattern>vendor/</exclude-pattern>
+    <exclude-pattern>composer-setup.php</exclude-pattern>
+    <exclude-pattern>.php-cs-fixer.php</exclude-pattern>
+
+    <!-- By default, inherit all Symfony code style rules, -->
+    <rule ref="./vendor/escapestudios/symfony2-coding-standard/Symfony">
+        <exclude name="Symfony.Commenting.ClassComment" />
+        <!-- except required license block in the top of each file, because it is not necessary for commercial projects -->
+        <exclude name="Symfony.Commenting.License" />
+        <!-- because of type hinting phpdoc blocks have duplicated information -->
+        <exclude name="Symfony.Commenting.FunctionComment.Missing" />
+        <!-- also allow to add number to the variable names, e.g. $base64 -->
+        <exclude name="Zend.NamingConventions.ValidVariableName.MemberVarContainsNumbers" />
+        <!-- except required all the arguments on the same line as the method/function name -->
+        <exclude name="Symfony.Functions.Arguments.Invalid" />
+    </rule>
+
+    <!-- Ignore required comments in docblocks for test files -->
+    <rule ref="Symfony.Commenting.FunctionComment">
+        <exclude-pattern>./Tests/</exclude-pattern>
+    </rule>
+    <rule ref="Symfony.Functions.ReturnType.Invalid">
+        <exclude-pattern>./Tests/</exclude-pattern>
+    </rule>
+
+    <!-- Don't hide tokenizer exceptions -->
+    <rule ref="Internal.Tokenizer.Exception">
+        <type>error</type>
+    </rule>
+
+    <!-- Don't allow to use underscore for methods and properties, throw it as code style error -->
+    <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+        <type>error</type>
+    </rule>
+    <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
+        <type>error</type>
+    </rule>
+
+    <rule ref="Generic">
+        <exclude name="Generic"/>
+    </rule>
+</ruleset>

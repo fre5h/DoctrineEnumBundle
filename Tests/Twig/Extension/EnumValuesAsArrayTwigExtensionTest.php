@@ -46,7 +46,7 @@ final class EnumValuesAsArrayTwigExtensionTest extends TestCase
     #[Test]
     public function getFunctions(): void
     {
-        self::assertEquals(
+        $this->assertEquals(
             [
                 new TwigFunction('enum_values', [$this->enumValuesAsArrayTwigExtension, 'getEnumValuesAsArray']),
                 new TwigFunction('enum_readable_values', [$this->enumValuesAsArrayTwigExtension, 'getReadableEnumValuesAsArray']),
@@ -58,7 +58,7 @@ final class EnumValuesAsArrayTwigExtensionTest extends TestCase
     #[Test]
     public function getEnumValuesAsArray(): void
     {
-        self::assertEquals(
+        $this->assertEquals(
             ['PG', 'SG', 'SF', 'PF', 'C'],
             $this->enumValuesAsArrayTwigExtension->getEnumValuesAsArray('BasketballPositionType')
         );
@@ -67,7 +67,7 @@ final class EnumValuesAsArrayTwigExtensionTest extends TestCase
     #[Test]
     public function getReadableEnumValuesAsArray(): void
     {
-        self::assertEquals(
+        $this->assertEquals(
             [
                 'PG' => 'Point Guard',
                 'SG' => 'Shooting Guard',

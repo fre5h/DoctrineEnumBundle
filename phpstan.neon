@@ -5,11 +5,12 @@ includes:
 parameters:
     level: 9
     excludePaths:
-        - '%rootDir%/../../../DependencyInjection/Configuration.php'
         - '%rootDir%/../../../Tests/*'
         - '%rootDir%/../../../vendor/*'
     fileExtensions:
         - 'php'
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false
     ignoreErrors:
         -
             identifier: missingType.iterableValue

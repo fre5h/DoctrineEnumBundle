@@ -57,7 +57,7 @@ final class EnumDropCommentCommand extends Command
         foreach ($registeredTypes as $type => $details) {
             $registeredEnumTypeFQCN = $details['class'];
 
-            if (!\class_exists($registeredEnumTypeFQCN)) {
+            if (!class_exists($registeredEnumTypeFQCN)) {
                 $exceptionMessage = \sprintf(
                     'ENUM type "%s" is registered as "%s", but that class does not exist',
                     $type,
@@ -68,7 +68,7 @@ final class EnumDropCommentCommand extends Command
             }
 
             // Filter only ENUM types
-            if (\is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
+            if (is_subclass_of($registeredEnumTypeFQCN, AbstractEnumType::class)) {
                 $this->registeredEnumTypes[$type] = $details['class'];
             }
         }
@@ -80,7 +80,7 @@ final class EnumDropCommentCommand extends Command
     public function getEnumTypesForAutocompletion(): \Closure
     {
         return function () {
-            return \array_keys($this->registeredEnumTypes);
+            return array_keys($this->registeredEnumTypes);
         };
     }
 
