@@ -69,7 +69,7 @@ abstract class AbstractEnumType extends Type
      */
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): mixed
     {
-        if (!isset(static::$choices[$value])) {
+        if (null === $value || !isset(static::$choices[$value])) {
             return $value;
         }
 
