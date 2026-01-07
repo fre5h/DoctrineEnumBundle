@@ -77,7 +77,7 @@ final class EnumDropCommentCommandTest extends TestCase
         );
 
         $this->application = new Application();
-        $this->application->add($command);
+        $this->application->addCommand($command);
 
         $this->command = $this->application->find('doctrine:enum:drop-comment');
         $this->commandTester = new CommandTester($this->command);
