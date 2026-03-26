@@ -8,7 +8,7 @@ As Symfony follows the next standards: [PSR-0](http://www.php-fig.org/psr/psr-0/
 
 You MUST follow the [Symfony Coding Standards](http://symfony.com/doc/current/contributing/code/standards.html).
 If you don't know about any of them, you should really read the recommendations.  
-You can use a helpful tool [phpcs](https://github.com/squizlabs/PHP_CodeSniffer) with a last version of [Symfony standards](https://github.com/escapestudios/Symfony2-coding-standard).
+You can use a helpful tool [phpcs](https://github.com/PHPCSStandards/PHP_CodeSniffer) with a last version of [Symfony standards](https://github.com/escapestudios/Symfony2-coding-standard).
 Or you can use a [PHP-CS-Fixer](http://cs.sensiolabs.org/) tool to fix all coding style issues.
 
 You MUST run the test suite.
